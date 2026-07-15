@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monnif — Suas finanças, organizadas</title>
+  <meta name="description" content="Gestão financeira pessoal e familiar. Despesas, receitas, recorrências e gráficos anuais — grátis, em contas compartilhadas." />
+  <meta property="og:title" content="Monnif — Suas finanças, organizadas" />
+  <meta property="og:description" content="Controle despesas e receitas em contas compartilhadas com a família. Recorrências automáticas, visão anual e categorias do seu jeito. Grátis." />
+  <meta property="og:image" content="https://alissonpelizaro.github.io/monnif-site/assets/dashboard-mensal.png" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%237c3aed'/><text x='50' y='72' font-size='62' font-weight='900' font-family='Arial' fill='white' text-anchor='middle'>M</text></svg>" />
+  <style>
+    :root {
+      --bg: #09090b;
+      --surface: #131316;
+      --surface-2: #1b1b20;
+      --border: rgba(255, 255, 255, 0.08);
+      --ink: #fafafa;
+      --ink-2: #a1a1aa;
+      --violet: #8b5cf6;
+      --violet-strong: #7c3aed;
+      --emerald: #10b981;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(9, 9, 11, 0.8);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .logo-mark {
+      width: 34px; height: 34px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--violet-strong), var(--violet));
+      display: grid; place-items: center;
+      font-weight: 900; font-size: 0.95rem; color: #fff;
+      box-shadow: 0 4px 18px rgba(124, 58, 237, 0.45);
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: 12px; font-weight: 700; font-size: 0.95rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--violet-strong), var(--violet));
+      color: #fff;
+      box-shadow: 0 6px 24px rgba(124, 58, 237, 0.4);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(124, 58, 237, 0.55); }
+    .btn-ghost { border: 1px solid var(--border); color: var(--ink-2); }
+    .btn-ghost:hover { background: var(--surface); color: var(--ink); }
+    .btn-lg { padding: 15px 32px; font-size: 1.05rem; border-radius: 14px; }
+
+    .hero { position: relative; padding: 88px 0 40px; text-align: center; }
+    .hero::before {
+      content: ""; position: absolute; inset: -200px 0 auto; height: 560px;
+      background:
+        radial-gradient(ellipse 600px 300px at 50% 10%, rgba(124, 58, 237, 0.22), transparent),
+        radial-gradient(ellipse 400px 200px at 80% 30%, rgba(16, 185, 129, 0.08), transparent);
+      pointer-events: none;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(124, 58, 237, 0.12); color: #c4b5fd;
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      padding: 6px 16px; border-radius: 999px;
+      font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 900; letter-spacing: -0.045em; line-height: 1.08;
+      margin-bottom: 20px;
+    }
+    h1 .grad {
+      background: linear-gradient(120deg, #a78bfa, #34d399);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .sub {
+      color: var(--ink-2); font-size: clamp(1.05rem, 2vw, 1.25rem);
+      max-width: 640px; margin: 0 auto 36px;
+    }
+    .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 18px; }
+    .cta-note { color: var(--ink-2); font-size: 0.85rem; }
+
+    .shot-frame {
+      position: relative;
+      margin: 56px auto 0; max-width: 980px;
+      border-radius: 18px; overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 40px 120px rgba(124, 58, 237, 0.18), 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+    .shot-frame .bar {
+      display: flex; gap: 7px; padding: 12px 16px;
+      background: var(--surface-2); border-bottom: 1px solid var(--border);
+    }
+    .shot-frame .dot { width: 11px; height: 11px; border-radius: 50%; background: #3f3f46; }
+    .shot-frame .dot:first-child { background: #f87171; }
+    .shot-frame .dot:nth-child(2) { background: #fbbf24; }
+    .shot-frame .dot:nth-child(3) { background: #34d399; }
+
+    .strip {
+      display: flex; justify-content: center; gap: clamp(18px, 5vw, 56px);
+      flex-wrap: wrap; padding: 44px 24px;
+      color: var(--ink-2); font-weight: 600; font-size: 0.95rem;
+    }
+    .strip span { display: flex; align-items: center; gap: 8px; }
+    .strip b { color: var(--emerald); }
+
+    section { padding: 72px 0; }
+    .kicker {
+      color: var(--violet); font-weight: 800; font-size: 0.82rem;
+      letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
+    .lead { color: var(--ink-2); max-width: 560px; margin-bottom: 40px; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 26px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(139, 92, 246, 0.35); }
+    .card .ico {
+      width: 42px; height: 42px; border-radius: 12px;
+      display: grid; place-items: center; font-size: 1.25rem;
+      background: rgba(124, 58, 237, 0.14); margin-bottom: 16px;
+    }
+    .card h3 { font-size: 1.06rem; font-weight: 700; margin-bottom: 6px; }
+    .card p { color: var(--ink-2); font-size: 0.92rem; }
+
+    .show { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+    .show.rev > .txt { order: 2; }
+    .show .img-card {
+      border-radius: 16px; overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+    }
+    .show .txt h2 { margin-bottom: 14px; }
+    .show .txt p { color: var(--ink-2); margin-bottom: 12px; }
+    .show ul { list-style: none; margin-top: 18px; display: grid; gap: 10px; }
+    .show li { display: flex; gap: 10px; color: var(--ink-2); font-size: 0.95rem; }
+    .show li::before { content: "✓"; color: var(--emerald); font-weight: 800; }
+
+    .mobile-shot {
+      max-width: 290px; margin: 0 auto;
+      border-radius: 32px; overflow: hidden;
+      border: 6px solid #26262b;
+      box-shadow: 0 30px 80px rgba(124, 58, 237, 0.22);
+    }
+
+    .final {
+      text-align: center; padding: 96px 24px;
+      background:
+        radial-gradient(ellipse 500px 260px at 50% 100%, rgba(124, 58, 237, 0.2), transparent);
+    }
+    .final h2 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 16px; }
+    .final p { color: var(--ink-2); margin-bottom: 32px; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px; text-align: center;
+      color: var(--ink-2); font-size: 0.85rem;
+    }
+    footer a { color: #c4b5fd; }
+
+    @media (max-width: 760px) {
+      .show { grid-template-columns: 1fr; }
+      .show.rev > .txt { order: 0; }
+      section { padding: 52px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <span class="logo"><span class="logo-mark">M</span> Monnif</span>
+    <a class="btn btn-primary" href="https://monnif-web.vercel.app" target="_blank" rel="noopener">Entrar no app</a>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <span class="pill">✦ 100% grátis · sem cartão de crédito</span>
+      <h1>Suas finanças,<br /><span class="grad">finalmente organizadas.</span></h1>
+      <p class="sub">
+        O Monnif reúne despesas, receitas e contas recorrentes da sua família num painel
+        simples e bonito. Saiba exatamente quanto sobra no fim do mês — antes de o mês acabar.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-lg" href="https://monnif-web.vercel.app/signup" target="_blank" rel="noopener">Criar conta grátis →</a>
+        <a class="btn btn-ghost btn-lg" href="#recursos">Ver recursos</a>
+      </div>
+      <p class="cta-note">Leva menos de 1 minuto. Sem pegadinha, sem plano pago.</p>
+
+      <div class="shot-frame">
+        <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <img src="assets/dashboard-mensal.png" alt="Dashboard do Monnif com sobra prevista, contas a pagar e próximas despesas" loading="eager" />
+      </div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <span><b>✓</b> Contas compartilhadas</span>
+    <span><b>✓</b> Recorrências automáticas</span>
+    <span><b>✓</b> Gráficos anuais</span>
+    <span><b>✓</b> Dark &amp; light mode</span>
+  </div>
+
+  <section id="recursos">
+    <div class="wrap">
+      <p class="kicker">Recursos</p>
+      <h2>Tudo que o seu dinheiro precisa.<br />Nada do que ele não precisa.</h2>
+      <p class="lead">Sem planilha quebrada, sem app de banco confuso. Só o essencial, muito bem feito.</p>
+      <div class="grid">
+        <div class="card">
+          <div class="ico">👨‍👩‍👧</div>
+          <h3>Contas compartilhadas</h3>
+          <p>Casa, família ou empresa: convide pessoas com papéis de Dono, Admin e Membro. Todo mundo na mesma página.</p>
+        </div>
+        <div class="card">
+          <div class="ico">🔁</div>
+          <h3>Recorrências inteligentes</h3>
+          <p>Aluguel, escola, assinatura? Cadastre uma vez — o Monnif gera os próximos vencimentos sozinho, com ou sem data de término.</p>
+        </div>
+        <div class="card">
+          <div class="ico">📊</div>
+          <h3>Visão anual completa</h3>
+          <p>Receitas × despesas mês a mês, gasto por categoria e sobra acumulada. Um ano inteiro numa tela.</p>
+        </div>
+        <div class="card">
+          <div class="ico">🎨</div>
+          <h3>Categorias do seu jeito</h3>
+          <p>Cores e ícones personalizados. Os valores das despesas mudam de cor conforme o peso no seu bolso.</p>
+        </div>
+        <div class="card">
+          <div class="ico">✅</div>
+          <h3>Um toque para pagar</h3>
+          <p>Marque contas como pagas direto da lista. Atrasou? O Monnif avisa em vermelho, sem drama.</p>
+        </div>
+        <div class="card">
+          <div class="ico">🌗</div>
+          <h3>Bonito de dia e de noite</h3>
+          <p>Dark mode, light mode ou seguir o sistema — com a cor de destaque que você escolher.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap show">
+      <div class="txt">
+        <p class="kicker">Visão anual</p>
+        <h2>O ano inteiro, de relance.</h2>
+        <p>
+          Alterne entre a visão do mês e a visão anual com um clique. Compare receitas e
+          despesas dos últimos 12 meses, veja pra onde o dinheiro vai por categoria e
+          acompanhe a sobra acumulada crescendo.
+        </p>
+        <ul>
+          <li>Receitas × despesas mês a mês</li>
+          <li>Ranking de gastos por categoria</li>
+          <li>Sobra acumulada dos últimos 12 meses</li>
+        </ul>
+      </div>
+      <div class="img-card"><img src="assets/dashboard-anual.png" alt="Visão anual do Monnif com gráfico de receitas e despesas por mês" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap show rev">
+      <div class="txt">
+        <p class="kicker">Despesas sob controle</p>
+        <h2>Saiba o que vence, quando vence.</h2>
+        <p>
+          Filtre por mês, status e categoria. Contas atrasadas gritam em vermelho,
+          as pagas ficam riscadas, e o total em aberto está sempre à vista.
+        </p>
+        <ul>
+          <li>Filtros por mês, status e categoria</li>
+          <li>Totais de pago e em aberto em tempo real</li>
+          <li>Edite uma ocorrência ou a série inteira</li>
+        </ul>
+      </div>
+      <div class="img-card"><img src="assets/despesas.png" alt="Lista de despesas do Monnif com filtros e status de pagamento" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap show">
+      <div class="txt">
+        <p class="kicker">Leve no bolso</p>
+        <h2>No sofá, na fila, no mercado.</h2>
+        <p>
+          O Monnif é 100% responsivo: a mesma experiência completa no notebook,
+          no tablet e no celular. Marque uma conta como paga na fila do caixa.
+        </p>
+        <ul>
+          <li>Interface adaptada para toque</li>
+          <li>Rápido até em conexões lentas</li>
+          <li>Nada pra instalar — abre no navegador</li>
+        </ul>
+      </div>
+      <div class="mobile-shot"><img src="assets/mobile-dashboard.png" alt="Monnif no celular mostrando o resumo financeiro do mês" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <div class="final">
+    <h2>Comece hoje. <span style="color:#a78bfa">De graça.</span></h2>
+    <p>Crie sua conta, convide a família e descubra quanto sobra este mês.</p>
+    <a class="btn btn-primary btn-lg" href="https://monnif-web.vercel.app/signup" target="_blank" rel="noopener">Usar o Monnif grátis →</a>
+  </div>
+</main>
+
+<footer>
+  Monnif © 2026 — Gestão financeira pessoal e familiar ·
+  <a href="https://monnif-web.vercel.app" target="_blank" rel="noopener">monnif-web.vercel.app</a>
+</footer>
+
+</body>
+</html>
