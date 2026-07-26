@@ -1,337 +1,1030 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Monnif — Suas finanças, organizadas</title>
-  <meta name="description" content="Gestão financeira pessoal e familiar. Despesas, receitas, recorrências e gráficos anuais — grátis, em contas compartilhadas." />
-  <meta property="og:title" content="Monnif — Suas finanças, organizadas" />
-  <meta property="og:description" content="Controle despesas e receitas em contas compartilhadas com a família. Recorrências automáticas, visão anual e categorias do seu jeito. Grátis." />
-  <meta property="og:image" content="https://alissonpelizaro.github.io/monnif-site/assets/dashboard-mensal.png" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%237c3aed'/><text x='50' y='72' font-size='62' font-weight='900' font-family='Arial' fill='white' text-anchor='middle'>M</text></svg>" />
-  <style>
-    :root {
-      --bg: #09090b;
-      --surface: #131316;
-      --surface-2: #1b1b20;
-      --border: rgba(255, 255, 255, 0.08);
-      --ink: #fafafa;
-      --ink-2: #a1a1aa;
-      --violet: #8b5cf6;
-      --violet-strong: #7c3aed;
-      --emerald: #10b981;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--ink);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Monnif — Suas finanças, organizadas</title>
+<meta name="description" content="Gestão financeira pessoal e familiar: despesas, receitas, cartão de crédito, orçamento por categoria, projeção de saldo e importação de extrato. Grátis, em contas compartilhadas." />
+<meta name="theme-color" content="#7C3AED" />
+<link rel="canonical" href="https://alissonpelizaro.github.io/monnif-site/" />
 
-    header {
-      position: sticky; top: 0; z-index: 50;
-      background: rgba(9, 9, 11, 0.8);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; }
-    .logo-mark {
-      width: 34px; height: 34px; border-radius: 10px;
-      background: linear-gradient(135deg, var(--violet-strong), var(--violet));
-      display: grid; place-items: center;
-      font-weight: 900; font-size: 0.95rem; color: #fff;
-      box-shadow: 0 4px 18px rgba(124, 58, 237, 0.45);
-    }
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 10px 20px; border-radius: 12px; font-weight: 700; font-size: 0.95rem;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--violet-strong), var(--violet));
-      color: #fff;
-      box-shadow: 0 6px 24px rgba(124, 58, 237, 0.4);
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(124, 58, 237, 0.55); }
-    .btn-ghost { border: 1px solid var(--border); color: var(--ink-2); }
-    .btn-ghost:hover { background: var(--surface); color: var(--ink); }
-    .btn-lg { padding: 15px 32px; font-size: 1.05rem; border-radius: 14px; }
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://alissonpelizaro.github.io/monnif-site/" />
+<meta property="og:title" content="Monnif — Suas finanças, organizadas" />
+<meta property="og:description" content="Despesas, receitas, cartão de crédito, orçamento e projeção de saldo em contas compartilhadas com a família. Importe o extrato do banco e deixe o resto com a gente. Grátis." />
+<meta property="og:image" content="https://alissonpelizaro.github.io/monnif-site/assets/dashboard-mensal.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Monnif — Suas finanças, organizadas" />
+<meta name="twitter:description" content="Despesas, receitas, cartão, orçamento e projeção de saldo em contas compartilhadas. Grátis." />
+<meta name="twitter:image" content="https://alissonpelizaro.github.io/monnif-site/assets/dashboard-mensal.png" />
 
-    .hero { position: relative; padding: 88px 0 40px; text-align: center; }
-    .hero::before {
-      content: ""; position: absolute; inset: -200px 0 auto; height: 560px;
-      background:
-        radial-gradient(ellipse 600px 300px at 50% 10%, rgba(124, 58, 237, 0.22), transparent),
-        radial-gradient(ellipse 400px 200px at 80% 30%, rgba(16, 185, 129, 0.08), transparent);
-      pointer-events: none;
-    }
-    .pill {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(124, 58, 237, 0.12); color: #c4b5fd;
-      border: 1px solid rgba(124, 58, 237, 0.3);
-      padding: 6px 16px; border-radius: 999px;
-      font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em;
-      margin-bottom: 24px;
-    }
-    h1 {
-      font-size: clamp(2.4rem, 6vw, 4rem);
-      font-weight: 900; letter-spacing: -0.045em; line-height: 1.08;
-      margin-bottom: 20px;
-    }
-    h1 .grad {
-      background: linear-gradient(120deg, #a78bfa, #34d399);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-    }
-    .sub {
-      color: var(--ink-2); font-size: clamp(1.05rem, 2vw, 1.25rem);
-      max-width: 640px; margin: 0 auto 36px;
-    }
-    .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 18px; }
-    .cta-note { color: var(--ink-2); font-size: 0.85rem; }
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0' y1='0' x2='100' y2='100'><stop offset='0' stop-color='%237C3AED'/><stop offset='1' stop-color='%23DB2777'/></linearGradient></defs><rect width='100' height='100' rx='24' fill='url(%23g)'/><path d='M22 74V32l28 27 28-27v42' fill='none' stroke='white' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/></svg>" />
 
-    .shot-frame {
-      position: relative;
-      margin: 56px auto 0; max-width: 980px;
-      border-radius: 18px; overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow: 0 40px 120px rgba(124, 58, 237, 0.18), 0 20px 60px rgba(0, 0, 0, 0.6);
-    }
-    .shot-frame .bar {
-      display: flex; gap: 7px; padding: 12px 16px;
-      background: var(--surface-2); border-bottom: 1px solid var(--border);
-    }
-    .shot-frame .dot { width: 11px; height: 11px; border-radius: 50%; background: #3f3f46; }
-    .shot-frame .dot:first-child { background: #f87171; }
-    .shot-frame .dot:nth-child(2) { background: #fbbf24; }
-    .shot-frame .dot:nth-child(3) { background: #34d399; }
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-    .strip {
-      display: flex; justify-content: center; gap: clamp(18px, 5vw, 56px);
-      flex-wrap: wrap; padding: 44px 24px;
-      color: var(--ink-2); font-weight: 600; font-size: 0.95rem;
-    }
-    .strip span { display: flex; align-items: center; gap: 8px; }
-    .strip b { color: var(--emerald); }
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Monnif",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web, iOS, Android",
+  "description": "Gestão financeira pessoal e familiar com contas compartilhadas, cartão de crédito, orçamento por categoria, projeção de saldo e importação de extrato bancário.",
+  "url": "https://monnif-web.vercel.app",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" },
+  "inLanguage": "pt-BR"
+}
+</script>
 
-    section { padding: 72px 0; }
-    .kicker {
-      color: var(--violet); font-weight: 800; font-size: 0.82rem;
-      letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 10px;
-    }
-    h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
-    .lead { color: var(--ink-2); max-width: 560px; margin-bottom: 40px; }
+<style>
+/* ==========================================================================
+   Tokens — os mesmos do app. Os neutros derivam do matiz de --primary via
+   `oklch(from ...)`, e o par do gradiente é --primary girado +55°, exatamente
+   como em apps/web/src/app/globals.css. Trocar --primary retinge o site todo.
+   ========================================================================== */
+:root {
+  --primary: oklch(0.606 0.25 292.717);
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
-    .card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 16px; padding: 26px;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-    .card:hover { transform: translateY(-4px); border-color: rgba(139, 92, 246, 0.35); }
-    .card .ico {
-      width: 42px; height: 42px; border-radius: 12px;
-      display: grid; place-items: center; font-size: 1.25rem;
-      background: rgba(124, 58, 237, 0.14); margin-bottom: 16px;
-    }
-    .card h3 { font-size: 1.06rem; font-weight: 700; margin-bottom: 6px; }
-    .card p { color: var(--ink-2); font-size: 0.92rem; }
+  --grad-a: var(--primary);
+  --grad-b: oklch(from var(--primary) l c calc(h + 55));
+  --grad: linear-gradient(120deg, var(--grad-a), var(--grad-b));
 
-    .show { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-    .show.rev > .txt { order: 2; }
-    .show .img-card {
-      border-radius: 16px; overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
-    }
-    .show .txt h2 { margin-bottom: 14px; }
-    .show .txt p { color: var(--ink-2); margin-bottom: 12px; }
-    .show ul { list-style: none; margin-top: 18px; display: grid; gap: 10px; }
-    .show li { display: flex; gap: 10px; color: var(--ink-2); font-size: 0.95rem; }
-    .show li::before { content: "✓"; color: var(--emerald); font-weight: 800; }
+  --background: oklch(from var(--primary) 0.09 0.015 h);
+  --foreground: oklch(from var(--primary) 0.96 0.014 h);
+  --card: oklch(from var(--primary) 0.21 0.035 h);
+  --elevated: oklch(from var(--primary) 0.17 0.028 h);
+  --muted: oklch(from var(--primary) 0.63 0.03 h);
+  --faint: oklch(from var(--primary) 0.45 0.03 h);
+  --border: oklch(1 0 0 / 8%);
+  --border-strong: oklch(1 0 0 / 14%);
 
-    .mobile-shot {
-      max-width: 290px; margin: 0 auto;
-      border-radius: 32px; overflow: hidden;
-      border: 6px solid #26262b;
-      box-shadow: 0 30px 80px rgba(124, 58, 237, 0.22);
-    }
+  --success: oklch(0.77 0.15 162.48);
+  --warning: oklch(0.83 0.16 83);
+  --destructive: oklch(0.71 0.17 12);
 
-    .final {
-      text-align: center; padding: 96px 24px;
-      background:
-        radial-gradient(ellipse 500px 260px at 50% 100%, rgba(124, 58, 237, 0.2), transparent);
-    }
-    .final h2 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 16px; }
-    .final p { color: var(--ink-2); margin-bottom: 32px; }
+  --glass: color-mix(in oklch, var(--card) 62%, transparent);
 
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 28px 24px; text-align: center;
-      color: var(--ink-2); font-size: 0.85rem;
-    }
-    footer a { color: #c4b5fd; }
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
 
-    @media (max-width: 760px) {
-      .show { grid-template-columns: 1fr; }
-      .show.rev > .txt { order: 0; }
-      section { padding: 52px 0; }
-    }
-  </style>
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --wrap: 1160px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+svg { display: block; }
+::selection { background: color-mix(in oklch, var(--primary) 35%, transparent); }
+:focus-visible { outline: 2px solid var(--grad-a); outline-offset: 3px; border-radius: 6px; }
+
+h1, h2, h3 { font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; }
+h4, h5 { font-weight: 700; letter-spacing: -0.02em; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+.grad-text {
+  background: var(--grad);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* ===== Aurora ambiente (idêntica à do app) ===== */
+.aurora { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.aurora span {
+  position: absolute; border-radius: 50%;
+  width: clamp(320px, 46vw, 720px); aspect-ratio: 1;
+  filter: blur(clamp(56px, 8vw, 130px));
+  opacity: 0.5; mix-blend-mode: screen;
+}
+.aurora span:nth-child(1) { background: oklch(from var(--grad-a) 0.5 0.24 h); top: -16%; left: -10%; animation: aurora1 14s ease-in-out infinite; }
+.aurora span:nth-child(2) { background: oklch(from var(--grad-b) 0.5 0.24 h); top: 22%; right: -16%; animation: aurora2 17s ease-in-out infinite; }
+.aurora span:nth-child(3) { background: oklch(from var(--primary) 0.5 0.22 calc(h - 55)); bottom: -10%; left: 12%; animation: aurora3 19s ease-in-out infinite; }
+@keyframes aurora1 { 50% { transform: translate(40px, 60px) scale(1.1); } }
+@keyframes aurora2 { 50% { transform: translate(-50px, 40px) scale(1.15); } }
+@keyframes aurora3 { 50% { transform: translate(30px, -40px) scale(1.05); } }
+
+/* ===== Header ===== */
+header {
+  position: sticky; top: 0; z-index: 60;
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s var(--ease-soft), border-color 0.3s var(--ease-soft), backdrop-filter 0.3s;
+}
+header.stuck {
+  background: color-mix(in oklch, var(--background) 72%, transparent);
+  backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom-color: var(--border);
+}
+.nav { display: flex; align-items: center; gap: 28px; height: 72px; }
+.logo { display: flex; align-items: center; gap: 11px; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.03em; }
+.logo-mark {
+  width: 36px; height: 36px; border-radius: 11px; background: var(--grad);
+  display: grid; place-items: center; flex: none;
+  box-shadow: 0 8px 24px -6px color-mix(in oklch, var(--grad-a) 70%, transparent);
+}
+.nav-links { display: flex; gap: 4px; margin-left: auto; }
+.nav-links a {
+  padding: 8px 14px; border-radius: 10px; font-size: 0.925rem; font-weight: 600;
+  color: var(--muted); transition: color 0.2s, background 0.2s;
+}
+.nav-links a:hover { color: var(--foreground); background: oklch(1 0 0 / 6%); }
+.nav-cta { margin-left: 8px; }
+
+/* ===== Botões ===== */
+.btn {
+  position: relative; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  padding: 12px 22px; border-radius: 14px;
+  font-family: inherit; font-weight: 700; font-size: 0.95rem; letter-spacing: -0.01em;
+  border: 1px solid transparent; cursor: pointer;
+  transition: transform 0.2s var(--ease-spring), box-shadow 0.25s var(--ease-soft),
+              background 0.25s, border-color 0.25s, filter 0.25s;
+}
+.btn::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(120deg, transparent, oklch(1 0 0 / 0.35), transparent);
+  transform: translateX(-120%);
+}
+.btn:active::after { animation: shine 0.6s var(--ease-soft); }
+@keyframes shine { to { transform: translateX(120%); } }
+.btn:active { transform: scale(0.965); }
+.btn-primary {
+  background: var(--grad); color: #fff;
+  box-shadow: 0 12px 32px -10px color-mix(in oklch, var(--grad-a) 75%, transparent);
+}
+.btn-primary:hover { transform: translateY(-2px); filter: brightness(1.1); box-shadow: 0 18px 42px -10px color-mix(in oklch, var(--grad-a) 80%, transparent); }
+.btn-primary:active { transform: scale(0.965); }
+.btn-ghost { border-color: var(--border-strong); color: var(--foreground); background: oklch(1 0 0 / 3%); }
+.btn-ghost:hover { background: oklch(1 0 0 / 7%); border-color: oklch(1 0 0 / 22%); transform: translateY(-2px); }
+.btn-lg { padding: 16px 30px; font-size: 1.03rem; border-radius: 16px; }
+
+/* ===== Hero ===== */
+.hero { padding: clamp(56px, 9vw, 104px) 0 0; text-align: center; }
+.pill {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: color-mix(in oklch, var(--primary) 14%, transparent);
+  border: 1px solid color-mix(in oklch, var(--primary) 32%, transparent);
+  color: color-mix(in oklch, var(--primary) 45%, white);
+  padding: 7px 16px 7px 12px; border-radius: 999px;
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.02em;
+}
+.pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 4px color-mix(in oklch, var(--success) 18%, transparent); }
+h1 { font-size: clamp(2.5rem, 6.4vw, 4.4rem); font-weight: 900; letter-spacing: -0.05em; margin: 26px 0 0; }
+.hero .sub {
+  color: var(--muted); font-size: clamp(1.05rem, 1.7vw, 1.22rem);
+  max-width: 620px; margin: 22px auto 0; line-height: 1.65;
+}
+.cta-row { display: flex; gap: 13px; justify-content: center; flex-wrap: wrap; margin-top: 34px; }
+.cta-note { color: var(--faint); font-size: 0.85rem; margin-top: 16px; }
+
+/* ===== Moldura de navegador para os mockups ===== */
+.browser {
+  margin: clamp(44px, 6vw, 72px) auto 0; max-width: 1020px;
+  border-radius: 20px; overflow: hidden;
+  border: 1px solid var(--border-strong);
+  background: var(--elevated);
+  box-shadow: 0 60px 140px -40px color-mix(in oklch, var(--grad-a) 45%, transparent),
+              0 30px 70px -20px oklch(0 0 0 / 0.7);
+}
+.browser-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 13px 16px; border-bottom: 1px solid var(--border);
+  background: oklch(1 0 0 / 2.5%);
+}
+.browser-bar i { width: 11px; height: 11px; border-radius: 50%; background: oklch(1 0 0 / 14%); flex: none; }
+.browser-bar i:nth-child(1) { background: #ff5f57; }
+.browser-bar i:nth-child(2) { background: #febc2e; }
+.browser-bar i:nth-child(3) { background: #28c840; }
+.browser-url {
+  margin-left: 10px; flex: 1; max-width: 300px;
+  background: oklch(0 0 0 / 30%); border-radius: 8px;
+  padding: 4px 12px; font-size: 0.72rem; color: var(--faint);
+  text-align: center; letter-spacing: 0.01em;
+}
+
+/* ==========================================================================
+   Mockups do app — recriados com os tokens do próprio app, então acompanham
+   a identidade sem depender de captura de tela.
+   ========================================================================== */
+.app { background: var(--background); padding: 20px; text-align: left; }
+.app-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.app-kicker { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--grad-a); }
+.app-title { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.035em; margin-top: 2px; }
+.app-sub { font-size: 0.78rem; color: var(--muted); }
+
+.chips { display: flex; gap: 5px; background: oklch(1 0 0 / 4.5%); border-radius: 14px; padding: 4px; }
+.chip { padding: 6px 13px; border-radius: 11px; font-size: 0.74rem; font-weight: 600; color: var(--muted); }
+.chip.on { background: oklch(1 0 0 / 9%); color: var(--foreground); box-shadow: inset 0 0 0 1px var(--border); }
+
+.stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.stat {
+  position: relative; overflow: hidden;
+  background: color-mix(in oklch, var(--card) 85%, transparent);
+  border-radius: 18px; padding: 16px; box-shadow: inset 0 0 0 1px var(--border);
+}
+.stat::before { content: ""; position: absolute; inset: 0 0 auto; height: 3px; background: var(--grad); }
+.stat.good::before { background: var(--success); }
+.stat-label { display: flex; align-items: center; gap: 8px; font-size: 0.73rem; font-weight: 600; color: var(--muted); margin-bottom: 10px; }
+.stat-ico { width: 27px; height: 27px; border-radius: 9px; display: grid; place-items: center; flex: none; }
+.stat-value { font-size: 1.42rem; font-weight: 800; letter-spacing: -0.045em; font-variant-numeric: tabular-nums; }
+.stat-foot { font-size: 0.66rem; color: var(--faint); margin-top: 4px; }
+.stat-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+
+.rows { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+.row {
+  display: flex; align-items: center; gap: 11px;
+  background: var(--card); border: 1px solid oklch(1 0 0 / 7%);
+  border-radius: 16px; padding: 11px 14px;
+}
+.tick { width: 22px; height: 22px; border-radius: 8px; border: 2px solid var(--faint); flex: none; display: grid; place-items: center; }
+.tick.done { border-color: transparent; background: var(--success); }
+.row-body { flex: 1; min-width: 0; }
+.row-title { font-size: 0.85rem; font-weight: 700; letter-spacing: -0.015em; }
+.row.paid .row-title { color: var(--muted); text-decoration: line-through; }
+.row-meta { display: flex; align-items: center; gap: 7px; font-size: 0.68rem; color: var(--muted); margin-top: 2px; }
+.row-meta .cdot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+.row-amount { font-size: 0.87rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.late { color: var(--destructive); font-weight: 700; }
+
+.bar-track { height: 7px; border-radius: 999px; background: oklch(1 0 0 / 8%); overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 999px; }
+
+.mock-list { display: flex; flex-direction: column; gap: 10px; }
+.mock-item {
+  background: var(--card); border: 1px solid oklch(1 0 0 / 7%);
+  border-radius: 16px; padding: 13px 15px;
+}
+.mock-item-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 9px; }
+.mock-name { font-size: 0.82rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.mock-num { font-size: 0.73rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* ===== Faixa de números ===== */
+.metrics {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
+  margin-top: clamp(56px, 8vw, 88px);
+}
+.metric { background: color-mix(in oklch, var(--background) 70%, var(--card)); padding: 26px 22px; text-align: center; }
+.metric b { display: block; font-size: 1.65rem; font-weight: 800; letter-spacing: -0.04em; }
+.metric span { font-size: 0.82rem; color: var(--muted); }
+
+/* ===== Seções ===== */
+section { padding: clamp(64px, 9vw, 108px) 0; }
+.sec-head { max-width: 640px; margin-bottom: 44px; }
+.sec-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+.kicker { color: var(--grad-a); font-weight: 800; font-size: 0.76rem; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px; }
+h2 { font-size: clamp(1.85rem, 3.8vw, 2.7rem); margin-bottom: 14px; }
+.lead { color: var(--muted); font-size: 1.05rem; line-height: 1.65; }
+
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+.feature {
+  position: relative; overflow: hidden;
+  background: color-mix(in oklch, var(--card) 55%, transparent);
+  border: 1px solid var(--border); border-radius: 20px; padding: 26px;
+  transition: transform 0.35s var(--ease-soft), border-color 0.35s, background 0.35s;
+}
+.feature::before {
+  content: ""; position: absolute; inset: 0 0 auto; height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--grad-a) 60%, transparent), transparent);
+  opacity: 0; transition: opacity 0.35s;
+}
+.feature:hover { transform: translateY(-4px); border-color: color-mix(in oklch, var(--grad-a) 35%, transparent); background: color-mix(in oklch, var(--card) 75%, transparent); }
+.feature:hover::before { opacity: 1; }
+.feature .ico {
+  width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center;
+  background: color-mix(in oklch, var(--primary) 15%, transparent);
+  border: 1px solid color-mix(in oklch, var(--primary) 25%, transparent);
+  color: var(--grad-a); margin-bottom: 16px;
+}
+.feature h3 { font-size: 1.08rem; margin-bottom: 7px; }
+.feature p { color: var(--muted); font-size: 0.92rem; }
+.feature .tag {
+  display: inline-block; margin-top: 13px; padding: 3px 10px; border-radius: 999px;
+  font-size: 0.66rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+  background: color-mix(in oklch, var(--success) 16%, transparent); color: var(--success);
+}
+
+/* ===== Blocos alternados ===== */
+.split { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
+.split + .split { margin-top: clamp(64px, 9vw, 104px); }
+.split.rev .split-txt { order: 2; }
+.split-txt h2 { font-size: clamp(1.6rem, 3vw, 2.15rem); }
+.split-txt p { color: var(--muted); margin-top: 12px; }
+.checks { list-style: none; margin-top: 22px; display: grid; gap: 11px; }
+.checks li { display: flex; gap: 11px; align-items: flex-start; color: var(--muted); font-size: 0.94rem; }
+.checks svg { flex: none; margin-top: 3px; color: var(--success); }
+.checks b { color: var(--foreground); font-weight: 600; }
+
+.panel {
+  background: var(--elevated); border: 1px solid var(--border-strong);
+  border-radius: 22px; padding: 20px; overflow: hidden;
+  box-shadow: 0 40px 90px -34px oklch(0 0 0 / 0.85),
+              0 0 90px -50px color-mix(in oklch, var(--grad-a) 70%, transparent);
+}
+
+/* ===== Celular ===== */
+.phone {
+  width: 300px; margin: 0 auto; flex: none;
+  background: #000; border-radius: 44px; padding: 9px;
+  box-shadow: 0 0 0 2px oklch(1 0 0 / 12%),
+              0 50px 110px -35px color-mix(in oklch, var(--grad-a) 60%, transparent),
+              0 30px 70px -20px oklch(0 0 0 / 0.8);
+}
+.phone-screen {
+  position: relative; border-radius: 36px; overflow: hidden;
+  background: var(--background); height: 560px; padding: 34px 14px 0;
+}
+.phone-screen::before {
+  content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 104px; height: 24px; background: #000; border-radius: 0 0 15px 15px; z-index: 5;
+}
+.phone-nav {
+  position: absolute; inset: auto 0 0; z-index: 4;
+  display: flex; justify-content: space-around; padding: 9px 4px 12px;
+  background: color-mix(in oklch, var(--card) 62%, transparent);
+  backdrop-filter: blur(20px) saturate(1.4);
+  border-top: 1px solid var(--border);
+}
+.phone-nav div { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 0.53rem; font-weight: 700; color: var(--faint); }
+.phone-nav .ni { width: 30px; height: 30px; border-radius: 11px; display: grid; place-items: center; }
+.phone-nav .on .ni { background: var(--grad); color: #fff; box-shadow: 0 6px 16px -6px color-mix(in oklch, var(--grad-a) 80%, transparent); }
+.phone-nav .on { color: var(--foreground); }
+.fab {
+  position: absolute; right: 14px; bottom: 78px; z-index: 4;
+  width: 48px; height: 48px; border-radius: 17px; background: var(--grad);
+  display: grid; place-items: center; color: #fff;
+  box-shadow: 0 14px 30px -8px color-mix(in oklch, var(--grad-b) 75%, transparent);
+}
+
+/* ===== FAQ ===== */
+.faq { display: grid; gap: 11px; max-width: 780px; margin: 0 auto; }
+.faq details {
+  background: color-mix(in oklch, var(--card) 50%, transparent);
+  border: 1px solid var(--border); border-radius: 16px;
+  transition: border-color 0.25s, background 0.25s;
+}
+.faq details[open] { border-color: color-mix(in oklch, var(--grad-a) 30%, transparent); background: color-mix(in oklch, var(--card) 72%, transparent); }
+.faq summary {
+  list-style: none; cursor: pointer; padding: 18px 22px;
+  font-weight: 700; font-size: 1rem; letter-spacing: -0.015em;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: ""; flex: none; width: 10px; height: 10px;
+  border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform 0.3s var(--ease-spring);
+}
+.faq details[open] summary::after { transform: rotate(-135deg) translate(-3px, -3px); }
+.faq p { padding: 0 22px 20px; color: var(--muted); font-size: 0.94rem; }
+
+/* ===== CTA final ===== */
+.final { text-align: center; padding: clamp(76px, 11vw, 128px) 24px; position: relative; }
+.final::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 560px 280px at 50% 100%, color-mix(in oklch, var(--grad-a) 22%, transparent), transparent 70%);
+}
+.final > * { position: relative; }
+.final h2 { font-size: clamp(2.1rem, 5vw, 3.2rem); }
+.final p { color: var(--muted); margin: 16px auto 34px; max-width: 460px; }
+
+footer { border-top: 1px solid var(--border); padding: 40px 24px; }
+.foot { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; color: var(--faint); font-size: 0.85rem; }
+.foot a { color: var(--muted); transition: color 0.2s; }
+.foot a:hover { color: var(--foreground); }
+
+/* ===== Revelação no scroll ===== */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s var(--ease-soft), transform 0.7s var(--ease-soft); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal[data-d="1"] { transition-delay: 0.08s; }
+.reveal[data-d="2"] { transition-delay: 0.16s; }
+.reveal[data-d="3"] { transition-delay: 0.24s; }
+.reveal[data-d="4"] { transition-delay: 0.32s; }
+.reveal[data-d="5"] { transition-delay: 0.4s; }
+
+/* ===== Responsivo ===== */
+@media (max-width: 940px) {
+  .split, .split.rev { grid-template-columns: 1fr; }
+  .split.rev .split-txt { order: 0; }
+  .nav-links { display: none; }
+  .stat-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .nav { height: 64px; }
+  .app { padding: 14px; }
+  .browser-url { display: none; }
+  .metric b { font-size: 1.4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .aurora span { animation: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
 </head>
 <body>
 
-<header>
+<div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<header id="header">
   <div class="wrap nav">
-    <span class="logo"><span class="logo-mark">M</span> Monnif</span>
-    <a class="btn btn-primary" href="https://monnif-web.vercel.app" target="_blank" rel="noopener">Entrar no app</a>
+    <a class="logo" href="#top" aria-label="Monnif — início">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="21" height="21"><path d="M8 30V13l11 11 11-11v17" fill="none" stroke="#fff" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      Monnif
+    </a>
+    <nav class="nav-links" aria-label="Seções">
+      <a href="#recursos">Recursos</a>
+      <a href="#cartao">Cartão</a>
+      <a href="#previsao">Previsão</a>
+      <a href="#automacao">Automação</a>
+      <a href="#faq">Dúvidas</a>
+    </nav>
+    <a class="btn btn-primary nav-cta" href="https://monnif-web.vercel.app" target="_blank" rel="noopener">Entrar</a>
   </div>
 </header>
 
-<main>
+<main id="top">
+
+  <!-- ============================ HERO ============================ -->
   <div class="hero">
     <div class="wrap">
-      <span class="pill">✦ 100% grátis · sem cartão de crédito</span>
-      <h1>Suas finanças,<br /><span class="grad">finalmente organizadas.</span></h1>
-      <p class="sub">
-        O Monnif reúne despesas, receitas e contas recorrentes da sua família num painel
-        simples e bonito. Saiba exatamente quanto sobra no fim do mês — antes de o mês acabar.
+      <span class="pill reveal"><span class="dot" aria-hidden="true"></span> 100% grátis · sem cartão de crédito</span>
+      <h1 class="reveal" data-d="1">Saiba quanto sobra<br /><span class="grad-text">antes do mês acabar.</span></h1>
+      <p class="sub reveal" data-d="2">
+        Monnif reúne despesas, receitas, cartão de crédito e orçamento da sua família
+        num só lugar — e projeta o seu saldo dia a dia, para que a surpresa no fim do
+        mês seja sempre boa.
       </p>
-      <div class="cta-row">
-        <a class="btn btn-primary btn-lg" href="https://monnif-web.vercel.app/signup" target="_blank" rel="noopener">Criar conta grátis →</a>
+      <div class="cta-row reveal" data-d="3">
+        <a class="btn btn-primary btn-lg" href="https://monnif-web.vercel.app/signup" target="_blank" rel="noopener">
+          Criar conta grátis
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
         <a class="btn btn-ghost btn-lg" href="#recursos">Ver recursos</a>
       </div>
-      <p class="cta-note">Leva menos de 1 minuto. Sem pegadinha, sem plano pago.</p>
+      <p class="cta-note reveal" data-d="4">Leva menos de 1 minuto. Sem plano pago, sem pegadinha.</p>
 
-      <div class="shot-frame">
-        <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-        <img src="assets/dashboard-mensal.png" alt="Dashboard do Monnif com sobra prevista, contas a pagar e próximas despesas" loading="eager" />
+      <!-- Mockup do dashboard -->
+      <div class="browser reveal" data-d="5">
+        <div class="browser-bar" aria-hidden="true">
+          <i></i><i></i><i></i>
+          <span class="browser-url">monnif-web.vercel.app</span>
+        </div>
+        <div class="app">
+          <div class="app-head">
+            <div>
+              <p class="app-kicker">Visão geral</p>
+              <p class="app-title">Olá, Família Pelizaro</p>
+              <p class="app-sub">Aqui está o resumo financeiro da sua conta.</p>
+            </div>
+            <div class="chips">
+              <span class="chip on">Mensal</span>
+              <span class="chip">Anual</span>
+              <span class="chip">Fluxo</span>
+            </div>
+          </div>
+
+          <div class="stat-grid">
+            <div class="stat good">
+              <div class="stat-label">
+                <span class="stat-ico" style="background:color-mix(in oklch,var(--success) 14%,transparent);color:var(--success)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z"/><path d="M2 9v1c0 1.1.9 2 2 2h1"/><path d="M16 11h0"/></svg>
+                </span>
+                Sobra prevista
+              </div>
+              <p class="stat-value" style="color:var(--success)">R$ 3.418,71</p>
+              <p class="stat-foot">R$ 16.819,00 receitas − R$ 13.400,29 despesas</p>
+            </div>
+
+            <div class="stat">
+              <div class="stat-label">
+                <span class="stat-ico" style="background:color-mix(in oklch,var(--warning) 14%,transparent);color:var(--warning)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v3l2 1"/></svg>
+                </span>
+                A pagar no mês
+              </div>
+              <div class="stat-row">
+                <div>
+                  <p class="stat-value">R$ 4.133,29</p>
+                  <p class="stat-foot">R$ 9.267,00 já pagos de R$ 13.400,29</p>
+                </div>
+                <svg width="52" height="52" viewBox="0 0 52 52" aria-hidden="true" style="flex:none">
+                  <defs><linearGradient id="ring1" x1="0" y1="0" x2="52" y2="52"><stop offset="0" stop-color="var(--grad-a)"/><stop offset="1" stop-color="var(--grad-b)"/></linearGradient></defs>
+                  <circle cx="26" cy="26" r="23" fill="none" stroke="oklch(1 0 0 / 10%)" stroke-width="5"/>
+                  <circle cx="26" cy="26" r="23" fill="none" stroke="url(#ring1)" stroke-width="5" stroke-linecap="round"
+                          stroke-dasharray="144.5" stroke-dashoffset="44.8" transform="rotate(-90 26 26)"/>
+                  <text x="26" y="30" text-anchor="middle" font-size="11" font-weight="800" fill="currentColor" font-family="Inter, sans-serif">69%</text>
+                </svg>
+              </div>
+            </div>
+
+            <div class="stat">
+              <div class="stat-label">
+                <span class="stat-ico" style="background:color-mix(in oklch,var(--primary) 16%,transparent);color:var(--grad-a)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 7-7"/><path d="M14 7h6v6"/></svg>
+                </span>
+                Receitas do mês
+              </div>
+              <p class="stat-value">R$ 16.819,00</p>
+              <p class="stat-foot">R$ 12.400,00 já recebidos</p>
+            </div>
+          </div>
+
+          <div class="rows">
+            <div class="row">
+              <span class="tick" aria-hidden="true"></span>
+              <span class="row-body">
+                <span class="row-title">Escola do Vini</span>
+                <span class="row-meta"><span class="late">Venceu 05/07</span> · <span class="cdot" style="background:#f472b6"></span> Educação</span>
+              </span>
+              <span class="row-amount" style="color:#fb923c">R$ 800,00</span>
+            </div>
+            <div class="row">
+              <span class="tick" aria-hidden="true"></span>
+              <span class="row-body">
+                <span class="row-title">Fatura Nubank</span>
+                <span class="row-meta">10/07 · <span class="cdot" style="background:var(--grad-a)"></span> Cartão</span>
+              </span>
+              <span class="row-amount" style="color:#ef4444">R$ 2.184,52</span>
+            </div>
+            <div class="row paid">
+              <span class="tick done" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg></span>
+              <span class="row-body">
+                <span class="row-title">Aluguel</span>
+                <span class="row-meta">05/07 · <span class="cdot" style="background:var(--success)"></span> Moradia</span>
+              </span>
+              <span class="row-amount" style="opacity:.55">R$ 2.900,00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="metrics reveal">
+        <div class="metric"><b class="grad-text">11</b><span>telas de gestão</span></div>
+        <div class="metric"><b class="grad-text">12</b><span>cores de tema</span></div>
+        <div class="metric"><b class="grad-text">OFX/CSV</b><span>importação de extrato</span></div>
+        <div class="metric"><b class="grad-text">R$ 0</b><span>para sempre</span></div>
       </div>
     </div>
   </div>
 
-  <div class="strip">
-    <span><b>✓</b> Contas compartilhadas</span>
-    <span><b>✓</b> Recorrências automáticas</span>
-    <span><b>✓</b> Gráficos anuais</span>
-    <span><b>✓</b> Dark &amp; light mode</span>
-  </div>
-
+  <!-- ============================ RECURSOS ============================ -->
   <section id="recursos">
     <div class="wrap">
-      <p class="kicker">Recursos</p>
-      <h2>Tudo que o seu dinheiro precisa.<br />Nada do que ele não precisa.</h2>
-      <p class="lead">Sem planilha quebrada, sem app de banco confuso. Só o essencial, muito bem feito.</p>
-      <div class="grid">
-        <div class="card">
-          <div class="ico">👨‍👩‍👧</div>
+      <div class="sec-head center reveal">
+        <p class="kicker">Recursos</p>
+        <h2>Tudo que o seu dinheiro precisa.<br />Nada do que ele não precisa.</h2>
+        <p class="lead">Sem planilha quebrada, sem app de banco confuso. O essencial de uma vida financeira inteira — feito com cuidado.</p>
+      </div>
+
+      <div class="features">
+        <div class="feature reveal">
+          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
           <h3>Contas compartilhadas</h3>
-          <p>Casa, família ou empresa: convide pessoas com papéis de Dono, Admin e Membro. Todo mundo na mesma página.</p>
+          <p>Casa, família ou empresa. Convide pessoas com papéis de Dono, Admin e Membro — todo mundo vendo o mesmo número.</p>
         </div>
-        <div class="card">
-          <div class="ico">🔁</div>
+
+        <div class="feature reveal" data-d="1">
+          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
+          <h3>Cartão de crédito</h3>
+          <p>Compras entram na fatura do ciclo certo e o vencimento vira o da fatura. Parcelamento sem dor de cabeça.</p>
+          <span class="tag">Novo</span>
+        </div>
+
+        <div class="feature reveal" data-d="2">
+          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z"/><path d="M2 9v1c0 1.1.9 2 2 2h1"/></svg></span>
+          <h3>Orçamento por categoria</h3>
+          <p>Um teto mensal por categoria e o quanto já foi gasto. As que chegam perto do limite sobem para o topo do dashboard.</p>
+          <span class="tag">Novo</span>
+        </div>
+
+        <div class="feature reveal" data-d="3">
+          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></span>
+          <h3>Projeção de saldo</h3>
+          <p>Saldo real em caixa hoje e a curva dos próximos dias. Descubra em que data a conta fica no vermelho — com antecedência.</p>
+          <span class="tag">Novo</span>
+        </div>
+
+        <div class="feature reveal" data-d="4">
+          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg></span>
+          <h3>Importação de extrato</h3>
+          <p>Envie o OFX ou CSV do banco. O Monnif concilia com o que já estava previsto, aponta duplicadas e deixa você desfazer tudo.</p>
+          <span class="tag">Novo</span>
+        </div>
+
+        <div class="feature reveal" data-d="5">
+          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6 4.6 1.9-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z"/><path d="M19 15l.9 2.1 2.1.9-2.1.9L19 21l-.9-2.1-2.1-.9 2.1-.9z"/></svg></span>
+          <h3>Categorização automática</h3>
+          <p>Regras aprendidas com o seu uso. Categorize a mesma descrição algumas vezes e o Monnif passa a preencher sozinho.</p>
+          <span class="tag">Novo</span>
+        </div>
+
+        <div class="feature reveal">
+          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/><path d="M12 18h.01"/></svg></span>
+          <h3>Instala como app</h3>
+          <p>PWA de verdade: instale na tela inicial do celular e ele abre em tela cheia, com ícone próprio. Sem loja de aplicativos.</p>
+          <span class="tag">Novo</span>
+        </div>
+
+        <div class="feature reveal" data-d="1">
+          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2.1a10 10 0 0 1 0 19.8"/><circle cx="12" cy="12" r="10"/></svg></span>
+          <h3>Do seu jeito</h3>
+          <p>Claro, escuro ou seguindo o sistema, com 12 cores de destaque. A cor escolhida tinge o app inteiro, não só os botões.</p>
+        </div>
+
+        <div class="feature reveal" data-d="2">
+          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></span>
           <h3>Recorrências inteligentes</h3>
-          <p>Aluguel, escola, assinatura? Cadastre uma vez — o Monnif gera os próximos vencimentos sozinho, com ou sem data de término.</p>
-        </div>
-        <div class="card">
-          <div class="ico">📊</div>
-          <h3>Visão anual completa</h3>
-          <p>Receitas × despesas mês a mês, gasto por categoria e sobra acumulada. Um ano inteiro numa tela.</p>
-        </div>
-        <div class="card">
-          <div class="ico">🎨</div>
-          <h3>Categorias do seu jeito</h3>
-          <p>Cores e ícones personalizados. Os valores das despesas mudam de cor conforme o peso no seu bolso.</p>
-        </div>
-        <div class="card">
-          <div class="ico">✅</div>
-          <h3>Um toque para pagar</h3>
-          <p>Marque contas como pagas direto da lista. Atrasou? O Monnif avisa em vermelho, sem drama.</p>
-        </div>
-        <div class="card">
-          <div class="ico">🌗</div>
-          <h3>Bonito de dia e de noite</h3>
-          <p>Dark mode, light mode ou seguir o sistema — com a cor de destaque que você escolher.</p>
+          <p>Aluguel, escola, assinatura: cadastre uma vez e o Monnif gera os próximos vencimentos, com ou sem data de término.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section>
-    <div class="wrap show">
-      <div class="txt">
-        <p class="kicker">Visão anual</p>
-        <h2>O ano inteiro, de relance.</h2>
-        <p>
-          Alterne entre a visão do mês e a visão anual com um clique. Compare receitas e
-          despesas dos últimos 12 meses, veja pra onde o dinheiro vai por categoria e
-          acompanhe a sobra acumulada crescendo.
-        </p>
-        <ul>
-          <li>Receitas × despesas mês a mês</li>
-          <li>Ranking de gastos por categoria</li>
-          <li>Sobra acumulada dos últimos 12 meses</li>
-        </ul>
+  <!-- ============================ CARTÃO ============================ -->
+  <section id="cartao">
+    <div class="wrap">
+      <div class="split">
+        <div class="split-txt reveal">
+          <p class="kicker">Cartão de crédito</p>
+          <h2>A fatura para de ser um mistério.</h2>
+          <p>
+            Cadastre seus cartões com dia de fechamento e de vencimento. Cada compra cai
+            no ciclo certo automaticamente, e a fatura vira uma despesa só — com todos os
+            itens que a compõem a um clique de distância.
+          </p>
+          <ul class="checks">
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Ciclo automático</b> — a compra entra na fatura do período correto</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Parcelas</b> — "3 de 10" aparece em cada mês, sem você fazer conta</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Fatura conta no orçamento</b> e no fluxo de caixa, como no mundo real</span></li>
+          </ul>
+        </div>
+
+        <div class="panel reveal" data-d="2">
+          <div class="mock-list">
+            <div class="mock-item">
+              <div class="mock-item-head">
+                <span class="mock-name"><span style="width:26px;height:17px;border-radius:4px;background:var(--grad);display:inline-block"></span> Nubank</span>
+                <span class="mock-num">fecha dia 3 · vence dia 10</span>
+              </div>
+              <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px">
+                <span style="font-size:1.3rem;font-weight:800;letter-spacing:-.04em;font-variant-numeric:tabular-nums">R$ 2.184,52</span>
+                <span class="mock-num">fatura de julho</span>
+              </div>
+              <div class="bar-track"><div class="bar-fill" style="width:42%;background:var(--grad)"></div></div>
+              <div class="mock-num" style="margin-top:7px">42% do limite de R$ 5.200,00</div>
+            </div>
+
+            <div class="mock-item" style="background:oklch(1 0 0 / 3%)">
+              <div class="mock-num" style="margin-bottom:9px;font-weight:700;color:var(--muted)">Compras desta fatura</div>
+              <div style="display:grid;gap:8px">
+                <div style="display:flex;justify-content:space-between;font-size:.78rem"><span>Mercado São Jorge <span style="color:var(--faint)">· 02/07</span></span><span style="font-variant-numeric:tabular-nums">R$ 612,40</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:.78rem"><span>Notebook <span style="color:var(--faint)">· 3 de 10</span></span><span style="font-variant-numeric:tabular-nums">R$ 489,90</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:.78rem"><span>Posto Ipiranga <span style="color:var(--faint)">· 08/07</span></span><span style="font-variant-numeric:tabular-nums">R$ 310,00</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:.78rem;color:var(--faint)"><span>+ 14 outras</span><span style="font-variant-numeric:tabular-nums">R$ 772,22</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="img-card"><img src="assets/dashboard-anual.png" alt="Visão anual do Monnif com gráfico de receitas e despesas por mês" loading="lazy" /></div>
     </div>
   </section>
 
-  <section>
-    <div class="wrap show rev">
-      <div class="txt">
-        <p class="kicker">Despesas sob controle</p>
-        <h2>Saiba o que vence, quando vence.</h2>
-        <p>
-          Filtre por mês, status e categoria. Contas atrasadas gritam em vermelho,
-          as pagas ficam riscadas, e o total em aberto está sempre à vista.
-        </p>
-        <ul>
-          <li>Filtros por mês, status e categoria</li>
-          <li>Totais de pago e em aberto em tempo real</li>
-          <li>Edite uma ocorrência ou a série inteira</li>
-        </ul>
+  <!-- ============================ PREVISÃO ============================ -->
+  <section id="previsao">
+    <div class="wrap">
+      <div class="split rev">
+        <div class="split-txt reveal">
+          <p class="kicker">Fluxo de caixa</p>
+          <h2>O futuro do seu saldo,<br />em uma linha.</h2>
+          <p>
+            Informe quanto você tem em caixa hoje e o Monnif projeta os próximos dias
+            com base em tudo que está em aberto — contas, faturas e receitas previstas.
+            Se a linha cruzar o zero, você fica sabendo com semanas de antecedência.
+          </p>
+          <ul class="checks">
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Saldo real</b> em caixa, ajustável a qualquer momento</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Projeção diária</b> considerando vencimentos e recebimentos</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>O dia crítico em destaque</b> — a primeira data em que o saldo fica negativo</span></li>
+          </ul>
+        </div>
+
+        <div class="panel reveal" data-d="2">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px">
+            <span style="font-size:.73rem;font-weight:600;color:var(--muted)">Saldo em caixa hoje</span>
+            <span style="font-size:.68rem;color:var(--destructive);font-weight:700">negativo em 22/08</span>
+          </div>
+          <p style="font-size:1.5rem;font-weight:800;letter-spacing:-.045em;color:var(--success);font-variant-numeric:tabular-nums;margin-bottom:14px">R$ 8.240,00</p>
+
+          <svg viewBox="0 0 400 150" width="100%" height="170" role="img" aria-label="Projeção do saldo em caixa: começa em R$ 8.240 e cruza o zero em 22 de agosto">
+            <defs>
+              <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--grad-a)" stop-opacity="0.32"/>
+                <stop offset="1" stop-color="var(--grad-a)" stop-opacity="0"/>
+              </linearGradient>
+              <linearGradient id="line" x1="0" y1="0" x2="400" y2="0">
+                <stop offset="0" stop-color="var(--grad-a)"/>
+                <stop offset="0.72" stop-color="var(--grad-b)"/>
+                <stop offset="1" stop-color="var(--destructive)"/>
+              </linearGradient>
+            </defs>
+            <line x1="0" y1="104" x2="400" y2="104" stroke="oklch(1 0 0 / 12%)" stroke-width="1" stroke-dasharray="4 4"/>
+            <text x="4" y="99" font-size="9" fill="oklch(1 0 0 / 35%)" font-family="Inter, sans-serif">R$ 0</text>
+            <path d="M0 44 L57 52 L114 40 L171 66 L228 61 L285 88 L318 104 L342 118 L400 136 L400 150 L0 150 Z" fill="url(#area)"/>
+            <path class="spark" d="M0 44 L57 52 L114 40 L171 66 L228 61 L285 88 L318 104 L342 118 L400 136"
+                  fill="none" stroke="url(#line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="318" cy="104" r="5" fill="var(--destructive)" stroke="var(--elevated)" stroke-width="2.5"/>
+          </svg>
+
+          <div style="display:flex;justify-content:space-between;font-size:.62rem;color:var(--faint);margin-top:2px">
+            <span>hoje</span><span>+15d</span><span>22/08</span><span>+45d</span>
+          </div>
+        </div>
       </div>
-      <div class="img-card"><img src="assets/despesas.png" alt="Lista de despesas do Monnif com filtros e status de pagamento" loading="lazy" /></div>
     </div>
   </section>
 
-  <section>
-    <div class="wrap show">
-      <div class="txt">
-        <p class="kicker">Leve no bolso</p>
-        <h2>No sofá, na fila, no mercado.</h2>
-        <p>
-          O Monnif é 100% responsivo: a mesma experiência completa no notebook,
-          no tablet e no celular. Marque uma conta como paga na fila do caixa.
-        </p>
-        <ul>
-          <li>Interface adaptada para toque</li>
-          <li>Rápido até em conexões lentas</li>
-          <li>Nada pra instalar — abre no navegador</li>
-        </ul>
+  <!-- ============================ IMPORT + AUTOMAÇÃO ============================ -->
+  <section id="automacao">
+    <div class="wrap">
+      <div class="split">
+        <div class="split-txt reveal">
+          <p class="kicker">Import e automação</p>
+          <h2>Menos digitação.<br />Mais decisão.</h2>
+          <p>
+            Suba o extrato do banco ou a fatura do cartão em OFX ou CSV. Nada é gravado
+            antes de você conferir: o Monnif mostra o que é novo, o que já existe e o que
+            casa com um lançamento previsto. Errou? Desfazer devolve tudo.
+          </p>
+          <ul class="checks">
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Conciliação</b> — marca o previsto como pago em vez de duplicar</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Detecção de duplicadas</b> do que já foi importado antes</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Regras aprendidas</b> categorizam os próximos lançamentos sozinhas</span></li>
+          </ul>
+        </div>
+
+        <div class="panel reveal" data-d="2">
+          <div style="border:2px dashed oklch(1 0 0 / 12%);border-radius:16px;padding:22px;text-align:center;margin-bottom:14px">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--grad-a)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 9px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg>
+            <p style="font-size:.84rem;font-weight:700">Clique para escolher o arquivo</p>
+            <p style="font-size:.68rem;color:var(--faint);margin-top:3px">Formatos aceitos: .ofx e .csv</p>
+          </div>
+
+          <div style="display:grid;gap:8px">
+            <div class="mock-item" style="display:flex;align-items:center;gap:10px;padding:11px 13px">
+              <span style="font-size:.6rem;font-weight:800;letter-spacing:.05em;padding:3px 8px;border-radius:999px;background:color-mix(in oklch,var(--success) 16%,transparent);color:var(--success)">NOVO</span>
+              <span style="flex:1;font-size:.78rem">Padaria Estrela</span>
+              <span style="font-size:.76rem;font-variant-numeric:tabular-nums">R$ 48,90</span>
+            </div>
+            <div class="mock-item" style="display:flex;align-items:center;gap:10px;padding:11px 13px">
+              <span style="font-size:.6rem;font-weight:800;letter-spacing:.05em;padding:3px 8px;border-radius:999px;background:color-mix(in oklch,var(--primary) 20%,transparent);color:var(--grad-a)">CONCILIAR</span>
+              <span style="flex:1;font-size:.78rem">Aluguel <span style="color:var(--faint)">· casa com o previsto</span></span>
+              <span style="font-size:.76rem;font-variant-numeric:tabular-nums">R$ 2.900,00</span>
+            </div>
+            <div class="mock-item" style="display:flex;align-items:center;gap:10px;padding:11px 13px;opacity:.55">
+              <span style="font-size:.6rem;font-weight:800;letter-spacing:.05em;padding:3px 8px;border-radius:999px;background:oklch(1 0 0 / 8%);color:var(--muted)">DUPLICADA</span>
+              <span style="flex:1;font-size:.78rem">Netflix</span>
+              <span style="font-size:.76rem;font-variant-numeric:tabular-nums">R$ 59,90</span>
+            </div>
+            <div class="mock-item" style="display:flex;align-items:center;gap:10px;padding:11px 13px;border-color:color-mix(in oklch,var(--grad-a) 32%,transparent)">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--grad-a)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6 4.6 1.9-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z"/></svg>
+              <span style="flex:1;font-size:.75rem;color:var(--muted)">Regra aprendida: <b style="color:var(--foreground)">"Padaria" → Alimentação</b></span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="mobile-shot"><img src="assets/mobile-dashboard.png" alt="Monnif no celular mostrando o resumo financeiro do mês" loading="lazy" /></div>
     </div>
   </section>
 
+  <!-- ============================ MOBILE ============================ -->
+  <section id="mobile">
+    <div class="wrap">
+      <div class="split rev">
+        <div class="split-txt reveal">
+          <p class="kicker">No bolso</p>
+          <h2>Instala na tela inicial<br />e vira app.</h2>
+          <p>
+            O Monnif é um PWA de verdade: instale no celular e ele abre em tela cheia,
+            com ícone próprio, sem passar por loja. Navegação por barra inferior,
+            arraste a linha para editar ou excluir, e um toque no + lança a despesa do dia.
+          </p>
+          <ul class="checks">
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Gestos de toque</b> — deslize a linha para editar ou excluir</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Despesa rápida</b> — categoria, valor e pronto, em segundos</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>A mesma conta</b> no computador e no celular, sempre em sincronia</span></li>
+          </ul>
+        </div>
+
+        <div class="reveal" data-d="2">
+          <div class="phone">
+            <div class="phone-screen">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+                <div>
+                  <p style="font-size:.58rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--grad-a)">Lançamentos</p>
+                  <p style="font-size:1.15rem;font-weight:800;letter-spacing:-.035em">Despesas</p>
+                </div>
+                <span style="width:30px;height:30px;border-radius:10px;background:oklch(1 0 0 / 7%);display:grid;place-items:center">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+                </span>
+              </div>
+
+              <div class="chips" style="margin-bottom:11px">
+                <span class="chip on" style="flex:1;text-align:center">Todas</span>
+                <span class="chip" style="flex:1;text-align:center">Em aberto</span>
+                <span class="chip" style="flex:1;text-align:center">Pagas</span>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:7px">
+                <div class="row" style="padding:9px 11px">
+                  <span class="tick" style="width:19px;height:19px" aria-hidden="true"></span>
+                  <span class="row-body"><span class="row-title" style="font-size:.76rem">Escola do Vini</span><span class="row-meta" style="font-size:.6rem"><span class="late">Venceu 05/07</span></span></span>
+                  <span class="row-amount" style="font-size:.76rem;color:#fb923c">R$ 800,00</span>
+                </div>
+                <div class="row" style="padding:9px 11px">
+                  <span class="tick" style="width:19px;height:19px" aria-hidden="true"></span>
+                  <span class="row-body"><span class="row-title" style="font-size:.76rem">Fatura Nubank</span><span class="row-meta" style="font-size:.6rem">10/07 · Cartão</span></span>
+                  <span class="row-amount" style="font-size:.76rem;color:#ef4444">R$ 2.184,52</span>
+                </div>
+                <div class="row" style="padding:9px 11px">
+                  <span class="tick" style="width:19px;height:19px" aria-hidden="true"></span>
+                  <span class="row-body"><span class="row-title" style="font-size:.76rem">Internet</span><span class="row-meta" style="font-size:.6rem">15/07 · Casa</span></span>
+                  <span class="row-amount" style="font-size:.76rem;color:#fbbf24">R$ 129,90</span>
+                </div>
+                <div class="row paid" style="padding:9px 11px">
+                  <span class="tick done" style="width:19px;height:19px" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg></span>
+                  <span class="row-body"><span class="row-title" style="font-size:.76rem">Aluguel</span><span class="row-meta" style="font-size:.6rem">05/07 · Moradia</span></span>
+                  <span class="row-amount" style="font-size:.76rem;opacity:.5">R$ 2.900,00</span>
+                </div>
+              </div>
+
+              <div class="fab" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+              </div>
+
+              <div class="phone-nav" aria-hidden="true">
+                <div><span class="ni"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></span>Início</div>
+                <div class="on"><span class="ni"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7l-8 8-4-4-6 6"/><path d="M15 7h6v6"/></svg></span>Despesas</div>
+                <div><span class="ni"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 7-7"/><path d="M14 7h6v6"/></svg></span>Receitas</div>
+                <div><span class="ni"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>Cartões</div>
+                <div><span class="ni"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></span>Mais</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ ORÇAMENTO ============================ -->
+  <section id="orcamento">
+    <div class="wrap">
+      <div class="split">
+        <div class="split-txt reveal">
+          <p class="kicker">Orçamento</p>
+          <h2>Um teto para cada categoria.</h2>
+          <p>
+            Defina quanto pretende gastar por mês em cada categoria e acompanhe o consumo
+            em tempo real. Verde tranquilo, âmbar de atenção, vermelho de estourou —
+            e as categorias que chegam perto do teto aparecem em destaque no dashboard,
+            antes de o mês fechar.
+          </p>
+        </div>
+
+        <div class="panel reveal" data-d="2">
+          <div class="mock-list">
+            <div class="mock-item">
+              <div class="mock-item-head"><span class="mock-name">🛒 Alimentação</span><span class="mock-num">R$ 1.240 / R$ 1.800</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:69%;background:var(--success)"></div></div>
+            </div>
+            <div class="mock-item">
+              <div class="mock-item-head"><span class="mock-name">🚗 Transporte</span><span class="mock-num" style="color:var(--warning)">R$ 712 / R$ 800</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:89%;background:var(--warning)"></div></div>
+            </div>
+            <div class="mock-item">
+              <div class="mock-item-head"><span class="mock-name">🍿 Lazer</span><span class="mock-num" style="color:var(--destructive);font-weight:700">R$ 640 / R$ 500</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--destructive)"></div></div>
+            </div>
+            <div class="mock-item">
+              <div class="mock-item-head"><span class="mock-name">💊 Saúde</span><span class="mock-num">R$ 180 / R$ 900</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:20%;background:var(--success)"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ FAQ ============================ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <p class="kicker">Dúvidas</p>
+        <h2>Perguntas honestas,<br />respostas honestas.</h2>
+      </div>
+      <div class="faq">
+        <details class="reveal" open>
+          <summary>É grátis mesmo? Qual é a pegadinha?</summary>
+          <p>É grátis e não há pegadinha. O Monnif é um projeto pessoal, sem plano pago, sem anúncio e sem venda de dados. Você cria a conta, usa tudo e pronto.</p>
+        </details>
+        <details class="reveal" data-d="1">
+          <summary>Preciso conectar minha conta bancária?</summary>
+          <p>Não. O Monnif nunca pede a senha do seu banco nem se conecta a ele. Se quiser poupar digitação, você baixa o extrato em OFX ou CSV pelo próprio site do banco e envia o arquivo — o controle é todo seu.</p>
+        </details>
+        <details class="reveal" data-d="2">
+          <summary>Como funciona o compartilhamento com a família?</summary>
+          <p>Cada conta financeira pode ter várias pessoas, com papéis de Dono, Admin e Membro. Você convida por link e todo mundo passa a ver e lançar na mesma conta. Também dá para manter contas separadas — pessoal, casa, empresa — na mesma sessão.</p>
+        </details>
+        <details class="reveal" data-d="3">
+          <summary>Preciso instalar alguma coisa?</summary>
+          <p>Não. Abre no navegador, no computador ou no celular. Se quiser, dá para instalar na tela inicial do celular como um app normal, com ícone próprio e tela cheia — sem passar por loja de aplicativos.</p>
+        </details>
+        <details class="reveal" data-d="4">
+          <summary>E se eu importar o extrato errado?</summary>
+          <p>Nada é gravado antes de você conferir a prévia. Depois de importar, o botão Desfazer reverte a importação inteira de uma vez.</p>
+        </details>
+        <details class="reveal" data-d="5">
+          <summary>Meus dados estão seguros?</summary>
+          <p>As senhas ficam guardadas com hash, a sessão usa token de curta duração com renovação automática, e cada conta financeira só é acessível a quem foi convidado. Nenhum dado é vendido ou compartilhado.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ CTA FINAL ============================ -->
   <div class="final">
-    <h2>Comece hoje. <span style="color:#a78bfa">De graça.</span></h2>
-    <p>Crie sua conta, convide a família e descubra quanto sobra este mês.</p>
-    <a class="btn btn-primary btn-lg" href="https://monnif-web.vercel.app/signup" target="_blank" rel="noopener">Usar o Monnif grátis →</a>
+    <div class="reveal">
+      <h2>Comece hoje.<br /><span class="grad-text">De graça, para sempre.</span></h2>
+      <p>Crie sua conta, convide a família e descubra quanto realmente sobra este mês.</p>
+      <a class="btn btn-primary btn-lg" href="https://monnif-web.vercel.app/signup" target="_blank" rel="noopener">
+        Usar o Monnif grátis
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
   </div>
 </main>
 
 <footer>
-  Monnif © 2026 — Gestão financeira pessoal e familiar ·
-  <a href="https://monnif-web.vercel.app" target="_blank" rel="noopener">monnif-web.vercel.app</a>
+  <div class="wrap foot">
+    <span class="logo" style="font-size:1rem">
+      <span class="logo-mark" style="width:28px;height:28px;border-radius:9px" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="16" height="16"><path d="M8 30V13l11 11 11-11v17" fill="none" stroke="#fff" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      Monnif
+    </span>
+    <span>© 2026 Monnif — gestão financeira pessoal e familiar</span>
+    <span><a href="https://monnif-web.vercel.app" target="_blank" rel="noopener">Abrir o app ↗</a></span>
+  </div>
 </footer>
+
+<script>
+(function () {
+  // Header ganha vidro depois de sair do topo.
+  var header = document.getElementById("header");
+  var onScroll = function () { header.classList.toggle("stuck", window.scrollY > 12); };
+  onScroll();
+  addEventListener("scroll", onScroll, { passive: true });
+
+  var items = document.querySelectorAll(".reveal");
+  var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Sem IntersectionObserver (ou com movimento reduzido) tudo já nasce visível.
+  if (reduced || !("IntersectionObserver" in window)) {
+    items.forEach(function (el) { el.classList.add("in"); });
+    return;
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("in");
+      io.unobserve(entry.target); // entrada é uma vez só, não reanima ao rolar de volta
+    });
+  }, { rootMargin: "0px 0px -12% 0px", threshold: 0.1 });
+
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
 
 </body>
 </html>
