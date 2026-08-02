@@ -1,3 +1,3 @@
 # monnif-site
 
-Landing page do [Monnif](https://monnif-web.vercel.app) — publicada via GitHub Pages.
+Landing page do [Monnif](https://app.monnif.com) — publicada via GitHub Pages em `monnif.com`.
