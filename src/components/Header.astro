@@ -1,64 +1,12 @@
 ---
 import BrandMark from "./BrandMark.astro";
-
-// Enquanto as páginas de recurso não existem, o mega-menu aponta para as
-// seções da home. Trocar o href aqui é o suficiente quando elas nascerem.
-const recursos = [
-  {
-    href: "/#assistente",
-    titulo: "Assistente com IA",
-    desc: "Lança, paga e projeta por texto ou voz",
-    icone: `<path d="M12 3l1.9 4.6 4.6 1.9-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z"/><path d="M19 15l.9 2.1 2.1.9-2.1.9L19 21l-.9-2.1-2.1-.9 2.1-.9z"/>`,
-  },
-  {
-    href: "/#cartao",
-    titulo: "Cartão de crédito",
-    desc: "Fatura por ciclo, parcelas e limite",
-    icone: `<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>`,
-  },
-  {
-    href: "/#orcamento",
-    titulo: "Orçamento",
-    desc: "Teto por categoria e quanto ainda cabe",
-    icone: `<path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z"/><path d="M2 9v1c0 1.1.9 2 2 2h1"/>`,
-  },
-  {
-    href: "/#previsao",
-    titulo: "Projeção de saldo",
-    desc: "Em que dia a conta fica no vermelho",
-    icone: `<path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/>`,
-  },
-  {
-    href: "/#agenda",
-    titulo: "Agenda e lembretes",
-    desc: "Compromissos com hora, convidados e aviso",
-    icone: `<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>`,
-  },
-  {
-    href: "/#automacao",
-    titulo: "Importação e regras",
-    desc: "Extrato OFX/CSV e categorização automática",
-    icone: `<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/>`,
-  },
-  {
-    href: "/#mobile",
-    titulo: "No celular",
-    desc: "Instala como app, sem loja de aplicativos",
-    icone: `<rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 18h.01"/>`,
-  },
-  {
-    href: "/#recursos",
-    titulo: "Todos os recursos",
-    desc: "A lista inteira, num lugar só",
-    icone: `<path d="M4 6h16M4 12h16M4 18h10"/>`,
-  },
-];
+import { RECURSOS } from "../data/recursos";
 
 const institucional = [
-  { href: "/docs/", label: "Documentação" },
+  { href: "/docs/", label: "Como usar" },
   { href: "/blog/", label: "Blog" },
-  { href: "/manifesto/", label: "Manifesto" },
-  { href: "/seguranca/", label: "Segurança" },
+  { href: "/manifesto/", label: "Nossa história" },
+  { href: "/seguranca/", label: "Seus dados" },
 ];
 
 const path = Astro.url.pathname;
@@ -79,21 +27,21 @@ const path = Astro.url.pathname;
         </summary>
         <div class="mega-panel">
           <div class="mega-grid">
-            {recursos.map((r) => (
-              <a class="mega-item" href={r.href}>
+            {RECURSOS.map((r) => (
+              <a class="mega-item" href={`/recursos/${r.slug}/`}>
                 <span class="ico" aria-hidden="true">
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={r.icone} />
                 </span>
                 <span>
                   <b>{r.titulo}</b>
-                  <span>{r.desc}</span>
+                  <span>{r.resumo}</span>
                 </span>
               </a>
             ))}
           </div>
           <div class="mega-foot">
             <span>Tudo grátis, sem plano pago e sem anúncio.</span>
-            <a href="/manifesto/">Por que →</a>
+            <a href="/recursos/">Ver todos →</a>
           </div>
         </div>
       </details>
@@ -115,7 +63,8 @@ const path = Astro.url.pathname;
       </summary>
       <div class="drawer-panel">
         <h4>Recursos</h4>
-        {recursos.map((r) => <a href={r.href}>{r.titulo}</a>)}
+        {RECURSOS.map((r) => <a href={`/recursos/${r.slug}/`}>{r.titulo}</a>)}
+        <a href="/recursos/">Ver todos</a>
         <h4>Monnif</h4>
         {institucional.map((i) => <a href={i.href}>{i.label}</a>)}
         <a class="btn btn-primary btn-lg" href="https://app.monnif.com/signup" target="_blank" rel="noopener">Criar conta grátis</a>

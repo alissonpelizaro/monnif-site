@@ -2,9 +2,12 @@
 import Base from "../layouts/Base.astro";
 import Cta from "../components/Cta.astro";
 
-const titulo = "Monnif — Suas finanças, com um assistente de IA junto";
+import ChatMock from "../components/ChatMock.astro";
+import { RECURSOS, OUTROS } from "../data/recursos";
+
+const titulo = "Monnif — O dinheiro da casa, organizado num lugar só";
 const descricao =
-  "Assistente financeiro com IA que lança, paga e projeta por você — por texto ou por voz. Mais cartão de crédito, orçamento por categoria, agenda de compromissos e importação de extrato. Grátis, em contas compartilhadas.";
+  "App grátis para organizar o dinheiro da família: contas do mês, cartão de crédito, orçamento e o saldo dos próximos dias. Com um assistente que lança para você — é só escrever ou falar.";
 
 const aplicativo = {
 "@context": "https://schema.org",
@@ -12,17 +15,15 @@ const aplicativo = {
 "name": "Monnif",
 "applicationCategory": "FinanceApplication",
 "operatingSystem": "Web, iOS, Android",
-"description": "Gestão financeira pessoal e familiar com assistente de IA por texto e voz, contas compartilhadas, cartão de crédito, orçamento por categoria, projeção de saldo, agenda de compromissos e importação de extrato bancário.",
+"description": "App grátis para organizar as finanças pessoais e da família: contas do mês, cartão de crédito, orçamento por categoria, saldo dos próximos dias, lembretes de vencimento e um assistente que lança por você.",
 "featureList": [
-  "Assistente financeiro com IA que executa ações por chat ou voz",
-  "Ditado por voz com transcrição automática",
-  "Agenda de compromissos com lembrete e convidados",
-  "Notificações push e e-mail de vencimentos",
-  "Contas compartilhadas com papéis",
-  "Cartão de crédito com fatura por ciclo e parcelas",
+  "Assistente que lança, paga e responde por escrito ou por voz",
+  "Lembretes de vencimento e agenda de compromissos",
+  "Contas compartilhadas com a família",
+  "Cartão de crédito com fatura fechada na data certa e parcelas",
   "Orçamento por categoria",
-  "Projeção diária de saldo",
-  "Importação de extrato OFX e CSV com conciliação"
+  "Saldo previsto para os próximos dias",
+  "Importação do extrato do banco"
 ],
 "url": "https://app.monnif.com",
 "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" },
@@ -37,21 +38,21 @@ const aplicativo = {
   <!-- ============================ HERO ============================ -->
   <div class="hero">
     <div class="wrap">
-      <span class="pill reveal"><span class="dot" aria-hidden="true"></span> Novo · assistente com IA · 100% grátis</span>
-      <h1 class="reveal" data-d="1">Fale com seu dinheiro.<br /><span class="grad-text">Ele responde — e resolve.</span></h1>
+      <span class="pill reveal"><span class="dot" aria-hidden="true"></span> Grátis de verdade · sem plano pago</span>
+      <h1 class="reveal" data-d="1">Saiba quanto sobra.<br /><span class="grad-text">Antes do mês acabar.</span></h1>
       <p class="sub reveal" data-d="2">
-        Monnif reúne despesas, receitas, cartão de crédito e orçamento da sua família
-        num só lugar, projeta o seu saldo dia a dia — e traz um assistente de IA que
-        lança, paga e explica tudo isso por texto ou por voz.
+        As contas da casa, o cartão de crédito e o que a família gasta, num lugar só.
+        E um assistente que anota por você: escreva “paguei o mercado, 240 no cartão”
+        e pronto.
       </p>
       <div class="cta-row reveal" data-d="3">
         <a class="btn btn-primary btn-lg" href="https://app.monnif.com/signup" target="_blank" rel="noopener">
           Criar conta grátis
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a class="btn btn-ghost btn-lg" href="#assistente">Ver o assistente</a>
+        <a class="btn btn-ghost btn-lg" href="#assistente">Ver como funciona</a>
       </div>
-      <p class="cta-note reveal" data-d="4">Leva menos de 1 minuto. Sem plano pago, sem pegadinha.</p>
+      <p class="cta-note reveal" data-d="4">Leva menos de 1 minuto. Sem cartão de crédito, sem pegadinha.</p>
 
       <!-- Mockup do dashboard -->
       <div class="browser reveal" data-d="5">
@@ -149,10 +150,10 @@ const aplicativo = {
       </div>
 
       <div class="metrics reveal">
-        <div class="metric"><b class="grad-text">24</b><span>ações que a IA faz por você</span></div>
-        <div class="metric"><b class="grad-text">Voz</b><span>ditado com transcrição</span></div>
-        <div class="metric"><b class="grad-text">OFX/CSV</b><span>importação de extrato</span></div>
-        <div class="metric"><b class="grad-text">R$ 0</b><span>para sempre</span></div>
+        <div class="metric"><b class="grad-text">R$ 0</b><span>para sempre, sem plano pago</span></div>
+        <div class="metric"><b class="grad-text">A família</b><span>toda vendo o mesmo número</span></div>
+        <div class="metric"><b class="grad-text">Sem anúncio</b><span>e sem venda de dados</span></div>
+        <div class="metric"><b class="grad-text">Sem instalar</b><span>abre no celular e no computador</span></div>
       </div>
     </div>
   </div>
@@ -161,84 +162,48 @@ const aplicativo = {
   <section id="assistente">
     <div class="wrap">
       <div class="sec-head center reveal">
-        <p class="kicker">Assistente com IA</p>
-        <h2>Não é um chatbot que dá conselho.<br /><span class="grad-text">É um que faz.</span></h2>
+        <p class="kicker">O assistente</p>
+        <h2>Não é um robô que dá conselho.<br /><span class="grad-text">É um que anota por você.</span></h2>
         <p class="lead">
-          O botão flutuante abre o assistente em qualquer tela da conta. Peça em português
-          e ele executa de verdade: cria a despesa, marca como paga, paga a fatura,
-          define o orçamento, projeta o saldo e ainda te leva para a tela certa.
+          Ele está a um toque em qualquer tela. Diga o que aconteceu e ele resolve:
+          lança a despesa, marca a conta como paga, quita a fatura do cartão, mostra
+          quanto ainda dá para gastar este mês.
         </p>
       </div>
 
       <div class="split">
-        <div class="panel reveal" data-d="1">
-          <div class="chat">
-            <div class="msg me">paguei o mercado agora, 240 reais no cartão do Nubank</div>
-
-            <div class="msg-tool" aria-hidden="true">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg>
-              criar_lancamento
-            </div>
-
-            <div class="msg ai">
-              Lançado: <b>Mercado — R$ 240,00</b> no Nubank, categoria Alimentação.
-              Entrou na fatura que fecha dia 3.
-            </div>
-
-            <div class="msg me">quanto ainda tenho pra gastar em alimentação esse mês?</div>
-
-            <div class="msg-tool" aria-hidden="true">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg>
-              listar_orcamentos
-            </div>
-
-            <div class="msg ai">
-              Restam <b>R$ 320,00</b> dos R$ 1.800,00 do mês — 82% já usados, e ainda
-              faltam 9 dias<span class="caret" aria-hidden="true"></span>
-            </div>
-          </div>
-
-          <div class="chat-input" aria-hidden="true">
-            <span>Escreva sua pergunta…</span>
-            <span class="chat-btn ghost">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
-            </span>
-            <span class="chat-btn send">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </span>
-          </div>
-        </div>
+        <div class="reveal" data-d="1"><ChatMock /></div>
 
         <div class="split-txt reveal" data-d="2">
-          <h2>24 ações, uma frase.</h2>
+          <h2>Uma frase resolve.</h2>
           <p>
-            O assistente usa exatamente as mesmas funções das telas — e as mesmas
-            permissões que você tem na conta. Ele não enxerga nada além do que você
-            já enxergaria, e a resposta aparece em streaming, palavra por palavra.
+            Preencher formulário é o motivo pelo qual quase todo mundo desiste de
+            anotar os gastos. Aqui você escreve o que aconteceu, do jeito que
+            contaria para alguém, e o assistente faz o resto.
           </p>
           <ul class="checks">
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Lança e edita</b> despesas, receitas, parcelas e recorrências</span></li>
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Marca como pago</b> e quita a fatura do cartão inteira</span></li>
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Cria categoria, cartão e orçamento</b> sem você abrir formulário</span></li>
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Responde com número</b> — resumo do mês, projeção de saldo, quem gastou o quê</span></li>
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Navega por você</b> — "abre meus cartões" e a tela troca</span></li>
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Convida gente</b> para a conta e agenda seus compromissos</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Anota o gasto</b>, inclusive parcelado e o que se repete todo mês</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Marca a conta como paga</b> e quita a fatura do cartão inteira</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Responde com número</b> — quanto sobra, quanto ainda cabe, quem gastou o quê</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Marca compromisso</b> e chama quem precisa estar junto</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Tudo o que ele faz</b> aparece na tela e você desfaz do jeito normal</span></li>
           </ul>
+          <a class="btn btn-ghost" href="/recursos/assistente/" style="margin-top:22px">Conhecer o assistente</a>
         </div>
       </div>
 
       <div class="split" style="margin-top:clamp(64px,9vw,104px)">
         <div class="split-txt reveal">
-          <p class="kicker">Ditado por voz</p>
+          <p class="kicker">Ou fale</p>
           <h2>Sem digitar nada.</h2>
           <p>
-            Segure o microfone e fale. O Monnif grava, transcreve e coloca o texto no
-            campo — você lê, corrige se quiser e só então envia. Nada sai da sua boca
-            direto para a sua conta sem passar pelos seus olhos.
+            Segure o microfone e fale. O que você disse vira texto na tela — você lê,
+            corrige se ele entendeu errado, e só então envia. Nada entra na sua conta
+            sem passar pelos seus olhos.
           </p>
           <ul class="checks">
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Até 30 segundos</b> por gravação, com as barras reagindo à sua voz</span></li>
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Você revisa antes</b> — a transcrição vai para o campo, não para o envio</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Bom para o gasto do dia</b> — “gasolina, cento e oitenta reais”</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Você confere antes</b> — o que foi falado vira texto, não vira lançamento</span></li>
             <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Escolha o tom</b> da resposta: formal, equilibrado ou descontraído</span></li>
           </ul>
         </div>
@@ -276,92 +241,26 @@ const aplicativo = {
     <div class="wrap">
       <div class="sec-head center reveal">
         <p class="kicker">Recursos</p>
-        <h2>Tudo que o seu dinheiro precisa.<br />Nada do que ele não precisa.</h2>
-        <p class="lead">Sem planilha quebrada, sem app de banco confuso. O essencial de uma vida financeira inteira — feito com cuidado.</p>
+        <h2>Tudo que o dinheiro da casa precisa.<br />Nada do que ele não precisa.</h2>
+        <p class="lead">Sem planilha que quebra e sem app de banco confuso. As contas do mês, o cartão, o que sobra e o que vem — num lugar só.</p>
       </div>
 
       <div class="features">
-        <div class="feature reveal">
-          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6 4.6 1.9-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z"/><path d="M19 15l.9 2.1 2.1.9-2.1.9L19 21l-.9-2.1-2.1-.9 2.1-.9z"/></svg></span>
-          <h3>Assistente com IA</h3>
-          <p>Peça em português e ele executa: lançar, pagar, orçar, projetar, convidar. 24 ações, as mesmas das telas e com as suas permissões.</p>
-          <span class="tag">Novo</span>
-        </div>
+        {RECURSOS.map((r, i) => (
+          <a class="feature reveal" data-d={i % 6} href={`/recursos/${r.slug}/`}>
+            <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={r.icone} /></span>
+            <h3>{r.titulo}</h3>
+            <p>{r.resumo}.</p>
+          </a>
+        ))}
 
-        <div class="feature reveal" data-d="1">
-          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
-          <h3>Lança por voz</h3>
-          <p>Fale "mercado, 240 reais" e pronto. Grava até 30s, transcreve e deixa o texto no campo para você conferir antes de enviar.</p>
-          <span class="tag">Novo</span>
-        </div>
-
-        <div class="feature reveal" data-d="2">
-          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v3l2 1"/></svg></span>
-          <h3>Agenda de compromissos</h3>
-          <p>Reunião, consulta, vencimento importante. Marque a hora, a importância e quem participa — e receba o lembrete antes.</p>
-          <span class="tag">Novo</span>
-        </div>
-
-        <div class="feature reveal" data-d="3">
-          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span>
-          <h3>Lembretes e resumo</h3>
-          <p>Notificação no celular 3 dias antes do vencimento, aviso do compromisso na hora certa e o resumo do mês no e-mail.</p>
-          <span class="tag">Novo</span>
-        </div>
-
-        <div class="feature reveal" data-d="4">
-          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-          <h3>Contas compartilhadas</h3>
-          <p>Casa, família ou empresa. Convide pessoas com papéis de Dono, Admin e Membro — todo mundo vendo o mesmo número.</p>
-        </div>
-
-        <div class="feature reveal" data-d="5">
-          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
-          <h3>Cartão de crédito</h3>
-          <p>Compras entram na fatura do ciclo certo e o vencimento vira o da fatura. A fatura vira uma linha só na lista de despesas.</p>
-        </div>
-
-        <div class="feature reveal">
-          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z"/><path d="M2 9v1c0 1.1.9 2 2 2h1"/></svg></span>
-          <h3>Orçamento por categoria</h3>
-          <p>Um teto mensal por categoria e o quanto já foi gasto. As que chegam perto do limite sobem para o topo do dashboard.</p>
-        </div>
-
-        <div class="feature reveal" data-d="1">
-          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></span>
-          <h3>Projeção de saldo</h3>
-          <p>Saldo real em caixa hoje e a curva dos próximos dias. Descubra em que data a conta fica no vermelho — com antecedência.</p>
-        </div>
-
-        <div class="feature reveal" data-d="2">
-          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg></span>
-          <h3>Importação de extrato</h3>
-          <p>Envie o OFX ou CSV do banco. O Monnif concilia com o que já estava previsto, aponta duplicadas e deixa você desfazer tudo.</p>
-        </div>
-
-        <div class="feature reveal" data-d="3">
-          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6 4.6 1.9-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z"/><path d="M19 15l.9 2.1 2.1.9-2.1.9L19 21l-.9-2.1-2.1-.9 2.1-.9z"/></svg></span>
-          <h3>Categorização automática</h3>
-          <p>Regras aprendidas com o seu uso. Categorize a mesma descrição algumas vezes e o Monnif passa a preencher sozinho.</p>
-        </div>
-
-        <div class="feature reveal" data-d="4">
-          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/><path d="M12 18h.01"/></svg></span>
-          <h3>Instala como app</h3>
-          <p>PWA de verdade: instale na tela inicial do celular e ele abre em tela cheia, com ícone próprio. Sem loja de aplicativos.</p>
-        </div>
-
-        <div class="feature reveal" data-d="1">
-          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2.1a10 10 0 0 1 0 19.8"/><circle cx="12" cy="12" r="10"/></svg></span>
-          <h3>Do seu jeito</h3>
-          <p>Claro, escuro ou seguindo o sistema, com 12 cores de destaque. A cor escolhida tinge o app inteiro, não só os botões.</p>
-        </div>
-
-        <div class="feature reveal" data-d="2">
-          <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></span>
-          <h3>Recorrências inteligentes</h3>
-          <p>Aluguel, escola, assinatura: cadastre uma vez e o Monnif gera os próximos vencimentos, com ou sem data de término.</p>
-        </div>
+        {OUTROS.map((o, i) => (
+          <a class="feature reveal" data-d={i % 6} href={o.href}>
+            <span class="ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg></span>
+            <h3>{o.titulo}</h3>
+            <p>{o.texto}</p>
+          </a>
+        ))}
       </div>
     </div>
   </section>
@@ -372,17 +271,18 @@ const aplicativo = {
       <div class="split">
         <div class="split-txt reveal">
           <p class="kicker">Cartão de crédito</p>
-          <h2>A fatura para de ser um mistério.</h2>
+          <h2>A fatura para de ser surpresa.</h2>
           <p>
-            Cadastre seus cartões com dia de fechamento e de vencimento. Cada compra cai
-            no ciclo certo automaticamente, e a fatura vira uma despesa só — com todos os
-            itens que a compõem a um clique de distância.
+            Você diz o dia em que o cartão fecha e o dia em que vence. Daí em diante
+            cada compra cai na fatura certa sozinha, e a fatura aparece na lista como
+            uma conta só — com tudo que tem dentro a um toque.
           </p>
           <ul class="checks">
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Ciclo automático</b> — a compra entra na fatura do período correto</span></li>
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Parcelas</b> — "3 de 10" aparece em cada mês, sem você fazer conta</span></li>
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Fatura conta no orçamento</b> e no fluxo de caixa, como no mundo real</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>A compra vai para o mês certo</b>, mesmo comprada depois do fechamento</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Parcela aparece mês a mês</b> — “3 de 10”, sem você fazer conta</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Quanto do limite já foi</b>, antes de a fatura chegar</span></li>
           </ul>
+          <a class="btn btn-ghost" href="/recursos/cartao-de-credito/" style="margin-top:22px">Ver como funciona o cartão</a>
         </div>
 
         <div class="panel reveal" data-d="2">
@@ -421,18 +321,19 @@ const aplicativo = {
       <div class="split rev">
         <div class="split-txt reveal">
           <p class="kicker">Agenda e lembretes</p>
-          <h2>Dinheiro tem hora marcada.<br />Agora o Monnif avisa.</h2>
+          <h2>Dinheiro tem hora marcada.<br />O Monnif lembra por você.</h2>
           <p>
-            Além das contas, a agenda: reunião com o contador, consulta, dia de renegociar
-            o financiamento. Cada compromisso tem hora, importância e convidados — e é
-            privado, só você e quem você convidou enxergam, mesmo numa conta compartilhada.
-            Peça ao assistente e ele marca por você.
+            Além das contas, a agenda: reunião com o contador, consulta, dia de
+            renegociar o financiamento. Cada compromisso tem hora e o aviso chega
+            com a antecedência que você escolher. Seus compromissos são seus — na
+            conta da família, só quem você chamar enxerga.
           </p>
           <ul class="checks">
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Lembrete no celular</b> na antecedência que você escolher</span></li>
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Aviso de vencimento</b> 3 dias antes, e o resumo do mês no e-mail</span></li>
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Convidados</b> recebem o mesmo lembrete, na hora certa</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Aviso três dias antes</b> de cada conta vencer</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Lembrete do compromisso</b> na hora que você pediu</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Quem você chamar</b> recebe o mesmo aviso, na mesma hora</span></li>
           </ul>
+          <a class="btn btn-ghost" href="/recursos/agenda-e-lembretes/" style="margin-top:22px">Ver os lembretes</a>
         </div>
 
         <div class="panel reveal" data-d="2">
@@ -494,18 +395,20 @@ const aplicativo = {
     <div class="wrap">
       <div class="split rev">
         <div class="split-txt reveal">
-          <p class="kicker">Fluxo de caixa</p>
-          <h2>O futuro do seu saldo,<br />em uma linha.</h2>
+          <p class="kicker">O que vem pela frente</p>
+          <h2>Descubra hoje o aperto<br />que vem no dia 22.</h2>
           <p>
-            Informe quanto você tem em caixa hoje e o Monnif projeta os próximos dias
-            com base em tudo que está em aberto — contas, faturas e receitas previstas.
-            Se a linha cruzar o zero, você fica sabendo com semanas de antecedência.
+            Você diz quanto tem agora. O Monnif soma o que ainda entra, desconta o que
+            ainda vence e desenha a linha do seu saldo pelas próximas semanas. Se em
+            algum dia o dinheiro não cobrir as contas, você fica sabendo com
+            antecedência — que é quando ainda dá para resolver.
           </p>
           <ul class="checks">
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Saldo real</b> em caixa, ajustável a qualquer momento</span></li>
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Projeção diária</b> considerando vencimentos e recebimentos</span></li>
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>O dia crítico em destaque</b> — a primeira data em que o saldo fica negativo</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>O dia do aperto em destaque</b>, semanas antes de ele chegar</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Conta com o que ainda não aconteceu</b> — contas, faturas e o salário</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Tudo junto</b> — conta, dinheiro guardado e cartões na mesma linha</span></li>
           </ul>
+          <a class="btn btn-ghost" href="/recursos/saldo-dos-proximos-dias/" style="margin-top:22px">Ver o saldo dos próximos dias</a>
         </div>
 
         <div class="panel reveal" data-d="2">
@@ -548,18 +451,20 @@ const aplicativo = {
     <div class="wrap">
       <div class="split">
         <div class="split-txt reveal">
-          <p class="kicker">Import e automação</p>
+          <p class="kicker">Do banco para cá</p>
           <h2>Menos digitação.<br />Mais decisão.</h2>
           <p>
-            Suba o extrato do banco ou a fatura do cartão em OFX ou CSV. Nada é gravado
-            antes de você conferir: o Monnif mostra o que é novo, o que já existe e o que
-            casa com um lançamento previsto. Errou? Desfazer devolve tudo.
+            Baixe o extrato no site do seu banco e mande o arquivo para cá. Nada é
+            gravado antes de você conferir: o Monnif mostra o que é novo, o que já
+            existe e o que combina com uma conta que você já tinha anotado. Mandou o
+            arquivo errado? Um botão desfaz tudo.
           </p>
           <ul class="checks">
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Conciliação</b> — marca o previsto como pago em vez de duplicar</span></li>
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Detecção de duplicadas</b> do que já foi importado antes</span></li>
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Regras aprendidas</b> categorizam os próximos lançamentos sozinhas</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Não duplica</b> — marca como paga a conta que você já tinha anotado</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Avisa o que parece repetido</b> antes de gravar qualquer coisa</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Aprende com você</b> — da segunda vez, já vem quase tudo separado</span></li>
           </ul>
+          <a class="btn btn-ghost" href="/recursos/importar-extrato/" style="margin-top:22px">Ver como importar</a>
         </div>
 
         <div class="panel reveal" data-d="2">
@@ -601,19 +506,19 @@ const aplicativo = {
       <div class="split rev">
         <div class="split-txt reveal">
           <p class="kicker">No bolso</p>
-          <h2>Instala na tela inicial<br />e vira app.</h2>
+          <h2>Na tela inicial,<br />sem passar por loja.</h2>
           <p>
-            O Monnif é um PWA de verdade: instale no celular e ele abre em tela cheia,
-            com ícone próprio, sem passar por loja. Navegação por barra inferior,
-            arraste a linha para editar ou excluir, um toque no + lança a despesa do dia
-            — e o botão de brilho abre o assistente em qualquer tela.
+            O Monnif abre no navegador do celular e do computador. Se quiser, ele fica
+            na tela inicial com ícone próprio e abre em tela cheia, igual a qualquer
+            app instalado — só que sem baixar nada e sem atualização para instalar.
           </p>
           <ul class="checks">
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Assistente a um toque</b> — pergunte ou dite de dentro de qualquer tela</span></li>
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Gestos de toque</b> — deslize a linha para editar ou excluir</span></li>
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Despesa rápida</b> — categoria, valor e pronto, em segundos</span></li>
-            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>A mesma conta</b> no computador e no celular, sempre em sincronia</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Lançar leva segundos</b> — um toque, a categoria, o valor, pronto</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>O assistente a um toque</b> de dentro de qualquer tela</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Deslize a linha</b> para editar ou apagar um lançamento</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>A mesma conta</b> no celular e no computador, sempre igual</span></li>
           </ul>
+          <a class="btn btn-ghost" href="/recursos/no-celular/" style="margin-top:22px">Ver no celular</a>
         </div>
 
         <div class="reveal" data-d="2">
@@ -686,13 +591,14 @@ const aplicativo = {
       <div class="split">
         <div class="split-txt reveal">
           <p class="kicker">Orçamento</p>
-          <h2>Um teto para cada categoria.</h2>
+          <h2>Um limite para cada coisa.</h2>
           <p>
-            Defina quanto pretende gastar por mês em cada categoria e acompanhe o consumo
-            em tempo real. Verde tranquilo, âmbar de atenção, vermelho de estourou —
-            e as categorias que chegam perto do teto aparecem em destaque no dashboard,
-            antes de o mês fechar.
+            Diga quanto pretende gastar por mês com mercado, transporte, lazer — e veja
+            quanto já foi enquanto o mês ainda dá para mudar. Verde é tranquilo, amarelo
+            é atenção, vermelho é que estourou. As categorias apertadas sobem para o
+            topo da tela inicial sozinhas.
           </p>
+          <a class="btn btn-ghost" href="/recursos/orcamento/" style="margin-top:22px">Ver o orçamento</a>
         </div>
 
         <div class="panel reveal" data-d="2">
@@ -729,43 +635,43 @@ const aplicativo = {
       <div class="faq">
         <details class="reveal" open>
           <summary>É grátis mesmo? Qual é a pegadinha?</summary>
-          <p>É grátis e não há pegadinha: sem plano pago escondido, sem limite de lançamentos, sem teste de 14 dias, sem anúncio e sem venda de dados. Você cria a conta, usa tudo e pronto. O porquê disso está no nosso <a href="/manifesto/" style="color:var(--grad-a);font-weight:600">manifesto</a>.</p>
+          <p>É grátis e não há pegadinha: sem plano pago escondido, sem limite de lançamentos, sem teste que expira, sem anúncio e sem venda dos seus dados. Você cria a conta, usa tudo, e nem pedimos cartão de crédito no cadastro. O porquê disso está na <a href="/manifesto/" style="color:var(--grad-a);font-weight:600">nossa história</a>.</p>
         </details>
         <details class="reveal" data-d="1">
-          <summary>O que o assistente de IA faz de verdade?</summary>
-          <p>Ele executa, não só conversa. São 24 ações: criar e editar despesas e receitas, marcar como pago, pagar a fatura do cartão, criar categoria, cartão e orçamento, mostrar o resumo do mês e a projeção de saldo, agendar compromisso, convidar gente para a conta e até trocar a tela que você está vendo. Por texto ou por voz.</p>
+          <summary>Preciso ligar o Monnif ao meu banco?</summary>
+          <p>Não, e não é possível: o Monnif nunca pede a senha do seu banco. Se quiser evitar digitação, você baixa o extrato no site do próprio banco, como sempre, e manda o arquivo para cá. A sua senha não chega até nós porque ela nunca sai de lá.</p>
         </details>
         <details class="reveal" data-d="2">
-          <summary>A IA vê tudo? É seguro deixar ela mexer?</summary>
-          <p>O assistente usa exatamente as mesmas funções das telas do app e roda com as suas permissões — ele não alcança nada que você já não alcançasse, nem enxerga contas de que você não participa. Toda ação aparece na tela como qualquer outro lançamento, e você desfaz do jeito normal. A conversa fica guardada por conta e por usuário, e nada é usado para treinar modelo nem vendido.</p>
+          <summary>O que o assistente faz de verdade?</summary>
+          <p>Ele resolve, não só conversa. Anota a despesa, marca a conta como paga, quita a fatura do cartão, cria uma categoria, define o limite do mês, mostra quanto sobra, marca compromisso e chama gente para a conta. Você escreve ou fala; ele faz.</p>
         </details>
         <details class="reveal" data-d="3">
-          <summary>O ditado por voz manda direto?</summary>
-          <p>Não. Você grava até 30 segundos, o Monnif transcreve e coloca o texto no campo de mensagem. Você lê, corrige o que quiser e só então envia — nada vai para a sua conta sem passar pelos seus olhos.</p>
+          <summary>É seguro deixar o assistente mexer nas minhas coisas?</summary>
+          <p>Ele só faz o que você pede, e tudo o que ele faz aparece na tela como qualquer outro lançamento — dá para editar ou apagar do jeito normal. Ele enxerga exatamente o que você enxerga e nada além disso. Suas conversas com ele não são lidas pelas outras pessoas da conta e não são usadas para treinar nada.</p>
         </details>
         <details class="reveal" data-d="4">
-          <summary>Como funcionam os lembretes?</summary>
-          <p>Se você permitir as notificações, o celular avisa 3 dias antes de cada vencimento e na antecedência que você escolheu para cada compromisso da agenda. No começo do mês chega também um resumo por e-mail. Dá para desligar tudo nas preferências.</p>
+          <summary>O que eu falo vai direto para a minha conta?</summary>
+          <p>Não. O que você fala vira texto na tela. Você lê, corrige se ele entendeu errado, e só então envia. Isso é de propósito: reconhecimento de voz erra número, e num app de dinheiro isso importa.</p>
         </details>
         <details class="reveal" data-d="5">
-          <summary>Preciso conectar minha conta bancária?</summary>
-          <p>Não. O Monnif nunca pede a senha do seu banco nem se conecta a ele. Se quiser poupar digitação, você baixa o extrato em OFX ou CSV pelo próprio site do banco e envia o arquivo — o controle é todo seu.</p>
+          <summary>Como funciona com a família?</summary>
+          <p>Cada pessoa entra com o próprio acesso e todas veem as mesmas contas, atualizadas na hora. Ninguém precisa emprestar senha. Dá para convidar alguém só para acompanhar, sem poder mudar nada, e dá para tirar o acesso quando quiser. Você também pode ter contas separadas — a da casa, a sua, a da empresa.</p>
         </details>
-        <details class="reveal" data-d="5">
-          <summary>Como funciona o compartilhamento com a família?</summary>
-          <p>Cada conta financeira pode ter várias pessoas, com papéis de Dono, Admin e Membro. Você convida por link e todo mundo passa a ver e lançar na mesma conta. Também dá para manter contas separadas — pessoal, casa, empresa — na mesma sessão.</p>
+        <details class="reveal" data-d="1">
+          <summary>Como funcionam os avisos?</summary>
+          <p>Se você permitir, o celular avisa três dias antes de cada conta vencer e na hora que você marcou para cada compromisso. No começo do mês chega também um resumo por e-mail. Dá para desligar tudo.</p>
         </details>
-        <details class="reveal" data-d="5">
+        <details class="reveal" data-d="2">
           <summary>Preciso instalar alguma coisa?</summary>
-          <p>Não. Abre no navegador, no computador ou no celular. Se quiser, dá para instalar na tela inicial do celular como um app normal, com ícone próprio e tela cheia — sem passar por loja de aplicativos.</p>
+          <p>Não. Abre no navegador, no celular ou no computador. Se quiser, dá para deixar na tela inicial do celular com ícone próprio, sem passar por loja de aplicativos.</p>
         </details>
-        <details class="reveal" data-d="5">
-          <summary>E se eu importar o extrato errado?</summary>
-          <p>Nada é gravado antes de você conferir a prévia. Depois de importar, o botão Desfazer reverte a importação inteira de uma vez.</p>
+        <details class="reveal" data-d="3">
+          <summary>E se eu mandar o extrato errado?</summary>
+          <p>Nada é gravado antes de você conferir a prévia. E, depois de importar, um botão desfaz a importação inteira de uma vez.</p>
         </details>
-        <details class="reveal" data-d="5">
+        <details class="reveal" data-d="4">
           <summary>Meus dados estão seguros?</summary>
-          <p>As senhas ficam guardadas com hash, a sessão usa token de curta duração com renovação automática, e cada conta financeira só é acessível a quem foi convidado. Nenhum dado é vendido ou compartilhado.</p>
+          <p>Sua senha é guardada de um jeito que nem nós conseguimos ler, e cada conta só é acessível a quem foi convidado. Nada é vendido nem compartilhado com terceiros. Você pode apagar sua conta e levar seus dados embora quando quiser — <a href="/seguranca/" style="color:var(--grad-a);font-weight:600">o detalhe está aqui</a>.</p>
         </details>
       </div>
     </div>

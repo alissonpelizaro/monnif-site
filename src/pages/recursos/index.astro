@@ -1,0 +1,47 @@
+---
+import Base from "../../layouts/Base.astro";
+import Cta from "../../components/Cta.astro";
+import { RECURSOS, OUTROS } from "../../data/recursos";
+---
+
+<Base
+  title="Recursos — Monnif"
+  description="Tudo que o Monnif faz: assistente que lança por você, cartão de crédito com a fatura certa, orçamento por categoria, saldo dos próximos dias, lembretes, importação do extrato do banco e contas em família."
+>
+  <div class="wrap">
+    <div class="page-head">
+      <p class="kicker">Recursos</p>
+      <h1>Tudo que o dinheiro da casa precisa.<br /><span class="grad-text">Nada do que ele não precisa.</span></h1>
+      <p class="lead">
+        Sem planilha que quebra e sem app de banco confuso. As contas do mês, o
+        cartão, o que sobra e o que vem — num lugar só, de graça.
+      </p>
+    </div>
+
+    <div class="recurso-grid grande">
+      {RECURSOS.map((r) => (
+        <a class="recurso-card" href={`/recursos/${r.slug}/`}>
+          <span class="ico" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={r.icone} />
+          </span>
+          <b>{r.titulo}</b>
+          <span>{r.resumo}</span>
+        </a>
+      ))}
+    </div>
+
+    <div class="recurso-outros">
+      <h4>E também</h4>
+      <div class="recurso-lista">
+        {OUTROS.map((o) => (
+          <a href={o.href}>
+            <b>{o.titulo}</b>
+            <span>{o.texto}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <Cta />
+</Base>
