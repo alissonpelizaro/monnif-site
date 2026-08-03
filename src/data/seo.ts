@@ -9,6 +9,15 @@
 
 export const SITE = "https://monnif.com";
 
+/**
+ * Perfis oficiais da marca, na ordem em que valem como prova. É o `sameAs` da
+ * Organization: o que diz ao buscador que este site e este perfil são a mesma
+ * Monnif, e não outra coisa de nome parecido. Só entra perfil que existe.
+ */
+export const INSTAGRAM = "https://www.instagram.com/monnif.br/";
+
+export const PERFIS = [INSTAGRAM];
+
 export const ID_ORG = `${SITE}/#organizacao`;
 export const ID_SITE = `${SITE}/#site`;
 
