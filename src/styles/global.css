@@ -870,3 +870,48 @@ html:has(.drawer[open]) { overflow: hidden; }
 .post-mais a:hover { border-color: color-mix(in oklch, var(--grad-a) 35%, transparent); background: oklch(1 0 0 / 3%); }
 .post-mais span { display: block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--grad-a); margin-bottom: 5px; }
 .post-mais b { font-size: 0.98rem; font-weight: 700; letter-spacing: -0.015em; }
+
+/* ==========================================================================
+   Recursos — o hub e as oito páginas. Os cards são os mesmos nos dois lugares,
+   só mudam de tamanho.
+   ========================================================================== */
+.recurso-mock { max-width: 860px; margin: 0 auto; }
+.recurso-mock .panel { max-width: 520px; margin: 0 auto; }
+
+.recurso-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
+.recurso-grid.grande { grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 18px; }
+.recurso-card {
+  display: block; padding: 22px;
+  background: color-mix(in oklch, var(--card) 55%, transparent);
+  border: 1px solid var(--border); border-radius: 20px;
+  transition: transform 0.25s var(--ease-soft), border-color 0.25s, background 0.25s;
+}
+.recurso-grid.grande .recurso-card { padding: 28px; }
+.recurso-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in oklch, var(--grad-a) 38%, transparent);
+  background: color-mix(in oklch, var(--card) 75%, transparent);
+}
+.recurso-card .ico {
+  display: grid; place-items: center; width: 40px; height: 40px; margin-bottom: 14px;
+  border-radius: 12px; color: var(--grad-a);
+  background: color-mix(in oklch, var(--primary) 16%, transparent);
+}
+.recurso-card b { display: block; font-size: 1.03rem; font-weight: 700; letter-spacing: -0.025em; }
+.recurso-grid.grande .recurso-card b { font-size: 1.12rem; }
+.recurso-card > span:last-child { display: block; color: var(--muted); font-size: 0.89rem; margin-top: 7px; }
+
+.recurso-outros { margin-top: clamp(56px, 8vw, 88px); padding-bottom: clamp(56px, 8vw, 88px); }
+.recurso-outros h4 {
+  font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--faint); margin-bottom: 18px;
+}
+.recurso-lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.recurso-lista a {
+  display: block; padding: 16px 18px;
+  border: 1px solid var(--border); border-radius: 15px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.recurso-lista a:hover { border-color: color-mix(in oklch, var(--grad-a) 35%, transparent); background: oklch(1 0 0 / 3%); }
+.recurso-lista b { font-size: 0.95rem; font-weight: 700; letter-spacing: -0.02em; }
+.recurso-lista span { display: block; color: var(--muted); font-size: 0.85rem; margin-top: 4px; }

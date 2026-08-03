@@ -1,34 +1,30 @@
 ---
 import BrandMark from "./BrandMark.astro";
+import { RECURSOS } from "../data/recursos";
 
 const colunas = [
   {
-    titulo: "Produto",
+    titulo: "O que ele faz",
     links: [
-      { href: "/#assistente", label: "Assistente com IA" },
-      { href: "/#cartao", label: "Cartão de crédito" },
-      { href: "/#orcamento", label: "Orçamento" },
-      { href: "/#previsao", label: "Projeção de saldo" },
-      { href: "/#agenda", label: "Agenda e lembretes" },
-      { href: "/#recursos", label: "Todos os recursos" },
+      ...RECURSOS.slice(0, 5).map((r) => ({ href: `/recursos/${r.slug}/`, label: r.titulo })),
+      { href: "/recursos/", label: "Todos os recursos" },
     ],
   },
   {
     titulo: "Monnif",
     links: [
-      { href: "/manifesto/", label: "Manifesto" },
-      { href: "/seguranca/", label: "Segurança" },
+      { href: "/manifesto/", label: "Nossa história" },
+      { href: "/seguranca/", label: "Seus dados" },
       { href: "/marca/", label: "Marca" },
       { href: "/#faq", label: "Dúvidas" },
     ],
   },
   {
-    titulo: "Apoio",
+    titulo: "Aprender",
     links: [
-      { href: "/docs/", label: "Documentação" },
+      { href: "/docs/", label: "Como usar o app" },
       { href: "/blog/", label: "Blog" },
       { href: "/docs/comecar/criar-conta/", label: "Primeiros passos" },
-      { href: "/docs/assistente/assistente/", label: "Assistente com IA" },
     ],
   },
   {
@@ -51,8 +47,8 @@ const colunas = [
           Monnif
         </a>
         <p>
-          Gestão financeira pessoal e familiar com um assistente de IA que
-          executa. Grátis, sem anúncio e sem venda de dados.
+          O dinheiro da casa organizado num lugar só, com um assistente que
+          lança por você. Grátis, sem anúncio e sem venda de dados.
         </p>
       </div>
 
