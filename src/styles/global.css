@@ -88,9 +88,10 @@ header.stuck {
 .nav { display: flex; align-items: center; gap: 28px; height: 72px; }
 .logo { display: flex; align-items: center; gap: 11px; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.03em; }
 .logo-mark {
-  width: 36px; height: 36px; border-radius: 11px; background: var(--grad);
-  display: grid; place-items: center; flex: none;
-  box-shadow: 0 8px 24px -6px color-mix(in oklch, var(--grad-a) 70%, transparent);
+  width: 36px; height: 36px; background: var(--grad);
+  display: block; flex: none;
+  -webkit-mask: url("/marca/monnif-simbolo-preto.svg") center / contain no-repeat;
+  mask: url("/marca/monnif-simbolo-preto.svg") center / contain no-repeat;
 }
 .nav-links { display: flex; gap: 4px; margin-left: auto; }
 .nav-links a {
@@ -309,7 +310,7 @@ h1 { font-size: clamp(2.5rem, 6.4vw, 4.4rem); font-weight: 900; letter-spacing: 
   border-radius: 15px; padding: 12px 14px; margin-top: 12px;
   box-shadow: 0 20px 40px -18px oklch(0 0 0 / 0.8);
 }
-.toast .logo-mark { width: 28px; height: 28px; border-radius: 9px; }
+.toast .logo-mark { width: 28px; height: 28px; }
 .toast b { font-size: 0.78rem; display: block; }
 .toast p { font-size: 0.73rem; opacity: 0.72; }
 
