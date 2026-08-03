@@ -3,6 +3,7 @@ title: "Dinheiro a dois: o combinado importa mais que o app"
 description: "Tudo junto, tudo separado ou proporcional — os três arranjos que funcionam, e a regra que vale para os três."
 date: 2026-07-15
 tag: "Finanças pessoais"
+capa: "https://images.unsplash.com/photo-1758522487963-1b193a2837fd?auto=format&fit=crop&w=1600&h=900&q=70"
 ---
 
 Não existe arranjo financeiro certo para um casal. Existem três que costumam

@@ -25,6 +25,8 @@ const blog = defineCollection({
     tag: z.enum(["Finanças pessoais", "Guia do app", "Bastidores"]),
     /** Sobe o post para o topo da listagem, em destaque. */
     destaque: z.boolean().default(false),
+    /** Imagem de topo do post. URL do CDN do Unsplash. */
+    capa: z.string().url().optional(),
   }),
 });
 

@@ -3,6 +3,7 @@ title: "Como pedir as coisas ao assistente (e o que ele não faz)"
 description: "Sem sintaxe, sem comando, sem palavra mágica. O que muda é a quantidade de contexto que você dá numa frase só."
 date: 2026-06-05
 tag: "Guia do app"
+capa: "https://images.unsplash.com/photo-1682941664177-7920d0e59418?auto=format&fit=crop&w=1600&h=900&q=70"
 ---
 
 O [assistente do Monnif](/docs/assistente/assistente/) não devolve conselho sobre

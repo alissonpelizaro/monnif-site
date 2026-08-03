@@ -92,6 +92,19 @@ const dados = grafo(
       </p>
     </div>
 
+    {post.data.capa && (
+      /* Decorativa: o título logo acima já diz do que o post trata, então alt vazio
+         evita que o leitor de tela repita a mesma informação. */
+      <img
+        class="post-capa"
+        src={post.data.capa}
+        alt=""
+        width="1600"
+        height="900"
+        fetchpriority="high"
+      />
+    )}
+
     <article class="prose">
       <Content />
 
