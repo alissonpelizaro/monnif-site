@@ -1,4 +1,5 @@
 ---
+import { existsSync } from "node:fs";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
@@ -10,15 +11,17 @@ interface Props {
   noindex?: boolean;
 }
 
-const {
-  title,
-  description,
-  ogImage = "/assets/dashboard-mensal.png",
-  noindex = false,
-} = Astro.props;
+const { title, description, ogImage, noindex = false } = Astro.props;
+
+// A imagem de compartilhamento de cada página é gerada por scripts/og.mjs
+// antes do build, com esta mesma regra de nome. Se faltar alguma, cai na da
+// home em vez de apontar para um arquivo que não existe.
+const nomeOg = Astro.url.pathname.replace(/^\/|\/$/g, "").replace(/\//g, "-") || "home";
+const gerada = `/og/${nomeOg}.png`;
+const temGerada = existsSync(`${process.cwd()}/public${gerada}`);
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
-const ogUrl = new URL(ogImage, Astro.site).href;
+const ogUrl = new URL(ogImage ?? (temGerada ? gerada : "/og/home.png"), Astro.site).href;
 
 const organizacao = {
   "@context": "https://schema.org",
@@ -40,6 +43,18 @@ const organizacao = {
 <title>{title}</title>
 <meta name="description" content={description} />
 <meta name="theme-color" content="#7f22fe" />
+
+<!-- Antes de qualquer estilo: sem isto a página pinta no tema errado e pisca. -->
+<script is:inline>
+(function () {
+  try {
+    var t = localStorage.getItem("monnif-tema");
+    if (t === "claro" || t === "escuro") document.documentElement.dataset.tema = t;
+  } catch (e) {
+    /* navegação privada em alguns navegadores barra o localStorage */
+  }
+})();
+</script>
 <link rel="canonical" href={canonical} />
 {noindex && <meta name="robots" content="noindex" />}
 
@@ -58,11 +73,17 @@ const organizacao = {
 <link rel="icon" href="/marca/monnif-icone.svg" type="image/svg+xml" />
 <link rel="alternate" type="application/rss+xml" title="Blog da Monnif" href="/rss.xml" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link rel="preload" href="/fontes/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
 
 <script type="application/ld+json" is:inline set:html={JSON.stringify(organizacao)} />
+<script type="application/ld+json" is:inline set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Monnif",
+  url: "https://monnif.com",
+  inLanguage: "pt-BR",
+  publisher: { "@type": "Organization", name: "Monnif" },
+})} />
 <slot name="head" />
 </head>
 <body>
@@ -98,6 +119,30 @@ const organizacao = {
     fechar(aberto);
   });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") fechar(null); });
+
+  // Tema: "sistema" é o padrão e não grava atributo nenhum — quem decide é a
+  // media query do CSS.
+  var guardado = "sistema";
+  try { guardado = localStorage.getItem("monnif-tema") || "sistema"; } catch (e) {}
+
+  var botoes = document.querySelectorAll("[data-tema-op]");
+  var marcar = function (valor) {
+    botoes.forEach(function (b) {
+      b.setAttribute("aria-checked", String(b.dataset.temaOp === valor));
+    });
+  };
+  marcar(guardado);
+
+  botoes.forEach(function (b) {
+    b.addEventListener("click", function () {
+      var valor = b.dataset.temaOp;
+      if (valor === "sistema") delete document.documentElement.dataset.tema;
+      else document.documentElement.dataset.tema = valor;
+      try { localStorage.setItem("monnif-tema", valor); } catch (e) {}
+      marcar(valor);
+      fechar(null);
+    });
+  });
 
   var items = document.querySelectorAll(".reveal");
   var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
