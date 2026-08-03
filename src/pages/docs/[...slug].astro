@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from "astro:content";
+import Doc from "../../layouts/Doc.astro";
+import { SECOES } from "../../content/docs/secoes";
+
+export async function getStaticPaths() {
+  const paginas = await getCollection("docs");
+
+  // Ordem de leitura: seção por seção, cada uma pelo `order` do frontmatter.
+  const ordenadas = SECOES.flatMap((s) =>
+    paginas
+      .filter((p) => p.id.startsWith(`${s.slug}/`))
+      .sort((a, b) => a.data.order - b.data.order)
+      .map((p) => ({ pagina: p, secao: s.titulo })),
+  );
+
+  return ordenadas.map(({ pagina, secao }, i) => ({
+    params: { slug: pagina.id },
+    props: {
+      pagina,
+      secao,
+      anterior: ordenadas[i - 1] && {
+        id: ordenadas[i - 1].pagina.id,
+        title: ordenadas[i - 1].pagina.data.title,
+      },
+      proxima: ordenadas[i + 1] && {
+        id: ordenadas[i + 1].pagina.id,
+        title: ordenadas[i + 1].pagina.data.title,
+      },
+    },
+  }));
+}
+
+const { pagina, secao, anterior, proxima } = Astro.props;
+const { Content, headings } = await render(pagina);
+---
+
+<Doc
+  title={pagina.data.title}
+  description={pagina.data.description}
+  print={pagina.data.print}
+  peca={pagina.data.peca}
+  id={pagina.id}
+  secao={secao}
+  headings={headings}
+  anterior={anterior}
+  proxima={proxima}
+>
+  <Content />
+</Doc>

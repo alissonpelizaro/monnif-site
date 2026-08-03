@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import { SECOES } from "../content/docs/secoes";
+
+interface Props {
+  atual?: string;
+}
+const { atual } = Astro.props;
+
+const paginas = await getCollection("docs");
+const porSecao = SECOES.map((s) => ({
+  ...s,
+  itens: paginas
+    .filter((p) => p.id.startsWith(`${s.slug}/`))
+    .sort((a, b) => a.data.order - b.data.order),
+}));
+---
+
+<nav class="doc-nav" aria-label="Documentação">
+  <h4>Documentação</h4>
+  <a href="/docs/" aria-current={atual === undefined ? "page" : undefined}>Visão geral</a>
+  {porSecao.map((s) => (
+    <>
+      <h4>{s.titulo}</h4>
+      {s.itens.map((p) => (
+        <a href={`/docs/${p.id}/`} aria-current={atual === p.id ? "page" : undefined}>
+          {p.data.title}
+        </a>
+      ))}
+    </>
+  ))}
+</nav>
