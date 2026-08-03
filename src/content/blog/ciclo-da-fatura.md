@@ -3,6 +3,7 @@ title: "Sua fatura não segue o mês do calendário"
 description: "Compra do dia 28 que só vence daqui a 40 dias, parcela que aparece em maio: por que o cartão desalinha o controle de quase todo mundo."
 date: 2026-07-24
 tag: "Finanças pessoais"
+capa: "https://images.unsplash.com/photo-1650402262905-4c35309c14d4?auto=format&fit=crop&w=1600&h=900&q=70"
 ---
 
 O cartão de crédito é o ponto onde a maioria dos controles financeiros quebra. Não

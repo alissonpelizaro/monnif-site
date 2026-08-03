@@ -3,6 +3,7 @@ title: "Três meses de histórico em cinco minutos"
 description: "Como usar o extrato do banco para começar com dados reais — sem digitar lançamento por lançamento e sem entregar sua senha bancária a ninguém."
 date: 2026-07-07
 tag: "Guia do app"
+capa: "https://images.unsplash.com/photo-1753955900083-b62ee8d97805?auto=format&fit=crop&w=1600&h=900&q=70"
 ---
 
 O maior obstáculo para começar a controlar as finanças não é escolher o app. É o vazio

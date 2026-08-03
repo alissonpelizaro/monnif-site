@@ -981,6 +981,14 @@ html:has(.drawer[open]) { overflow: hidden; }
 .post-head .lead, .post-head .updated { margin-left: 0; margin-right: 0; }
 .post-head .updated a { color: var(--acento); font-weight: 600; }
 
+/* Capa do post: mesma largura do texto. O width/height no <img> segura a
+   proporção 16:9 antes da imagem chegar, então o texto não pula. */
+.post-capa {
+  display: block; width: 100%; max-width: 720px; height: auto;
+  margin: 0 auto clamp(28px, 4vw, 40px);
+  border: 1px solid var(--border); border-radius: 18px;
+}
+
 .post-mais { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--border); }
 .post-mais h4 {
   font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;

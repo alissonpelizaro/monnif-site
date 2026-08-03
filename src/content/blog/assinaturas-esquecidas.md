@@ -3,6 +3,7 @@ title: "As assinaturas que você não lembra que assinou"
 description: "Cobrança recorrente é o gasto que nunca dói de uma vez. Como achar as suas sem cadastrar nada."
 date: 2026-06-17
 tag: "Guia do app"
+capa: "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&w=1600&h=900&q=70"
 ---
 
 Assinatura é o único tipo de gasto projetado para ser esquecido. Você decide uma vez, e

@@ -3,6 +3,7 @@ title: "Reserva de emergência: quanto, onde e a partir de quando"
 description: "Seis meses de despesa é a resposta padrão. Nem sempre é a sua — e o número certo depende de quanto a sua renda oscila."
 date: 2026-06-26
 tag: "Finanças pessoais"
+capa: "https://images.unsplash.com/photo-1585143790814-b40d4b829e4a?auto=format&fit=crop&w=1600&h=900&q=70"
 ---
 
 "Seis meses de despesas" é a resposta que todo mundo repete. É um bom ponto de partida
