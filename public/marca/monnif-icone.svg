@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Monnif">
+  <defs>
+    <linearGradient id="monnif" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7f22fe"/>
+      <stop offset="1" stop-color="#d3008b"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#monnif)"/>
+  <path fill="#ffffff" fill-rule="evenodd" transform="translate(145.7 102.4) scale(0.6013)" d="M361.9 0L366.8 509.3L296.9 510.9L289.8 142.5L112.1 242.2L107.2 159.3ZM0 3.8L160.3 87.2L94.2 128.4L75.8 129.5L76.4 431.8L2.1 427.5ZM349.4 23.3L120.8 165.8L123 220.5L302.3 121.9L309.9 499.5L354.3 496.8ZM14.1 24.4L14.6 418.8L63.4 420.4L62.3 113.2L87.2 117L134.9 88.3ZM264.4 181L270.9 429.1L197.7 431.8L194.5 223.8ZM253.5 202.6L207.5 231.3L210.2 419.4L259 415.6Z"/>
+</svg>
