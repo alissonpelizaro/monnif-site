@@ -1,0 +1,123 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  ogImage = "/assets/dashboard-mensal.png",
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogUrl = new URL(ogImage, Astro.site).href;
+
+const organizacao = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Monnif",
+  url: "https://monnif.com",
+  logo: "https://monnif.com/marca/monnif-simbolo.svg",
+  email: "contato@monnif.com",
+  description:
+    "Gestão financeira pessoal e familiar com assistente de IA, contas compartilhadas, cartão de crédito, orçamento e projeção de saldo.",
+};
+---
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="theme-color" content="#7C3AED" />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex" />}
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Monnif" />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogUrl} />
+<meta property="og:locale" content="pt_BR" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogUrl} />
+
+<link rel="icon" href="/marca/monnif-simbolo.svg" type="image/svg+xml" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(organizacao)} />
+<slot name="head" />
+</head>
+<body>
+
+<a class="skip" href="#top">Pular para o conteúdo</a>
+
+<div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<Header />
+
+<main id="top">
+  <slot />
+</main>
+
+<Footer />
+
+<script is:inline>
+(function () {
+  // Header ganha vidro depois de sair do topo.
+  var header = document.getElementById("header");
+  var onScroll = function () { header.classList.toggle("stuck", window.scrollY > 12); };
+  onScroll();
+  addEventListener("scroll", onScroll, { passive: true });
+
+  // O <details> abre e fecha sozinho; falta só fechar no Esc e no clique fora.
+  var menus = document.querySelectorAll("header details");
+  var fechar = function (exceto) {
+    menus.forEach(function (d) { if (d !== exceto) d.open = false; });
+  };
+  document.addEventListener("click", function (e) {
+    var aberto = null;
+    menus.forEach(function (d) { if (d.open && d.contains(e.target)) aberto = d; });
+    fechar(aberto);
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") fechar(null); });
+
+  var items = document.querySelectorAll(".reveal");
+  var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Sem IntersectionObserver (ou com movimento reduzido) tudo já nasce visível.
+  if (reduced || !("IntersectionObserver" in window)) {
+    items.forEach(function (el) { el.classList.add("in"); });
+    return;
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("in");
+      io.unobserve(entry.target); // entrada é uma vez só, não reanima ao rolar de volta
+    });
+  }, { rootMargin: "0px 0px -12% 0px", threshold: 0.1 });
+
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+
+</body>
+</html>

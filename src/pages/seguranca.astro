@@ -1,0 +1,161 @@
+---
+import Base from "../layouts/Base.astro";
+import Cta from "../components/Cta.astro";
+
+const medidas = [
+  {
+    titulo: "Senhas com Argon2",
+    texto:
+      "Sua senha nunca é guardada, nem de forma reversível. O que fica no banco é um hash Argon2 — o algoritmo vencedor da Password Hashing Competition, feito para ser caro de quebrar em GPU. Nem a equipe da Monnif consegue ler sua senha.",
+    icone: `<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>`,
+  },
+  {
+    titulo: "Verificação em duas etapas",
+    texto:
+      "Você pode ligar o 2FA por aplicativo autenticador (TOTP), do mesmo tipo que o seu banco usa. A Monnif gera códigos de backup de uso único para o caso de você perder o celular.",
+    icone: `<path d="M12 3l8 4v5c0 5-3.4 8.5-8 9.9C7.4 20.5 4 17 4 12V7z"/><path d="M9 12.5l2 2 4-4.5"/>`,
+  },
+  {
+    titulo: "Sessão curta, renovação silenciosa",
+    texto:
+      "O token de acesso vale 6 horas. A renovação usa um refresh token que fica num cookie httpOnly, com SameSite Lax e a flag Secure em produção — ou seja, JavaScript de página nenhuma consegue ler.",
+    icone: `<path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 21v-6h6"/>`,
+  },
+  {
+    titulo: "Limite de tentativas",
+    texto:
+      "As rotas são protegidas por rate limiting, com um teto bem mais apertado nas sensíveis — login, recuperação de senha e confirmação de 2FA. Força bruta esbarra no limite antes de chegar a qualquer lugar.",
+    icone: `<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>`,
+  },
+  {
+    titulo: "Cada conta é uma ilha",
+    texto:
+      "Toda consulta passa pela checagem de participação: você só alcança as contas financeiras em que foi convidado, e no papel que recebeu — Dono, Admin ou Membro. Não existe rota que devolva dado de uma conta da qual você não faz parte.",
+    icone: `<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/>`,
+  },
+  {
+    titulo: "Histórico de tudo",
+    texto:
+      "Criou, editou, apagou, importou, convidou: cada ação relevante vira uma linha na tela de Histórico, com quem fez e quando. Vale também para o que o assistente de IA executa.",
+    icone: `<path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 5v5h5"/><path d="M12 7v5l3 2"/>`,
+  },
+  {
+    titulo: "Anexos sem URL pública",
+    texto:
+      "Comprovante e nota fiscal ficam em armazenamento privado. Não existe link direto para o arquivo: ele é servido pela API depois de checar a sua sessão e o seu acesso àquela conta.",
+    icone: `<path d="M21.4 11.05L12.25 20.2a5.5 5.5 0 0 1-7.78-7.78l9.19-9.19a3.67 3.67 0 1 1 5.18 5.18l-9.2 9.19a1.83 1.83 0 0 1-2.59-2.59l8.49-8.48"/>`,
+  },
+  {
+    titulo: "Seu banco fora do circuito",
+    texto:
+      "A Monnif não integra com banco e nunca pede sua senha bancária. O caminho para trazer os dados é você mesmo baixar o extrato em OFX ou CSV e enviar o arquivo. Menos automação, muito menos superfície de risco.",
+    icone: `<path d="M3 21h18M5 21V10l7-5 7 5v11"/><path d="M9 21v-6h6v6"/>`,
+  },
+];
+---
+
+<Base
+  title="Segurança — Monnif"
+  description="Como a Monnif protege seus dados: senhas com Argon2, 2FA por TOTP, sessão curta com refresh em cookie httpOnly, rate limiting, isolamento por conta e nenhuma conexão com o seu banco."
+>
+  <div class="page-head">
+    <div class="wrap">
+      <p class="kicker">Segurança</p>
+      <h1>Seu dinheiro é sensível.<br /><span class="grad-text">Tratamos assim.</span></h1>
+      <p class="lead">
+        Esta página descreve o que a Monnif faz de concreto para proteger a sua
+        conta — sem selo de fachada e sem promessa que o código não cumpre.
+      </p>
+    </div>
+  </div>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="features">
+        {medidas.map((m, i) => (
+          <div class="feature reveal" data-d={String((i % 5) + 1)}>
+            <span class="ico" aria-hidden="true">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={m.icone} />
+            </span>
+            <h3>{m.titulo}</h3>
+            <p>{m.texto}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="prose reveal">
+        <h2>O assistente de IA</h2>
+        <p>
+          O assistente não é um caminho paralelo para os seus dados. Ele chama as
+          mesmas funções que as telas chamam, autenticado como você e limitado
+          pelo mesmo papel — se você é Membro de uma conta, ele é Membro
+          daquela conta. Não existe ação que ele consiga fazer e você não.
+        </p>
+        <p>
+          Para responder, a Monnif envia ao provedor de modelo o texto da
+          conversa e o contexto necessário para a pergunta. O histórico fica
+          guardado por conta e por usuário, e você pode apagar. <strong>Suas
+          conversas não são usadas para treinar modelo nenhum</strong> e não são
+          compartilhadas com terceiros além do provedor que gera a resposta.
+        </p>
+        <p>
+          O ditado por voz grava até 30 segundos, transcreve e escreve o
+          resultado no campo de mensagem. O envio continua sendo seu: nada sai
+          da gravação direto para a sua conta.
+        </p>
+
+        <h2>Onde os dados ficam</h2>
+        <table>
+          <thead>
+            <tr><th>Dado</th><th>Onde</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Conta, lançamentos, orçamento, metas</td><td>Banco de dados PostgreSQL da própria Monnif</td></tr>
+            <tr><td>Comprovantes e anexos</td><td>Armazenamento privado em nuvem, servido só pela API</td></tr>
+            <tr><td>E-mails transacionais</td><td>Provedor de envio de e-mail (Resend)</td></tr>
+            <tr><td>Notificações push</td><td>Serviço de push do seu navegador, via Web Push com chaves VAPID</td></tr>
+            <tr><td>Conversas com o assistente</td><td>Banco da Monnif; o texto trafega pelo provedor do modelo para gerar a resposta</td></tr>
+          </tbody>
+        </table>
+        <p>
+          A lista completa, com finalidade e base legal de cada tratamento, está
+          na <a href="/privacidade">Política de Privacidade</a>.
+        </p>
+
+        <h2>Encontrou uma falha?</h2>
+        <div class="note">
+          <p>
+            Escreva para <a href="mailto:contato@monnif.com">contato@monnif.com</a>
+            com o passo a passo para reproduzir. Pedimos que você não divulgue
+            publicamente antes da correção sair, e que não acesse, altere nem
+            baixe dado de outra pessoa durante o teste.
+          </p>
+          <p>
+            Respondemos toda comunicação de segurança. Não há programa pago de
+            recompensa — mas há crédito público a quem quiser, e gratidão a quem
+            não quiser.
+          </p>
+        </div>
+
+        <h2>O que ainda não temos</h2>
+        <p>
+          Honestidade também é postura de segurança. A Monnif ainda não passou
+          por auditoria externa nem tem certificação formal do tipo SOC 2 ou ISO
+          27001. O que está descrito nesta página é o que existe no código hoje
+          — nada além disso.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Cta
+    titulo="Sem senha de banco."
+    destaque="Sem venda de dados."
+    texto="Crie sua conta e confira você mesmo, do jeito que a gente descreveu."
+    botao="Criar conta grátis"
+  />
+</Base>

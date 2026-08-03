@@ -1,0 +1,22 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="Página não encontrada — Monnif"
+  description="Esta página não existe. Volte para o início ou abra o app."
+  noindex={true}
+>
+  <div class="notfound">
+    <p class="code grad-text">404</p>
+    <h1>Esta conta não fecha.</h1>
+    <p>
+      A página que você procurou não existe, mudou de endereço ou nunca
+      chegou a ser criada.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary btn-lg" href="/">Voltar para o início</a>
+      <a class="btn btn-ghost btn-lg" href="https://app.monnif.com" target="_blank" rel="noopener">Abrir o app</a>
+    </div>
+  </div>
+</Base>

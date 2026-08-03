@@ -483,3 +483,206 @@ footer { border-top: 1px solid var(--border); padding: 40px 24px; }
   .aurora span { animation: none !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ==========================================================================
+   Chassi — header com mega-menu, gaveta mobile, rodapé em colunas e as
+   páginas de texto. Tudo abaixo daqui é compartilhado por todas as rotas.
+   ========================================================================== */
+
+.skip {
+  position: absolute; left: 12px; top: -60px; z-index: 100;
+  background: var(--card); border: 1px solid var(--border-strong);
+  border-radius: 12px; padding: 10px 16px; font-weight: 700; font-size: 0.9rem;
+  transition: top 0.2s var(--ease-soft);
+}
+.skip:focus { top: 12px; }
+
+.btn-sm { padding: 9px 16px; font-size: 0.875rem; border-radius: 11px; }
+
+/* ===== Mega-menu ===== */
+.nav-actions { display: flex; align-items: center; gap: 8px; margin-left: 8px; }
+
+.mega { position: relative; }
+.mega > summary {
+  list-style: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border-radius: 10px;
+  font-size: 0.925rem; font-weight: 600; color: var(--muted);
+  transition: color 0.2s, background 0.2s;
+}
+.mega > summary::-webkit-details-marker { display: none; }
+.mega > summary:hover, .mega[open] > summary { color: var(--foreground); background: oklch(1 0 0 / 6%); }
+.mega > summary svg { transition: transform 0.25s var(--ease-soft); }
+.mega[open] > summary svg { transform: rotate(180deg); }
+
+.mega-panel {
+  position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%);
+  width: min(660px, calc(100vw - 48px));
+  /* Opaco de propósito: com backdrop-filter o texto da página aparecia por
+     baixo dos itens sempre que o navegador não aplicava o blur. */
+  background: var(--elevated);
+  border: 1px solid var(--border-strong); border-radius: 20px; padding: 12px;
+  box-shadow: 0 40px 90px -30px oklch(0 0 0 / 0.85);
+  animation: mega-in 0.22s var(--ease-soft);
+}
+@keyframes mega-in { from { opacity: 0; transform: translateX(-50%) translateY(-8px); } }
+
+.mega-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.mega-item { display: flex; gap: 12px; padding: 11px 12px; border-radius: 14px; transition: background 0.2s; }
+.mega-item:hover { background: oklch(1 0 0 / 6%); }
+.mega-item .ico {
+  width: 34px; height: 34px; border-radius: 11px; flex: none;
+  display: grid; place-items: center;
+  background: color-mix(in oklch, var(--primary) 15%, transparent);
+  border: 1px solid color-mix(in oklch, var(--primary) 25%, transparent);
+  color: var(--grad-a);
+}
+.mega-item b { display: block; font-size: 0.9rem; font-weight: 700; letter-spacing: -0.015em; }
+.mega-item span { display: block; font-size: 0.78rem; color: var(--muted); line-height: 1.45; margin-top: 2px; }
+.mega-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  margin-top: 8px; padding: 13px 14px 4px; border-top: 1px solid var(--border);
+  font-size: 0.82rem; color: var(--muted);
+}
+.mega-foot a { color: var(--grad-a); font-weight: 700; }
+
+/* ===== Gaveta mobile =====
+   Sem JS: o <details> abre o painel, o :has() escurece o header e trava o
+   scroll do documento. O botão continua acima do painel e fecha no 2º toque. */
+.drawer { display: none; margin-left: auto; }
+.burger {
+  list-style: none; cursor: pointer;
+  width: 42px; height: 42px; border-radius: 13px;
+  display: grid; place-items: center;
+  border: 1px solid var(--border-strong); background: oklch(1 0 0 / 4%);
+}
+.burger::-webkit-details-marker { display: none; }
+.drawer[open] .burger { background: oklch(1 0 0 / 9%); }
+.burger .close, .drawer[open] .burger .open { display: none; }
+.drawer[open] .burger .close { display: block; }
+
+.drawer-panel {
+  position: fixed; inset: 0; z-index: 1;
+  padding: 96px 24px 40px; overflow-y: auto;
+  background: var(--background);
+  animation: drawer-in 0.24s var(--ease-soft);
+}
+/* O painel é posicionado e o resto do header não — sem isto ele pinta por cima
+   do próprio botão que fecha a gaveta. */
+.nav > .logo, .nav-actions, .burger { position: relative; z-index: 2; }
+@keyframes drawer-in { from { opacity: 0; transform: translateY(-10px); } }
+.drawer-panel h4 {
+  font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--faint); margin: 26px 0 10px;
+}
+.drawer-panel h4:first-child { margin-top: 0; }
+.drawer-panel a { display: block; padding: 11px 0; font-size: 1.05rem; font-weight: 600; border-bottom: 1px solid var(--border); }
+.drawer-panel .btn { display: flex; width: 100%; margin-top: 12px; border-bottom: 0; }
+
+html:has(.drawer[open]) { overflow: hidden; }
+
+/* ===== Rodapé em colunas ===== */
+.foot-grid {
+  display: grid; grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: clamp(28px, 5vw, 56px); padding-bottom: 36px;
+}
+.foot-brand p { color: var(--muted); font-size: 0.88rem; margin-top: 14px; max-width: 260px; }
+.foot-col h4 {
+  font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--faint); margin-bottom: 14px;
+}
+.foot-col a { display: block; padding: 5px 0; color: var(--muted); font-size: 0.9rem; transition: color 0.2s; }
+.foot-col a:hover { color: var(--foreground); }
+.foot-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+  padding-top: 26px; border-top: 1px solid var(--border);
+  color: var(--faint); font-size: 0.83rem;
+}
+
+/* ===== Cabeçalho das páginas internas ===== */
+.page-head { padding: clamp(52px, 8vw, 88px) 0 clamp(28px, 4vw, 44px); text-align: center; }
+.page-head h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); }
+.page-head .lead { max-width: 640px; margin: 20px auto 0; }
+.page-head .updated { color: var(--faint); font-size: 0.83rem; margin-top: 18px; }
+
+/* ===== Texto corrido (manifesto, legal) ===== */
+.prose { max-width: 720px; margin: 0 auto; padding-bottom: clamp(64px, 9vw, 104px); }
+.prose h2 { font-size: clamp(1.4rem, 2.6vw, 1.85rem); margin: 48px 0 14px; }
+.prose h2:first-child { margin-top: 0; }
+.prose h3 { font-size: 1.08rem; margin: 30px 0 8px; }
+.prose p { color: var(--muted); margin-bottom: 14px; }
+.prose ul { color: var(--muted); margin: 0 0 18px 20px; display: grid; gap: 8px; }
+.prose li::marker { color: var(--grad-a); }
+.prose strong { color: var(--foreground); font-weight: 600; }
+.prose a { color: var(--grad-a); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.prose table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.9rem; }
+.prose th, .prose td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.prose th { color: var(--foreground); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.prose td { color: var(--muted); }
+.prose .note {
+  background: color-mix(in oklch, var(--card) 55%, transparent);
+  border: 1px solid var(--border); border-left: 3px solid var(--grad-a);
+  border-radius: 14px; padding: 16px 18px; margin-bottom: 20px;
+}
+.prose .note p:last-child { margin-bottom: 0; }
+
+/* ===== Manifesto ===== */
+.principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.principle {
+  background: color-mix(in oklch, var(--card) 55%, transparent);
+  border: 1px solid var(--border); border-radius: 20px; padding: 26px;
+}
+.principle .num {
+  font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em;
+  color: var(--grad-a); margin-bottom: 12px;
+}
+.principle h3 { font-size: 1.1rem; margin-bottom: 8px; }
+.principle p { color: var(--muted); font-size: 0.93rem; }
+
+.never { display: grid; gap: 10px; max-width: 720px; margin: 0 auto; list-style: none; }
+.never li {
+  display: flex; gap: 13px; align-items: flex-start;
+  background: color-mix(in oklch, var(--destructive) 7%, transparent);
+  border: 1px solid color-mix(in oklch, var(--destructive) 20%, transparent);
+  border-radius: 15px; padding: 15px 18px; font-size: 0.95rem;
+}
+.never svg { flex: none; margin-top: 3px; color: var(--destructive); }
+.never b { font-weight: 700; }
+
+/* ===== Kit de marca ===== */
+.swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+.swatch { border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+.swatch .fill { height: 84px; }
+.swatch .meta { padding: 12px 14px; }
+.swatch b { display: block; font-size: 0.88rem; }
+.swatch code { display: block; font-size: 0.72rem; color: var(--faint); margin-top: 3px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+.brand-box {
+  display: grid; place-items: center; gap: 16px;
+  border: 1px solid var(--border); border-radius: 20px; padding: 40px 24px;
+  background: color-mix(in oklch, var(--card) 40%, transparent);
+}
+.brand-box.light { background: #fff; color: #0b0710; }
+.brand-box .caption { font-size: 0.78rem; color: var(--faint); }
+.brand-box.light .caption { color: oklch(0 0 0 / 45%); }
+
+/* ===== 404 ===== */
+.notfound { text-align: center; padding: clamp(80px, 14vw, 160px) 24px; }
+.notfound .code { font-size: clamp(4rem, 14vw, 8rem); font-weight: 900; letter-spacing: -0.06em; line-height: 1; }
+.notfound p { color: var(--muted); margin: 18px auto 32px; max-width: 420px; }
+
+@media (max-width: 940px) {
+  /* Sem .nav-links o `margin-left:auto` dela some, então quem empurra o bloco
+     da direita passa a ser .nav-actions. */
+  .nav-actions { margin-left: auto; }
+  .nav-actions .btn-ghost { display: none; }
+  .drawer { display: block; margin-left: 8px; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .foot-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .drawer-panel { padding-top: 88px; }
+  .foot-grid { grid-template-columns: 1fr; gap: 28px; }
+  .principles { grid-template-columns: 1fr; }
+}
