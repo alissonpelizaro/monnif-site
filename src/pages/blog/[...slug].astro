@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import Cta from "../../components/Cta.astro";
+import { AUTORA } from "../../data/autoria";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("blog")).sort(
@@ -36,7 +37,7 @@ const artigo = {
   description: post.data.description,
   datePublished: post.data.date.toISOString(),
   inLanguage: "pt-BR",
-  author: { "@type": "Organization", name: "Monnif" },
+  author: { "@type": "Person", name: AUTORA.nome, url: AUTORA.perfil },
   publisher: { "@type": "Organization", name: "Monnif" },
   mainEntityOfPage: `https://monnif.com/blog/${post.id}/`,
 };
@@ -50,7 +51,9 @@ const artigo = {
       <p class="doc-crumb"><a href="/blog/">Blog</a> · {post.data.tag}</p>
       <h1>{post.data.title}</h1>
       <p class="lead">{post.data.description}</p>
-      <p class="updated"><time datetime={post.data.date.toISOString()}>{dia}</time> · {minutos} min de leitura</p>
+      <p class="updated">
+        Por <a href={AUTORA.perfil} rel="author noopener" target="_blank">{AUTORA.nome}</a>{" · "}<time datetime={post.data.date.toISOString()}>{dia}</time> · {minutos} min de leitura
+      </p>
     </div>
 
     <article class="prose">
