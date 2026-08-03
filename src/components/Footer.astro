@@ -1,0 +1,64 @@
+---
+import BrandMark from "./BrandMark.astro";
+
+const colunas = [
+  {
+    titulo: "Produto",
+    links: [
+      { href: "/#assistente", label: "Assistente com IA" },
+      { href: "/#cartao", label: "Cartão de crédito" },
+      { href: "/#orcamento", label: "Orçamento" },
+      { href: "/#previsao", label: "Projeção de saldo" },
+      { href: "/#agenda", label: "Agenda e lembretes" },
+      { href: "/#recursos", label: "Todos os recursos" },
+    ],
+  },
+  {
+    titulo: "Monnif",
+    links: [
+      { href: "/manifesto", label: "Manifesto" },
+      { href: "/seguranca", label: "Segurança" },
+      { href: "/marca", label: "Marca" },
+      { href: "/#faq", label: "Dúvidas" },
+    ],
+  },
+  {
+    titulo: "Legal",
+    links: [
+      { href: "/privacidade", label: "Privacidade" },
+      { href: "/termos", label: "Termos de uso" },
+      { href: "mailto:contato@monnif.com", label: "contato@monnif.com" },
+    ],
+  },
+];
+---
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="logo" href="/" style="font-size:1.05rem">
+          <BrandMark size={30} />
+          Monnif
+        </a>
+        <p>
+          Gestão financeira pessoal e familiar com um assistente de IA que
+          executa. Grátis, sem anúncio e sem venda de dados.
+        </p>
+      </div>
+
+      {colunas.map((c) => (
+        <div class="foot-col">
+          <h4>{c.titulo}</h4>
+          {c.links.map((l) => <a href={l.href}>{l.label}</a>)}
+        </div>
+      ))}
+    </div>
+
+    <div class="foot-bottom">
+      <span>© 2026 Monnif</span>
+      <span>Feito no Brasil 🇧🇷</span>
+      <a href="https://app.monnif.com" target="_blank" rel="noopener">Abrir o app ↗</a>
+    </div>
+  </div>
+</footer>

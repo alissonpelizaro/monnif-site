@@ -1,0 +1,128 @@
+---
+import Base from "../layouts/Base.astro";
+import BrandMark from "../components/BrandMark.astro";
+
+const cores = [
+  { nome: "Roxo Monnif", valor: "oklch(0.606 0.25 292.717)", hex: "#7C3AED", fundo: "var(--primary)" },
+  { nome: "Rosa do gradiente", valor: "oklch(0.606 0.25 347.717)", hex: "#DB2777", fundo: "var(--grad-b)" },
+  { nome: "Gradiente", valor: "linear-gradient(120deg, roxo, rosa)", hex: "120°", fundo: "var(--grad)" },
+  { nome: "Fundo escuro", valor: "oklch(0.09 0.015 292.7)", hex: "#0B0710", fundo: "var(--background)" },
+  { nome: "Sucesso", valor: "oklch(0.77 0.15 162.48)", hex: "#34D399", fundo: "var(--success)" },
+  { nome: "Alerta", valor: "oklch(0.83 0.16 83)", hex: "#F5A524", fundo: "var(--warning)" },
+];
+
+const proibido = [
+  "Girar, inclinar ou espelhar o símbolo.",
+  "Trocar as cores do gradiente ou aplicar o símbolo em cor chapada fora das versões mono.",
+  "Reescrever “Monnif” em outra fonte ou com outra caixa (não é MONNIF nem monnif).",
+  "Colocar o símbolo colorido sobre fundo de baixo contraste — nesse caso, use a versão mono.",
+  "Usar a marca de um jeito que sugira parceria, patrocínio ou endosso que não existe.",
+];
+---
+
+<Base
+  title="Marca — Monnif"
+  description="Símbolo, gradiente, cores e tipografia da Monnif, com os arquivos para download e as regras de uso."
+>
+  <div class="page-head">
+    <div class="wrap">
+      <p class="kicker">Marca</p>
+      <h1>Kit de marca</h1>
+      <p class="lead">
+        Vai citar a Monnif num post, numa apresentação ou numa matéria? Os
+        arquivos e as regras estão aqui. Pode usar sem pedir autorização, desde
+        que respeite o que está nesta página.
+      </p>
+    </div>
+  </div>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="prose" style="max-width:860px">
+        <h2>Símbolo</h2>
+        <p>
+          O símbolo é um <strong>M</strong> desenhado em traço único, com pontas
+          arredondadas, dentro de um quadrado de cantos suaves com o gradiente da
+          marca. O traço nunca muda de espessura relativa: escale o SVG inteiro,
+          nunca só o desenho.
+        </p>
+
+        <div class="features" style="margin-bottom:24px">
+          <div class="brand-box">
+            <BrandMark size={92} />
+            <span class="caption">Principal — fundo escuro</span>
+          </div>
+          <div class="brand-box light">
+            <BrandMark size={92} />
+            <span class="caption">Principal — fundo claro</span>
+          </div>
+          <div class="brand-box">
+            <img src="/marca/monnif-simbolo-branco.svg" width="92" height="92" alt="Símbolo da Monnif em branco" />
+            <span class="caption">Mono branco</span>
+          </div>
+          <div class="brand-box light">
+            <img src="/marca/monnif-simbolo-preto.svg" width="92" height="92" alt="Símbolo da Monnif em preto" />
+            <span class="caption">Mono preto</span>
+          </div>
+        </div>
+
+        <p>
+          Download:
+          <a href="/marca/monnif-simbolo.svg" download>símbolo colorido</a> ·
+          <a href="/marca/monnif-simbolo-branco.svg" download>mono branco</a> ·
+          <a href="/marca/monnif-simbolo-preto.svg" download>mono preto</a>
+          — todos em SVG.
+        </p>
+
+        <h2>Nome</h2>
+        <p>
+          Escreve-se <strong>Monnif</strong>: M maiúsculo, o resto minúsculo,
+          dois enes no meio. Nunca em caixa alta, nunca em caixa baixa, nunca
+          “Monif”. Ao lado do símbolo, o nome usa Inter em peso 800, com
+          <code>letter-spacing</code> de −0.03em.
+        </p>
+
+        <h2>Cores</h2>
+        <p>
+          Os tokens são definidos em <code>oklch</code> e os neutros derivam do
+          matiz do roxo — é o mesmo sistema que o app usa, e é por isso que
+          trocar a cor de destaque retinge a interface inteira. Os hexadecimais
+          abaixo são aproximações para quando a ferramenta não aceitar oklch.
+        </p>
+
+        <div class="swatches" style="margin-bottom:24px">
+          {cores.map((c) => (
+            <div class="swatch">
+              <div class="fill" style={`background:${c.fundo}`}></div>
+              <div class="meta">
+                <b>{c.nome}</b>
+                <code>{c.hex} · {c.valor}</code>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <h2>Tipografia</h2>
+        <p>
+          <strong>Inter</strong> em todo lugar. Títulos em 800 ou 900 com
+          <code>letter-spacing</code> negativo entre −0.03em e −0.05em; texto
+          corrido em 400 com entrelinha 1.6. Valores em dinheiro sempre com
+          <code>font-variant-numeric: tabular-nums</code>, para as colunas
+          alinharem.
+        </p>
+
+        <h2>O que não fazer</h2>
+        <ul>
+          {proibido.map((p) => <li>{p}</li>)}
+        </ul>
+
+        <div class="note">
+          <p>
+            Dúvida sobre um uso específico, ou precisa de um arquivo em outro
+            formato? <a href="mailto:contato@monnif.com">contato@monnif.com</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

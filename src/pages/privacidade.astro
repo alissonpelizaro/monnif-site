@@ -1,0 +1,211 @@
+---
+import Base from "../layouts/Base.astro";
+
+const atualizacao = "2 de agosto de 2026";
+---
+
+<Base
+  title="Política de Privacidade — Monnif"
+  description="Quais dados a Monnif coleta, para quê, com quem compartilha e como você exerce seus direitos previstos na LGPD."
+>
+  <div class="page-head">
+    <div class="wrap">
+      <p class="kicker">Legal</p>
+      <h1>Política de Privacidade</h1>
+      <p class="lead">
+        Escrita para ser lida. Se alguma parte estiver confusa, escreva para
+        contato@monnif.com e a gente reescreve.
+      </p>
+      <p class="updated">Última atualização: {atualizacao}</p>
+    </div>
+  </div>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="prose">
+        <div class="note">
+          <p>
+            <strong>Resumo em cinco linhas.</strong> A Monnif coleta o mínimo
+            para funcionar: seu cadastro e o que você lança no app. Não vende,
+            aluga nem troca esses dados com ninguém. Não exibe anúncio nem usa
+            rastreador de terceiro. Não pede nem guarda a senha do seu banco. E
+            você pode exportar ou apagar tudo quando quiser.
+          </p>
+        </div>
+
+        <h2>1. Quem trata os seus dados</h2>
+        <p>
+          O controlador dos dados pessoais tratados no Monnif é a Monnif,
+          responsável pelo aplicativo disponível em
+          <a href="https://app.monnif.com">app.monnif.com</a>. Contato para
+          qualquer assunto de privacidade, incluindo o exercício dos seus
+          direitos: <a href="mailto:contato@monnif.com">contato@monnif.com</a>.
+        </p>
+        <p>
+          Esta política se aplica ao site <strong>monnif.com</strong> e ao
+          aplicativo <strong>app.monnif.com</strong>.
+        </p>
+
+        <h2>2. Quais dados coletamos</h2>
+        <h3>Você fornece</h3>
+        <ul>
+          <li><strong>Cadastro:</strong> nome, e-mail e senha (guardada apenas como hash Argon2).</li>
+          <li><strong>Dados financeiros que você lança:</strong> despesas, receitas, categorias, carteiras, cartões, faturas, orçamentos, metas, assinaturas e compromissos.</li>
+          <li><strong>Arquivos:</strong> comprovantes e anexos que você envia, e extratos OFX ou CSV que você importa.</li>
+          <li><strong>Conversas com o assistente:</strong> as mensagens que você escreve ou dita, e as respostas geradas.</li>
+          <li><strong>Preferências:</strong> tema, cor de destaque, tom das respostas e configuração de notificações.</li>
+        </ul>
+
+        <h3>Coletamos automaticamente</h3>
+        <ul>
+          <li><strong>Dados de sessão:</strong> tokens de autenticação necessários para manter você conectado.</li>
+          <li><strong>Registros de atividade:</strong> quem criou, editou ou apagou o quê e quando, dentro de cada conta financeira — é o Histórico visível no próprio app.</li>
+          <li><strong>Registros técnicos:</strong> logs de erro e de acesso à API, usados para operar e depurar o serviço.</li>
+          <li><strong>Inscrição de push:</strong> se você autorizar notificações, o endereço de inscrição gerado pelo seu navegador.</li>
+        </ul>
+
+        <h3>Não coletamos</h3>
+        <ul>
+          <li>Senha, token ou qualquer credencial de banco. A Monnif não se conecta a instituições financeiras.</li>
+          <li>Dados de cartão de crédito para cobrança — não há cobrança.</li>
+          <li>Localização, agenda do dispositivo ou lista de contatos.</li>
+          <li>Dados de navegação para publicidade. Não usamos rastreador de terceiro.</li>
+        </ul>
+
+        <h2>3. Para que usamos, e com que base legal</h2>
+        <table>
+          <thead>
+            <tr><th>Finalidade</th><th>Base legal (LGPD)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Criar e manter sua conta, autenticar o acesso</td><td>Execução de contrato (art. 7º, V)</td></tr>
+            <tr><td>Guardar e exibir os lançamentos, orçamentos e relatórios</td><td>Execução de contrato (art. 7º, V)</td></tr>
+            <tr><td>Processar seus pedidos ao assistente de IA</td><td>Execução de contrato (art. 7º, V)</td></tr>
+            <tr><td>Enviar e-mails transacionais e lembretes de vencimento</td><td>Execução de contrato (art. 7º, V)</td></tr>
+            <tr><td>Enviar notificações push</td><td>Consentimento (art. 7º, I) — você autoriza no navegador e pode revogar</td></tr>
+            <tr><td>Manter o Histórico de ações da conta compartilhada</td><td>Legítimo interesse (art. 7º, IX) — rastreabilidade entre participantes</td></tr>
+            <tr><td>Operar, depurar e proteger o serviço contra abuso</td><td>Legítimo interesse (art. 7º, IX)</td></tr>
+          </tbody>
+        </table>
+
+        <h2>4. Com quem compartilhamos</h2>
+        <p>
+          <strong>A Monnif não vende, aluga nem cede seus dados.</strong> O
+          compartilhamento se limita aos operadores necessários para o serviço
+          funcionar, cada um recebendo só o que precisa:
+        </p>
+        <table>
+          <thead>
+            <tr><th>Operador</th><th>O que recebe</th><th>Para quê</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Provedor de hospedagem e banco de dados</td><td>Todos os dados da aplicação</td><td>Rodar a API e armazenar os registros</td></tr>
+            <tr><td>Google Cloud Storage</td><td>Arquivos que você anexa</td><td>Guardar comprovantes em armazenamento privado</td></tr>
+            <tr><td>Resend</td><td>Seu e-mail e o conteúdo da mensagem</td><td>Entregar e-mails transacionais e resumos</td></tr>
+            <tr><td>Provedor de modelo de IA</td><td>O texto da conversa e o contexto necessário para responder, além do áudio quando você usa o ditado</td><td>Gerar a resposta do assistente e transcrever a voz</td></tr>
+            <tr><td>Serviço de push do seu navegador</td><td>O endereço de inscrição e o conteúdo da notificação</td><td>Entregar o aviso no seu dispositivo</td></tr>
+          </tbody>
+        </table>
+        <p>
+          Também podemos compartilhar dados quando houver ordem judicial ou
+          obrigação legal — e, nesse caso, avisaremos você sempre que a lei
+          permitir.
+        </p>
+        <p>
+          <strong>Suas conversas com o assistente não são usadas para treinar
+          modelos de inteligência artificial.</strong>
+        </p>
+
+        <h2>5. Contas compartilhadas</h2>
+        <p>
+          Ao entrar numa conta financeira compartilhada, os lançamentos que você
+          criar ficam visíveis para os demais participantes daquela conta, junto
+          com o seu nome no Histórico. Isso é o propósito do recurso. Os
+          compromissos da agenda são a exceção: só aparecem para você e para
+          quem você convidou.
+        </p>
+        <p>
+          Seus dados de perfil, suas outras contas financeiras e suas conversas
+          com o assistente <strong>não</strong> são visíveis para os demais
+          participantes.
+        </p>
+
+        <h2>6. Cookies</h2>
+        <p>
+          O aplicativo usa cookies estritamente necessários: o que guarda o
+          refresh token da sua sessão, marcado como <code>httpOnly</code>,
+          <code>SameSite=Lax</code> e <code>Secure</code>. Este site
+          institucional não usa cookie algum. Não há cookie de publicidade,
+          de rede social nem de analytics de terceiro.
+        </p>
+
+        <h2>7. Por quanto tempo guardamos</h2>
+        <ul>
+          <li><strong>Enquanto sua conta existir:</strong> cadastro, lançamentos, anexos e conversas.</li>
+          <li><strong>Ao excluir a conta:</strong> seus dados pessoais e financeiros são removidos. Registros do Histórico que envolvam contas compartilhadas podem ser mantidos de forma despersonalizada, para os demais participantes não perderem a rastreabilidade dos próprios números.</li>
+          <li><strong>Logs técnicos:</strong> mantidos por período curto, apenas para operação e segurança.</li>
+        </ul>
+
+        <h2>8. Seus direitos</h2>
+        <p>
+          A LGPD garante a você, a qualquer momento e sem custo, o direito de:
+        </p>
+        <ul>
+          <li>Confirmar que existe tratamento e acessar os seus dados.</li>
+          <li>Corrigir dados incompletos, inexatos ou desatualizados.</li>
+          <li>Solicitar anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade com a lei.</li>
+          <li>Solicitar a portabilidade dos seus dados.</li>
+          <li>Revogar o consentimento e se opor a tratamento feito com base em legítimo interesse.</li>
+          <li>Ser informado sobre com quem compartilhamos seus dados.</li>
+        </ul>
+        <p>
+          Boa parte disso você resolve sozinho dentro do app — editando o
+          perfil, apagando lançamentos, exportando relatórios ou excluindo a
+          conta. Para o restante, escreva para
+          <a href="mailto:contato@monnif.com">contato@monnif.com</a>. Respondemos
+          em até 15 dias.
+        </p>
+
+        <h2>9. Transferência internacional</h2>
+        <p>
+          Alguns dos operadores listados na seção 4 processam dados fora do
+          Brasil. Nesses casos, a transferência ocorre nos termos do art. 33 da
+          LGPD, apoiada nas cláusulas contratuais e nas garantias oferecidas por
+          cada fornecedor.
+        </p>
+
+        <h2>10. Menores de idade</h2>
+        <p>
+          A Monnif é destinada a maiores de 18 anos. Não coletamos
+          intencionalmente dados de crianças e adolescentes. Se identificarmos
+          um cadastro nessa situação, ele será removido.
+        </p>
+
+        <h2>11. Segurança</h2>
+        <p>
+          As medidas técnicas que aplicamos — hash de senha, verificação em duas
+          etapas, sessão curta, isolamento por conta e armazenamento privado de
+          anexos — estão descritas em detalhe na página de
+          <a href="/seguranca">Segurança</a>. Nenhum sistema é imune a
+          incidentes; se algum ocorrer com risco relevante aos seus direitos,
+          comunicaremos você e a ANPD, como manda o art. 48 da LGPD.
+        </p>
+
+        <h2>12. Mudanças nesta política</h2>
+        <p>
+          Se esta política mudar de forma relevante, avisaremos por e-mail ou
+          dentro do app antes da mudança valer. A data de atualização no topo
+          desta página sempre reflete a versão vigente.
+        </p>
+
+        <h2>13. Contato</h2>
+        <p>
+          Dúvida, pedido ou reclamação sobre privacidade:
+          <a href="mailto:contato@monnif.com">contato@monnif.com</a>. Você
+          também pode registrar reclamação junto à Autoridade Nacional de
+          Proteção de Dados (ANPD).
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,25 @@
+---
+interface Props {
+  titulo?: string;
+  destaque?: string;
+  texto?: string;
+  botao?: string;
+}
+const {
+  titulo = "Comece hoje.",
+  destaque = "De graça, para sempre.",
+  texto = "Crie sua conta, convide a família e pergunte ao assistente quanto realmente sobra este mês.",
+  botao = "Usar o Monnif grátis",
+} = Astro.props;
+---
+
+<div class="final">
+  <div class="reveal">
+    <h2>{titulo}<br /><span class="grad-text">{destaque}</span></h2>
+    <p>{texto}</p>
+    <a class="btn btn-primary btn-lg" href="https://app.monnif.com/signup" target="_blank" rel="noopener">
+      {botao}
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</div>

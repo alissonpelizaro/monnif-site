@@ -1,0 +1,138 @@
+---
+import Base from "../layouts/Base.astro";
+import Cta from "../components/Cta.astro";
+
+const principios = [
+  {
+    titulo: "Dinheiro é assunto de casa, não de uma pessoa só",
+    texto:
+      "Quase todo app de finanças assume um usuário sozinho olhando os próprios gastos. A vida real é outra: o aluguel é dividido, a escola é de alguém, a fatura é de todo mundo. A conta compartilhada não é um recurso extra da Monnif — é a forma padrão de usar.",
+  },
+  {
+    titulo: "Seu banco é seu",
+    texto:
+      "A Monnif nunca pede a senha do seu banco e não se conecta a ele. Se você quiser poupar digitação, baixa o extrato em OFX ou CSV no site do próprio banco e envia o arquivo. É menos automático de propósito: a chave da sua conta bancária não fica com a gente porque ela nunca chega até nós.",
+  },
+  {
+    titulo: "Grátis não é isca",
+    texto:
+      "Não existe versão paga escondida, limite de lançamentos, teste de 14 dias nem recurso com cadeado. O que está no app hoje é o que você usa hoje, inteiro, sem cartão de crédito no cadastro.",
+  },
+  {
+    titulo: "A IA tem que fazer, não opinar",
+    texto:
+      "Assistente que devolve conselho genérico sobre economia doméstica não resolve nada. O da Monnif executa: lança a despesa, marca como paga, quita a fatura, cria o orçamento, projeta o saldo. Usa exatamente as mesmas funções das telas e as mesmas permissões que você já tem.",
+  },
+  {
+    titulo: "Nada acontece sem você ver",
+    texto:
+      "O ditado por voz transcreve para o campo de texto e para ali — você lê antes de enviar. A importação de extrato mostra a prévia antes de gravar e tem desfazer da leva inteira. Toda ação da IA aparece na tela como qualquer outro lançamento, e sai do jeito normal.",
+  },
+  {
+    titulo: "Seus dados não são o produto",
+    texto:
+      "Sem anúncio, sem rastreador de terceiro, sem venda ou troca de dado com ninguém. Suas conversas com o assistente não treinam modelo nenhum. A Monnif ganha nada por saber onde você gasta — e é assim que tem que ser.",
+  },
+];
+
+const nunca = [
+  "Vender, alugar ou trocar seus dados financeiros com terceiros.",
+  "Exibir anúncio, dentro do app ou no e-mail.",
+  "Pedir a senha do seu banco ou se conectar à sua conta bancária.",
+  "Usar suas conversas com o assistente para treinar modelo de IA.",
+  "Trancar atrás de assinatura um recurso que já era grátis.",
+  "Esconder o botão de excluir a conta ou dificultar a saída dos seus dados.",
+];
+---
+
+<Base
+  title="Manifesto — Monnif"
+  description="No que a Monnif acredita: dinheiro é assunto de casa, seu banco é seu, grátis não é isca e a IA tem que fazer, não opinar. E o que a Monnif nunca vai fazer."
+>
+  <div class="page-head">
+    <div class="wrap">
+      <p class="kicker">Manifesto</p>
+      <h1>Um app de finanças<br /><span class="grad-text">com opinião.</span></h1>
+      <p class="lead">
+        A Monnif não tenta ser tudo para todo mundo. Ela tem uma ideia bem
+        específica de como o dinheiro de uma casa deveria ser tratado — e quase
+        toda decisão de produto sai daqui.
+      </p>
+    </div>
+  </div>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="principles">
+        {principios.map((p, i) => (
+          <div class="principle reveal" data-d={String((i % 5) + 1)}>
+            <p class="num">0{i + 1}</p>
+            <h3>{p.titulo}</h3>
+            <p>{p.texto}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <p class="kicker">Compromisso</p>
+        <h2>O que a Monnif nunca vai fazer.</h2>
+        <p class="lead">
+          Lista curta e sem asterisco. Se algum dia um destes itens cair, vai
+          estar escrito aqui — não numa atualização silenciosa dos termos.
+        </p>
+      </div>
+
+      <ul class="never">
+        {nunca.map((n) => (
+          <li class="reveal">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            <span>{n}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="prose reveal">
+        <h2>Então como isso se sustenta?</h2>
+        <p>
+          Pergunta justa — quando um produto é grátis, normalmente alguém está
+          pagando de outro jeito. Aqui não tem pegadinha, tem escolha de escala.
+        </p>
+        <p>
+          A Monnif é enxuta por decisão de projeto: roda numa infraestrutura
+          pequena, sem time de vendas, sem investidor cobrando crescimento e sem
+          o custo que faz um app de finanças precisar monetizar o usuário. O que
+          sobra de conta no fim do mês é baixo o bastante para o projeto se pagar
+          sozinho.
+        </p>
+        <p>
+          Se um dia isso deixar de ser verdade, o caminho será cobrar por algo
+          <strong>novo</strong> — algo que hoje não existe e que ninguém está
+          usando. Nunca fechar o que já está aberto. Quem entrou de graça
+          continua de graça.
+        </p>
+
+        <h2>Falar com a gente</h2>
+        <p>
+          Sugestão, bug, discordância com alguma coisa desta página:
+          <a href="mailto:contato@monnif.com">contato@monnif.com</a>. É uma
+          caixa lida por gente, não por robô de atendimento.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Cta
+    titulo="Se você concorda,"
+    destaque="o app está aqui."
+    texto="Criar conta leva menos de um minuto e não pede cartão de crédito."
+    botao="Criar conta grátis"
+  />
+</Base>
