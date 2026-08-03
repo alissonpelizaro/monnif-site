@@ -122,26 +122,35 @@ const organizacao = {
 
   // Tema: "sistema" é o padrão e não grava atributo nenhum — quem decide é a
   // media query do CSS.
+  var raiz = document.documentElement;
   var guardado = "sistema";
   try { guardado = localStorage.getItem("monnif-tema") || "sistema"; } catch (e) {}
 
-  var botoes = document.querySelectorAll("[data-tema-op]");
+  var sistemas = document.querySelectorAll("[data-tema-sistema]");
   var marcar = function (valor) {
-    botoes.forEach(function (b) {
-      b.setAttribute("aria-checked", String(b.dataset.temaOp === valor));
-    });
+    sistemas.forEach(function (b) { b.setAttribute("aria-pressed", String(valor === "sistema")); });
   };
   marcar(guardado);
 
-  botoes.forEach(function (b) {
+  var aplicar = function (valor) {
+    if (valor === "sistema") delete raiz.dataset.tema;
+    else raiz.dataset.tema = valor;
+    try { localStorage.setItem("monnif-tema", valor); } catch (e) {}
+    marcar(valor);
+  };
+
+  document.querySelectorAll("[data-tema-alterna]").forEach(function (b) {
     b.addEventListener("click", function () {
-      var valor = b.dataset.temaOp;
-      if (valor === "sistema") delete document.documentElement.dataset.tema;
-      else document.documentElement.dataset.tema = valor;
-      try { localStorage.setItem("monnif-tema", valor); } catch (e) {}
-      marcar(valor);
-      fechar(null);
+      // Sem escolha explícita, o que vale é o tema do sistema — é dele que o
+      // clique parte para inverter.
+      var atual = raiz.dataset.tema
+        || (matchMedia("(prefers-color-scheme: dark)").matches ? "escuro" : "claro");
+      aplicar(atual === "escuro" ? "claro" : "escuro");
     });
+  });
+
+  sistemas.forEach(function (b) {
+    b.addEventListener("click", function () { aplicar("sistema"); });
   });
 
   var items = document.querySelectorAll(".reveal");
