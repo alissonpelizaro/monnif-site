@@ -34,3 +34,26 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Avisa o Bing (e os outros que falam IndexNow) no minuto da publicação, em
+  # vez de esperar o rastreio. A chave não é segredo: ela é publicada de
+  # propósito em /<chave>.txt, que é como o buscador confirma que o site é seu.
+  indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Avisa o IndexNow
+        env:
+          CHAVE: b3ddb49c73ac42e9aed8a0f89e0034fb
+        # ponytail: manda o sitemap inteiro a cada publicação, que com 50
+        # páginas é barato. Se o site crescer a ponto de o Astro quebrar o
+        # sitemap em vários arquivos, aqui passa a ler só o primeiro.
+        run: |
+          urls=$(curl -sf https://monnif.com/sitemap-0.xml \
+            | grep -o '<loc>[^<]*</loc>' | sed 's/<[^>]*>//g' \
+            | jq -R . | jq -sc .)
+          echo "Enviando $(echo "$urls" | jq 'length') URLs"
+          curl -sS -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' \
+            -d "{\"host\":\"monnif.com\",\"key\":\"$CHAVE\",\"keyLocation\":\"https://monnif.com/$CHAVE.txt\",\"urlList\":$urls}" \
+            -w '\nIndexNow respondeu %{http_code}\n'
