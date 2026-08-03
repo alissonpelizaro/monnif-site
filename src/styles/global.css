@@ -813,3 +813,60 @@ html:has(.drawer[open]) { overflow: hidden; }
   .doc-prevnext { grid-template-columns: 1fr; }
   .doc-prevnext .next { grid-column: 1; text-align: left; }
 }
+
+/* ==========================================================================
+   Blog — um destaque no topo e uma grade abaixo. Os cards herdam o vidro dos
+   outros blocos do site; o que muda é só a etiqueta e a linha de data.
+   ========================================================================== */
+.post-tag {
+  display: inline-block; font-size: 0.7rem; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--grad-a);
+  margin-bottom: 14px;
+}
+.post-data {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin-top: 18px; font-size: 0.8rem; color: var(--faint);
+}
+.post-data span { color: var(--grad-a); font-weight: 700; }
+
+.post-destaque, .post-card {
+  display: block;
+  background: color-mix(in oklch, var(--card) 55%, transparent);
+  border: 1px solid var(--border); border-radius: 22px;
+  transition: transform 0.25s var(--ease-soft), border-color 0.25s, background 0.25s;
+}
+.post-destaque:hover, .post-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in oklch, var(--grad-a) 38%, transparent);
+  background: color-mix(in oklch, var(--card) 75%, transparent);
+}
+.post-destaque { padding: clamp(28px, 4vw, 44px); }
+.post-destaque h2 { font-size: clamp(1.5rem, 3.4vw, 2.2rem); }
+.post-destaque p { color: var(--muted); margin-top: 14px; max-width: 620px; }
+
+.post-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 18px; margin-top: 18px; padding-bottom: clamp(56px, 8vw, 88px);
+}
+.post-card { padding: 26px; }
+.post-card h3 { font-size: 1.12rem; }
+.post-card p { color: var(--muted); font-size: 0.9rem; margin-top: 10px; }
+
+/* Cabeçalho do post: alinhado à esquerda, na mesma largura do texto. */
+.post-head { max-width: 720px; margin: 0 auto; text-align: left; }
+.post-head .lead, .post-head .updated { margin-left: 0; margin-right: 0; }
+.post-head .updated a { color: var(--grad-a); font-weight: 600; }
+
+.post-mais { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--border); }
+.post-mais h4 {
+  font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--faint); margin-bottom: 14px;
+}
+.post-mais a {
+  display: block; padding: 14px 18px; margin-bottom: 10px;
+  border: 1px solid var(--border); border-radius: 15px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.post-mais a:hover { border-color: color-mix(in oklch, var(--grad-a) 35%, transparent); background: oklch(1 0 0 / 3%); }
+.post-mais span { display: block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--grad-a); margin-bottom: 5px; }
+.post-mais b { font-size: 0.98rem; font-weight: 700; letter-spacing: -0.015em; }

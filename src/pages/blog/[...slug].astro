@@ -1,0 +1,74 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Cta from "../../components/Cta.astro";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+  );
+
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    // Os vizinhos na ordem cronológica viram "leia também" no fim do texto.
+    props: { post, relacionados: [posts[i - 1], posts[i + 1]].filter(Boolean) },
+  }));
+}
+
+const { post, relacionados } = Astro.props;
+const { Content } = await render(post);
+
+// A data vem de um `YYYY-MM-DD`, que o zod lê como meia-noite UTC. Sem fixar o
+// fuso, quem estiver no Brasil vê o dia anterior.
+const dia = post.data.date.toLocaleDateString("pt-BR", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
+const minutos = Math.max(2, Math.round(post.body.split(/\s+/).length / 200));
+
+const artigo = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date.toISOString(),
+  inLanguage: "pt-BR",
+  author: { "@type": "Organization", name: "Monnif" },
+  publisher: { "@type": "Organization", name: "Monnif" },
+  mainEntityOfPage: `https://monnif.com/blog/${post.id}/`,
+};
+---
+
+<Base title={`${post.data.title} — Blog Monnif`} description={post.data.description}>
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(artigo)} />
+
+  <div class="wrap">
+    <div class="page-head post-head">
+      <p class="doc-crumb"><a href="/blog/">Blog</a> · {post.data.tag}</p>
+      <h1>{post.data.title}</h1>
+      <p class="lead">{post.data.description}</p>
+      <p class="updated"><time datetime={post.data.date.toISOString()}>{dia}</time> · {minutos} min de leitura</p>
+    </div>
+
+    <article class="prose">
+      <Content />
+
+      {relacionados.length > 0 && (
+        <div class="post-mais">
+          <h4>Leia também</h4>
+          {relacionados.map((p) => (
+            <a href={`/blog/${p.id}/`}>
+              <span>{p.data.tag}</span>
+              <b>{p.data.title}</b>
+            </a>
+          ))}
+        </div>
+      )}
+    </article>
+  </div>
+
+  <Cta />
+</Base>

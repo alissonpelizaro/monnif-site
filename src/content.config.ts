@@ -15,4 +15,17 @@ const docs = defineCollection({
   }),
 });
 
-export const collections = { docs };
+const blog = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.coerce.date(),
+    /** Um assunto só por post — vira a etiqueta na listagem. */
+    tag: z.enum(["Finanças pessoais", "Guia do app", "Bastidores"]),
+    /** Sobe o post para o topo da listagem, em destaque. */
+    destaque: z.boolean().default(false),
+  }),
+});
+
+export const collections = { docs, blog };
