@@ -1,0 +1,108 @@
+---
+import Base from "./Base.astro";
+import DocNav from "../components/DocNav.astro";
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import type { MarkdownHeading } from "astro";
+
+interface Props {
+  title: string;
+  description: string;
+  print?: string;
+  peca?: string;
+  id: string;
+  secao: string;
+  headings: MarkdownHeading[];
+  anterior?: { id: string; title: string };
+  proxima?: { id: string; title: string };
+}
+
+const { title, description, print, peca, id, secao, headings, anterior, proxima } = Astro.props;
+
+// Os prints são importados de src/assets para o Astro otimizar e versionar.
+const prints = import.meta.glob<{ default: ImageMetadata }>("/src/assets/docs/*.webp", {
+  eager: true,
+});
+const imagem = print ? prints[`/src/assets/docs/${print}.webp`]?.default : undefined;
+
+// Só os h2 entram no sumário; h3 deixaria a coluna longa demais.
+const sumario = headings.filter((h) => h.depth === 2);
+
+const migalha = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Documentação", item: "https://monnif.com/docs/" },
+    { "@type": "ListItem", position: 2, name: secao },
+    { "@type": "ListItem", position: 3, name: title },
+  ],
+};
+---
+
+<Base title={`${title} — Documentação Monnif`} description={description}>
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(migalha)} />
+
+  <div class="doc-wrap">
+    <DocNav atual={id} />
+
+    <article>
+      <details class="doc-nav-mobile">
+        <summary>
+          Navegar pela documentação
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <DocNav atual={id} />
+      </details>
+
+      <div class="doc-head">
+        <p class="doc-crumb"><a href="/docs/">Documentação</a> · {secao}</p>
+        <h1>{title}</h1>
+        <p class="lead">{description}</p>
+      </div>
+
+      {imagem && (
+        <div class="doc-print">
+          <Image src={imagem} alt={`Tela de ${title} no Monnif`} widths={[640, 1024, 1600]} sizes="(max-width: 860px) 100vw, 720px" loading="eager" />
+        </div>
+      )}
+
+      {peca && (
+        <div class="doc-peca">
+          <span class="ico" aria-hidden="true">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6 4.6 1.9-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z"/><path d="M19 15l.9 2.1 2.1.9-2.1.9L19 21l-.9-2.1-2.1-.9 2.1-.9z"/></svg>
+          </span>
+          <span>
+            <b>Ou peça ao assistente</b>
+            <q>{peca}</q>
+          </span>
+        </div>
+      )}
+
+      <div class="doc-body">
+        <slot />
+      </div>
+
+      <div class="doc-prevnext">
+        {anterior && (
+          <a href={`/docs/${anterior.id}/`}>
+            <span>← Anterior</span>
+            <b>{anterior.title}</b>
+          </a>
+        )}
+        {proxima && (
+          <a class="next" href={`/docs/${proxima.id}/`}>
+            <span>Próxima →</span>
+            <b>{proxima.title}</b>
+          </a>
+        )}
+      </div>
+    </article>
+
+    {sumario.length > 1 && (
+      <aside class="doc-toc">
+        <p>Nesta página</p>
+        {sumario.map((h) => <a href={`#${h.slug}`}>{h.text}</a>)}
+      </aside>
+    )}
+  </div>
+</Base>
