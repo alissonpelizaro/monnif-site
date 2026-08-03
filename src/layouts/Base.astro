@@ -49,7 +49,7 @@ const organizacao = {
 (function () {
   try {
     var t = localStorage.getItem("monnif-tema");
-    if (t === "claro" || t === "escuro") document.documentElement.dataset.tema = t;
+    if (t === "escuro" || t === "sistema") document.documentElement.dataset.tema = t;
   } catch (e) {
     /* navegação privada em alguns navegadores barra o localStorage */
   }
@@ -120,11 +120,11 @@ const organizacao = {
   });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") fechar(null); });
 
-  // Tema: "sistema" é o padrão e não grava atributo nenhum — quem decide é a
-  // media query do CSS.
+  // Tema: o padrão é o claro e não grava atributo nenhum. "sistema" é escolha
+  // explícita e vira data-tema, porque é ele quem liga a media query do CSS.
   var raiz = document.documentElement;
-  var guardado = "sistema";
-  try { guardado = localStorage.getItem("monnif-tema") || "sistema"; } catch (e) {}
+  var guardado = "claro";
+  try { guardado = localStorage.getItem("monnif-tema") || "claro"; } catch (e) {}
 
   var sistemas = document.querySelectorAll("[data-tema-sistema]");
   var marcar = function (valor) {
@@ -133,7 +133,7 @@ const organizacao = {
   marcar(guardado);
 
   var aplicar = function (valor) {
-    if (valor === "sistema") delete raiz.dataset.tema;
+    if (valor === "claro") delete raiz.dataset.tema;
     else raiz.dataset.tema = valor;
     try { localStorage.setItem("monnif-tema", valor); } catch (e) {}
     marcar(valor);
@@ -141,10 +141,11 @@ const organizacao = {
 
   document.querySelectorAll("[data-tema-alterna]").forEach(function (b) {
     b.addEventListener("click", function () {
-      // Sem escolha explícita, o que vale é o tema do sistema — é dele que o
-      // clique parte para inverter.
-      var atual = raiz.dataset.tema
-        || (matchMedia("(prefers-color-scheme: dark)").matches ? "escuro" : "claro");
+      // Em "sistema" o clique parte do que o sistema está mostrando agora.
+      var atual = raiz.dataset.tema || "claro";
+      if (atual === "sistema") {
+        atual = matchMedia("(prefers-color-scheme: dark)").matches ? "escuro" : "claro";
+      }
       aplicar(atual === "escuro" ? "claro" : "escuro");
     });
   });
