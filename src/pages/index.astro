@@ -4,31 +4,114 @@ import Cta from "../components/Cta.astro";
 
 import ChatMock from "../components/ChatMock.astro";
 import { RECURSOS, OUTROS } from "../data/recursos";
+import { EDITORA, SITE, grafo } from "../data/seo";
 
-const titulo = "Monnif — O dinheiro da casa, organizado num lugar só";
+// O <title> começa pelo que se digita no buscador; a marca, que ainda ninguém
+// procura pelo nome, fecha a linha.
+const titulo = "App grátis de controle financeiro para a família — Monnif";
 const descricao =
-  "App grátis para organizar o dinheiro da família: contas do mês, cartão de crédito, orçamento e o saldo dos próximos dias. Com um assistente que lança para você — é só escrever ou falar.";
+  "App grátis para organizar o dinheiro da família: contas do mês, cartão de crédito, orçamento e saldo dos próximos dias — com um assistente que lança por você.";
 
-const aplicativo = {
-"@context": "https://schema.org",
-"@type": "SoftwareApplication",
-"name": "Monnif",
-"applicationCategory": "FinanceApplication",
-"operatingSystem": "Web, iOS, Android",
-"description": "App grátis para organizar as finanças pessoais e da família: contas do mês, cartão de crédito, orçamento por categoria, saldo dos próximos dias, lembretes de vencimento e um assistente que lança por você.",
-"featureList": [
-  "Assistente que lança, paga e responde por escrito ou por voz",
-  "Lembretes de vencimento e agenda de compromissos",
-  "Contas compartilhadas com a família",
-  "Cartão de crédito com fatura fechada na data certa e parcelas",
-  "Orçamento por categoria",
-  "Saldo previsto para os próximos dias",
-  "Importação do extrato do banco"
-],
-"url": "https://app.monnif.com",
-"offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" },
-"inLanguage": "pt-BR"
-};
+// As mesmas perguntas alimentam o bloco de dúvidas e o FAQPage do JSON-LD —
+// escrever duas vezes é como as duas versões acabam divergindo.
+const PERGUNTAS = [
+  {
+    pergunta: "O Monnif é grátis mesmo?",
+    resposta: `É grátis para criar a conta e usar: sem teste que expira, sem anúncio e sem venda dos seus dados, e nem pedimos cartão de crédito no cadastro. Existem planos pagos para quem quiser mais, mas o que dá para fazer de graça continua dando. O porquê disso está na <a href="/manifesto/" style="color:var(--acento);font-weight:600">nossa história</a>.`,
+  },
+  {
+    pergunta: "Preciso ligar o Monnif ao meu banco?",
+    resposta:
+      "Não, e não é possível: o Monnif nunca pede a senha do seu banco. Se quiser evitar digitação, você baixa o extrato no site do próprio banco, como sempre, e manda o arquivo para cá. A sua senha não chega até nós porque ela nunca sai de lá.",
+  },
+  {
+    pergunta: "O que o assistente de IA faz de verdade?",
+    resposta:
+      "Ele resolve, não só conversa. Anota a despesa, marca a conta como paga, quita a fatura do cartão, cria uma categoria, define o limite do mês, mostra quanto sobra, marca compromisso e chama gente para a conta. Você escreve ou fala; ele faz.",
+  },
+  {
+    pergunta: "É seguro deixar o assistente mexer nas minhas coisas?",
+    resposta:
+      "Ele só faz o que você pede, e tudo o que ele faz aparece na tela como qualquer outro lançamento — dá para editar ou apagar do jeito normal. Ele enxerga exatamente o que você enxerga e nada além disso. Suas conversas com ele não são lidas pelas outras pessoas da conta e não são usadas para treinar nada.",
+  },
+  {
+    pergunta: "O que eu falo vai direto para a minha conta?",
+    resposta:
+      "Não. O que você fala vira texto na tela. Você lê, corrige se ele entendeu errado, e só então envia. Isso é de propósito: reconhecimento de voz erra número, e num app de dinheiro isso importa.",
+  },
+  {
+    pergunta: "Como funciona a conta compartilhada com a família?",
+    resposta:
+      "Cada pessoa entra com o próprio acesso e todas veem as mesmas contas, atualizadas na hora. Ninguém precisa emprestar senha. Dá para convidar alguém só para acompanhar, sem poder mudar nada, e dá para tirar o acesso quando quiser. Você também pode ter contas separadas — a da casa, a sua, a da empresa.",
+  },
+  {
+    pergunta: "Como funcionam os avisos de vencimento?",
+    resposta:
+      "Se você permitir, o celular avisa três dias antes de cada conta vencer e na hora que você marcou para cada compromisso. No começo do mês chega também um resumo por e-mail. Dá para desligar tudo.",
+  },
+  {
+    pergunta: "Preciso instalar alguma coisa?",
+    resposta:
+      "Não. Abre no navegador, no celular ou no computador. Se quiser, dá para deixar na tela inicial do celular com ícone próprio, sem passar por loja de aplicativos.",
+  },
+  {
+    pergunta: "E se eu importar o extrato errado?",
+    resposta:
+      "Nada é gravado antes de você conferir a prévia. E, depois de importar, um botão desfaz a importação inteira de uma vez.",
+  },
+  {
+    pergunta: "Meus dados financeiros estão seguros?",
+    resposta: `Sua senha é guardada de um jeito que nem nós conseguimos ler, e cada conta só é acessível a quem foi convidado. Nada é vendido nem compartilhado com terceiros. Você pode apagar sua conta e levar seus dados embora quando quiser — <a href="/seguranca/" style="color:var(--acento);font-weight:600">o detalhe está aqui</a>.`,
+  },
+];
+
+const dados = grafo(
+  {
+    "@type": "SoftwareApplication",
+    "@id": `${SITE}/#app`,
+    name: "Monnif",
+    applicationCategory: "FinanceApplication",
+    applicationSubCategory: "Gestão financeira pessoal e familiar",
+    operatingSystem: "Web, iOS, Android",
+    browserRequirements: "Funciona em qualquer navegador atual, sem instalar nada",
+    description:
+      "App grátis para organizar as finanças pessoais e da família: contas do mês, cartão de crédito, orçamento por categoria, saldo dos próximos dias, lembretes de vencimento e um assistente que lança por você.",
+    featureList: [
+      "Assistente que lança, paga e responde por escrito ou por voz",
+      "Lembretes de vencimento e agenda de compromissos",
+      "Contas compartilhadas com a família",
+      "Cartão de crédito com fatura fechada na data certa e parcelas",
+      "Orçamento por categoria",
+      "Saldo previsto para os próximos dias",
+      "Importação do extrato do banco",
+    ],
+    screenshot: [
+      `${SITE}/assets/dashboard-mensal.png`,
+      `${SITE}/assets/despesas.png`,
+      `${SITE}/assets/mobile-dashboard.png`,
+    ],
+    url: "https://app.monnif.com",
+    installUrl: "https://app.monnif.com/signup",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "BRL",
+      availability: "https://schema.org/InStock",
+      description: "Grátis para criar a conta e usar, sem cartão de crédito no cadastro.",
+    },
+    publisher: EDITORA,
+    inLanguage: "pt-BR",
+  },
+  {
+    "@type": "FAQPage",
+    "@id": `${SITE}/#duvidas`,
+    mainEntity: PERGUNTAS.map((p) => ({
+      "@type": "Question",
+      name: p.pergunta,
+      acceptedAnswer: { "@type": "Answer", text: p.resposta },
+    })),
+  },
+);
 
 // As frases do hero se alternam sozinhas. A primeira é a que vai para o HTML
 // (e para o indexador); o resto entra por JS.
@@ -47,7 +130,7 @@ const FRASES = [
 ---
 
 <Base title={titulo} description={descricao}>
-  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(aplicativo)} />
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(dados)} />
 
 
   <!-- ============================ HERO ============================ -->
@@ -649,46 +732,12 @@ const FRASES = [
         <h2>Perguntas honestas,<br />respostas honestas.</h2>
       </div>
       <div class="faq">
-        <details class="reveal" open>
-          <summary>É grátis mesmo?</summary>
-          <p>É grátis para criar a conta e usar: sem teste que expira, sem anúncio e sem venda dos seus dados, e nem pedimos cartão de crédito no cadastro. Existem planos pagos para quem quiser mais, mas o que dá para fazer de graça continua dando. O porquê disso está na <a href="/manifesto/" style="color:var(--acento);font-weight:600">nossa história</a>.</p>
-        </details>
-        <details class="reveal" data-d="1">
-          <summary>Preciso ligar o Monnif ao meu banco?</summary>
-          <p>Não, e não é possível: o Monnif nunca pede a senha do seu banco. Se quiser evitar digitação, você baixa o extrato no site do próprio banco, como sempre, e manda o arquivo para cá. A sua senha não chega até nós porque ela nunca sai de lá.</p>
-        </details>
-        <details class="reveal" data-d="2">
-          <summary>O que o assistente faz de verdade?</summary>
-          <p>Ele resolve, não só conversa. Anota a despesa, marca a conta como paga, quita a fatura do cartão, cria uma categoria, define o limite do mês, mostra quanto sobra, marca compromisso e chama gente para a conta. Você escreve ou fala; ele faz.</p>
-        </details>
-        <details class="reveal" data-d="3">
-          <summary>É seguro deixar o assistente mexer nas minhas coisas?</summary>
-          <p>Ele só faz o que você pede, e tudo o que ele faz aparece na tela como qualquer outro lançamento — dá para editar ou apagar do jeito normal. Ele enxerga exatamente o que você enxerga e nada além disso. Suas conversas com ele não são lidas pelas outras pessoas da conta e não são usadas para treinar nada.</p>
-        </details>
-        <details class="reveal" data-d="4">
-          <summary>O que eu falo vai direto para a minha conta?</summary>
-          <p>Não. O que você fala vira texto na tela. Você lê, corrige se ele entendeu errado, e só então envia. Isso é de propósito: reconhecimento de voz erra número, e num app de dinheiro isso importa.</p>
-        </details>
-        <details class="reveal" data-d="5">
-          <summary>Como funciona com a família?</summary>
-          <p>Cada pessoa entra com o próprio acesso e todas veem as mesmas contas, atualizadas na hora. Ninguém precisa emprestar senha. Dá para convidar alguém só para acompanhar, sem poder mudar nada, e dá para tirar o acesso quando quiser. Você também pode ter contas separadas — a da casa, a sua, a da empresa.</p>
-        </details>
-        <details class="reveal" data-d="1">
-          <summary>Como funcionam os avisos?</summary>
-          <p>Se você permitir, o celular avisa três dias antes de cada conta vencer e na hora que você marcou para cada compromisso. No começo do mês chega também um resumo por e-mail. Dá para desligar tudo.</p>
-        </details>
-        <details class="reveal" data-d="2">
-          <summary>Preciso instalar alguma coisa?</summary>
-          <p>Não. Abre no navegador, no celular ou no computador. Se quiser, dá para deixar na tela inicial do celular com ícone próprio, sem passar por loja de aplicativos.</p>
-        </details>
-        <details class="reveal" data-d="3">
-          <summary>E se eu mandar o extrato errado?</summary>
-          <p>Nada é gravado antes de você conferir a prévia. E, depois de importar, um botão desfaz a importação inteira de uma vez.</p>
-        </details>
-        <details class="reveal" data-d="4">
-          <summary>Meus dados estão seguros?</summary>
-          <p>Sua senha é guardada de um jeito que nem nós conseguimos ler, e cada conta só é acessível a quem foi convidado. Nada é vendido nem compartilhado com terceiros. Você pode apagar sua conta e levar seus dados embora quando quiser — <a href="/seguranca/" style="color:var(--acento);font-weight:600">o detalhe está aqui</a>.</p>
-        </details>
+        {PERGUNTAS.map((f, i) => (
+          <details class="reveal" data-d={i % 6} open={i === 0}>
+            <summary>{f.pergunta}</summary>
+            <p set:html={f.resposta} />
+          </details>
+        ))}
       </div>
     </div>
   </section>

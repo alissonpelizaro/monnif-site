@@ -2,9 +2,37 @@
 import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import Cta from "../../components/Cta.astro";
+import { EDITORA, ID_SITE, SITE, grafo, lista, migalha } from "../../data/seo";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+
+const dados = grafo(
+  {
+    "@type": "Blog",
+    "@id": `${SITE}/blog/#blog`,
+    name: "Blog da Monnif",
+    description:
+      "Textos sobre orçamento, cartão de crédito, reserva de emergência e dinheiro a dois — e guias de como cada parte do Monnif funciona.",
+    url: `${SITE}/blog/`,
+    inLanguage: "pt-BR",
+    publisher: EDITORA,
+    isPartOf: { "@id": ID_SITE },
+    blogPost: posts.map((p) => ({
+      "@type": "BlogPosting",
+      "@id": `${SITE}/blog/${p.id}/#artigo`,
+      headline: p.data.title,
+      description: p.data.description,
+      datePublished: p.data.date.toISOString(),
+      url: `${SITE}/blog/${p.id}/`,
+    })),
+  },
+  lista(
+    "Posts do blog da Monnif",
+    posts.map((p) => ({ nome: p.data.title, url: `/blog/${p.id}/` })),
+  ),
+  migalha([{ nome: "Blog" }]),
 );
 
 // O post em destaque abre a página; o resto vai para a grade, na ordem da data.
@@ -16,9 +44,11 @@ const dia = (d: Date) =>
 ---
 
 <Base
-  title="Blog — Monnif"
+  title="Blog: orçamento, cartão e dinheiro da casa — Monnif"
   description="Textos sobre orçamento, cartão de crédito, reserva de emergência e dinheiro a dois — e guias de como cada parte do Monnif funciona."
 >
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(dados)} />
+
   <div class="wrap">
     <div class="page-head">
       <p class="kicker">Blog</p>

@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import Cta from "../../components/Cta.astro";
 import { AUTORA } from "../../data/autoria";
+import { EDITORA, ID_SITE, SITE, grafo, migalha } from "../../data/seo";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("blog")).sort(
@@ -28,23 +29,58 @@ const dia = post.data.date.toLocaleDateString("pt-BR", {
   timeZone: "UTC",
 });
 
-const minutos = Math.max(2, Math.round(post.body.split(/\s+/).length / 200));
+const palavras = post.body.split(/\s+/).length;
+const minutos = Math.max(2, Math.round(palavras / 200));
 
-const artigo = {
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  headline: post.data.title,
-  description: post.data.description,
-  datePublished: post.data.date.toISOString(),
-  inLanguage: "pt-BR",
-  author: { "@type": "Person", name: AUTORA.nome, url: AUTORA.perfil },
-  publisher: { "@type": "Organization", name: "Monnif" },
-  mainEntityOfPage: `https://monnif.com/blog/${post.id}/`,
-};
+const url = `${SITE}/blog/${post.id}/`;
+const capa = `${SITE}/og/blog-${post.id}.png`;
+const publicado = post.data.date.toISOString();
+
+const dados = grafo(
+  {
+    "@type": "BlogPosting",
+    "@id": `${url}#artigo`,
+    headline: post.data.title,
+    description: post.data.description,
+    image: capa,
+    datePublished: publicado,
+    // Sem data de revisão no frontmatter, a de publicação é a informação honesta.
+    dateModified: publicado,
+    inLanguage: "pt-BR",
+    articleSection: post.data.tag,
+    wordCount: palavras,
+    timeRequired: `PT${minutos}M`,
+    author: { "@type": "Person", name: AUTORA.nome, url: AUTORA.perfil },
+    publisher: EDITORA,
+    isPartOf: { "@id": `${SITE}/blog/#blog` },
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${url}#pagina` },
+  },
+  {
+    "@type": "Blog",
+    "@id": `${SITE}/blog/#blog`,
+    name: "Blog da Monnif",
+    url: `${SITE}/blog/`,
+    inLanguage: "pt-BR",
+    publisher: EDITORA,
+    isPartOf: { "@id": ID_SITE },
+  },
+  migalha([{ nome: "Blog", url: "/blog/" }, { nome: post.data.title }]),
+);
 ---
 
-<Base title={`${post.data.title} — Blog Monnif`} description={post.data.description}>
-  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(artigo)} />
+<Base
+  title={`${post.data.title} — Monnif`}
+  description={post.data.description}
+  ogType="article"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(dados)} />
+    <meta property="article:published_time" content={publicado} />
+    <meta property="article:modified_time" content={publicado} />
+    <meta property="article:section" content={post.data.tag} />
+    <meta property="article:author" content={AUTORA.nome} />
+    <meta name="author" content={AUTORA.nome} />
+  </Fragment>
 
   <div class="wrap">
     <div class="page-head post-head">

@@ -11,6 +11,8 @@ export interface Recurso {
   slug: string;
   /** Nome curto, do jeito que aparece no menu. */
   titulo: string;
+  /** <title> da página: começa pelo que a pessoa digita no buscador, marca no fim. */
+  tituloSeo: string;
   /** Uma linha para o menu e para os cards. */
   resumo: string;
   /** Título da página. */
@@ -32,6 +34,7 @@ export const RECURSOS: Recurso[] = [
   {
     slug: "assistente",
     titulo: "Assistente",
+    tituloSeo: "Assistente de IA que lança seus gastos — Monnif",
     resumo: "Escreva ou fale, e ele faz o lançamento por você",
     chamada: "Diga o que aconteceu. Ele anota.",
     lead: "Em vez de abrir formulário e preencher campo por campo, escreva como você contaria para alguém: “paguei o mercado, 240 no cartão”. Pronto, está lançado.",
@@ -81,6 +84,7 @@ export const RECURSOS: Recurso[] = [
   {
     slug: "cartao-de-credito",
     titulo: "Cartão de crédito",
+    tituloSeo: "Controle de cartão de crédito e fatura — Monnif",
     resumo: "A fatura fechada certa, com as parcelas nos meses certos",
     chamada: "A fatura para de ser surpresa.",
     lead: "Você cadastra o dia em que o cartão fecha e o dia em que vence. A partir daí cada compra cai na fatura certa sozinha — inclusive as parceladas, que aparecem uma por mês.",
@@ -130,6 +134,7 @@ export const RECURSOS: Recurso[] = [
   {
     slug: "orcamento",
     titulo: "Orçamento",
+    tituloSeo: "Orçamento mensal por categoria — Monnif",
     resumo: "Um limite por categoria e quanto ainda cabe neste mês",
     chamada: "Saiba quanto ainda cabe, antes de gastar.",
     lead: "Você diz quanto pretende gastar por mês com mercado, transporte, lazer. O Monnif mostra quanto já foi e quanto ainda sobra — enquanto o mês ainda dá para mudar.",
@@ -179,6 +184,7 @@ export const RECURSOS: Recurso[] = [
   {
     slug: "saldo-dos-proximos-dias",
     titulo: "Saldo dos próximos dias",
+    tituloSeo: "Previsão de saldo dos próximos dias — Monnif",
     resumo: "Em que dia a conta aperta, com semanas de antecedência",
     chamada: "Descubra hoje o aperto que vem no dia 22.",
     lead: "O Monnif pega o que você tem agora, soma o que ainda entra e desconta o que ainda vence. O resultado é uma linha: o seu saldo, dia a dia, pelas próximas semanas.",
@@ -219,6 +225,7 @@ export const RECURSOS: Recurso[] = [
   {
     slug: "agenda-e-lembretes",
     titulo: "Agenda e lembretes",
+    tituloSeo: "Lembrete de contas a pagar e agenda — Monnif",
     resumo: "Avisos de vencimento e compromissos com hora marcada",
     chamada: "O Monnif lembra por você.",
     lead: "Conta que vence, reunião com o contador, dia de renegociar o financiamento. Marque a hora e escolha com quanta antecedência quer ser avisado — o aviso chega no celular.",
@@ -264,6 +271,7 @@ export const RECURSOS: Recurso[] = [
   {
     slug: "importar-extrato",
     titulo: "Importar do banco",
+    tituloSeo: "Importar o extrato do banco (OFX e CSV) — Monnif",
     resumo: "Traga meses de histórico sem digitar lançamento por lançamento",
     chamada: "Meses de histórico em cinco minutos.",
     lead: "Baixe o extrato no site do seu banco e mande o arquivo para o Monnif. Ele lê tudo, mostra o que entendeu e só grava depois que você confere.",
@@ -313,6 +321,7 @@ export const RECURSOS: Recurso[] = [
   {
     slug: "familia",
     titulo: "Contas em família",
+    tituloSeo: "App de finanças para a família, compartilhado — Monnif",
     resumo: "Todo mundo da casa vendo o mesmo número, sem dividir senha",
     chamada: "O dinheiro da casa é de mais de uma pessoa.",
     lead: "Cada pessoa entra com o seu próprio acesso e enxerga as mesmas contas, os mesmos cartões e o mesmo orçamento. Ninguém precisa emprestar senha nem virar o responsável pela planilha.",
@@ -361,6 +370,7 @@ export const RECURSOS: Recurso[] = [
   {
     slug: "no-celular",
     titulo: "No celular",
+    tituloSeo: "App de finanças no celular, sem instalar — Monnif",
     resumo: "Instala na tela inicial e abre como qualquer outro app",
     chamada: "Na tela inicial, sem passar por loja.",
     lead: "O Monnif abre no navegador do computador e do celular. Se quiser, ele fica na tela inicial com ícone próprio e abre em tela cheia, igual a qualquer app instalado.",

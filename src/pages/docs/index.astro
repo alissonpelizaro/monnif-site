@@ -3,6 +3,7 @@ import Base from "../../layouts/Base.astro";
 import DocNav from "../../components/DocNav.astro";
 import { getCollection } from "astro:content";
 import { SECOES } from "../../content/docs/secoes";
+import { grafo, lista, migalha } from "../../data/seo";
 
 const paginas = await getCollection("docs");
 const porSecao = SECOES.map((s) => ({
@@ -11,12 +12,24 @@ const porSecao = SECOES.map((s) => ({
     .filter((p) => p.id.startsWith(`${s.slug}/`))
     .sort((a, b) => a.data.order - b.data.order),
 }));
+
+const dados = grafo(
+  lista(
+    "Documentação do Monnif",
+    porSecao.flatMap((s) =>
+      s.itens.map((p) => ({ nome: `${s.titulo}: ${p.data.title}`, url: `/docs/${p.id}/` })),
+    ),
+  ),
+  migalha([{ nome: "Documentação" }]),
+);
 ---
 
 <Base
-  title="Documentação — Monnif"
+  title="Como usar o Monnif — Documentação"
   description="Como usar cada tela do Monnif: dashboard, despesas, cartões, orçamento, metas, relatórios, importação de extrato, contas compartilhadas e o assistente de IA."
 >
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(dados)} />
+
   <div class="doc-wrap">
     <DocNav />
 

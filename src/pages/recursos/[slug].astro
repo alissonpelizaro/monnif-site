@@ -5,6 +5,7 @@ import Base from "../../layouts/Base.astro";
 import Cta from "../../components/Cta.astro";
 import ChatMock from "../../components/ChatMock.astro";
 import { RECURSOS } from "../../data/recursos";
+import { EDITORA, ID_SITE, SITE, grafo, migalha, resumir } from "../../data/seo";
 
 export function getStaticPaths() {
   return RECURSOS.map((r) => ({ params: { slug: r.slug }, props: { recurso: r } }));
@@ -20,30 +21,43 @@ const prints = import.meta.glob<{ default: ImageMetadata }>("/src/assets/docs/*.
 });
 const imagem = recurso.print ? prints[`/src/assets/docs/${recurso.print}.webp`]?.default : undefined;
 
-const migalha = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Recursos", item: "https://monnif.com/recursos/" },
-    { "@type": "ListItem", position: 2, name: recurso.titulo },
-  ],
-};
----
+const url = `${SITE}/recursos/${recurso.slug}/`;
 
-<Base
-  title={`${recurso.titulo} — Monnif`}
-  description={recurso.resumo + ". " + recurso.lead}
->
-  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(migalha)} />
-  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify({
-    "@context": "https://schema.org",
+const dados = grafo(
+  {
+    // Mesmo `@id` da home: é o mesmo app, visto pelo lado de um recurso só.
+    "@type": "SoftwareApplication",
+    "@id": `${SITE}/#app`,
+    name: "Monnif",
+    applicationCategory: "FinanceApplication",
+    operatingSystem: "Web, iOS, Android",
+    description: recurso.lead,
+    featureList: recurso.pontos.map((p) => `${p.titulo}: ${p.texto}`),
+    url: "https://app.monnif.com",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "BRL" },
+    publisher: EDITORA,
+    inLanguage: "pt-BR",
+    isPartOf: { "@id": ID_SITE },
+    ...(imagem ? { screenshot: new URL(imagem.src, SITE).href } : {}),
+  },
+  {
     "@type": "FAQPage",
+    "@id": `${url}#duvidas`,
     mainEntity: recurso.duvidas.map((d) => ({
       "@type": "Question",
       name: d.pergunta,
       acceptedAnswer: { "@type": "Answer", text: d.resposta },
     })),
-  })} />
+  },
+  migalha([{ nome: "Recursos", url: "/recursos/" }, { nome: recurso.titulo }]),
+);
+---
+
+<Base
+  title={recurso.tituloSeo}
+  description={resumir(`${recurso.resumo}. ${recurso.lead}`)}
+>
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(dados)} />
 
   <div class="wrap">
     <div class="page-head">

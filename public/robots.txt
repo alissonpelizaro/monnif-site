@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 
+# Índice em markdown para buscadores com IA (llmstxt.org): https://monnif.com/llms.txt
+
 Sitemap: https://monnif.com/sitemap-index.xml
