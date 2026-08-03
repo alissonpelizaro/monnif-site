@@ -2,12 +2,23 @@
 import Base from "../../layouts/Base.astro";
 import Cta from "../../components/Cta.astro";
 import { RECURSOS, OUTROS } from "../../data/recursos";
+import { grafo, lista, migalha } from "../../data/seo";
+
+const dados = grafo(
+  lista(
+    "Recursos do Monnif",
+    RECURSOS.map((r) => ({ nome: r.titulo, url: `/recursos/${r.slug}/` })),
+  ),
+  migalha([{ nome: "Recursos" }]),
+);
 ---
 
 <Base
-  title="Recursos — Monnif"
-  description="Tudo que o Monnif faz: assistente que lança por você, cartão de crédito com a fatura certa, orçamento por categoria, saldo dos próximos dias, lembretes, importação do extrato do banco e contas em família."
+  title="Recursos: assistente, cartão, orçamento e metas — Monnif"
+  description="Tudo que o Monnif faz: assistente que lança por você, cartão com a fatura certa, orçamento por categoria, saldo dos próximos dias e contas em família."
 >
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(dados)} />
+
   <div class="wrap">
     <div class="page-head">
       <p class="kicker">Recursos</p>

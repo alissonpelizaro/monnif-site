@@ -2,6 +2,7 @@
 import { existsSync } from "node:fs";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { ID_ORG, ID_SITE, SITE } from "../data/seo";
 import "../styles/global.css";
 
 interface Props {
@@ -9,9 +10,11 @@ interface Props {
   description: string;
   ogImage?: string;
   noindex?: boolean;
+  /** "article" nos posts do blog; o resto do site é "website". */
+  ogType?: "website" | "article";
 }
 
-const { title, description, ogImage, noindex = false } = Astro.props;
+const { title, description, ogImage, noindex = false, ogType = "website" } = Astro.props;
 
 // A imagem de compartilhamento de cada página é gerada por scripts/og.mjs
 // antes do build, com esta mesma regra de nome. Se faltar alguma, cai na da
@@ -23,15 +26,50 @@ const temGerada = existsSync(`${process.cwd()}/public${gerada}`);
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogUrl = new URL(ogImage ?? (temGerada ? gerada : "/og/home.png"), Astro.site).href;
 
-const organizacao = {
+// Organization, WebSite e a página atual num grafo só, com `@id` estável: as
+// outras páginas apontam para esses ids em vez de repetir o objeto inteiro.
+// O logo é PNG de propósito — o Google não aceita SVG no logo da Organization.
+const grafoBase = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Monnif",
-  url: "https://monnif.com",
-  logo: "https://monnif.com/marca/monnif-icone.svg",
-  email: "contato@monnif.com",
-  description:
-    "Gestão financeira pessoal e familiar com assistente de IA, contas compartilhadas, cartão de crédito, orçamento e projeção de saldo.",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": ID_ORG,
+      name: "Monnif",
+      url: SITE,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE}/marca/monnif-icone.png`,
+        width: 512,
+        height: 512,
+      },
+      image: `${SITE}/marca/monnif-icone.png`,
+      email: "contato@monnif.com",
+      description:
+        "Gestão financeira pessoal e familiar com assistente de IA, contas compartilhadas, cartão de crédito, orçamento e projeção de saldo.",
+      areaServed: { "@type": "Country", name: "Brasil" },
+      knowsLanguage: "pt-BR",
+    },
+    {
+      "@type": "WebSite",
+      "@id": ID_SITE,
+      name: "Monnif",
+      alternateName: "Monnif — finanças da família",
+      url: SITE,
+      inLanguage: "pt-BR",
+      publisher: { "@id": ID_ORG },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${canonical}#pagina`,
+      url: canonical,
+      name: title,
+      description,
+      inLanguage: "pt-BR",
+      isPartOf: { "@id": ID_SITE },
+      primaryImageOfPage: ogUrl,
+    },
+  ],
 };
 ---
 
@@ -56,34 +94,41 @@ const organizacao = {
 })();
 </script>
 <link rel="canonical" href={canonical} />
-{noindex && <meta name="robots" content="noindex" />}
 
-<meta property="og:type" content="website" />
+<!-- Sem os limites explícitos o Google corta o resumo e usa miniatura pequena. -->
+<meta
+  name="robots"
+  content={noindex
+    ? "noindex, nofollow"
+    : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"}
+/>
+
+<meta property="og:type" content={ogType} />
 <meta property="og:site_name" content="Monnif" />
 <meta property="og:url" content={canonical} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogUrl} />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={title} />
 <meta property="og:locale" content="pt_BR" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogUrl} />
+<meta name="twitter:image:alt" content={title} />
 
 <link rel="icon" href="/marca/monnif-icone.svg" type="image/svg+xml" />
+<link rel="icon" href="/marca/monnif-icone.png" type="image/png" sizes="512x512" />
+<link rel="apple-touch-icon" href="/marca/monnif-icone.png" />
 <link rel="alternate" type="application/rss+xml" title="Blog da Monnif" href="/rss.xml" />
+<link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
 
 <link rel="preload" href="/fontes/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
 
-<script type="application/ld+json" is:inline set:html={JSON.stringify(organizacao)} />
-<script type="application/ld+json" is:inline set:html={JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "Monnif",
-  url: "https://monnif.com",
-  inLanguage: "pt-BR",
-  publisher: { "@type": "Organization", name: "Monnif" },
-})} />
+<script type="application/ld+json" is:inline set:html={JSON.stringify(grafoBase)} />
 <slot name="head" />
 </head>
 <body>

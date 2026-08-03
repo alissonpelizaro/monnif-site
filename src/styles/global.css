@@ -134,6 +134,15 @@
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+
+/* Barra de rolagem fina e sem trilho. O `--tint` já é preto no claro e branco
+   no escuro, então a mesma regra serve para os dois temas. Vale no `*` porque
+   `scrollbar-width` não é herdada e as caixas que rolam por dentro (menu,
+   sumário, bloco de código) também precisam dela. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(var(--tint) / 22%) transparent;
+}
 body {
   background: var(--background);
   color: var(--foreground);
