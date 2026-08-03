@@ -1,0 +1,64 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Cta from "../../components/Cta.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+
+// O post em destaque abre a página; o resto vai para a grade, na ordem da data.
+const destaque = posts.find((p) => p.data.destaque) ?? posts[0];
+const resto = posts.filter((p) => p !== destaque);
+
+const dia = (d: Date) =>
+  d.toLocaleDateString("pt-BR", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+---
+
+<Base
+  title="Blog — Monnif"
+  description="Textos sobre orçamento, cartão de crédito, reserva de emergência e dinheiro a dois — e guias de como cada parte do Monnif funciona."
+>
+  <div class="wrap">
+    <div class="page-head">
+      <p class="kicker">Blog</p>
+      <h1>Dinheiro explicado <span class="grad-text">sem enrolação</span></h1>
+      <p class="lead">
+        O que a gente aprendeu construindo um app de finanças: o que funciona no
+        orçamento de uma casa, o que quebra, e como usar cada parte do Monnif.
+      </p>
+      <p class="updated">
+        <a href="/rss.xml">Assinar por RSS ↗</a>
+      </p>
+    </div>
+
+    <a class="post-destaque" href={`/blog/${destaque.id}/`}>
+      <span class="post-tag">{destaque.data.tag}</span>
+      <h2>{destaque.data.title}</h2>
+      <p>{destaque.data.description}</p>
+      <span class="post-data">
+        <time datetime={destaque.data.date.toISOString()}>{dia(destaque.data.date)}</time>
+        <span>Ler →</span>
+      </span>
+    </a>
+
+    <div class="post-grid">
+      {resto.map((p) => (
+        <a class="post-card" href={`/blog/${p.id}/`}>
+          <span class="post-tag">{p.data.tag}</span>
+          <h3>{p.data.title}</h3>
+          <p>{p.data.description}</p>
+          <span class="post-data">
+            <time datetime={p.data.date.toISOString()}>{dia(p.data.date)}</time>
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <Cta
+    titulo="Ler é bom."
+    destaque="Fazer é melhor."
+    texto="Crie sua conta, importe o extrato do último mês e veja o retrato de verdade."
+  />
+</Base>
