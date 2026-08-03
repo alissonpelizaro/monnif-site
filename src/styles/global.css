@@ -954,25 +954,34 @@ html:has(.drawer[open]) { overflow: hidden; }
 .post-data span { color: var(--acento); font-weight: 700; }
 
 .post-destaque, .post-card {
-  display: block;
+  display: block; overflow: hidden;
   background: color-mix(in oklch, var(--card) 55%, transparent);
   border: 1px solid var(--border); border-radius: 22px;
   transition: transform 0.25s var(--ease-soft), border-color 0.25s, background 0.25s;
 }
+/* A miniatura sangra até a borda, então o respiro sai do <a> e vai para o corpo. */
+.post-thumb { display: block; width: 100%; height: auto; }
 .post-destaque:hover, .post-card:hover {
   transform: translateY(-3px);
   border-color: color-mix(in oklch, var(--grad-a) 38%, transparent);
   background: color-mix(in oklch, var(--card) 75%, transparent);
 }
-.post-destaque { padding: clamp(28px, 4vw, 44px); }
+.post-destaque .post-corpo { padding: clamp(28px, 4vw, 44px); }
 .post-destaque h2 { font-size: clamp(1.5rem, 3.4vw, 2.2rem); }
 .post-destaque p { color: var(--muted); margin-top: 14px; max-width: 620px; }
+/* Empilhado no celular; lado a lado quando cabe, senão a capa come a dobra. */
+@media (min-width: 760px) {
+  .post-destaque { display: grid; grid-template-columns: 1fr 1fr; align-items: center; }
+  .post-destaque .post-thumb { height: 100%; object-fit: cover; }
+  /* Post sem capa ocupa a largura toda em vez de deixar metade vazia. */
+  .post-destaque .post-corpo:only-child { grid-column: 1 / -1; }
+}
 
 .post-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   gap: 18px; margin-top: 18px; padding-bottom: clamp(56px, 8vw, 88px);
 }
-.post-card { padding: 26px; }
+.post-card .post-corpo { padding: 26px; }
 .post-card h3 { font-size: 1.12rem; }
 .post-card p { color: var(--muted); font-size: 0.9rem; margin-top: 10px; }
 
