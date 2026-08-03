@@ -29,6 +29,21 @@ const aplicativo = {
 "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" },
 "inLanguage": "pt-BR"
 };
+
+// As frases do hero se alternam sozinhas. A primeira é a que vai para o HTML
+// (e para o indexador); o resto entra por JS.
+const FRASES = [
+  ["Saiba quanto sobra.", "Antes do mês acabar."],
+  ["Chega de descobrir tarde.", "O aperto avisa antes."],
+  ["A fatura deixa de assustar.", "Você já sabe o valor."],
+  ["Anote falando.", "O assistente faz o resto."],
+  ["As contas da casa.", "Num lugar só."],
+  ["A família inteira vendo.", "Exatamente o mesmo número."],
+  ["O dinheiro do mês.", "Sem planilha e sem susto."],
+  ["Cada conta na data certa.", "O aviso chega antes."],
+  ["Quanto ainda dá para gastar?", "Pergunte e ele responde."],
+  ["Menos digitação.", "Mais decisão."],
+];
 ---
 
 <Base title={titulo} description={descricao}>
@@ -38,8 +53,9 @@ const aplicativo = {
   <!-- ============================ HERO ============================ -->
   <div class="hero">
     <div class="wrap">
-      <span class="pill reveal"><span class="dot" aria-hidden="true"></span> Grátis de verdade · sem plano pago</span>
-      <h1 class="reveal" data-d="1">Saiba quanto sobra.<br /><span class="grad-text">Antes do mês acabar.</span></h1>
+      <h1 class="reveal frases" data-d="1" data-frases={JSON.stringify(FRASES)}>
+        <span class="frase-a">{FRASES[0][0]}</span><br /><span class="grad-text frase-b">{FRASES[0][1]}</span>
+      </h1>
       <p class="sub reveal" data-d="2">
         As contas da casa, o cartão de crédito e o que a família gasta, num lugar só.
         E um assistente que anota por você: escreva “paguei o mercado, 240 no cartão”
@@ -52,7 +68,7 @@ const aplicativo = {
         </a>
         <a class="btn btn-ghost btn-lg" href="#assistente">Ver como funciona</a>
       </div>
-      <p class="cta-note reveal" data-d="4">Leva menos de 1 minuto. Sem cartão de crédito, sem pegadinha.</p>
+      <p class="cta-note reveal" data-d="4">Leva menos de 1 minuto. Sem cartão de crédito no cadastro.</p>
 
       <!-- Mockup do dashboard -->
       <div class="browser reveal" data-d="5">
@@ -64,7 +80,7 @@ const aplicativo = {
           <div class="app-head">
             <div>
               <p class="app-kicker">Visão geral</p>
-              <p class="app-title">Olá, Família Pelizaro</p>
+              <p class="app-title">Olá, Família Silva</p>
               <p class="app-sub">Aqui está o resumo financeiro da sua conta.</p>
             </div>
             <div class="chips">
@@ -124,7 +140,7 @@ const aplicativo = {
             <div class="row">
               <span class="tick" aria-hidden="true"></span>
               <span class="row-body">
-                <span class="row-title">Escola do Vini</span>
+                <span class="row-title">Mensalidade da escola</span>
                 <span class="row-meta"><span class="late">Venceu 05/07</span> · <span class="cdot" style="background:#f472b6"></span> Educação</span>
               </span>
               <span class="row-amount" style="color:#fb923c">R$ 800,00</span>
@@ -150,7 +166,7 @@ const aplicativo = {
       </div>
 
       <div class="metrics reveal">
-        <div class="metric"><b class="grad-text">R$ 0</b><span>para sempre, sem plano pago</span></div>
+        <div class="metric"><b class="grad-text">R$ 0</b><span>para criar a conta e usar</span></div>
         <div class="metric"><b class="grad-text">A família</b><span>toda vendo o mesmo número</span></div>
         <div class="metric"><b class="grad-text">Sem anúncio</b><span>e sem venda de dados</span></div>
         <div class="metric"><b class="grad-text">Sem instalar</b><span>abre no celular e no computador</span></div>
@@ -372,7 +388,7 @@ const aplicativo = {
             <div class="mock-item appt" style="opacity:.55">
               <span class="appt-time">07:30</span>
               <span class="appt-body">
-                <span class="appt-title" style="text-decoration:line-through">Pagar a escola do Vini</span>
+                <span class="appt-title" style="text-decoration:line-through">Pagar a mensalidade da escola</span>
                 <span class="appt-meta"><span class="badge low">Baixa</span><span>concluído</span></span>
               </span>
             </div>
@@ -382,7 +398,7 @@ const aplicativo = {
             <span class="logo-mark" aria-hidden="true"></span>
             <span>
               <b>Reunião com o contador</b>
-              <p>Começa em 30 minutos · Família Pelizaro</p>
+              <p>Começa em 30 minutos · Família Silva</p>
             </span>
           </div>
         </div>
@@ -543,7 +559,7 @@ const aplicativo = {
               <div style="display:flex;flex-direction:column;gap:7px">
                 <div class="row" style="padding:9px 11px">
                   <span class="tick" style="width:19px;height:19px" aria-hidden="true"></span>
-                  <span class="row-body"><span class="row-title" style="font-size:.76rem">Escola do Vini</span><span class="row-meta" style="font-size:.6rem"><span class="late">Venceu 05/07</span></span></span>
+                  <span class="row-body"><span class="row-title" style="font-size:.76rem">Mensalidade da escola</span><span class="row-meta" style="font-size:.6rem"><span class="late">Venceu 05/07</span></span></span>
                   <span class="row-amount" style="font-size:.76rem;color:#fb923c">R$ 800,00</span>
                 </div>
                 <div class="row" style="padding:9px 11px">
@@ -634,8 +650,8 @@ const aplicativo = {
       </div>
       <div class="faq">
         <details class="reveal" open>
-          <summary>É grátis mesmo? Qual é a pegadinha?</summary>
-          <p>É grátis e não há pegadinha: sem plano pago escondido, sem limite de lançamentos, sem teste que expira, sem anúncio e sem venda dos seus dados. Você cria a conta, usa tudo, e nem pedimos cartão de crédito no cadastro. O porquê disso está na <a href="/manifesto/" style="color:var(--acento);font-weight:600">nossa história</a>.</p>
+          <summary>É grátis mesmo?</summary>
+          <p>É grátis para criar a conta e usar: sem teste que expira, sem anúncio e sem venda dos seus dados, e nem pedimos cartão de crédito no cadastro. Existem planos pagos para quem quiser mais, mas o que dá para fazer de graça continua dando. O porquê disso está na <a href="/manifesto/" style="color:var(--acento);font-weight:600">nossa história</a>.</p>
         </details>
         <details class="reveal" data-d="1">
           <summary>Preciso ligar o Monnif ao meu banco?</summary>
@@ -678,4 +694,26 @@ const aplicativo = {
   </section>
 
   <Cta />
+
+  <script is:inline>
+  (function () {
+    var h1 = document.querySelector(".frases");
+    if (!h1 || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    var frases = JSON.parse(h1.dataset.frases);
+    var a = h1.querySelector(".frase-a");
+    var b = h1.querySelector(".frase-b");
+    var i = 0;
+
+    setInterval(function () {
+      i = (i + 1) % frases.length;
+      h1.classList.add("trocando");
+      setTimeout(function () {
+        a.textContent = frases[i][0];
+        b.textContent = frases[i][1];
+        h1.classList.remove("trocando");
+      }, 420);
+    }, 5200);
+  })();
+  </script>
 </Base>

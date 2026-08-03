@@ -73,10 +73,11 @@
   --aurora-opacidade: 0.14;
 }
 
-/* ----- Escuro: escolha explícita, preferência do sistema, e dentro dos
-   mockups de app, que imitam uma captura de tela e são escuros nos dois
-   temas. O bloco é repetido na media query porque não dá para juntar um
-   seletor com uma condição de mídia. ----- */
+/* ----- Escuro: escolha explícita, preferência do sistema quando o visitante
+   pediu o tema do sistema, e dentro dos mockups de app, que imitam uma captura
+   de tela e são escuros nos dois temas. O padrão sem escolha nenhuma é o claro,
+   por isso a media query só vale para [data-tema="sistema"]. O bloco é repetido
+   porque não dá para juntar um seletor com uma condição de mídia. ----- */
 :root[data-tema="escuro"],
 .browser, .phone {
   color-scheme: dark;
@@ -106,7 +107,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-tema="claro"]) {
+  :root[data-tema="sistema"] {
     color-scheme: dark;
 
     --background: oklch(from var(--primary) 0.09 0.015 h);
@@ -166,12 +167,31 @@ h4, h5 { font-weight: 700; letter-spacing: -0.02em; }
   filter: blur(clamp(56px, 8vw, 130px));
   opacity: var(--aurora-opacidade); mix-blend-mode: var(--aurora-blend);
 }
-.aurora span:nth-child(1) { background: oklch(from var(--grad-a) 0.5 0.24 h); top: -16%; left: -10%; animation: aurora1 14s ease-in-out infinite; }
-.aurora span:nth-child(2) { background: oklch(from var(--grad-b) 0.5 0.24 h); top: 22%; right: -16%; animation: aurora2 17s ease-in-out infinite; }
-.aurora span:nth-child(3) { background: oklch(from var(--primary) 0.5 0.22 calc(h - 55)); bottom: -10%; left: 12%; animation: aurora3 19s ease-in-out infinite; }
-@keyframes aurora1 { 50% { transform: translate(40px, 60px) scale(1.1); } }
-@keyframes aurora2 { 50% { transform: translate(-50px, 40px) scale(1.15); } }
-@keyframes aurora3 { 50% { transform: translate(30px, -40px) scale(1.05); } }
+/* As manchas passeiam devagar em ciclos de durações diferentes, então nunca
+   repetem o mesmo arranjo. Vai junto um respiro na opacidade para o fundo não
+   ficar parado. */
+.aurora span:nth-child(1) { background: oklch(from var(--grad-a) 0.5 0.24 h); top: -16%; left: -10%; animation: aurora1 34s ease-in-out infinite, respiro 11s ease-in-out infinite; }
+.aurora span:nth-child(2) { background: oklch(from var(--grad-b) 0.5 0.24 h); top: 22%; right: -16%; animation: aurora2 41s ease-in-out infinite, respiro 14s ease-in-out infinite -3s; }
+.aurora span:nth-child(3) { background: oklch(from var(--primary) 0.5 0.22 calc(h - 55)); bottom: -10%; left: 12%; animation: aurora3 47s ease-in-out infinite, respiro 17s ease-in-out infinite -6s; }
+@keyframes aurora1 {
+  0%, 100% { transform: none; }
+  25% { transform: translate(9vw, 7vh) scale(1.18); }
+  50% { transform: translate(4vw, 16vh) scale(0.92); }
+  75% { transform: translate(-5vw, 6vh) scale(1.08); }
+}
+@keyframes aurora2 {
+  0%, 100% { transform: none; }
+  25% { transform: translate(-11vw, 9vh) scale(1.12); }
+  50% { transform: translate(-4vw, 22vh) scale(1.24); }
+  75% { transform: translate(3vw, 8vh) scale(0.95); }
+}
+@keyframes aurora3 {
+  0%, 100% { transform: none; }
+  25% { transform: translate(12vw, -8vh) scale(1.06); }
+  50% { transform: translate(22vw, -18vh) scale(0.88); }
+  75% { transform: translate(6vw, -6vh) scale(1.16); }
+}
+@keyframes respiro { 50% { opacity: calc(var(--aurora-opacidade) * 1.45); } }
 
 /* ===== Header ===== */
 header {
@@ -230,18 +250,11 @@ header.stuck {
 
 /* ===== Hero ===== */
 .hero { padding: clamp(56px, 9vw, 104px) 0 0; text-align: center; }
-.pill {
-  display: inline-flex; align-items: center; gap: 9px;
-  background: color-mix(in oklch, var(--primary) 14%, transparent);
-  border: 1px solid color-mix(in oklch, var(--primary) 32%, transparent);
-  /* Puxa para o texto do tema em vigor, não para o branco: no claro, misturar
-     com branco deixava a pílula ilegível. */
-  color: color-mix(in oklch, var(--primary) 55%, var(--foreground));
-  padding: 7px 16px 7px 12px; border-radius: 999px;
-  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.02em;
-}
-.pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 4px color-mix(in oklch, var(--success) 18%, transparent); }
 h1 { font-size: clamp(2.5rem, 6.4vw, 4.4rem); font-weight: 900; letter-spacing: -0.05em; margin: 26px 0 0; }
+/* Frases do hero: trocam sozinhas, com um fade curto entre elas. */
+.frases span { display: inline-block; transition: opacity 0.4s var(--ease-soft), transform 0.4s var(--ease-soft); }
+.frases.trocando span { opacity: 0; transform: translateY(-10px); }
+.frases.trocando .frase-b { transition-delay: 0.06s; }
 .hero .sub {
   color: var(--muted); font-size: clamp(1.05rem, 1.7vw, 1.22rem);
   max-width: 620px; margin: 22px auto 0; line-height: 1.65;
@@ -362,13 +375,15 @@ h1 { font-size: clamp(2.5rem, 6.4vw, 4.4rem); font-weight: 900; letter-spacing: 
   background: var(--card); border: 1px solid var(--border-strong);
   border-radius: 16px; padding: 9px 10px 9px 15px;
 }
-.chat-input span { flex: 1; font-size: 0.8rem; color: var(--faint); }
-.chat-btn { width: 32px; height: 32px; border-radius: 11px; display: grid; place-items: center; flex: none; }
+/* Só o texto solto estica — sem essa restrição os botões e a onda, que também
+   são <span>, herdavam o flex:1 e viravam retângulos gigantes. */
+.chat-input span:not([class]) { flex: 1; font-size: 0.8rem; color: var(--faint); }
+.chat-btn { width: 32px; height: 32px; border-radius: 11px; display: grid; place-items: center; flex: none; align-self: center; }
 .chat-btn.ghost { background: oklch(var(--tint) / 7%); color: var(--muted); }
 .chat-btn.send { background: var(--grad); color: #fff; }
 
 /* Barras de nível do microfone — reagem ao volume no app; aqui, animadas. */
-.wave { display: flex; align-items: center; gap: 3px; height: 20px; }
+.wave { display: flex; align-items: center; gap: 3px; height: 20px; flex: none; }
 .wave i { width: 3px; border-radius: 999px; background: var(--grad-a); animation: wave 1.05s ease-in-out infinite; }
 .wave i:nth-child(1) { height: 40%; animation-delay: 0s; }
 .wave i:nth-child(2) { height: 78%; animation-delay: 0.1s; }
@@ -778,7 +793,6 @@ html:has(.drawer[open]) { overflow: hidden; }
   /* Sem .nav-links o `margin-left:auto` dela some, então quem empurra o bloco
      da direita passa a ser .nav-actions. */
   .nav-actions { margin-left: auto; }
-  .nav-actions .btn-ghost { display: none; }
   .drawer { display: block; margin-left: 8px; }
   .foot-grid { grid-template-columns: 1fr 1fr; }
   .foot-brand { grid-column: 1 / -1; }
@@ -1018,50 +1032,32 @@ html:has(.drawer[open]) { overflow: hidden; }
 .recurso-lista span { display: block; color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
 
 /* ==========================================================================
-   Seletor de tema. O ícone do botão mostra o tema em vigor; a marcação do
-   item ativo é feita por aria-checked, que o script atualiza.
+   Seletor de tema: dois botões grudados. O da esquerda mostra o ícone do que
+   o clique vai fazer (sol = vai clarear, lua = vai escurecer); o da direita
+   volta para o tema do sistema e fica marcado por aria-pressed.
    ========================================================================== */
-.tema { position: relative; }
-.tema > summary {
-  list-style: none; cursor: pointer;
-  display: grid; place-items: center; width: 34px; height: 34px;
-  border-radius: 11px; color: var(--muted);
-  border: 1px solid var(--border-strong); background: oklch(var(--tint) / 4%);
+.tema {
+  display: inline-flex; flex: none;
+  border: 1px solid var(--border-strong); border-radius: 11px;
+  background: oklch(var(--tint) / 4%); overflow: hidden;
+}
+.tema button {
+  display: grid; place-items: center; width: 32px; height: 32px;
+  border: 0; padding: 0; cursor: pointer;
+  background: none; color: var(--muted);
   transition: color 0.2s, background 0.2s;
 }
-.tema > summary::-webkit-details-marker { display: none; }
-.tema > summary:hover { color: var(--foreground); background: oklch(var(--tint) / 8%); }
-/* O ícone é o do tema que está valendo agora, não o do que o clique faria. */
-.tema .i-escuro { display: none; }
-:root[data-tema="escuro"] .tema .i-claro { display: none; }
-:root[data-tema="escuro"] .tema .i-escuro { display: block; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-tema="claro"]) .tema .i-claro { display: none; }
-  :root:not([data-tema="claro"]) .tema .i-escuro { display: block; }
-}
-
-.tema-menu {
-  position: absolute; top: calc(100% + 10px); right: 0; z-index: 2;
-  display: grid; gap: 2px; padding: 6px; min-width: 168px;
-  background: var(--elevated); border: 1px solid var(--border-strong);
-  border-radius: 14px; box-shadow: 0 24px 50px -22px oklch(0 0 0 / var(--sombra));
-  animation: mega-in 0.18s var(--ease-soft);
-}
-.tema-menu button {
-  display: flex; align-items: center; gap: 10px;
-  padding: 9px 11px; border: 0; border-radius: 10px; cursor: pointer;
-  font: inherit; font-size: 0.87rem; font-weight: 600; text-align: left;
-  background: none; color: var(--muted);
-  transition: color 0.15s, background 0.15s;
-}
-.tema-menu button:hover { color: var(--foreground); background: oklch(var(--tint) / 6%); }
-.tema-menu button[aria-checked="true"] {
+.tema button + button { border-left: 1px solid var(--border-strong); }
+.tema button:hover { color: var(--foreground); background: oklch(var(--tint) / 8%); }
+.tema button[aria-pressed="true"] {
   color: var(--foreground);
-  background: color-mix(in oklch, var(--primary) 16%, transparent);
+  background: color-mix(in oklch, var(--primary) 18%, transparent);
 }
-.tema-menu button svg { flex: none; }
-
-@media (max-width: 940px) {
-  /* O menu abre para dentro da tela, não para fora dela. */
-  .tema-menu { right: auto; left: 50%; transform: translateX(-50%); }
+/* Claro em vigor → oferece a lua. Escuro em vigor → oferece o sol. */
+.tema .i-para-claro { display: none; }
+:root[data-tema="escuro"] .tema .i-para-escuro { display: none; }
+:root[data-tema="escuro"] .tema .i-para-claro { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root[data-tema="sistema"] .tema .i-para-escuro { display: none; }
+  :root[data-tema="sistema"] .tema .i-para-claro { display: block; }
 }
