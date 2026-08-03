@@ -5,13 +5,15 @@
   "packageManager": "pnpm@11.18.0",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+    "build": "pnpm run og && astro build",
+    "preview": "astro preview",
+    "og": "node --experimental-strip-types scripts/og.mjs"
   },
   "devDependencies": {
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.1.6",
+    "satori": "^0.29.0",
     "sharp": "^0.35.3"
   }
 }
