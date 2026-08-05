@@ -45,7 +45,7 @@ const dados = grafo(
 
       <div class="doc-index">
         {porSecao.map((s) => (
-          <div class="doc-card">
+          <div class="doc-card" id={s.slug}>
             <h3>{s.titulo}</h3>
             {s.itens.map((p) => <a href={`/docs/${p.id}/`}>{p.data.title}</a>)}
           </div>

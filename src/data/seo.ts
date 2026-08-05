@@ -45,12 +45,17 @@ export function migalha(itens: { nome: string; url?: string }[]) {
   return {
     "@type": "BreadcrumbList",
     "@id": `${SITE}/#migalha`,
-    itemListElement: [{ nome: "Início", url: "/" }, ...itens].map((item, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: item.nome,
-      ...(item.url ? { item: absoluta(item.url) } : {}),
-    })),
+    itemListElement: [{ nome: "Início", url: "/" }, ...itens].map((item, i, todos) => {
+      if (!item.url && i < todos.length - 1) {
+        throw new Error(`migalha: "${item.nome}" não é o último item, então precisa de url`);
+      }
+      return {
+        "@type": "ListItem",
+        position: i + 1,
+        name: item.nome,
+        ...(item.url ? { item: absoluta(item.url) } : {}),
+      };
+    }),
   };
 }
 

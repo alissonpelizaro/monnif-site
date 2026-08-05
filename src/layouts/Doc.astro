@@ -30,6 +30,8 @@ const imagem = print ? prints[`/src/assets/docs/${print}.webp`]?.default : undef
 const sumario = headings.filter((h) => h.depth === 2);
 
 const url = `${SITE}/docs/${id}/`;
+// A seção não tem página própria, só o bloco dela no índice.
+const urlSecao = `/docs/#${id.split("/")[0]}`;
 
 const dados = grafo(
   {
@@ -47,7 +49,11 @@ const dados = grafo(
     isPartOf: { "@id": ID_SITE },
     mainEntityOfPage: { "@type": "WebPage", "@id": `${url}#pagina` },
   },
-  migalha([{ nome: "Documentação", url: "/docs/" }, { nome: secao }, { nome: title }]),
+  migalha([
+    { nome: "Documentação", url: "/docs/" },
+    { nome: secao, url: urlSecao },
+    { nome: title },
+  ]),
 );
 ---
 
@@ -67,7 +73,7 @@ const dados = grafo(
       </details>
 
       <div class="doc-head">
-        <p class="doc-crumb"><a href="/docs/">Documentação</a> · {secao}</p>
+        <p class="doc-crumb"><a href="/docs/">Documentação</a> · <a href={urlSecao}>{secao}</a></p>
         <h1>{title}</h1>
         <p class="lead">{description}</p>
       </div>
