@@ -1,7 +1,7 @@
 ---
 title: Ditado por voz
 description: Falar em vez de digitar, com transcrição no campo de texto e revisão antes de enviar.
-order: 2
+order: 3
 ---
 
 No campo do assistente há um botão de microfone. Segure e fale: o Monnif grava, transcreve e **escreve o resultado no campo de mensagem**.

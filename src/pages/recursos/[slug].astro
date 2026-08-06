@@ -4,6 +4,7 @@ import type { ImageMetadata } from "astro";
 import Base from "../../layouts/Base.astro";
 import Cta from "../../components/Cta.astro";
 import ChatMock from "../../components/ChatMock.astro";
+import WhatsAppMock from "../../components/WhatsAppMock.astro";
 import { RECURSOS } from "../../data/recursos";
 import { EDITORA, ID_SITE, SITE, grafo, migalha, resumir } from "../../data/seo";
 
@@ -40,6 +41,27 @@ const dados = grafo(
     isPartOf: { "@id": ID_SITE },
     ...(imagem ? { screenshot: new URL(imagem.src, SITE).href } : {}),
   },
+  // Só os recursos que têm configuração ganham HowTo — é o que o buscador
+  // mostra numerado no resultado, e ele exige que os passos estejam à vista
+  // na página, que é o bloco `.passos` lá embaixo.
+  ...(recurso.passos
+    ? [
+        {
+          "@type": "HowTo",
+          "@id": `${url}#passo-a-passo`,
+          name: recurso.passos.titulo,
+          description: recurso.lead,
+          totalTime: "PT2M",
+          step: recurso.passos.itens.map((p, i) => ({
+            "@type": "HowToStep",
+            position: i + 1,
+            name: p.nome,
+            text: p.texto,
+            url: `${url}#passo-a-passo`,
+          })),
+        },
+      ]
+    : []),
   {
     "@type": "FAQPage",
     "@id": `${url}#duvidas`,
@@ -72,10 +94,14 @@ const dados = grafo(
       </div>
     </div>
 
+    {/* Sem print do app, entra uma conversa de exemplo — a do WhatsApp na
+        página do WhatsApp, a do assistente no resto. */}
     <div class="recurso-mock reveal">
       {imagem
         ? <div class="doc-print"><Image src={imagem} alt={`Tela de ${recurso.titulo} no Monnif`} widths={[640, 1024, 1600]} sizes="(max-width: 900px) 100vw, 860px" loading="eager" /></div>
-        : <ChatMock />}
+        : recurso.slug === "whatsapp"
+          ? <WhatsAppMock />
+          : <ChatMock />}
     </div>
 
     <div class="principles" style="margin-top:clamp(48px,7vw,80px)">
@@ -86,6 +112,23 @@ const dados = grafo(
         </div>
       ))}
     </div>
+
+    {recurso.passos && (
+      <section id="passo-a-passo">
+        <div class="sec-head center reveal">
+          <h2>{recurso.passos.titulo}</h2>
+        </div>
+        <div class="principles">
+          {recurso.passos.itens.map((p, i) => (
+            <div class="principle reveal">
+              <span class="num">{i + 1}</span>
+              <h3>{p.nome}</h3>
+              <p>{p.texto}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
 
     <section id="duvidas">
       <div class="sec-head center reveal">

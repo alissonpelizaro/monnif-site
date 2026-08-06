@@ -6,6 +6,8 @@ order: 1
 
 O botão flutuante no canto abre o assistente em qualquer tela da conta. A diferença dele para um chatbot comum cabe numa frase: **ele executa**. Não devolve conselho genérico sobre economia doméstica; cria a despesa, marca como paga, quita a fatura, define o teto do orçamento.
 
+O mesmo assistente atende [pelo WhatsApp](/docs/assistente/whatsapp/), quando abrir o app não for prático.
+
 ## Como pedir
 
 Em português normal, do jeito que você falaria com alguém:

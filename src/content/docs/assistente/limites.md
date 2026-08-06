@@ -1,7 +1,7 @@
 ---
 title: Limites e privacidade
 description: O que o assistente pode errar, o que é enviado ao provedor do modelo e o que nunca é feito com a sua conversa.
-order: 3
+order: 4
 ---
 
 Vale saber onde estão as bordas antes de confiar tarefa importante a qualquer assistente.
@@ -21,6 +21,8 @@ E o óbvio que precisa estar escrito: as respostas **não são aconselhamento fi
 ## O que sai da sua conta
 
 Para gerar a resposta, o Monnif envia ao provedor do modelo o **texto da conversa** e o **contexto necessário** para aquela pergunta — e, no ditado por voz, o áudio para transcrição.
+
+Pelo [WhatsApp](/docs/assistente/whatsapp/) é o mesmo caminho, com um transporte a mais: a mensagem passa pela Meta, dona do WhatsApp, antes de chegar aqui — como qualquer mensagem que você manda por lá. O que sai daqui para o provedor do modelo continua sendo o texto da conversa e o contexto da pergunta.
 
 O que **não** acontece:
 

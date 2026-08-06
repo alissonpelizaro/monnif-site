@@ -4,7 +4,6 @@ description: "O problema raramente é falta de disciplina. É que o orçamento f
 date: 2026-08-01
 tag: "Finanças pessoais"
 capa: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&h=900&q=70"
-destaque: true
 ---
 
 Quase todo mundo já montou um orçamento. Planilha bonita, categorias bem separadas,

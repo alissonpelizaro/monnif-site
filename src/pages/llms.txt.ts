@@ -27,7 +27,9 @@ export async function GET() {
 
   const texto = `# Monnif
 
-> App grátis de finanças pessoais e familiares, em português: as contas do mês, o cartão de crédito, o orçamento por categoria e o saldo dos próximos dias num lugar só — com um assistente de IA que faz o lançamento quando você escreve ou fala o que aconteceu.
+> App grátis de finanças pessoais e familiares, em português: as contas do mês, o cartão de crédito, o orçamento por categoria e o saldo dos próximos dias num lugar só — com um assistente de IA que faz o lançamento quando você escreve ou fala o que aconteceu, dentro do app ou pelo WhatsApp.
+
+O assistente atende no WhatsApp: a pessoa vincula o número uma vez, de dentro do app, e passa a lançar gastos por mensagem, por áudio ou mandando a foto do cupom, sem abrir o app. O que entra por lá aparece na conta na hora. Excluir lançamento, convidar pessoas e ajustar saldo continuam sendo feitos só dentro do app.
 
 O Monnif não se conecta ao banco e nunca pede a senha bancária: quem quiser evitar digitação importa o extrato (.ofx ou .csv) baixado no site do próprio banco. A conta é compartilhada com a família por padrão, cada pessoa com o próprio acesso. Roda no navegador do celular e do computador, sem loja de aplicativos. É grátis para criar a conta e usar, sem anúncio e sem venda de dados.
 
