@@ -407,6 +407,10 @@ h1 { font-size: clamp(2.5rem, 6.4vw, 4.4rem); font-weight: 900; letter-spacing: 
    O que a conversa diz que fez, muda ali na mesma tela.
    ========================================================================== */
 .app-demo { display: grid; grid-template-columns: 1.3fr 0.85fr; gap: 16px; align-items: start; }
+/* Item de grid nasce com min-width:auto, ou seja, nunca encolhe abaixo do
+   conteúdo. Sem isso a frase que a animação digita alarga a coluna e o painel
+   do chat engorda e empurra o dashboard a cada cena. */
+.app-demo > * { min-width: 0; }
 .app-demo .stat-grid { grid-template-columns: repeat(2, 1fr); }
 
 .hero-chat {
@@ -423,7 +427,10 @@ h1 { font-size: clamp(2.5rem, 6.4vw, 4.4rem); font-weight: 900; letter-spacing: 
 .hero-chat .chat { flex: 1; justify-content: flex-end; min-height: 252px; }
 .hero-chat .chat-input { margin-top: 0; }
 
-.chat-input .campo { flex: 1; min-width: 0; font-size: 0.8rem; color: var(--faint); white-space: nowrap; overflow: hidden; }
+/* flex-end: com a largura travada, a frase longa passa a ser cortada. Ancorar
+   no fim mantém à vista o trecho recém-digitado e o cursor, como num campo de
+   verdade — senão o texto congela nas primeiras palavras. */
+.chat-input .campo { flex: 1; min-width: 0; font-size: 0.8rem; color: var(--faint); white-space: nowrap; overflow: hidden; display: flex; justify-content: flex-end; }
 .chat-input .campo.cheio { color: var(--foreground); }
 .chat-input .campo.cheio::after {
   content: ""; display: inline-block; width: 2px; height: 0.92em;
