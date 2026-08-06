@@ -4,7 +4,7 @@ import type { ImageMetadata } from "astro";
 import Base from "../../layouts/Base.astro";
 import Cta from "../../components/Cta.astro";
 import ChatMock from "../../components/ChatMock.astro";
-import WhatsAppMock from "../../components/WhatsAppMock.astro";
+import WhatsAppPrint from "../../components/WhatsAppPrint.astro";
 import { RECURSOS } from "../../data/recursos";
 import { EDITORA, ID_SITE, SITE, grafo, migalha, resumir } from "../../data/seo";
 
@@ -94,13 +94,13 @@ const dados = grafo(
       </div>
     </div>
 
-    {/* Sem print do app, entra uma conversa de exemplo — a do WhatsApp na
-        página do WhatsApp, a do assistente no resto. */}
+    {/* Sem print do app, entra uma conversa — a captura real do WhatsApp na
+        página do WhatsApp, o exemplo do assistente no resto. */}
     <div class="recurso-mock reveal">
       {imagem
         ? <div class="doc-print"><Image src={imagem} alt={`Tela de ${recurso.titulo} no Monnif`} widths={[640, 1024, 1600]} sizes="(max-width: 900px) 100vw, 860px" loading="eager" /></div>
         : recurso.slug === "whatsapp"
-          ? <WhatsAppMock />
+          ? <WhatsAppPrint eager />
           : <ChatMock />}
     </div>
 
