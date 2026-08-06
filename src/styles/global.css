@@ -462,35 +462,10 @@ h1 { font-size: clamp(2.5rem, 6.4vw, 4.4rem); font-weight: 900; letter-spacing: 
 /* ==========================================================================
    WhatsApp — a mesma conversa, na tela onde a pessoa já passa o dia.
    ========================================================================== */
-.wa { display: flex; flex-direction: column; }
-.wa-head {
-  display: flex; align-items: center; gap: 10px; flex: none;
-  margin: 0 -14px; padding: 6px 14px 10px;
-  border-bottom: 1px solid var(--border);
-  background: color-mix(in oklch, var(--card) 70%, transparent);
-}
-.wa-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--grad); display: grid; place-items: center; color: #fff; flex: none; }
-.wa-head b { display: block; font-size: 0.84rem; letter-spacing: -0.02em; }
-.wa-head i { font-style: normal; font-size: 0.63rem; color: var(--success); }
-.wa-body { flex: 1; display: flex; flex-direction: column; gap: 7px; padding: 12px 0 20px; overflow: hidden; }
-.wa-msg {
-  max-width: 88%; padding: 8px 11px; border-radius: 13px;
-  font-size: 0.76rem; line-height: 1.45;
-}
-/* O verde é fixo, e não um token: a moldura do celular já é sempre escura, e
-   é justamente esta cor que faz a tela ser reconhecida sem legenda. */
-.wa-msg.eu { align-self: flex-end; background: #005c4b; border-bottom-right-radius: 4px; }
-.wa-msg.bot { align-self: flex-start; background: var(--card); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
-.wa-msg b { font-weight: 700; }
-.wa-hora { display: block; text-align: right; font-size: 0.55rem; color: var(--faint); margin-top: 3px; }
-.wa-audio { display: flex; align-items: center; gap: 8px; }
-.wa-audio .wave { height: 16px; }
-.wa-audio .wave i { background: var(--success); }
-.wa-cupom {
-  display: flex; align-items: center; gap: 9px; padding: 9px 10px; margin-bottom: 5px;
-  border-radius: 9px; background: oklch(var(--tint) / 7%);
-  font-size: 0.68rem; color: var(--muted);
-}
+/* A captura é real e já traz barra de status e cantos próprios, então entra na
+   moldura sem a tela falsa (.phone-screen) — que desenharia um notch por cima
+   do print. O raio é o mesmo de .phone-screen, para casar com a moldura. */
+.phone-print img { display: block; width: 100%; height: auto; border-radius: 36px; }
 .wa-selo {
   display: inline-flex; align-items: center; gap: 5px;
   padding: 3px 9px; border-radius: 999px;

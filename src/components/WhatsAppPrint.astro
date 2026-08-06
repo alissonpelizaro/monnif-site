@@ -1,0 +1,25 @@
+---
+// Print de uma conversa de verdade com o assistente no WhatsApp. Aparece na
+// home e na página do recurso.
+//
+// É uma captura real, e não um mockup: a tela já traz a barra de status, o
+// selo de Business account e o áudio enviado — detalhes que ninguém desenha
+// por engano e que é justamente o que faz a página ser lida como prova, e não
+// como ilustração.
+import { Image } from "astro:assets";
+import conversa from "../assets/whatsapp-conversa.jpg";
+
+// Na home a conversa está lá embaixo; na página do recurso ela é o primeiro
+// bloco depois do título, e aí carregar preguiçoso atrasaria o LCP.
+const { eager = false } = Astro.props;
+---
+
+<div class="phone phone-print">
+  <Image
+    src={conversa}
+    alt="Conversa no WhatsApp com o assistente do Monnif: a pessoa pergunta o saldo e recebe R$ 19.755,73 na conta Pessoal, manda um áudio e o assistente responde quanto dá para investir no mês, pergunta qual a conta mais alta e depois diz que abasteceu o carro por R$ 200 no crédito da C6 — o assistente registra a despesa e informa o total da fatura."
+    widths={[360, 560, 738]}
+    sizes="300px"
+    loading={eager ? "eager" : "lazy"}
+  />
+</div>
