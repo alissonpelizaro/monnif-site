@@ -1,0 +1,333 @@
+---
+/**
+ * O mockup do hero: o dashboard do app com o assistente aberto do lado,
+ * conversando sozinho.
+ *
+ * A primeira cena vem inteira no HTML — é o que o buscador lê e o que aparece
+ * para quem desligou animação. O script só apaga e reescreve a partir daí, e
+ * nunca roda com `prefers-reduced-motion`.
+ *
+ * Cada cena é uma frase do usuário, a etiqueta da ferramenta que o assistente
+ * usou e o efeito disso no dashboard ao lado. Os números batem: o que a
+ * conversa diz que lançou é o que muda na tela.
+ */
+
+const CENAS = [
+  {
+    me: "paguei o mercado agora, 240 no cartão do Nubank",
+    ferramenta: "despesa lançada",
+    ia: "Anotei: <b>Mercado — R$ 240,00</b> no Nubank, em Alimentação. Entrou na fatura que fecha dia 3.",
+    efeitos: [
+      {
+        tipo: "linha",
+        titulo: "Mercado São Jorge",
+        meta: 'hoje · <span class="cdot" style="background:#22c55e"></span> Alimentação',
+        valor: "R$ 240,00",
+      },
+      {
+        tipo: "stat",
+        alvo: "sobra",
+        valor: "R$ 3.178,71",
+        pe: "R$ 16.819,00 receitas − R$ 13.640,29 despesas",
+      },
+    ],
+  },
+  {
+    me: "paguei a fatura do Nubank",
+    ferramenta: "fatura quitada",
+    ia: "Feito. A fatura de julho do <b>Nubank</b> está paga — R$ 2.184,52. Faltam R$ 1.948,77 de contas no mês.",
+    efeitos: [
+      { tipo: "quitar", alvo: "nubank" },
+      {
+        tipo: "stat",
+        alvo: "pagar",
+        valor: "R$ 1.948,77",
+        pe: "R$ 11.451,52 já pagos de R$ 13.400,29",
+      },
+      { tipo: "anel", pct: 85 },
+    ],
+  },
+  {
+    audio: true,
+    me: "gasolina, cento e oitenta reais, hoje",
+    ferramenta: "áudio transcrito · despesa lançada",
+    ia: "Pronto: <b>Gasolina — R$ 180,00</b>, hoje, em Transporte. Sobram R$ 88,00 do seu limite de Transporte.",
+    efeitos: [
+      {
+        tipo: "linha",
+        titulo: "Gasolina",
+        meta: 'hoje · <span class="cdot" style="background:#38bdf8"></span> Transporte',
+        valor: "R$ 180,00",
+      },
+      {
+        tipo: "stat",
+        alvo: "sobra",
+        valor: "R$ 3.238,71",
+        pe: "R$ 16.819,00 receitas − R$ 13.580,29 despesas",
+      },
+    ],
+  },
+];
+
+const primeira = CENAS[0];
+---
+
+<div class="browser reveal" data-d="5" id="demo" data-cenas={JSON.stringify(CENAS)}>
+  <div class="browser-bar" aria-hidden="true">
+    <i></i><i></i><i></i>
+    <span class="browser-url">app.monnif.com</span>
+  </div>
+
+  <div class="app app-demo">
+    <div class="app-main">
+      <div class="app-head">
+        <div>
+          <p class="app-kicker">Visão geral</p>
+          <p class="app-title">Olá, Família Silva</p>
+          <p class="app-sub">Aqui está o resumo financeiro da sua conta.</p>
+        </div>
+        <div class="chips">
+          <span class="chip on">Mensal</span>
+          <span class="chip">Anual</span>
+        </div>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat good" data-stat="sobra">
+          <div class="stat-label">
+            <span class="stat-ico" style="background:color-mix(in oklch,var(--success) 14%,transparent);color:var(--success)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z"/><path d="M2 9v1c0 1.1.9 2 2 2h1"/><path d="M16 11h0"/></svg>
+            </span>
+            Sobra prevista
+          </div>
+          <p class="stat-value" style="color:var(--success)">R$ 3.418,71</p>
+          <p class="stat-foot">R$ 16.819,00 receitas − R$ 13.400,29 despesas</p>
+        </div>
+
+        <div class="stat" data-stat="pagar">
+          <div class="stat-label">
+            <span class="stat-ico" style="background:color-mix(in oklch,var(--warning) 14%,transparent);color:var(--warning)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v3l2 1"/></svg>
+            </span>
+            A pagar no mês
+          </div>
+          <div class="stat-row">
+            <div>
+              <p class="stat-value">R$ 4.133,29</p>
+              <p class="stat-foot">R$ 9.267,00 já pagos de R$ 13.400,29</p>
+            </div>
+            <svg width="52" height="52" viewBox="0 0 52 52" aria-hidden="true" style="flex:none">
+              <defs><linearGradient id="ring1" x1="0" y1="0" x2="52" y2="52"><stop offset="0" stop-color="var(--grad-a)"/><stop offset="1" stop-color="var(--grad-b)"/></linearGradient></defs>
+              <circle cx="26" cy="26" r="23" fill="none" stroke="oklch(var(--tint) / 10%)" stroke-width="5"/>
+              <circle data-anel cx="26" cy="26" r="23" fill="none" stroke="url(#ring1)" stroke-width="5" stroke-linecap="round"
+                      stroke-dasharray="144.5" stroke-dashoffset="44.8" transform="rotate(-90 26 26)"/>
+              <text data-anel-texto x="26" y="30" text-anchor="middle" font-size="11" font-weight="800" fill="currentColor" font-family="Inter, sans-serif">69%</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="rows">
+        <div class="row">
+          <span class="tick" aria-hidden="true"></span>
+          <span class="row-body">
+            <span class="row-title">Mensalidade da escola</span>
+            <span class="row-meta"><span class="late">Venceu 05/07</span> · <span class="cdot" style="background:#f472b6"></span> Educação</span>
+          </span>
+          <span class="row-amount" style="color:#fb923c">R$ 800,00</span>
+        </div>
+        <div class="row" data-row="nubank">
+          <span class="tick" aria-hidden="true"></span>
+          <span class="row-body">
+            <span class="row-title">Fatura Nubank</span>
+            <span class="row-meta">10/07 · <span class="cdot" style="background:var(--grad-a)"></span> Cartão</span>
+          </span>
+          <span class="row-amount" style="color:#ef4444">R$ 2.184,52</span>
+        </div>
+        <div class="row paid">
+          <span class="tick done" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg></span>
+          <span class="row-body">
+            <span class="row-title">Aluguel</span>
+            <span class="row-meta">05/07 · <span class="cdot" style="background:var(--success)"></span> Moradia</span>
+          </span>
+          <span class="row-amount" style="opacity:.55">R$ 2.900,00</span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="hero-chat">
+      <div class="hero-chat-head" aria-hidden="true">
+        <span class="logo-mark"></span>
+        <span><b>Assistente</b><i>conta Família Silva</i></span>
+      </div>
+
+      <div class="chat">
+        <div class="msg me">{primeira.me}</div>
+        <div class="msg-tool">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg>
+          {primeira.ferramenta}
+        </div>
+        <div class="msg ai" set:html={primeira.ia} />
+      </div>
+
+      <div class="chat-input" aria-hidden="true">
+        <span class="campo">Escreva sua pergunta…</span>
+        <span class="gravacao">
+          <span class="wave"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          Gravando · 0:04
+        </span>
+        <span class="chat-btn ghost">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+        </span>
+        <span class="chat-btn send">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script is:inline>
+(function () {
+  var demo = document.getElementById("demo");
+  // Sem animação: fica a cena que já veio no HTML, que é a conversa inteira.
+  if (!demo || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  var cenas = JSON.parse(demo.dataset.cenas);
+  var chat = demo.querySelector(".hero-chat .chat");
+  var barra = demo.querySelector(".hero-chat .chat-input");
+  var campo = barra.querySelector(".campo");
+  var main = demo.querySelector(".app-main");
+  var inicial = main.innerHTML;
+  var vazio = campo.textContent;
+
+  // Cada volta do laço incrementa. Uma volta abandonada percebe que outra
+  // começou e desiste em vez de escrever por cima da nova.
+  var geracao = 0;
+  var rodando = false;
+
+  function espera(ms) {
+    return new Promise(function (resolve) { setTimeout(resolve, ms); });
+  }
+
+  function balao(classe, html) {
+    var el = document.createElement("div");
+    el.className = classe;
+    el.innerHTML = html;
+    chat.appendChild(el);
+    return el;
+  }
+
+  var CHECK =
+    '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg>';
+
+  /** Aplica no dashboard o que a conversa acabou de dizer que fez. */
+  function aplica(efeito) {
+    if (efeito.tipo === "linha") {
+      var lista = main.querySelector(".rows");
+      var linha = document.createElement("div");
+      linha.className = "row nova";
+      linha.innerHTML =
+        '<span class="tick done" aria-hidden="true">' + CHECK.replace(/currentColor/, "#fff") + "</span>" +
+        '<span class="row-body"><span class="row-title">' + efeito.titulo +
+        '</span><span class="row-meta">' + efeito.meta + "</span></span>" +
+        '<span class="row-amount">' + efeito.valor + "</span>";
+      lista.insertBefore(linha, lista.firstChild);
+      return;
+    }
+
+    if (efeito.tipo === "stat") {
+      var stat = main.querySelector('[data-stat="' + efeito.alvo + '"]');
+      stat.querySelector(".stat-value").textContent = efeito.valor;
+      stat.querySelector(".stat-foot").textContent = efeito.pe;
+      stat.classList.add("mudou");
+      return;
+    }
+
+    if (efeito.tipo === "quitar") {
+      var row = main.querySelector('[data-row="' + efeito.alvo + '"]');
+      row.classList.add("paid", "mudou");
+      row.querySelector(".tick").classList.add("done");
+      row.querySelector(".tick").innerHTML = CHECK.replace(/currentColor/, "#fff");
+      row.querySelector(".row-amount").setAttribute("style", "opacity:.55");
+      return;
+    }
+
+    if (efeito.tipo === "anel") {
+      // 144.5 é o perímetro do círculo de raio 23 desenhado ali em cima.
+      main.querySelector("[data-anel]").setAttribute(
+        "stroke-dashoffset",
+        (144.5 * (1 - efeito.pct / 100)).toFixed(1),
+      );
+      main.querySelector("[data-anel-texto]").textContent = efeito.pct + "%";
+    }
+  }
+
+  async function toca() {
+    if (rodando) return;
+    rodando = true;
+    var minha = ++geracao;
+    var viva = function () { return minha === geracao; };
+
+    for (var i = 0; viva(); i = (i + 1) % cenas.length) {
+      var cena = cenas[i];
+
+      chat.innerHTML = "";
+      main.innerHTML = inicial;
+      campo.textContent = vazio;
+      campo.classList.remove("cheio");
+      await espera(700); if (!viva()) break;
+
+      if (cena.audio) {
+        barra.classList.add("gravando");
+        await espera(2200); if (!viva()) break;
+        barra.classList.remove("gravando");
+      }
+
+      // Digita no campo antes de "enviar": é o passo que faz parecer que tem
+      // alguém do outro lado, e não um vídeo.
+      campo.classList.add("cheio");
+      for (var c = 1; c <= cena.me.length; c++) {
+        campo.textContent = cena.me.slice(0, c);
+        await espera(26); if (!viva()) break;
+      }
+      if (!viva()) break;
+
+      await espera(320); if (!viva()) break;
+      campo.textContent = vazio;
+      campo.classList.remove("cheio");
+      balao("msg me entra", cena.me);
+
+      var pensando = balao("dots entra", "<i></i><i></i><i></i>");
+      await espera(1100); if (!viva()) break;
+      pensando.remove();
+
+      balao("msg-tool entra", CHECK + cena.ferramenta);
+      (cena.efeitos || []).forEach(aplica);
+      await espera(900); if (!viva()) break;
+
+      balao("msg ai entra", cena.ia);
+      await espera(4200); if (!viva()) break;
+    }
+
+    rodando = false;
+  }
+
+  function para() { geracao++; rodando = false; }
+
+  // Só anima o que está na tela: o hero sai de vista e o laço morre no lugar.
+  new IntersectionObserver(function (entradas) {
+    entradas.forEach(function (e) {
+      if (e.isIntersecting) toca();
+      else para();
+    });
+  }, { threshold: 0.15 }).observe(demo);
+
+  // IntersectionObserver não dispara em aba de fundo em todo navegador.
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) return para();
+    var caixa = demo.getBoundingClientRect();
+    if (caixa.bottom > 0 && caixa.top < innerHeight) toca();
+  });
+})();
+</script>

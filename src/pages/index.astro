@@ -3,14 +3,17 @@ import Base from "../layouts/Base.astro";
 import Cta from "../components/Cta.astro";
 
 import ChatMock from "../components/ChatMock.astro";
+import HeroDemo from "../components/HeroDemo.astro";
+import WhatsAppMock from "../components/WhatsAppMock.astro";
 import { RECURSOS, OUTROS } from "../data/recursos";
 import { EDITORA, SITE, grafo } from "../data/seo";
 
 // O <title> começa pelo que se digita no buscador; a marca, que ainda ninguém
-// procura pelo nome, fecha a linha.
-const titulo = "App grátis de controle financeiro para a família — Monnif";
+// procura pelo nome, fecha a linha. "No WhatsApp" vem na frente porque é a
+// única coisa aqui que nenhum concorrente de planilha oferece.
+const titulo = "Controle financeiro pelo WhatsApp: app grátis com IA — Monnif";
 const descricao =
-  "App grátis para organizar o dinheiro da família: contas do mês, cartão de crédito, orçamento e saldo dos próximos dias — com um assistente que lança por você.";
+  "Anote gastos por mensagem ou áudio no WhatsApp. App grátis para o dinheiro da família: contas do mês, cartão de crédito, orçamento e o saldo dos próximos dias.";
 
 // As mesmas perguntas alimentam o bloco de dúvidas e o FAQPage do JSON-LD —
 // escrever duas vezes é como as duas versões acabam divergindo.
@@ -18,6 +21,26 @@ const PERGUNTAS = [
   {
     pergunta: "O Monnif é grátis mesmo?",
     resposta: `É grátis para criar a conta e usar: sem teste que expira, sem anúncio e sem venda dos seus dados, e nem pedimos cartão de crédito no cadastro. Existem planos pagos para quem quiser mais, mas o que dá para fazer de graça continua dando. O porquê disso está na <a href="/manifesto/" style="color:var(--acento);font-weight:600">nossa história</a>.`,
+  },
+  {
+    pergunta: "Dá para usar o Monnif pelo WhatsApp?",
+    resposta:
+      "Dá, e é a forma mais rápida de anotar um gasto. Você vincula seu número uma vez, dentro do app, e daí em diante conversa com o assistente no WhatsApp como conversaria com uma pessoa: “paguei o mercado, 240 no cartão”. Ele lança e responde ali mesmo, e o lançamento aparece no app na hora. Está incluído no plano grátis.",
+  },
+  {
+    pergunta: "Preciso instalar um robô ou salvar um contato estranho?",
+    resposta:
+      "Não. É o número oficial do Monnif, e o vínculo começa de dentro do app: ele mostra um código e abre a conversa com a mensagem já escrita. Um toque, e pronto. Dá para vincular mais de um número — o seu e o da empresa, por exemplo, cada um lançando na conta dele.",
+  },
+  {
+    pergunta: "É seguro deixar meu WhatsApp lançar na minha conta?",
+    resposta:
+      "O número só passa a falar com a sua conta depois de confirmar um código gerado dentro do app, que vale poucos minutos. Se o canal ficar semanas sem uso, o vínculo cai sozinho e precisa ser refeito. E o que é destrutivo — excluir lançamento, convidar gente, ajustar saldo — continua só no app, com você logado.",
+  },
+  {
+    pergunta: "Posso mandar áudio em vez de digitar?",
+    resposta:
+      "Pode: grave o áudio no WhatsApp e ele vira lançamento. É o jeito de anotar sem parar o que você está fazendo — no posto, na fila do mercado, saindo do restaurante. O plano grátis tem uma cota mensal de ditados; no Plus ela é bem maior, e a leitura de cupom por foto também entra.",
   },
   {
     pergunta: "Preciso ligar o Monnif ao meu banco?",
@@ -75,8 +98,10 @@ const dados = grafo(
     operatingSystem: "Web, iOS, Android",
     browserRequirements: "Funciona em qualquer navegador atual, sem instalar nada",
     description:
-      "App grátis para organizar as finanças pessoais e da família: contas do mês, cartão de crédito, orçamento por categoria, saldo dos próximos dias, lembretes de vencimento e um assistente que lança por você.",
+      "App grátis para organizar as finanças pessoais e da família: contas do mês, cartão de crédito, orçamento por categoria, saldo dos próximos dias, lembretes de vencimento e um assistente de IA que lança por você — no app ou pelo WhatsApp.",
     featureList: [
+      "Assistente de IA no WhatsApp: lança gastos por mensagem ou áudio, sem abrir o app",
+      "Vínculo de até três números de WhatsApp, cada um lançando na sua própria conta",
       "Assistente que lança, paga e responde por escrito ou por voz",
       "Lembretes de vencimento e agenda de compromissos",
       "Contas compartilhadas com a família",
@@ -116,14 +141,14 @@ const dados = grafo(
 // As frases do hero se alternam sozinhas. A primeira é a que vai para o HTML
 // (e para o indexador); o resto entra por JS.
 const FRASES = [
+  ["Seu assistente financeiro.", "No seu WhatsApp."],
   ["Saiba quanto sobra.", "Antes do mês acabar."],
+  ["Manda um áudio.", "Está lançado."],
   ["Chega de descobrir tarde.", "O aperto avisa antes."],
   ["A fatura deixa de assustar.", "Você já sabe o valor."],
-  ["Anote falando.", "O assistente faz o resto."],
+  ["Foto do cupom no WhatsApp.", "Ele digita por você."],
   ["As contas da casa.", "Num lugar só."],
   ["A família inteira vendo.", "Exatamente o mesmo número."],
-  ["O dinheiro do mês.", "Sem planilha e sem susto."],
-  ["Cada conta na data certa.", "O aviso chega antes."],
   ["Quanto ainda dá para gastar?", "Pergunte e ele responde."],
   ["Menos digitação.", "Mais decisão."],
 ];
@@ -141,114 +166,23 @@ const FRASES = [
       </h1>
       <p class="sub reveal" data-d="2">
         As contas da casa, o cartão de crédito e o que a família gasta, num lugar só.
-        E um assistente que anota por você: escreva “paguei o mercado, 240 no cartão”
-        e pronto.
+        E um assistente de IA que anota por você — no app ou mandando mensagem no
+        WhatsApp: “paguei o mercado, 240 no cartão” e pronto.
       </p>
       <div class="cta-row reveal" data-d="3">
         <a class="btn btn-primary btn-lg" href="https://app.monnif.com/signup" target="_blank" rel="noopener">
           Criar conta grátis
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a class="btn btn-ghost btn-lg" href="#assistente">Ver como funciona</a>
+        <a class="btn btn-ghost btn-lg" href="#whatsapp">Ver no WhatsApp</a>
       </div>
       <p class="cta-note reveal" data-d="4">Leva menos de 1 minuto. Sem cartão de crédito no cadastro.</p>
 
-      <!-- Mockup do dashboard -->
-      <div class="browser reveal" data-d="5">
-        <div class="browser-bar" aria-hidden="true">
-          <i></i><i></i><i></i>
-          <span class="browser-url">app.monnif.com</span>
-        </div>
-        <div class="app">
-          <div class="app-head">
-            <div>
-              <p class="app-kicker">Visão geral</p>
-              <p class="app-title">Olá, Família Silva</p>
-              <p class="app-sub">Aqui está o resumo financeiro da sua conta.</p>
-            </div>
-            <div class="chips">
-              <span class="chip on">Mensal</span>
-              <span class="chip">Anual</span>
-              <span class="chip">Fluxo</span>
-            </div>
-          </div>
-
-          <div class="stat-grid">
-            <div class="stat good">
-              <div class="stat-label">
-                <span class="stat-ico" style="background:color-mix(in oklch,var(--success) 14%,transparent);color:var(--success)">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z"/><path d="M2 9v1c0 1.1.9 2 2 2h1"/><path d="M16 11h0"/></svg>
-                </span>
-                Sobra prevista
-              </div>
-              <p class="stat-value" style="color:var(--success)">R$ 3.418,71</p>
-              <p class="stat-foot">R$ 16.819,00 receitas − R$ 13.400,29 despesas</p>
-            </div>
-
-            <div class="stat">
-              <div class="stat-label">
-                <span class="stat-ico" style="background:color-mix(in oklch,var(--warning) 14%,transparent);color:var(--warning)">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v3l2 1"/></svg>
-                </span>
-                A pagar no mês
-              </div>
-              <div class="stat-row">
-                <div>
-                  <p class="stat-value">R$ 4.133,29</p>
-                  <p class="stat-foot">R$ 9.267,00 já pagos de R$ 13.400,29</p>
-                </div>
-                <svg width="52" height="52" viewBox="0 0 52 52" aria-hidden="true" style="flex:none">
-                  <defs><linearGradient id="ring1" x1="0" y1="0" x2="52" y2="52"><stop offset="0" stop-color="var(--grad-a)"/><stop offset="1" stop-color="var(--grad-b)"/></linearGradient></defs>
-                  <circle cx="26" cy="26" r="23" fill="none" stroke="oklch(var(--tint) / 10%)" stroke-width="5"/>
-                  <circle cx="26" cy="26" r="23" fill="none" stroke="url(#ring1)" stroke-width="5" stroke-linecap="round"
-                          stroke-dasharray="144.5" stroke-dashoffset="44.8" transform="rotate(-90 26 26)"/>
-                  <text x="26" y="30" text-anchor="middle" font-size="11" font-weight="800" fill="currentColor" font-family="Inter, sans-serif">69%</text>
-                </svg>
-              </div>
-            </div>
-
-            <div class="stat">
-              <div class="stat-label">
-                <span class="stat-ico" style="background:color-mix(in oklch,var(--primary) 16%,transparent);color:var(--grad-a)">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 7-7"/><path d="M14 7h6v6"/></svg>
-                </span>
-                Receitas do mês
-              </div>
-              <p class="stat-value">R$ 16.819,00</p>
-              <p class="stat-foot">R$ 12.400,00 já recebidos</p>
-            </div>
-          </div>
-
-          <div class="rows">
-            <div class="row">
-              <span class="tick" aria-hidden="true"></span>
-              <span class="row-body">
-                <span class="row-title">Mensalidade da escola</span>
-                <span class="row-meta"><span class="late">Venceu 05/07</span> · <span class="cdot" style="background:#f472b6"></span> Educação</span>
-              </span>
-              <span class="row-amount" style="color:#fb923c">R$ 800,00</span>
-            </div>
-            <div class="row">
-              <span class="tick" aria-hidden="true"></span>
-              <span class="row-body">
-                <span class="row-title">Fatura Nubank</span>
-                <span class="row-meta">10/07 · <span class="cdot" style="background:var(--grad-a)"></span> Cartão</span>
-              </span>
-              <span class="row-amount" style="color:#ef4444">R$ 2.184,52</span>
-            </div>
-            <div class="row paid">
-              <span class="tick done" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg></span>
-              <span class="row-body">
-                <span class="row-title">Aluguel</span>
-                <span class="row-meta">05/07 · <span class="cdot" style="background:var(--success)"></span> Moradia</span>
-              </span>
-              <span class="row-amount" style="opacity:.55">R$ 2.900,00</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- O dashboard com o assistente aberto do lado, conversando sozinho. -->
+      <HeroDemo />
 
       <div class="metrics reveal">
+        <div class="metric"><b class="grad-text">No WhatsApp</b><span>o assistente onde você já digita</span></div>
         <div class="metric"><b class="grad-text">R$ 0</b><span>para criar a conta e usar</span></div>
         <div class="metric"><b class="grad-text">A família</b><span>toda vendo o mesmo número</span></div>
         <div class="metric"><b class="grad-text">Sem anúncio</b><span>e sem venda de dados</span></div>
@@ -256,6 +190,100 @@ const FRASES = [
       </div>
     </div>
   </div>
+
+  <!-- ============================ WHATSAPP ============================ -->
+  <section id="whatsapp">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <p class="kicker">No WhatsApp</p>
+        <h2>O único app de finanças<br /><span class="grad-text">que você não precisa abrir.</span></h2>
+        <p class="lead">
+          Vincule seu número uma vez e converse com o assistente no WhatsApp,
+          como você conversa com qualquer pessoa. Ele lança, responde com número
+          e o que ele faz aparece na sua conta na hora.
+        </p>
+      </div>
+
+      <div class="split rev">
+        <div class="split-txt reveal" data-d="2">
+          <h2>Anotar deixa de ser tarefa.</h2>
+          <p>
+            O motivo de todo mundo desistir de controlar gasto é o mesmo: o
+            gasto acontece na rua e o app está em casa. Quando o lugar de anotar
+            é a mesma tela onde você já responde mensagem, a anotação acontece
+            no momento em que a compra acontece — que é o único momento em que
+            você ainda lembra do valor.
+          </p>
+          <ul class="checks">
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Texto, áudio ou foto do cupom</b> — no posto, na fila, saindo do restaurante</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Responde a qualquer hora</b>, sem fila de atendimento e sem horário comercial</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Cai na conta certa</b> — dá para vincular mais de um número, o seu e o da empresa, cada um na sua conta</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Aparece no app na hora</b>, como qualquer lançamento — e sai do jeito normal se estiver errado</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Apagar, convidar e ajustar saldo continuam só no app</b> — celular perdido não apaga o seu histórico</span></li>
+          </ul>
+          <a class="btn btn-ghost" href="/recursos/whatsapp/" style="margin-top:22px">Ver como funciona no WhatsApp</a>
+        </div>
+
+        <div class="reveal">
+          <WhatsAppMock />
+        </div>
+      </div>
+
+      <div class="split" style="margin-top:clamp(56px,8vw,88px)">
+        <div class="split-txt reveal">
+          <p class="kicker">E do outro lado</p>
+          <h2>O que você mandou já está lá.</h2>
+          <p>
+            Não é um robô que anota num caderno à parte. É o mesmo assistente do
+            app, na mesma conta, olhando os mesmos números. O que entrou pelo
+            WhatsApp aparece na lista, entra no orçamento do mês, muda a sobra
+            prevista e fica no histórico com a hora e o autor.
+          </p>
+          <a class="btn btn-ghost" href="/docs/assistente/whatsapp/" style="margin-top:22px">Como vincular meu número</a>
+        </div>
+
+        <div class="panel reveal" data-d="2">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:13px">
+            <span style="font-size:.95rem;font-weight:800;letter-spacing:-.03em">Despesas de hoje</span>
+            <span class="wa-selo">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg>
+              via WhatsApp
+            </span>
+          </div>
+
+          <div class="rows" style="margin-top:0">
+            <div class="row">
+              <span class="tick done" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg></span>
+              <span class="row-body">
+                <span class="row-title">Posto Shell</span>
+                <span class="row-meta">19:44 · <span class="cdot" style="background:#38bdf8"></span> Transporte</span>
+              </span>
+              <span class="row-amount">R$ 212,40</span>
+            </div>
+            <div class="row">
+              <span class="tick done" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg></span>
+              <span class="row-body">
+                <span class="row-title">Almoço</span>
+                <span class="row-meta">19:42 · <span class="cdot" style="background:#22c55e"></span> Alimentação</span>
+              </span>
+              <span class="row-amount">R$ 38,00</span>
+            </div>
+          </div>
+
+          <div class="mock-item" style="margin-top:12px">
+            <div class="mock-item-head"><span class="mock-name">🚗 Transporte</span><span class="mock-num" style="color:var(--warning)">R$ 712 / R$ 800</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:89%;background:var(--warning)"></div></div>
+            <div class="mock-num" style="margin-top:7px">Sobram R$ 88,00 até o fim do mês</div>
+          </div>
+
+          <p style="font-size:.68rem;color:var(--faint);margin-top:12px">
+            O assistente no WhatsApp está no plano grátis. Ler o cupom por foto
+            faz parte do Plus.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ============================ ASSISTENTE IA ============================ -->
   <section id="assistente">

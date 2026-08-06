@@ -24,6 +24,11 @@ export interface Recurso {
   icone: string;
   /** Os três a cinco pontos que a página desenvolve. */
   pontos: { titulo: string; texto: string }[];
+  /**
+   * Passo a passo de configuração, quando o recurso tem um. Vira o HowTo do
+   * JSON-LD — o formato que o buscador mostra numerado no resultado.
+   */
+  passos?: { titulo: string; itens: { nome: string; texto: string }[] };
   /** Perguntas que aparecem no fim da página. */
   duvidas: { pergunta: string; resposta: string }[];
   /** Onde aprender a usar, na documentação. */
@@ -79,6 +84,92 @@ export const RECURSOS: Recurso[] = [
       },
     ],
     docs: { href: "/docs/assistente/assistente/", label: "Como pedir as coisas ao assistente" },
+  },
+
+  {
+    slug: "whatsapp",
+    titulo: "No WhatsApp",
+    tituloSeo: "Assistente financeiro no WhatsApp: anote gastos por áudio — Monnif",
+    resumo: "Lance gastos por mensagem, áudio ou foto do cupom, sem abrir o app",
+    chamada: "Seu assistente financeiro mora no seu WhatsApp.",
+    lead: "O gasto acontece na rua e o app fica em casa — é por isso que quase todo mundo desiste de anotar. Vincule seu número uma vez e mande a mensagem de onde você estiver: o lançamento entra na sua conta na hora.",
+    icone: `<path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-4-1L3 21l2.2-4.8A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4z"/><path d="M8.5 9.5c.6 2.6 3.4 5.4 6 6l1.2-1.5-1.9-1-1 .9c-1-.5-1.8-1.3-2.3-2.3l.9-1-1-1.9z"/>`,
+    passos: {
+      titulo: "Como ativar o WhatsApp, em quatro passos",
+      itens: [
+        {
+          nome: "Abra o assistente nas preferências",
+          texto: "No app, vá em Preferências → Assistente. É onde fica o bloco do WhatsApp.",
+        },
+        {
+          nome: "Digite seu celular e gere o código",
+          texto: "Informe o número com DDD. O app mostra um código de seis dígitos, válido por poucos minutos.",
+        },
+        {
+          nome: "Toque no botão que abre a conversa",
+          texto: "A mensagem já vai escrita, com o código dentro. Você só envia — não precisa copiar nada.",
+        },
+        {
+          nome: "Escolha a conta e comece a mandar gastos",
+          texto: "O assistente confirma o vínculo e pergunta em qual conta este número lança. A partir daí é só conversar.",
+        },
+      ],
+    },
+    pontos: [
+      {
+        titulo: "Anote no momento em que o gasto acontece",
+        texto:
+          "Abastecer, almoçar, pagar o estacionamento: mande a mensagem antes de guardar o celular no bolso. É a diferença entre anotar e tentar lembrar do valor no fim da semana — que é quando o controle de gastos costuma morrer.",
+      },
+      {
+        titulo: "Texto, áudio ou foto do cupom",
+        texto:
+          "Grave um áudio quando estiver de mãos ocupadas: ele transcreve e lança. Mande a foto do cupom fiscal e ele lê o estabelecimento, o valor e a data, e pergunta antes de gravar. A leitura de cupom por foto faz parte do plano Plus.",
+      },
+      {
+        titulo: "Um número para cada conta",
+        texto:
+          "Dá para vincular mais de um número, e cada um lança na conta que você escolher — o seu celular na conta da casa, o da empresa na conta da empresa. Trocar a conta de um número leva um toque nas preferências.",
+      },
+      {
+        titulo: "É o mesmo assistente, na mesma conta",
+        texto:
+          "Não é um robô paralelo com uma lista à parte. O que entra pelo WhatsApp aparece na lista do app na hora, conta no orçamento do mês, muda a sobra prevista e fica no histórico com hora e autor. Errou a categoria? Corrige na tela, do jeito de sempre.",
+      },
+      {
+        titulo: "O que é destrutivo continua só no app",
+        texto:
+          "Excluir lançamento, convidar gente para a conta e ajustar saldo não acontecem por mensagem. Telefone é a única credencial deste canal, e um celular perdido não pode virar acesso para apagar o seu histórico.",
+      },
+    ],
+    duvidas: [
+      {
+        pergunta: "Preciso salvar algum contato ou instalar um robô?",
+        resposta:
+          "Não. O vínculo começa dentro do app: ele mostra o código e abre a conversa com a mensagem já escrita, no número oficial do Monnif. Um toque e está feito.",
+      },
+      {
+        pergunta: "Isso está no plano grátis?",
+        resposta:
+          "Está: vincular o número e conversar pelo WhatsApp faz parte do plano grátis, e as mensagens contam na mesma cota mensal do assistente do app. Ditado por áudio tem cota no grátis e cota bem maior no Plus; a leitura de cupom por foto é do Plus.",
+      },
+      {
+        pergunta: "E se alguém pegar meu celular?",
+        resposta:
+          "O canal não abre nada sozinho: o número só passa a falar com a sua conta depois de confirmar um código gerado dentro do app, e o vínculo cai por inatividade depois de algumas semanas paradas. Excluir lançamento, convidar pessoas e ajustar saldo continuam exigindo você logado no app. E dá para desvincular o número a qualquer momento, das preferências.",
+      },
+      {
+        pergunta: "Minhas mensagens ficam guardadas?",
+        resposta:
+          "A conversa fica guardada por conta e por usuário, como a do assistente dentro do app: as outras pessoas da conta compartilhada não leem a sua, e ela não é usada para treinar modelo nenhum.",
+      },
+      {
+        pergunta: "O assistente fica me mandando mensagem?",
+        resposta:
+          "Ele responde ao que você manda. Os avisos de vencimento continuam sendo os do app e do e-mail, do jeito que você configurou — o WhatsApp não vira canal de propaganda.",
+      },
+    ],
+    docs: { href: "/docs/assistente/whatsapp/", label: "Como vincular meu número" },
   },
 
   {
