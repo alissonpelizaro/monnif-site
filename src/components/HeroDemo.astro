@@ -289,6 +289,7 @@ const primeira = CENAS[0];
       campo.classList.add("cheio");
       for (var c = 1; c <= cena.me.length; c++) {
         campo.textContent = cena.me.slice(0, c);
+        campo.scrollLeft = campo.scrollWidth;
         await espera(26); if (!viva()) break;
       }
       if (!viva()) break;
