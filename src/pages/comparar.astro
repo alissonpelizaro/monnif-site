@@ -1,0 +1,229 @@
+---
+import Base from "../layouts/Base.astro";
+import Cta from "../components/Cta.astro";
+import { SITE, grafo, migalha } from "../data/seo";
+
+const url = `${SITE}/comparar/`;
+
+// Comparação sem citar concorrente pelo nome: as colunas são categorias, não
+// marcas. Sai mais honesto (nenhum app do mercado é igual ao outro) e não
+// envelhece toda vez que alguém do lado de lá muda de plano.
+const LINHAS = [
+  {
+    criterio: "Onde você anota o gasto",
+    planilha: "Abrindo o arquivo e digitando a linha, no computador",
+    apps: "Abrindo o app e preenchendo o formulário",
+    monnif: "Mensagem, áudio ou foto do cupom no WhatsApp — ou o formulário, se preferir",
+  },
+  {
+    criterio: "Anotar na hora, na rua",
+    planilha: "Na prática, não. Fica para depois — e depois some",
+    apps: "Dá, se você abrir o app na fila do caixa",
+    monnif: "Manda a mensagem e acabou. O lançamento entra na hora",
+  },
+  {
+    criterio: "Usar junto com outra pessoa",
+    planilha: "Compartilhando o arquivo. Uma pessoa acaba dona dele",
+    apps: "Depende — em vários, é o recurso que exige plano pago",
+    monnif: "Cada um com o próprio acesso, sem dividir senha. No plano grátis",
+  },
+  {
+    criterio: "Cartão de crédito",
+    planilha: "Você calcula na mão em que fatura cada compra cai",
+    apps: "Geralmente sim, com fechamento e parcelas",
+    monnif: "Fatura fecha na data certa e a parcela aparece mês a mês",
+  },
+  {
+    criterio: "Saber quanto ainda pode gastar",
+    planilha: "Só olhando o passado. O futuro você adivinha",
+    apps: "Orçamento por categoria, quase sempre",
+    monnif: "Orçamento por categoria e o saldo previsto dos próximos dias",
+  },
+  {
+    criterio: "Conexão automática com o banco",
+    planilha: "Não",
+    apps: "Muitos sim, por Open Finance — costuma ser o recurso pago",
+    monnif: "Não, por escolha. Você importa o extrato quando quiser",
+  },
+  {
+    criterio: "Preço",
+    planilha: "Zero, e o custo é o seu tempo",
+    apps: "Grátis limitado, com o essencial atrás da assinatura",
+    monnif: "Grátis para criar e usar, sem cartão no cadastro",
+  },
+  {
+    criterio: "Anúncio e venda de dados",
+    planilha: "Não",
+    apps: "Varia. Vale ler a política antes",
+    monnif: "Nenhum dos dois, nunca",
+  },
+  {
+    criterio: "Se você parar de pagar",
+    planilha: "Nada muda",
+    apps: "Recursos somem e o histórico costuma ficar trancado",
+    monnif: "O que dá para fazer de graça continua dando",
+  },
+  {
+    criterio: "Por que costuma dar errado",
+    planilha: "Cansaço. Duas semanas de atraso e ninguém volta",
+    apps: "Fricção de abrir o app toda vez, e a parede do plano pago",
+    monnif: "Se você não falar com o assistente, também vai esfriar. Ele reduz o trabalho, não elimina",
+  },
+];
+
+const duvidas = [
+  {
+    pergunta: "Por que o Monnif não conecta no meu banco?",
+    resposta:
+      "Porque conectar exige entregar acesso à sua conta bancária a mais um intermediário, e a gente preferiu não ser esse intermediário. O caminho aqui é você baixar o extrato no site do próprio banco e mandar o arquivo — um passo a mais, e a chave da sua conta nunca sai de lá. Se conexão automática é obrigatória para você, um app com Open Finance atende melhor.",
+  },
+  {
+    pergunta: "Dá para trazer a minha planilha para o Monnif?",
+    resposta:
+      "Dá, se ela estiver em CSV. O Monnif lê o arquivo, mostra o que entendeu e só grava depois que você confere. O mesmo caminho do extrato do banco.",
+  },
+  {
+    pergunta: "O que o Monnif ainda não faz?",
+    resposta:
+      "Não conecta em banco, não faz acerto de contas entre pessoas, não acompanha investimento e não tem app na loja — ele instala na tela inicial pelo navegador. Se algum desses é indispensável para você, é melhor saber agora.",
+  },
+  {
+    pergunta: "O plano grátis é isca para virar pago depois?",
+    resposta:
+      "Não. Existem planos pagos para quem quiser mais, mas o que dá para fazer de graça continua dando — incluindo conta compartilhada e assistente no WhatsApp, que costumam ser justamente o que fica atrás da assinatura em outros lugares.",
+  },
+];
+
+const dados = grafo(
+  {
+    "@type": "FAQPage",
+    "@id": `${url}#duvidas`,
+    mainEntity: duvidas.map((d) => ({
+      "@type": "Question",
+      name: d.pergunta,
+      acceptedAnswer: { "@type": "Answer", text: d.resposta },
+    })),
+  },
+  migalha([{ nome: "Comparar" }]),
+);
+---
+
+<Base
+  title="Planilha, app de controle financeiro ou Monnif: qual usar — Monnif"
+  description="Comparação honesta entre planilha de gastos, aplicativos de controle financeiro do mercado e o Monnif: onde você anota, o que é grátis, uso a dois e o que cada um não faz."
+>
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(dados)} />
+
+  <div class="page-head">
+    <div class="wrap">
+      <p class="kicker">Comparar</p>
+      <h1>Planilha, app ou Monnif?<br /><span class="grad-text">Depende do que te faz desistir.</span></h1>
+      <p class="lead">
+        Quase todo mundo já tentou planilha e já baixou um app. Os dois
+        funcionam — até o mês em que você para de alimentar. Esta página compara
+        os três pelo único critério que importa: o que faz você largar.
+      </p>
+    </div>
+  </div>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="prose reveal">
+        <div style="overflow-x:auto">
+          <table>
+            <thead>
+              <tr>
+                <th style="min-width:170px">&nbsp;</th>
+                <th style="min-width:210px">Planilha</th>
+                <th style="min-width:210px">Apps do mercado</th>
+                <th style="min-width:210px">Monnif</th>
+              </tr>
+            </thead>
+            <tbody>
+              {LINHAS.map((l) => (
+                <tr>
+                  <th scope="row">{l.criterio}</th>
+                  <td>{l.planilha}</td>
+                  <td>{l.apps}</td>
+                  <td><strong>{l.monnif}</strong></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note">
+          <p>
+            “Apps do mercado” é uma generalização, e generalização sempre erra em
+            algum caso. Cada aplicativo tem o seu plano grátis e o seu limite —
+            vale conferir o do que você está avaliando antes de decidir.
+          </p>
+        </div>
+
+        <h2>Quando a planilha ainda é a melhor escolha</h2>
+        <p>
+          Se você gosta de mexer em fórmula, quer um cálculo que só existe na sua
+          cabeça e o controle é só seu, a planilha ganha. Ela é infinitamente
+          moldável e não depende de ninguém. O problema dela nunca foi capacidade
+          — foi constância: ela exige que você sente no computador e digite. Duas
+          semanas de atraso e o arquivo vira ficção.
+        </p>
+
+        <h2>Quando um app com conexão bancária faz mais sentido</h2>
+        <p>
+          Se o que você quer é não anotar nada e ver os lançamentos aparecerem
+          sozinhos, um app com Open Finance resolve isso melhor que o Monnif —
+          aqui não existe conexão com banco, e isso é escolha, não pendência.
+          O custo do outro lado é entregar acesso à conta bancária, e o recurso
+          costuma morar no plano pago.
+        </p>
+
+        <h2>Onde o Monnif é diferente</h2>
+        <p>
+          A aposta aqui é outra: em vez de tirar você do circuito, deixar o
+          registro tão barato que você não desista. Você manda
+          <a href="/recursos/whatsapp/">“paguei o mercado, 240 no cartão” no WhatsApp</a>
+          e acabou — texto, áudio ou foto do cupom. Sem abrir app, sem formulário,
+          sem esperar até a noite.
+        </p>
+        <p>
+          O resto é consequência: se o lançamento existe, a
+          <a href="/recursos/cartao-de-credito/">fatura fecha certa</a>, o
+          <a href="/recursos/orcamento/">orçamento</a> diz quanto ainda cabe e o
+          <a href="/recursos/saldo-dos-proximos-dias/">saldo dos próximos dias</a>
+          mostra em que dia a conta aperta. Nada disso funciona com dado pela
+          metade — por isso o foco está em anotar, não em relatório bonito.
+        </p>
+        <p>
+          E a <a href="/recursos/familia/">conta compartilhada</a> está no plano
+          grátis, com acesso próprio para cada pessoa. É o recurso que mais
+          costuma esbarrar em assinatura em outros lugares, e é o que faz o
+          controle sobreviver quando o dinheiro é de mais de um.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="duvidas">
+    <div class="wrap">
+      <div class="page-head" style="padding-bottom:34px">
+        <h2>Antes de decidir</h2>
+      </div>
+      <div class="faq">
+        {duvidas.map((d, i) => (
+          <details class="reveal" open={i === 0}>
+            <summary>{d.pergunta}</summary>
+            <p set:html={d.resposta} />
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Cta
+    titulo="Testar é mais rápido"
+    destaque="que continuar decidindo."
+    texto="Crie a conta, mande um gasto pelo WhatsApp e veja se combina com você. Grátis, sem cartão de crédito."
+    botao="Criar conta grátis"
+  />
+</Base>

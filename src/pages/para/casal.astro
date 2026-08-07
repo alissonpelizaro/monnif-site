@@ -1,0 +1,229 @@
+---
+import Base from "../../layouts/Base.astro";
+import Cta from "../../components/Cta.astro";
+import { EDITORA, ID_SITE, SITE, grafo, migalha } from "../../data/seo";
+
+const url = `${SITE}/para/casal/`;
+
+const pontos = [
+  {
+    titulo: "Cada um com o seu acesso",
+    texto:
+      "Ninguém empresta senha. Você convida por link, a outra pessoa cria o acesso dela e as duas passam a ver as mesmas contas, os mesmos cartões e o mesmo orçamento — atualizado na hora.",
+    icone: `<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>`,
+  },
+  {
+    titulo: "A conta da casa e a sua",
+    texto:
+      "São contas separadas na mesma pessoa. A da casa vocês dois enxergam; a sua pessoal continua só sua. Você troca entre elas quando quiser, e cada uma tem o próprio dinheiro e o próprio orçamento.",
+    icone: `<rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18M8 6V3M16 6V3"/>`,
+  },
+  {
+    titulo: "Acaba a pergunta “quem pagou o mercado?”",
+    texto:
+      "Cada lançamento guarda quem fez. Não como fiscalização — como fim da discussão. Ninguém precisa lembrar de cabeça o que pagou na terça.",
+    icone: `<path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 5v5h5"/><path d="M12 7v5l3 2"/>`,
+  },
+  {
+    titulo: "Um WhatsApp para cada um",
+    texto:
+      "Vocês vinculam os dois números, e os dois lançam na conta da casa de onde estiverem. Quem está no mercado manda a mensagem na fila do caixa; aparece para o outro na mesma hora.",
+    icone: `<path d="M21 11.5a8.4 8.4 0 0 1-12.5 7.3L3 20.5l1.7-5.4A8.4 8.4 0 1 1 21 11.5z"/>`,
+  },
+  {
+    titulo: "Dá para convidar só para olhar",
+    texto:
+      "Se um dos dois quer acompanhar sem mexer em nada, existe o acesso que só lê. Útil quando uma pessoa cuida dos lançamentos e a outra só quer estar por dentro.",
+    icone: `<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>`,
+  },
+  {
+    titulo: "O aperto avisa os dois",
+    texto:
+      "O saldo dos próximos dias conta o que ainda entra e o que ainda vence. Quando a conta vai apertar no dia 22, os dois veem no dia 3 — que é quando ainda dá para mudar alguma coisa.",
+    icone: `<path d="M3 17l6-6 4 4 7-8"/><path d="M14 7h7v7"/>`,
+  },
+];
+
+const duvidas = [
+  {
+    pergunta: "O Monnif divide a conta e calcula quem deve quanto para quem?",
+    resposta:
+      "Não. Ele não faz acerto de contas entre pessoas — nada de “você me deve 180”. O Monnif trata o dinheiro como um bolo só: as duas pessoas lançam na mesma conta e enxergam o mesmo total. Se o que vocês procuram é rachar a conta do rodízio com os amigos, um app de divisão de despesas resolve melhor.",
+  },
+  {
+    pergunta: "A outra pessoa vai ver os meus gastos pessoais?",
+    resposta:
+      "Só se você lançar na conta compartilhada. A sua conta pessoal é outra conta, e ela continua invisível para quem não foi convidado. É essa separação que faz a maioria dos casais conseguir usar o mesmo app sem atrito.",
+  },
+  {
+    pergunta: "E se a gente se separar, ou eu quiser tirar o acesso?",
+    resposta:
+      "Você remove a pessoa a qualquer momento e o acesso dela termina na hora. O histórico da conta continua com você.",
+  },
+  {
+    pergunta: "Precisa conectar o banco dos dois?",
+    resposta:
+      "Não. O Monnif não se conecta a banco nenhum e nunca pede senha bancária. Se quiserem trazer histórico, cada um baixa o extrato no site do próprio banco e manda o arquivo.",
+  },
+  {
+    pergunta: "Tem limite de pessoas na conta?",
+    resposta:
+      "Não. Casal, casa inteira, sogra, sócio — quantas pessoas fizerem sentido, no plano grátis.",
+  },
+  {
+    pergunta: "E se só um dos dois se interessar por planilha?",
+    resposta:
+      "É o caso mais comum, e é para ele que o assistente existe. A pessoa que não quer abrir app manda “paguei 240 no mercado” no WhatsApp e acabou. O outro cuida do orçamento e dos relatórios se quiser.",
+  },
+];
+
+const dados = grafo(
+  {
+    "@type": "FAQPage",
+    "@id": `${url}#duvidas`,
+    mainEntity: duvidas.map((d) => ({
+      "@type": "Question",
+      name: d.pergunta,
+      acceptedAnswer: { "@type": "Answer", text: d.resposta },
+    })),
+  },
+  {
+    // Mesmo `@id` da home: é o mesmo app, visto pelo lado de quem divide a casa.
+    "@type": "SoftwareApplication",
+    "@id": `${SITE}/#app`,
+    name: "Monnif",
+    applicationCategory: "FinanceApplication",
+    applicationSubCategory: "Gestão financeira para casal e família",
+    operatingSystem: "Web, iOS, Android",
+    description:
+      "App grátis de gestão financeira para casal: conta compartilhada com acesso próprio para cada um, orçamento comum, cartão de crédito e assistente que lança pelo WhatsApp.",
+    url: "https://app.monnif.com",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "BRL" },
+    isAccessibleForFree: true,
+    publisher: EDITORA,
+    inLanguage: "pt-BR",
+    isPartOf: { "@id": ID_SITE },
+  },
+  migalha([{ nome: "Para casais" }]),
+);
+---
+
+<Base
+  title="Gestão financeira para casal: app grátis compartilhado — Monnif"
+  description="App grátis de gestão financeira para casal: os dois com acesso próprio, sem dividir senha. Conta da casa separada da pessoal, orçamento comum e lançamento pelo WhatsApp."
+>
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(dados)} />
+
+  <div class="page-head">
+    <div class="wrap">
+      <p class="kicker">Para casais</p>
+      <h1>O dinheiro é de dois.<br /><span class="grad-text">A conta também.</span></h1>
+      <p class="lead">
+        Controlar as finanças a dois quase nunca falha por falta de app. Falha
+        porque um dos dois vira o dono da planilha, e o outro nunca sabe quanto
+        pode gastar. O Monnif dá acesso próprio a cada um e o mesmo número para
+        os dois.
+      </p>
+      <div class="cta-row" style="justify-content:center;margin-top:26px">
+        <a class="btn btn-primary btn-lg" href="https://app.monnif.com/signup" target="_blank" rel="noopener">
+          Criar conta grátis
+        </a>
+        <a class="btn btn-ghost btn-lg" href="/docs/conta/usuarios/">Como convidar</a>
+      </div>
+    </div>
+  </div>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="features">
+        {pontos.map((p, i) => (
+          <div class="feature reveal" data-d={String((i % 5) + 1)}>
+            <span class="ico" aria-hidden="true">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={p.icone} />
+            </span>
+            <h3>{p.titulo}</h3>
+            <p>{p.texto}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="prose reveal">
+        <h2>Os três jeitos de fazer isso dar errado</h2>
+        <p>
+          <strong>Uma conta só, com a mesma senha.</strong> Funciona até o dia em
+          que um quer privacidade em alguma coisa. Aí a pessoa passa a anotar
+          menos, e o número deixa de valer para os dois.
+        </p>
+        <p>
+          <strong>Cada um no seu app.</strong> Dois aplicativos, dois orçamentos,
+          nenhum total. Ninguém consegue responder “dá para viajar em julho?”,
+          porque a resposta está partida ao meio.
+        </p>
+        <p>
+          <strong>A planilha de um só.</strong> A pessoa que criou vira a
+          responsável eterna. Quando ela cansa — e ela cansa —, o controle acaba
+          junto. É o fim mais comum de todos.
+        </p>
+
+        <h2>Como o Monnif resolve</h2>
+        <p>
+          Você cria a <a href="/recursos/familia/">conta da casa</a> e convida a
+          outra pessoa por link. Cada um entra com o próprio acesso, e os dois
+          enxergam exatamente o mesmo: as contas do mês, a
+          <a href="/recursos/cartao-de-credito/">fatura do cartão</a>, o
+          <a href="/recursos/orcamento/">orçamento por categoria</a> e o
+          <a href="/recursos/saldo-dos-proximos-dias/">saldo dos próximos dias</a>.
+        </p>
+        <p>
+          Sua conta pessoal é outra conta, na mesma tela de entrada. O que você
+          lança lá não aparece na da casa. É a separação que costuma faltar, e é
+          o que faz os dois continuarem usando depois do segundo mês.
+        </p>
+        <p>
+          E para a parte que ninguém gosta de fazer — anotar — existe o
+          <a href="/recursos/whatsapp/">assistente no WhatsApp</a>. Cada um vincula
+          o próprio número e manda o gasto por mensagem ou áudio, na hora em que
+          ele acontece. Não precisa abrir o app, nem lembrar depois.
+        </p>
+
+        <h2>O que ele não faz</h2>
+        <div class="note">
+          <p>
+            O Monnif não calcula acerto entre pessoas. Ele não vai dizer “você
+            pagou 60% do mês, o outro te deve 340”. O dinheiro da conta
+            compartilhada é tratado como um bolo só. Se o que vocês precisam é
+            rachar despesa e cobrar o acerto, um app de divisão de contas faz
+            isso melhor — e dá para usar os dois.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="duvidas">
+    <div class="wrap">
+      <div class="page-head" style="padding-bottom:34px">
+        <h2>Perguntas de quem divide a casa</h2>
+      </div>
+      <div class="faq">
+        {duvidas.map((d, i) => (
+          <details class="reveal" open={i === 0}>
+            <summary>{d.pergunta}</summary>
+            <p set:html={d.resposta} />
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Cta
+    titulo="Convide quem divide a casa."
+    destaque="Os dois veem o mesmo número."
+    texto="Crie a conta, mande o link e comece a lançar pelo WhatsApp hoje. De graça, sem cartão de crédito."
+    botao="Criar conta grátis"
+  />
+</Base>

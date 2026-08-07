@@ -8,10 +8,11 @@ import WhatsAppPrint from "../components/WhatsAppPrint.astro";
 import { RECURSOS, OUTROS } from "../data/recursos";
 import { EDITORA, SITE, grafo } from "../data/seo";
 
-// O <title> começa pelo que se digita no buscador; a marca, que ainda ninguém
-// procura pelo nome, fecha a linha. "No WhatsApp" vem na frente porque é a
-// única coisa aqui que nenhum concorrente de planilha oferece.
-const titulo = "Controle financeiro pelo WhatsApp: app grátis com IA — Monnif";
+// Só nesta página a marca vem na frente: o <title> da home é uma das quatro
+// fontes de onde o buscador tira o nome do site, junto com og:site_name e o
+// WebSite do JSON-LD. Discordando delas, ele desiste e mostra "monnif.com".
+// Nas outras páginas a marca continua fechando a linha, atrás do termo buscado.
+const titulo = "Monnif: controle financeiro pelo WhatsApp — app grátis com IA";
 const descricao =
   "Anote gastos por mensagem ou áudio no WhatsApp. App grátis para o dinheiro da família: contas do mês, cartão de crédito, orçamento e o saldo dos próximos dias.";
 
@@ -124,6 +125,17 @@ const dados = grafo(
       availability: "https://schema.org/InStock",
       description: "Grátis para criar a conta e usar, sem cartão de crédito no cadastro.",
     },
+    // O público busca "gestão financeira" tanto quanto "controle financeiro", e
+    // a página inteira está escrita no segundo. As duas famílias entram aqui
+    // para o buscador entender que é a mesma coisa.
+    keywords:
+      "gestão financeira pessoal, gestão financeira familiar, aplicativo de gestão financeira grátis, controle financeiro, finanças de casal, controle de gastos pelo WhatsApp, organizar as contas da casa",
+    // Sinais de app terminado, não de projeto parado: existe manual, roda em
+    // tudo, é de graça de verdade e tem um lugar para reclamar.
+    isAccessibleForFree: true,
+    softwareHelp: { "@type": "CreativeWork", url: `${SITE}/docs/` },
+    availableOnDevice: ["Celular Android", "iPhone", "Computador"],
+    countriesSupported: "BR",
     publisher: EDITORA,
     inLanguage: "pt-BR",
   },
