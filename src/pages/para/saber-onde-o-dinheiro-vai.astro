@@ -1,0 +1,207 @@
+---
+import Base from "../../layouts/Base.astro";
+import Cta from "../../components/Cta.astro";
+import { SITE, grafo, migalha } from "../../data/seo";
+
+const url = `${SITE}/para/saber-onde-o-dinheiro-vai/`;
+
+// As quatro causas cobrem quase todo caso real de "o salário sumiu". Cada uma
+// tem o recurso que resolve — é o que transforma a página de desabafo em saída.
+const CAUSAS = [
+  {
+    titulo: "Os gastos pequenos, que ninguém anota",
+    sintoma:
+      "Café, aplicativo de corrida, lanche, entrega. Cada um parece irrelevante e nenhum entra na conta de cabeça.",
+    conta:
+      "Vinte e dois dias úteis de almoço fora a 35 reais somam 770 no mês. Ninguém acorda decidindo gastar 770 com almoço.",
+    saida:
+      "É o gasto que só existe se for anotado no segundo em que acontece. Por isso o assistente do Monnif vive no WhatsApp: você manda “almoço 35” na saída do restaurante e acabou.",
+    href: "/recursos/whatsapp/",
+    label: "Anotar pelo WhatsApp",
+  },
+  {
+    titulo: "O cartão, que mostra o mês errado",
+    sintoma:
+      "Você olha o app do banco, vê a fatura em aberto e acha que é o gasto do mês. Não é: parte já é do mês que vem, e a fatura que vence agora é de compras de semanas atrás.",
+    conta:
+      "Com parcelamento fica pior — você já se comprometeu com meses que ainda nem começaram, e nada disso aparece no saldo da conta corrente.",
+    saida:
+      "O Monnif fecha a fatura na data real do seu cartão e coloca cada parcela no mês em que ela vai cair. O gasto de hoje aparece no mês em que vira dinheiro de verdade.",
+    href: "/recursos/cartao-de-credito/",
+    label: "Como a fatura funciona",
+  },
+  {
+    titulo: "As assinaturas que você esqueceu que assinou",
+    sintoma:
+      "Streaming que ninguém abre há meses, plano anual renovado sozinho, aquele teste de 7 dias que virou cobrança fixa.",
+    conta:
+      "Cinco assinaturas de 30 reais são 150 por mês e 1.800 por ano. É quase sempre o dinheiro mais fácil de recuperar que existe.",
+    saida:
+      "O Monnif lista o que se repete todo mês e mostra quanto cada coisa custa por ano. Ver o número anual é o que faz a pessoa finalmente cancelar.",
+    href: "/docs/planejamento/assinaturas/",
+    label: "Ver as assinaturas",
+  },
+  {
+    titulo: "As contas fixas que vencem depois do salário",
+    sintoma:
+      "O dia 5 parece confortável. O aperto chega no 22, quando cai a conta de luz, a escola e a fatura — e aí já se gastou como se o dinheiro fosse todo livre.",
+    conta:
+      "O saldo de hoje mente porque ele não sabe o que ainda vai vencer nesta semana.",
+    saida:
+      "O saldo dos próximos dias soma o que ainda entra, desconta o que ainda vence e mostra a linha do seu dinheiro dia a dia. O dia do aperto aparece com semanas de antecedência.",
+    href: "/recursos/saldo-dos-proximos-dias/",
+    label: "Ver o saldo previsto",
+  },
+];
+
+const duvidas = [
+  {
+    pergunta: "Quanto tempo até eu descobrir para onde vai meu dinheiro?",
+    resposta:
+      "Um mês inteiro anotado responde a maior parte. Se você não quiser esperar, importe o extrato do banco dos últimos meses e o histórico já nasce pronto — dá para ver o padrão no primeiro dia.",
+  },
+  {
+    pergunta: "Já tentei anotar antes e desisti em duas semanas. Vai ser diferente?",
+    resposta:
+      "Só se o esforço de anotar cair. Continuar abrindo app e preenchendo formulário dá no mesmo resultado de antes. O que muda aqui é mandar uma mensagem no WhatsApp na hora do gasto, que é o mesmo esforço de responder alguém.",
+  },
+  {
+    pergunta: "Preciso categorizar tudo na mão?",
+    resposta:
+      "Não. O Monnif aprende em que categoria cada gasto costuma cair e passa a sugerir sozinho. Você corrige quando ele errar, e ele erra menos com o tempo.",
+  },
+  {
+    pergunta: "Como eu sei quanto ainda posso gastar este mês?",
+    resposta:
+      "Duas respostas diferentes, e você precisa das duas: o orçamento diz quanto ainda cabe em cada categoria, e o saldo dos próximos dias diz se o dinheiro chega até o fim do mês depois do que ainda vence. Dá para perguntar isso ao assistente com essas palavras mesmo.",
+  },
+  {
+    pergunta: "Preciso conectar o banco para isso funcionar?",
+    resposta:
+      "Não, e não dá — o Monnif não se conecta a banco nenhum e nunca pede senha bancária. O histórico entra pelo extrato que você mesmo baixa, e o dia a dia entra por mensagem.",
+  },
+];
+
+const dados = grafo(
+  {
+    "@type": "FAQPage",
+    "@id": `${url}#duvidas`,
+    mainEntity: duvidas.map((d) => ({
+      "@type": "Question",
+      name: d.pergunta,
+      acceptedAnswer: { "@type": "Answer", text: d.resposta },
+    })),
+  },
+  migalha([{ nome: "Para onde vai o meu dinheiro" }]),
+);
+---
+
+<Base
+  title="Não sei para onde vai meu dinheiro: as 4 causas e como sair — Monnif"
+  description="O salário some e você não sabe onde. As quatro causas reais — gastos pequenos, cartão fora do mês, assinaturas esquecidas e contas que vencem depois do salário — e o que fazer com cada uma."
+>
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(dados)} />
+
+  <div class="page-head">
+    <div class="wrap">
+      <p class="kicker">Para onde vai o meu dinheiro</p>
+      <h1>O dinheiro não some.<br /><span class="grad-text">Ele sai em pedaços pequenos.</span></h1>
+      <p class="lead">
+        Quem ganha bem também chega apertado no fim do mês. Não é falta de
+        disciplina: é que o dinheiro sai por quatro portas que ninguém consegue
+        somar de cabeça. Esta página mostra as quatro e o que fazer com cada uma
+        — dá para aplicar mesmo sem o Monnif.
+      </p>
+    </div>
+  </div>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="prose reveal">
+        {CAUSAS.map((c, i) => (
+          <>
+            <h2>{i + 1}. {c.titulo}</h2>
+            <p>{c.sintoma}</p>
+            <p><strong>A conta:</strong> {c.conta}</p>
+            <p>{c.saida} <a href={c.href}>{c.label}</a>.</p>
+          </>
+        ))}
+
+        <h2>O erro de sempre: começar pelo relatório</h2>
+        <p>
+          Quase todo mundo começa procurando o app com o gráfico mais bonito.
+          Gráfico nenhum funciona sem dado, e o dado é a parte chata. Se anotar
+          continuar custando abrir um app e preencher cinco campos, você desiste
+          na segunda semana — como desistiu das outras vezes, e como quase todo
+          mundo desiste.
+        </p>
+        <p>
+          A ordem certa é inversa. Primeiro reduza o custo de registrar até quase
+          zero. Depois olhe o relatório, que aí ele vai estar dizendo a verdade.
+        </p>
+
+        <h2>Por onde começar esta semana</h2>
+        <ol>
+          <li>
+            <strong>Traga o passado de uma vez.</strong> Baixe o extrato dos
+            últimos três meses no site do seu banco e
+            <a href="/recursos/importar-extrato/"> importe o arquivo</a>. Você
+            enxerga o padrão sem ter digitado nada.
+          </li>
+          <li>
+            <strong>Cace as assinaturas.</strong> Olhe as cobranças que se
+            repetem e cancele o que você não usou no último mês. É o dinheiro
+            mais fácil da lista.
+          </li>
+          <li>
+            <strong>Anote na hora, não à noite.</strong> Vincule seu WhatsApp e
+            mande o gasto no momento em que ele acontece. À noite você já
+            esqueceu dois.
+          </li>
+          <li>
+            <strong>Ponha limite só em duas categorias.</strong> As duas que mais
+            doeram no extrato. Orçamento em dez categorias de uma vez ninguém
+            sustenta.
+          </li>
+          <li>
+            <strong>Olhe o saldo previsto uma vez por semana.</strong> Cinco
+            segundos para saber se o mês fecha. É a única leitura que muda
+            decisão.
+          </li>
+        </ol>
+
+        <div class="note">
+          <p>
+            Nenhum app resolve dívida com juro alto no lugar de renegociação, e
+            nenhum app gasta menos por você. O que ele faz é tirar a pergunta
+            “quanto eu posso gastar?” do achismo — e isso, sozinho, já muda o
+            fim do mês.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="duvidas">
+    <div class="wrap">
+      <div class="page-head" style="padding-bottom:34px">
+        <h2>Perguntas frequentes</h2>
+      </div>
+      <div class="faq">
+        {duvidas.map((d, i) => (
+          <details class="reveal" open={i === 0}>
+            <summary>{d.pergunta}</summary>
+            <p set:html={d.resposta} />
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Cta
+    titulo="Descubra em um mês."
+    destaque="Ou em cinco minutos, importando o extrato."
+    texto="Crie sua conta grátis, traga o histórico do banco e pergunte ao assistente para onde o dinheiro foi."
+    botao="Criar conta grátis"
+  />
+</Base>

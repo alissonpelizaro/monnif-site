@@ -412,8 +412,8 @@ export const RECURSOS: Recurso[] = [
   {
     slug: "familia",
     titulo: "Contas em família",
-    tituloSeo: "App de finanças para a família, compartilhado — Monnif",
-    resumo: "Todo mundo da casa vendo o mesmo número, sem dividir senha",
+    tituloSeo: "Gestão financeira para casal e família, compartilhada — Monnif",
+    resumo: "Casal ou casa inteira vendo o mesmo número, sem dividir senha",
     chamada: "O dinheiro da casa é de mais de uma pessoa.",
     lead: "Cada pessoa entra com o seu próprio acesso e enxerga as mesmas contas, os mesmos cartões e o mesmo orçamento. Ninguém precisa emprestar senha nem virar o responsável pela planilha.",
     print: "usuarios",
