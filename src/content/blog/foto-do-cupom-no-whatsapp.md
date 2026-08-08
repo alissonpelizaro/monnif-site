@@ -3,6 +3,7 @@ title: "Mandei a foto do cupom e o gasto se lançou"
 description: "A leitura de cupom fiscal por foto no WhatsApp: o que ela acerta, o que ela pergunta antes e por que nada é gravado sem você confirmar."
 date: 2026-08-05
 tag: "Guia do app"
+capa: "https://images.unsplash.com/photo-1634733988138-bf2c3a2a13fa?auto=format&fit=crop&w=1600&h=900&q=70"
 ---
 
 Tem um tipo de gasto que ninguém anota: o cupom que fica amassado no bolso da calça. O

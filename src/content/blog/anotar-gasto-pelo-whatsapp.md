@@ -4,6 +4,7 @@ description: "O gasto acontece na rua e o app fica em casa. Mudar o lugar de ano
 date: 2026-08-06
 tag: "Finanças pessoais"
 destaque: true
+capa: "https://images.unsplash.com/photo-1758272420960-0e615980f864?auto=format&fit=crop&w=1600&h=900&q=70"
 ---
 
 Quase ninguém desiste de controlar gastos por falta de disciplina. Desiste por causa de
