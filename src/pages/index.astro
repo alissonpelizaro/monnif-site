@@ -4,6 +4,7 @@ import Cta from "../components/Cta.astro";
 
 import ChatMock from "../components/ChatMock.astro";
 import HeroDemo from "../components/HeroDemo.astro";
+import WhatsAppIcon from "../components/WhatsAppIcon.astro";
 import WhatsAppPrint from "../components/WhatsAppPrint.astro";
 import { RECURSOS, OUTROS } from "../data/recursos";
 import { EDITORA, SITE, grafo } from "../data/seo";
@@ -186,7 +187,7 @@ const FRASES = [
           Criar conta grátis
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a class="btn btn-ghost btn-lg" href="#whatsapp">Ver no WhatsApp</a>
+        <a class="btn btn-ghost btn-lg" href="#whatsapp"><WhatsAppIcon size={19} verde /> Ver no WhatsApp</a>
       </div>
       <p class="cta-note reveal" data-d="4">Leva menos de 1 minuto. Sem cartão de crédito no cadastro.</p>
 
@@ -207,7 +208,9 @@ const FRASES = [
   <section id="whatsapp">
     <div class="wrap">
       <div class="sec-head center reveal">
-        <p class="kicker">No WhatsApp</p>
+        {/* `inline-flex` porque o global deixa todo svg em `display:block` —
+            sem isto o ícone cai numa linha só dele, fora do centro. */}
+        <p class="kicker" style="display:inline-flex;align-items:center;gap:7px"><WhatsAppIcon size={15} /> No WhatsApp</p>
         <h2>O único app de finanças<br /><span class="grad-text">que você não precisa abrir.</span></h2>
         <p class="lead">
           Vincule seu número uma vez e converse com o assistente no WhatsApp,
@@ -233,7 +236,7 @@ const FRASES = [
             <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Aparece no app na hora</b>, como qualquer lançamento — e sai do jeito normal se estiver errado</span></li>
             <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Apagar, convidar e ajustar saldo continuam só no app</b> — celular perdido não apaga o seu histórico</span></li>
           </ul>
-          <a class="btn btn-ghost" href="/recursos/whatsapp/" style="margin-top:22px">Ver como funciona no WhatsApp</a>
+          <a class="btn btn-ghost" href="/recursos/whatsapp/" style="margin-top:22px"><WhatsAppIcon verde /> Ver como funciona no WhatsApp</a>
         </div>
 
         <div class="reveal">
