@@ -3,6 +3,7 @@ title: "Um WhatsApp para a casa, outro para a empresa"
 description: "Quem tem CNPJ costuma ter dois celulares e uma bagunça só. Vincular cada número a uma conta resolve a separação sem você repetir isso em toda mensagem."
 date: 2026-08-04
 tag: "Guia do app"
+capa: "https://images.unsplash.com/photo-1668834850258-a91ca94ee76b?auto=format&fit=crop&w=1600&h=900&q=70"
 ---
 
 Quem tem empresa pequena conhece a cena: o gasto da empresa entra na conta da casa, o
