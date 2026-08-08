@@ -31,7 +31,7 @@ const path = Astro.url.pathname;
             {RECURSOS.map((r) => (
               <a class="mega-item" href={`/recursos/${r.slug}/`}>
                 <span class="ico" aria-hidden="true">
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={r.icone} />
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill={r.iconeSolido ? "currentColor" : "none"} stroke={r.iconeSolido ? "none" : "currentColor"} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={r.icone} />
                 </span>
                 <span>
                   <b>{r.titulo}</b>
