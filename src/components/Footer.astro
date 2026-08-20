@@ -2,6 +2,7 @@
 import BrandMark from "./BrandMark.astro";
 import { RECURSOS } from "../data/recursos";
 import { INSTAGRAM } from "../data/seo";
+import { ENTRAR } from "../data/app";
 
 const colunas = [
   {
@@ -15,6 +16,7 @@ const colunas = [
     titulo: "Monnif",
     links: [
       { href: "/manifesto/", label: "Nossa história" },
+      { href: "/indique/", label: "Indique e ganhe" },
       { href: "/seguranca/", label: "Seus dados" },
       { href: "/marca/", label: "Marca" },
       { href: "/#faq", label: "Dúvidas" },
@@ -69,7 +71,7 @@ const colunas = [
       <!-- `rel="me"` é o par do sameAs do JSON-LD: um diz que o perfil é da
            marca, o outro que a marca é do perfil. -->
       <a href={INSTAGRAM} target="_blank" rel="me noopener">Instagram ↗</a>
-      <a href="https://app.monnif.com" target="_blank" rel="noopener">Abrir o app ↗</a>
+      <a href={ENTRAR("rodape")} target="_blank" rel="noopener">Abrir o app ↗</a>
     </div>
   </div>
 </footer>

@@ -2,6 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import Cta from "../../components/Cta.astro";
 import { EDITORA, ID_SITE, SITE, grafo, migalha } from "../../data/seo";
+import { CRIAR_CONTA } from "../../data/app";
 
 const url = `${SITE}/para/casal/`;
 
@@ -125,7 +126,7 @@ const dados = grafo(
         os dois.
       </p>
       <div class="cta-row" style="justify-content:center;margin-top:26px">
-        <a class="btn btn-primary btn-lg" href="https://app.monnif.com/signup" target="_blank" rel="noopener">
+        <a class="btn btn-primary btn-lg" href={CRIAR_CONTA("para-casal")} target="_blank" rel="noopener">
           Criar conta grátis
         </a>
         <a class="btn btn-ghost btn-lg" href="/docs/conta/usuarios/">Como convidar</a>

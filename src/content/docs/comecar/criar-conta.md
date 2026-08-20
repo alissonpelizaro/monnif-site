@@ -4,7 +4,7 @@ description: Cadastro, o que é pedido e por que o login é feito com CPF.
 order: 1
 ---
 
-O cadastro leva menos de um minuto e não pede cartão de crédito. Vá para [app.monnif.com](https://app.monnif.com/signup) e preencha nome, e-mail, CPF e uma senha de no mínimo 8 caracteres.
+O cadastro leva menos de um minuto e não pede cartão de crédito. Vá para [app.monnif.com](https://app.monnif.com/signup?utm_source=site&utm_medium=docs) e preencha nome, e-mail, CPF e uma senha de no mínimo 8 caracteres.
 
 ## Por que CPF
 

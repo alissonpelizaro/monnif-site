@@ -8,6 +8,7 @@ import WhatsAppIcon from "../components/WhatsAppIcon.astro";
 import WhatsAppPrint from "../components/WhatsAppPrint.astro";
 import { RECURSOS, OUTROS } from "../data/recursos";
 import { EDITORA, SITE, grafo } from "../data/seo";
+import { CRIAR_CONTA } from "../data/app";
 
 // Só nesta página a marca vem na frente: o <title> da home é uma das quatro
 // fontes de onde o buscador tira o nome do site, junto com og:site_name e o
@@ -183,7 +184,7 @@ const FRASES = [
         WhatsApp: “paguei o mercado, 240 no cartão” e pronto.
       </p>
       <div class="cta-row reveal" data-d="3">
-        <a class="btn btn-primary btn-lg" href="https://app.monnif.com/signup" target="_blank" rel="noopener">
+        <a class="btn btn-primary btn-lg" href={CRIAR_CONTA("home")} target="_blank" rel="noopener">
           Criar conta grátis
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>

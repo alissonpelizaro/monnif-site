@@ -1,0 +1,261 @@
+---
+import Base from "../layouts/Base.astro";
+import Cta from "../components/Cta.astro";
+import { EDITORA, ID_SITE, SITE, grafo, migalha } from "../data/seo";
+import { ENTRAR } from "../data/app";
+
+const url = `${SITE}/indique/`;
+
+/**
+ * Percentual não entra nesta página. Ele é definido por cupom, no painel, e
+ * muda de campanha para campanha — número escrito aqui envelhece calado e vira
+ * promessa que o app não cumpre. Quem entra vê o seu no próprio painel.
+ */
+const pontos = [
+  {
+    titulo: "O cupom desconta para quem usa",
+    texto:
+      "Você não pede favor a ninguém: quem entrar pelo seu cupom paga menos do que pagaria sozinho. É por isso que ele é fácil de mandar — a outra pessoa também ganha alguma coisa.",
+    icone: `<path d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2 2 2 0 0 0 0 6 2 2 0 0 1-2 2H5a2 2 0 0 1-2-2 2 2 0 0 0 0-6z"/><path d="M14 7v10"/>`,
+  },
+  {
+    titulo: "Você recebe em toda renovação",
+    texto:
+      "A comissão não é um bônus de boas-vindas que acontece uma vez. Enquanto a pessoa que você indicou continuar assinando, cada renovação dela paga comissão de novo — inclusive a renovação automática no cartão.",
+    icone: `<path d="M3 12a9 9 0 0 1 15.5-6.3M21 12a9 9 0 0 1-15.5 6.3"/><path d="M18 3v5h-5M6 21v-5h5"/>`,
+  },
+  {
+    titulo: "Sai por PIX, na sua chave",
+    texto:
+      "Nada de crédito para gastar dentro do app, nada de voucher. É dinheiro na sua conta, por PIX, a partir de R$ 100 de saldo acumulado.",
+    icone: `<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><circle cx="17" cy="14.5" r="1.4"/>`,
+  },
+  {
+    titulo: "Prazo escrito, não estimado",
+    texto:
+      "Pedido feito, o pagamento sai em até 10 dias úteis. O prazo está no termo que você aceita, e não no rodapé de uma página que muda sozinha.",
+    icone: `<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>`,
+  },
+  {
+    titulo: "Você acompanha, sem bisbilhotar",
+    texto:
+      "Seu painel mostra quantas pessoas entraram pelo seu cupom e quanto cada uma gerou. Não mostra o nome completo, o e-mail nem um centavo do dinheiro delas — e isso é de propósito.",
+    icone: `<path d="M12 3l8 4v5c0 5-3.4 8.5-8 9.9C7.4 20.5 4 17 4 12V7z"/><path d="M9 12.5l2 2 4-4.5"/>`,
+  },
+  {
+    titulo: "Sem meta, sem cobrança",
+    texto:
+      "Não existe mínimo de indicações, não existe ranking e ninguém vai te mandar mensagem perguntando quantas você fez este mês. Indicou, ganhou. Não indicou, não acontece nada.",
+    icone: `<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/>`,
+  },
+];
+
+const duvidas = [
+  {
+    pergunta: "Preciso ser assinante para indicar?",
+    resposta:
+      "Precisa ter conta no Monnif, porque o programa vive dentro do app. Se a inscrição estiver aberta, a opção <strong>Indique e ganhe</strong> aparece no menu do seu nome.",
+  },
+  {
+    pergunta: "Quanto eu ganho por indicação?",
+    resposta:
+      "O percentual é definido por cupom e aparece no seu painel assim que você entra. Não colocamos um número fixo nesta página porque ele muda de campanha para campanha, e número desatualizado no site vira promessa que o app não cumpre.",
+  },
+  {
+    pergunta: "A chave PIX precisa ser CPF?",
+    resposta:
+      "A chave pode ser de qualquer tipo — CPF, e-mail, telefone ou aleatória. O que não muda é que <strong>a conta por trás dela precisa estar no seu próprio CPF</strong>. Chave em nome de outra pessoa é recusada na conferência do repasse.",
+  },
+  {
+    pergunta: "E se a pessoa cancelar ou pedir estorno?",
+    resposta:
+      "A comissão daquele pagamento é anulada. O que já foi pago e não foi estornado continua seu.",
+  },
+  {
+    pergunta: "Posso usar o meu próprio cupom?",
+    resposta:
+      "Não, e o app recusa na hora. Desconto para si mesmo somado a comissão para si mesmo é desconto duplo, e o termo veda.",
+  },
+  {
+    pergunta: "Isso me torna funcionário ou representante do Monnif?",
+    resposta:
+      "Não. Ser embaixador não cria vínculo de emprego, sociedade nem representação, e o imposto sobre o que você recebe é responsabilidade sua — nada é retido na fonte. Está escrito assim no termo, não nas entrelinhas.",
+  },
+  {
+    pergunta: "Dá para anunciar o Monnif no Google ou no Instagram pago?",
+    resposta:
+      "Anúncio pago comprando o nome Monnif, não. Falar do app para quem te acompanha, sim — o que o programa proíbe é spam, mensagem em massa, site agregador de cupom e promessa feita em nome do Monnif.",
+  },
+  {
+    pergunta: "E se eu quiser sair?",
+    resposta:
+      "Você sai quando quiser, e o saldo que acumulou continua devido — dá para pedir o repasse nas mesmas condições. Sair do programa não mexe na sua conta como usuário.",
+  },
+];
+
+const dados = grafo(
+  {
+    "@type": "FAQPage",
+    "@id": `${url}#duvidas`,
+    mainEntity: duvidas.map((d) => ({
+      "@type": "Question",
+      name: d.pergunta,
+      // O texto do JSON-LD é o mesmo da tela, sem as tags que só existem lá.
+      acceptedAnswer: { "@type": "Answer", text: d.resposta.replace(/<[^>]+>/g, "") },
+    })),
+  },
+  {
+    "@type": "WebPage",
+    "@id": `${url}#programa`,
+    url,
+    name: "Programa de indicação do Monnif",
+    description:
+      "Programa de embaixadores do Monnif: cupom com desconto para quem usa, comissão recorrente para quem indica e repasse por PIX a partir de R$ 100.",
+    inLanguage: "pt-BR",
+    isPartOf: { "@id": ID_SITE },
+    publisher: EDITORA,
+  },
+  migalha([{ nome: "Indique e ganhe" }]),
+);
+---
+
+<Base
+  title="Indique o Monnif e ganhe comissão por PIX — Monnif"
+  description="Vire embaixador do Monnif: seu cupom dá desconto para quem usar e comissão para você em cada renovação. Saque por PIX a partir de R$ 100, em até 10 dias úteis."
+>
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(dados)} />
+
+  <div class="page-head">
+    <div class="wrap">
+      <p class="kicker">Indique e ganhe</p>
+      <h1>Você já indica o Monnif.<br /><span class="grad-text">Agora dá para receber por isso.</span></h1>
+      <p class="lead">
+        Vire embaixador, ganhe um cupom e mande para quem você indicaria de
+        qualquer jeito. Quem usar paga menos; você recebe uma parte do que essa
+        pessoa pagar, em cada renovação dela, direto na sua chave PIX.
+      </p>
+      <div class="cta-row" style="justify-content:center;margin-top:26px">
+        <a class="btn btn-primary btn-lg" href={ENTRAR("indique")} target="_blank" rel="noopener">
+          Entrar no app
+        </a>
+        <a class="btn btn-ghost btn-lg" href="/docs/conta/indicar-amigos/">Como funciona, em detalhe</a>
+      </div>
+    </div>
+  </div>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="features">
+        {pontos.map((p, i) => (
+          <div class="feature reveal" data-d={String((i % 5) + 1)}>
+            <span class="ico" aria-hidden="true">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={p.icone} />
+            </span>
+            <h3>{p.titulo}</h3>
+            <p>{p.texto}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="prose reveal">
+        <h2>Como funciona, do começo ao fim</h2>
+        <p>
+          <strong>1. Você entra.</strong> No app, no menu do seu nome, abra
+          <strong>Indique e ganhe</strong>. Leia o termo, marque o aceite e
+          informe uma chave PIX. O cupom nasce na hora, com o link pronto para
+          copiar.
+        </p>
+        <p>
+          <strong>2. Você manda o link.</strong> É um endereço com o seu cupom
+          dentro. Quem abrir já chega com o desconto preenchido e não precisa
+          digitar nada — se preferir falar por voz, mande o código do cupom.
+        </p>
+        <p>
+          <strong>3. A pessoa contrata.</strong> A comissão nasce quando o
+          pagamento é confirmado, não quando ela cria a conta. Cadastro sem
+          contratação não gera nada.
+        </p>
+        <p>
+          <strong>4. O saldo acumula.</strong> Cada renovação da pessoa soma de
+          novo. Chegou a R$ 100, o botão de pedir o repasse libera.
+        </p>
+        <p>
+          <strong>5. Você pede e recebe.</strong> O pedido vai para uma pessoa
+          conferir e pagar por PIX, em até 10 dias úteis.
+        </p>
+
+        <h2>Por que existe uma conferência humana</h2>
+        <p>
+          O repasse não é automático de propósito. Antes de o dinheiro sair,
+          alguém confere se a chave PIX está no CPF do embaixador e se as
+          indicações são reais. É um dia a mais no prazo e é o que impede que o
+          programa vire uma máquina de conta falsa — que é como programa de
+          indicação costuma morrer.
+        </p>
+        <p>
+          Pela mesma razão, o app recusa o seu próprio cupom, e comissão vinda de
+          conduta proibida é anulada. O que você acumulou honestamente antes
+          disso continua seu.
+        </p>
+
+        <h2>O que o programa não é</h2>
+        <div class="note">
+          <p>
+            Não é renda passiva, não é multinível e não tem segundo nível: você
+            ganha das pessoas que <strong>você</strong> indicou, e ninguém ganha
+            por cima de você. Não existe pirâmide para subir, taxa para entrar
+            nem material para comprar.
+          </p>
+          <p>
+            Também não é emprego. Ser embaixador não cria vínculo de trabalho,
+            sociedade nem representação com o Monnif, e o imposto sobre o que
+            você recebe é responsabilidade sua.
+          </p>
+        </div>
+
+        <h2>Quando a inscrição está aberta</h2>
+        <p>
+          O programa funciona por campanha. Quando não há campanha aberta, a
+          opção simplesmente não aparece no menu do app — menu que leva a uma
+          tela de “programa fechado” é pior do que menu nenhum. Quem já é
+          embaixador continua com o cupom, o saldo e o direito de pedir o
+          repasse.
+        </p>
+        <p>
+          As regras completas — comissão, prazo, condutas proibidas, dados
+          pessoais e cancelamento — estão no termo que você lê antes de aceitar,
+          dentro do app. O resumo em português claro está em
+          <a href="/docs/conta/indicar-amigos/">Indique e ganhe</a>, na
+          documentação.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="duvidas">
+    <div class="wrap">
+      <div class="page-head" style="padding-bottom:34px">
+        <h2>Perguntas de quem vai indicar</h2>
+      </div>
+      <div class="faq">
+        {duvidas.map((d, i) => (
+          <details class="reveal" open={i === 0}>
+            <summary>{d.pergunta}</summary>
+            <p set:html={d.resposta} />
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Cta
+    titulo="Para indicar, primeiro é preciso usar."
+    destaque="Comece de graça."
+    texto="Crie sua conta, use o app por um tempo e decida se ele merece a sua indicação. Sem cartão de crédito no cadastro."
+    botao="Criar conta grátis"
+  />
+</Base>
