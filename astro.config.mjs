@@ -16,6 +16,12 @@ const datas = new Map(
 
 export default defineConfig({
   site: "https://monnif.com",
+  // O compressor come o espaço entre um texto e a tag em linha que vem na
+  // linha de baixo: "as contas do mês, a\n<a>fatura</a>" virava "afatura" em
+  // oito páginas. Escrever `{" "}` em cada ponto resolveria o sintoma e
+  // deixaria a armadilha armada para o próximo parágrafo escrito assim.
+  // Custa ~0,4 KB por página depois do gzip.
+  compressHTML: false,
   integrations: [
     sitemap({
       serialize(item) {
