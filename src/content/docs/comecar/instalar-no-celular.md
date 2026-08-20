@@ -9,13 +9,13 @@ O Monnif roda no navegador, no computador e no celular. Mas ele também é um **
 
 ## No Android (Chrome)
 
-1. Abra [app.monnif.com](https://app.monnif.com) no Chrome.
+1. Abra [app.monnif.com](https://app.monnif.com/?utm_source=site&utm_medium=docs) no Chrome.
 2. Toque no menu de três pontos.
 3. Escolha **Instalar aplicativo** ou **Adicionar à tela inicial**.
 
 ## No iPhone (Safari)
 
-1. Abra [app.monnif.com](https://app.monnif.com) no Safari — precisa ser o Safari.
+1. Abra [app.monnif.com](https://app.monnif.com/?utm_source=site&utm_medium=docs) no Safari — precisa ser o Safari.
 2. Toque no botão de compartilhar, o quadrado com a seta para cima.
 3. Role e escolha **Adicionar à Tela de Início**.
 

@@ -53,6 +53,7 @@ ${blog.map((p) => linha(p.data.title, `/blog/${p.id}/`, p.data.description)).joi
 
 ${[
   linha("Nossa história", "/manifesto/", "Por que o Monnif existe e o que ele se recusa a fazer"),
+  linha("Indique e ganhe", "/indique/", "Programa de embaixadores: cupom com desconto para quem usa, comissão recorrente para quem indica e repasse por PIX"),
   linha("Segurança", "/seguranca/", "Como os dados são guardados e o que a equipe não consegue ver"),
   linha("Privacidade", "/privacidade/", "Quais dados são coletados, para quê e os direitos da LGPD"),
   linha("Termos de uso", "/termos/", "As regras de uso do serviço"),

@@ -7,6 +7,7 @@ import ChatMock from "../../components/ChatMock.astro";
 import WhatsAppPrint from "../../components/WhatsAppPrint.astro";
 import { RECURSOS } from "../../data/recursos";
 import { EDITORA, ID_SITE, SITE, grafo, migalha, resumir } from "../../data/seo";
+import { CRIAR_CONTA } from "../../data/app";
 
 export function getStaticPaths() {
   return RECURSOS.map((r) => ({ params: { slug: r.slug }, props: { recurso: r } }));
@@ -87,7 +88,7 @@ const dados = grafo(
       <h1>{recurso.chamada}</h1>
       <p class="lead">{recurso.lead}</p>
       <div class="cta-row" style="justify-content:center;margin-top:26px">
-        <a class="btn btn-primary btn-lg" href="https://app.monnif.com/signup" target="_blank" rel="noopener">
+        <a class="btn btn-primary btn-lg" href={CRIAR_CONTA("recurso")} target="_blank" rel="noopener">
           Criar conta grátis
         </a>
         <a class="btn btn-ghost btn-lg" href={recurso.docs.href}>{recurso.docs.label}</a>

@@ -62,6 +62,7 @@ const paginas = [
   { caminho: "/comparar/", titulo: "Planilha, app ou Monnif?", etiqueta: "Comparar" },
   { caminho: "/para/casal/", titulo: "O dinheiro é de dois. A conta também.", etiqueta: "Para casais" },
   { caminho: "/para/saber-onde-o-dinheiro-vai/", titulo: "O dinheiro não some. Ele sai em pedaços pequenos.", etiqueta: "Para onde vai o meu dinheiro" },
+  { caminho: "/indique/", titulo: "Você já indica o Monnif. Agora dá para receber por isso.", etiqueta: "Indique e ganhe" },
   { caminho: "/manifesto/", titulo: "No que a Monnif acredita", etiqueta: "Nossa história" },
   { caminho: "/seguranca/", titulo: "Dinheiro é assunto sério. Tratamos assim.", etiqueta: "Seus dados" },
   { caminho: "/marca/", titulo: "A marca Monnif", etiqueta: "Kit de marca" },

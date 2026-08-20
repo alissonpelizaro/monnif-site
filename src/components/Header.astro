@@ -2,6 +2,7 @@
 import BrandMark from "./BrandMark.astro";
 import Tema from "./Tema.astro";
 import { RECURSOS } from "../data/recursos";
+import { CRIAR_CONTA, ENTRAR } from "../data/app";
 
 const institucional = [
   { href: "/docs/", label: "Como usar" },
@@ -54,7 +55,7 @@ const path = Astro.url.pathname;
 
     <div class="nav-actions">
       <Tema />
-      <a class="btn btn-primary btn-sm" href="https://app.monnif.com" target="_blank" rel="noopener">Entrar</a>
+      <a class="btn btn-primary btn-sm" href={ENTRAR("cabecalho")} target="_blank" rel="noopener">Entrar</a>
     </div>
 
     <details class="drawer">
@@ -68,8 +69,8 @@ const path = Astro.url.pathname;
         <a href="/recursos/">Ver todos</a>
         <h4>Monnif</h4>
         {institucional.map((i) => <a href={i.href}>{i.label}</a>)}
-        <a class="btn btn-primary btn-lg" href="https://app.monnif.com/signup" target="_blank" rel="noopener">Criar conta grátis</a>
-        <a class="btn btn-ghost btn-lg" href="https://app.monnif.com" target="_blank" rel="noopener">Entrar</a>
+        <a class="btn btn-primary btn-lg" href={CRIAR_CONTA("menu-celular")} target="_blank" rel="noopener">Criar conta grátis</a>
+        <a class="btn btn-ghost btn-lg" href={ENTRAR("menu-celular")} target="_blank" rel="noopener">Entrar</a>
       </div>
     </details>
   </div>
