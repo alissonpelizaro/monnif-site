@@ -1,0 +1,88 @@
+---
+/**
+ * Conta a visita no painel do app (/admin › Origens).
+ *
+ * O `src/data/app.ts` já carimba `utm_source=site` em quem *clica* para o app,
+ * e é isso que o painel media até agora. Faltava o resto: quem lê um artigo,
+ * acha caro e fecha a aba nunca apareceu em lugar nenhum — uma campanha que
+ * trouxe mil pessoas e nenhum cadastro era indistinguível de uma que não
+ * trouxe ninguém.
+ *
+ * Não guarda nada sobre a pessoa: nem IP, nem cookie, nem id de visitante. O
+ * servidor só soma contadores por dia, canal e rota. É por isso que isto pode
+ * rodar sem banner de consentimento — não há o que consentir.
+ *
+ * Vai pelo domínio do app, e não direto para o Cloud Run: o `/api` de lá já é
+ * o proxy que o app inteiro usa, então trocar a URL da API não mexe aqui.
+ */
+const ENDPOINT = "https://app.monnif.com/api/site/visits";
+---
+
+<script is:inline define:vars={{ ENDPOINT }}>
+  (function () {
+    // Localhost e preview de build não somam no relatório de produção.
+    var host = location.hostname;
+    if (host === "localhost" || host === "127.0.0.1" || host === "") return;
+
+    var CHAVE = "monnif_visita";
+    var novo = false;
+    var origem = null;
+
+    try {
+      origem = JSON.parse(sessionStorage.getItem(CHAVE) || "null");
+    } catch (e) {
+      // Storage bloqueado (aba anônima travada). Segue sem memória de sessão.
+    }
+
+    // A origem é a da *entrada*. Sem guardar, a segunda página que a pessoa
+    // abre teria `document.referrer = monnif.com` e entraria como "direto" —
+    // e quem lê cinco artigos viraria um visitante do Instagram e quatro
+    // diretos.
+    if (!origem) {
+      novo = true;
+      var q = new URLSearchParams(location.search);
+      var vindoDe = "";
+      try {
+        vindoDe = document.referrer
+          ? new URL(document.referrer).hostname.replace(/^www\./, "")
+          : "";
+      } catch (e) {}
+      // O próprio site não trouxe ninguém: navegação interna não é origem.
+      if (vindoDe === host) vindoDe = "";
+
+      var ref = q.get("ref");
+      origem = {
+        source: q.get("utm_source") || (ref ? "indicacao" : vindoDe || "direct"),
+        medium: q.get("utm_medium") || (ref ? "cupom" : ""),
+        campaign: q.get("utm_campaign") || ref || "",
+      };
+
+      try {
+        sessionStorage.setItem(CHAVE, JSON.stringify(origem));
+      } catch (e) {
+        // ponytail: sem sessionStorage cada página vira uma visita nova. O
+        // número de páginas continua certo; só o de visitas infla um pouco.
+      }
+    }
+
+    fetch(ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        source: origem.source,
+        medium: origem.medium,
+        campaign: origem.campaign,
+        // Só o caminho. A query string é histórico de navegação, e o relatório
+        // pergunta por rota.
+        path: location.pathname,
+        first: novo,
+      }),
+      // A pessoa pode clicar para o app antes da resposta voltar; sem isto o
+      // navegador cancelaria a contagem justo de quem converteu.
+      keepalive: true,
+    }).catch(function () {
+      // Bloqueador de anúncio, rede caindo, API dormindo. Contagem é
+      // acessória: nada na página depende dela.
+    });
+  })();
+</script>

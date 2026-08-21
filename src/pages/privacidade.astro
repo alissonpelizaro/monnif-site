@@ -61,6 +61,7 @@ const atualizacao = "2 de agosto de 2026";
           <li><strong>Dados de sessão:</strong> tokens de autenticação necessários para manter você conectado.</li>
           <li><strong>Registros de atividade:</strong> quem criou, editou ou apagou o quê e quando, dentro de cada conta financeira — é o Histórico visível no próprio app.</li>
           <li><strong>Registros técnicos:</strong> logs de erro e de acesso à API, usados para operar e depurar o serviço.</li>
+          <li><strong>Contagem de visitas a este site:</strong> a rota aberta e o canal de onde você chegou (o site que trouxe o link, ou a marcação <code>utm_</code> dele), somados em um contador por dia. Não há IP, cookie nem identificador de visitante: as visitas viram um número agregado, sem nada que aponte de volta para uma pessoa.</li>
           <li><strong>Inscrição de push:</strong> se você autorizar notificações, o endereço de inscrição gerado pelo seu navegador.</li>
         </ul>
 
@@ -137,6 +138,14 @@ const atualizacao = "2 de agosto de 2026";
           <code>SameSite=Lax</code> e <code>Secure</code>. Este site
           institucional não usa cookie algum. Não há cookie de publicidade,
           de rede social nem de analytics de terceiro.
+        </p>
+
+        <p>
+          A contagem de visitas deste site usa <code>sessionStorage</code> — não
+          cookie — para lembrar, enquanto a aba estiver aberta, de qual canal
+          você chegou. Some quando você fecha a aba, fica só no seu navegador e
+          não é enviado para lugar nenhum: serve apenas para que cinco páginas
+          lidas em sequência contem como uma visita, e não como cinco.
         </p>
 
         <h2>7. Por quanto tempo guardamos</h2>
