@@ -2,6 +2,7 @@
 import { existsSync } from "node:fs";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Visita from "../components/Visita.astro";
 import { ID_ORG, ID_SITE, PERFIS, SITE } from "../data/seo";
 import "../styles/global.css";
 
@@ -220,6 +221,8 @@ const grafoBase = {
   items.forEach(function (el) { io.observe(el); });
 })();
 </script>
+
+<Visita />
 
 </body>
 </html>
