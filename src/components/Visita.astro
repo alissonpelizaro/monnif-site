@@ -34,29 +34,53 @@ const ENDPOINT = "https://app.monnif.com/api/site/visits";
       // Storage bloqueado (aba anônima travada). Segue sem memória de sessão.
     }
 
-    // A origem é a da *entrada*. Sem guardar, a segunda página que a pessoa
-    // abre teria `document.referrer = monnif.com` e entraria como "direto" —
-    // e quem lê cinco artigos viraria um visitante do Instagram e quatro
-    // diretos.
-    if (!origem) {
+    var q = new URLSearchParams(location.search);
+    var ref = q.get("ref");
+    var utm = q.get("utm_source");
+
+    // Campanha explícita na URL: alguém montou este link de propósito.
+    //
+    // O link de embaixador (`?ref=CUPOM`) é um canal como outro qualquer, e o
+    // cupom é a peça — assim a indicação aparece no painel de origens sem um
+    // relatório separado.
+    var daUrl =
+      utm || ref
+        ? {
+            source: utm || "indicacao",
+            medium: q.get("utm_medium") || (ref ? "cupom" : ""),
+            campaign: q.get("utm_campaign") || ref || "",
+          }
+        : null;
+
+    if (daUrl && JSON.stringify(daUrl) !== JSON.stringify(origem)) {
+      // Marcação de campanha sobrescreve o que já estava guardado, e só ela.
+      //
+      // Quem abre o site pelo favorito, lê um artigo e *na mesma aba* clica no
+      // anúncio do Instagram entrava como acesso direto: o primeiro toque já
+      // estava gravado e o `utm_` era descartado. É o caminho de quem já
+      // conhece o produto e foi reimpactado — justamente a campanha que mais
+      // precisa provar que funciona.
+      //
+      // Sobrescrever aqui não reabre o problema que o primeiro toque resolve:
+      // navegação interna nunca carrega `utm_`.
+      //
+      // Entrada por campanha conta como visita nova, porque para atribuição é
+      // uma sessão nova. Comparar antes de gravar é o que impede um F5 na
+      // mesma URL de campanha de inventar visita a cada recarga.
+      origem = daUrl;
       novo = true;
-      var q = new URLSearchParams(location.search);
-      var vindoDe = "";
-      try {
-        vindoDe = document.referrer
-          ? new URL(document.referrer).hostname.replace(/^www\./, "")
-          : "";
-      } catch (e) {}
-      // O próprio site não trouxe ninguém: navegação interna não é origem.
-      if (vindoDe === host) vindoDe = "";
+    } else if (!origem) {
+      // Sem marcação e sem nada guardado: é a entrada da sessão, e quem diz de
+      // onde veio é o referrer.
+      origem = { source: origemDoReferrer(), medium: "", campaign: "" };
+      novo = true;
+    }
 
-      var ref = q.get("ref");
-      origem = {
-        source: q.get("utm_source") || (ref ? "indicacao" : vindoDe || "direct"),
-        medium: q.get("utm_medium") || (ref ? "cupom" : ""),
-        campaign: q.get("utm_campaign") || ref || "",
-      };
-
+    // Só a entrada grava. As páginas seguintes reusam o que está guardado —
+    // sem isso a segunda página teria `document.referrer = monnif.com` e
+    // entraria como acesso direto, e quem lê cinco artigos viraria um
+    // visitante do Instagram e quatro diretos.
+    if (novo) {
       try {
         sessionStorage.setItem(CHAVE, JSON.stringify(origem));
       } catch (e) {
@@ -84,5 +108,20 @@ const ENDPOINT = "https://app.monnif.com/api/site/visits";
       // Bloqueador de anúncio, rede caindo, API dormindo. Contagem é
       // acessória: nada na página depende dela.
     });
+
+    /** "https://www.google.com/search?q=x" → "google.com". */
+    function origemDoReferrer() {
+      var vindoDe = "";
+      try {
+        vindoDe = document.referrer
+          ? new URL(document.referrer).hostname.replace(/^www\./, "")
+          : "";
+      } catch (e) {}
+      // O próprio site não trouxe ninguém: navegação interna não é origem.
+      // Vazio (endereço digitado, app nativo sem referrer, cliente de e-mail)
+      // vira "direct" — que é o balde do "não deu para saber", e não só de
+      // quem digitou o endereço.
+      return !vindoDe || vindoDe === host ? "direct" : vindoDe;
+    }
   })();
 </script>
