@@ -1,8 +1,10 @@
 name: Deploy
 
+# Publicação sai de release publicada, não de merge. O rascunho é montado pelo
+# Release Drafter a cada merge na main; publicar a release é o gesto que sobe.
 on:
-  push:
-    branches: [main]
+  release:
+    types: [published]
   workflow_dispatch:
 
 permissions:
@@ -20,6 +22,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # No `workflow_dispatch` não existe release: cai na ref do dispatch.
+          ref: ${{ github.event.release.tag_name || github.ref }}
       # O runner default é Node 20, e o pnpm 11 não roda nele.
       - uses: withastro/action@v3
         with:

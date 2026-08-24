@@ -1,0 +1,41 @@
+name-template: "v$RESOLVED_VERSION"
+tag-template: "v$RESOLVED_VERSION"
+
+categories:
+  - title: "Novidades"
+    labels: ["minor", "enhancement"]
+  - title: "Correções"
+    labels: ["patch", "bug"]
+  - title: "Manutenção"
+    labels: ["documentation"]
+
+change-template: "- $TITLE (#$NUMBER)"
+change-title-escapes: '\<*_&'
+no-changes-template: "- Nada além do que já estava na main."
+
+# O label manda; sem label, o autolabeler abaixo já colocou um. `patch` no
+# final é só rede de segurança para PR que entrou sem passar pelo autolabeler.
+version-resolver:
+  major:
+    labels: ["major"]
+  minor:
+    labels: ["minor"]
+  patch:
+    labels: ["patch"]
+  default: patch
+
+# Conventional Commits já dizem o tamanho do bump — não faz sentido etiquetar
+# tudo na mão. O label continua editável no PR quando o padrão estiver errado.
+autolabeler:
+  - label: "major"
+    branch: ['/^\w+(\(.+\))?!\//']
+    title: '/^\w+(\(.+\))?!:/'
+  - label: "minor"
+    branch: ['/^feat\//']
+    title: "/^feat(\\(.+\\))?:/"
+  - label: "patch"
+    branch: ['/^(fix|perf|refactor|revert|docs|chore|ci|build|test|style)\//']
+    title: "/^(fix|perf|refactor|revert|docs|chore|ci|build|test|style)(\\(.+\\))?:/"
+
+template: |
+  $CHANGES

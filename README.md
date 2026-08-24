@@ -25,6 +25,14 @@ src/styles/      global.css (tokens + componentes)
 
 ## Deploy
 
-Push na `main` dispara `.github/workflows/deploy.yml`, que builda e publica no
-GitHub Pages. O domínio depende de `public/CNAME` estar no build — sem ele o
-`monnif.com` cai.
+Merge na `main` **não** publica. O que publica é **release publicada**:
+
+1. Merge na `main` → o *Release Drafter* (`.github/workflows/release-drafter.yml`)
+   monta/atualiza um rascunho de release com os PRs desde a última.
+2. O bump vem do label do PR — `major`, `minor` ou `patch`. O autolabeler
+   deduz pelo Conventional Commit do título/branch; dá pra trocar na mão.
+3. Publicar o rascunho em *Releases* dispara `.github/workflows/deploy.yml`,
+   que builda e publica no GitHub Pages (e avisa o IndexNow). O
+   `workflow_dispatch` continua ali para publicar fora do fluxo.
+
+O domínio depende de `public/CNAME` estar no build — sem ele o `monnif.com` cai.
