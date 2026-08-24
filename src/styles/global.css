@@ -1078,6 +1078,13 @@ html:has(.drawer[open]) { overflow: hidden; }
   border: 1px solid var(--border); border-radius: 18px;
 }
 
+/* Imagem no meio do texto: o markdown embrulha o <img> num <p>, e o Astro já
+   carimba width/height, então só falta a moldura da capa. */
+.prose p > img {
+  display: block; width: 100%; height: auto;
+  margin: 26px 0; border: 1px solid var(--border); border-radius: 18px;
+}
+
 .post-mais { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--border); }
 .post-mais h4 {
   font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
