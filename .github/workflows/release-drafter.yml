@@ -1,0 +1,25 @@
+name: Release Drafter
+
+on:
+  push:
+    branches: [main]
+  # Precisa ser `pull_request_target` para o autolabeler ter permissão de
+  # escrita no PR. Não há checkout aqui — nenhum código do PR roda neste job.
+  pull_request_target:
+    types: [opened, reopened, synchronize, edited]
+
+permissions:
+  contents: read
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # cria/atualiza o rascunho da release
+      pull-requests: write # aplica os labels de versão
+    steps:
+      - uses: release-drafter/release-drafter@v6
+        with:
+          config-name: release-drafter.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
