@@ -18,6 +18,23 @@ export const INSTAGRAM = "https://www.instagram.com/monnif.br/";
 
 export const PERFIS = [INSTAGRAM];
 
+/**
+ * Quem fundou e construiu o Monnif. Entra como `founder` da Organization: liga
+ * o produto à pessoa por trás dele, que é uma entidade que já existe fora daqui
+ * — por isso o `sameAs`, para o buscador reconhecer que é a mesma pessoa.
+ * Não confundir com AUTORA, que assina os textos do blog.
+ */
+export const CRIADOR = {
+  "@type": "Person" as const,
+  name: "Alisson Pelizaro",
+  url: "https://alissonpelizaro.github.io/",
+  jobTitle: "Senior Software Engineer",
+  sameAs: [
+    "https://github.com/alissonpelizaro",
+    "https://www.linkedin.com/in/alisson-pelizaro",
+  ],
+};
+
 export const ID_ORG = `${SITE}/#organizacao`;
 export const ID_SITE = `${SITE}/#site`;
 
