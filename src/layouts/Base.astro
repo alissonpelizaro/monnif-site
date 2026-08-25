@@ -3,7 +3,7 @@ import { existsSync } from "node:fs";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Visita from "../components/Visita.astro";
-import { CRIADOR, ID_ORG, ID_SITE, PERFIS, SITE } from "../data/seo";
+import { CRIADOR, EMPRESA_MAE, ID_ORG, ID_SITE, PERFIS, SITE } from "../data/seo";
 import "../styles/global.css";
 
 interface Props {
@@ -52,6 +52,7 @@ const grafoBase = {
       areaServed: { "@type": "Country", name: "Brasil" },
       knowsLanguage: "pt-BR",
       founder: CRIADOR,
+      parentOrganization: EMPRESA_MAE,
     },
     {
       "@type": "WebSite",

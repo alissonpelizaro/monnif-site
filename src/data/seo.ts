@@ -35,6 +35,18 @@ export const CRIADOR = {
   ],
 };
 
+/**
+ * A software house que construiu e mantém o Monnif. Entra como
+ * `parentOrganization` da Organization — o Monnif é produto dela, não uma
+ * empresa independente. O par recíproco (`subOrganization`) é declarado no
+ * JSON-LD do site da Element.
+ */
+export const EMPRESA_MAE = {
+  "@type": "Organization" as const,
+  name: "Element Web Development LTDA",
+  url: "https://elementwebdev.com.br",
+};
+
 export const ID_ORG = `${SITE}/#organizacao`;
 export const ID_SITE = `${SITE}/#site`;
 
