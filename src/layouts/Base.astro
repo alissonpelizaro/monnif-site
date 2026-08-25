@@ -3,7 +3,7 @@ import { existsSync } from "node:fs";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Visita from "../components/Visita.astro";
-import { ID_ORG, ID_SITE, PERFIS, SITE } from "../data/seo";
+import { CRIADOR, EMPRESA_MAE, ID_ORG, ID_SITE, PERFIS, SITE } from "../data/seo";
 import "../styles/global.css";
 
 interface Props {
@@ -51,6 +51,8 @@ const grafoBase = {
         "Gestão financeira pessoal e familiar com assistente de IA, contas compartilhadas, cartão de crédito, orçamento e projeção de saldo.",
       areaServed: { "@type": "Country", name: "Brasil" },
       knowsLanguage: "pt-BR",
+      founder: CRIADOR,
+      parentOrganization: EMPRESA_MAE,
     },
     {
       "@type": "WebSite",

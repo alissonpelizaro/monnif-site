@@ -18,6 +18,35 @@ export const INSTAGRAM = "https://www.instagram.com/monnif.br/";
 
 export const PERFIS = [INSTAGRAM];
 
+/**
+ * Quem fundou e construiu o Monnif. Entra como `founder` da Organization: liga
+ * o produto à pessoa por trás dele, que é uma entidade que já existe fora daqui
+ * — por isso o `sameAs`, para o buscador reconhecer que é a mesma pessoa.
+ * Não confundir com AUTORA, que assina os textos do blog.
+ */
+export const CRIADOR = {
+  "@type": "Person" as const,
+  name: "Alisson Pelizaro",
+  url: "https://alissonpelizaro.github.io/",
+  jobTitle: "Senior Software Engineer",
+  sameAs: [
+    "https://github.com/alissonpelizaro",
+    "https://www.linkedin.com/in/alisson-pelizaro",
+  ],
+};
+
+/**
+ * A software house que construiu e mantém o Monnif. Entra como
+ * `parentOrganization` da Organization — o Monnif é produto dela, não uma
+ * empresa independente. O par recíproco (`subOrganization`) é declarado no
+ * JSON-LD do site da Element.
+ */
+export const EMPRESA_MAE = {
+  "@type": "Organization" as const,
+  name: "Element Web Development LTDA",
+  url: "https://elementwebdev.com.br",
+};
+
 export const ID_ORG = `${SITE}/#organizacao`;
 export const ID_SITE = `${SITE}/#site`;
 
