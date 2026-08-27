@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 
-const atualizacao = "2 de agosto de 2026";
+const atualizacao = "26 de agosto de 2026";
 ---
 
 <Base
@@ -49,10 +49,12 @@ const atualizacao = "2 de agosto de 2026";
         <h2>2. Quais dados coletamos</h2>
         <h3>Você fornece</h3>
         <ul>
-          <li><strong>Cadastro:</strong> nome, e-mail e senha (guardada apenas como hash Argon2).</li>
+          <li><strong>Cadastro:</strong> nome, CPF, e-mail e senha (guardada apenas como hash Argon2). O CPF identifica a conta de forma única e é o que impede a mesma pessoa de abrir várias contas para burlar limite de plano ou programa de indicação.</li>
           <li><strong>Dados financeiros que você lança:</strong> despesas, receitas, categorias, carteiras, cartões, faturas, orçamentos, metas, assinaturas e compromissos.</li>
           <li><strong>Arquivos:</strong> comprovantes e anexos que você envia, e extratos OFX ou CSV que você importa.</li>
           <li><strong>Conversas com o assistente:</strong> as mensagens que você escreve ou dita, e as respostas geradas.</li>
+          <li><strong>Telefone, se você usar o WhatsApp:</strong> ao vincular o número, guardamos ele e as mensagens que você manda para o assistente por lá. Cada número fala por uma conta só. Você desvincula quando quiser, dentro do app.</li>
+          <li><strong>Dados de pagamento, se você assinar um plano pago:</strong> na assinatura feita pelo site, o endereço e o telefone de cobrança, mais um <em>token</em> do cartão e os quatro últimos dígitos — o número completo nunca chega até nós, fica com o processador. Na assinatura feita pelo app das lojas, nem isso: quem cobra é a Google Play ou a Apple, e recebemos apenas a confirmação de que a compra existe e até quando vale.</li>
           <li><strong>Preferências:</strong> tema, cor de destaque, tom das respostas e configuração de notificações.</li>
         </ul>
 
@@ -68,7 +70,7 @@ const atualizacao = "2 de agosto de 2026";
         <h3>Não coletamos</h3>
         <ul>
           <li>Senha, token ou qualquer credencial de banco. A Monnif não se conecta a instituições financeiras.</li>
-          <li>Dados de cartão de crédito para cobrança — não há cobrança.</li>
+          <li>O número completo do seu cartão de crédito. Ele é digitado direto no processador de pagamento, que nos devolve só um <em>token</em> e os quatro últimos dígitos.</li>
           <li>Localização, agenda do dispositivo ou lista de contatos.</li>
           <li>Dados de navegação para publicidade. Não usamos rastreador de terceiro.</li>
         </ul>
@@ -85,6 +87,8 @@ const atualizacao = "2 de agosto de 2026";
             <tr><td>Enviar e-mails transacionais e lembretes de vencimento</td><td>Execução de contrato (art. 7º, V)</td></tr>
             <tr><td>Enviar notificações push</td><td>Consentimento (art. 7º, I) — você autoriza no navegador e pode revogar</td></tr>
             <tr><td>Manter o Histórico de ações da conta compartilhada</td><td>Legítimo interesse (art. 7º, IX) — rastreabilidade entre participantes</td></tr>
+            <tr><td>Cobrar a assinatura de um plano pago</td><td>Execução de contrato (art. 7º, V)</td></tr>
+            <tr><td>Impedir contas duplicadas pelo CPF</td><td>Legítimo interesse (art. 7º, IX) — prevenção a fraude em plano e indicação</td></tr>
             <tr><td>Operar, depurar e proteger o serviço contra abuso</td><td>Legítimo interesse (art. 7º, IX)</td></tr>
           </tbody>
         </table>
@@ -105,6 +109,8 @@ const atualizacao = "2 de agosto de 2026";
             <tr><td>Resend</td><td>Seu e-mail e o conteúdo da mensagem</td><td>Entregar e-mails transacionais e resumos</td></tr>
             <tr><td>Provedor de modelo de IA</td><td>O texto da conversa e o contexto necessário para responder, além do áudio quando você usa o ditado</td><td>Gerar a resposta do assistente e transcrever a voz</td></tr>
             <tr><td>Serviço de push do seu navegador</td><td>O endereço de inscrição e o conteúdo da notificação</td><td>Entregar o aviso no seu dispositivo</td></tr>
+            <tr><td>Efí (processadora de pagamento)</td><td>Nome, CPF, e-mail, endereço e telefone de cobrança, e os dados do cartão que você digita na tela dela</td><td>Cobrar a assinatura contratada pelo site</td></tr>
+            <tr><td>Google Play e App Store</td><td>Um identificador da sua conta no Monnif, criado só para isso e que não revela quem você é</td><td>Ligar a assinatura comprada dentro do app à sua conta. Nome, e-mail e cartão ficam com a loja e não chegam até nós</td></tr>
           </tbody>
         </table>
         <p>
@@ -173,6 +179,13 @@ const atualizacao = "2 de agosto de 2026";
           conta. Para o restante, escreva para
           <a href="mailto:contato@monnif.com">contato@monnif.com</a>. Respondemos
           em até 15 dias.
+        </p>
+        <p>
+          A exclusão da conta fica em <strong>Minha conta → Segurança →
+          Excluir minha conta</strong>, e apaga o seu cadastro junto com tudo
+          que era só seu. Se você já desinstalou o app ou não consegue mais
+          entrar, o pedido também pode ser feito em
+          <a href="/excluir-conta">monnif.com/excluir-conta</a>.
         </p>
 
         <h2>9. Transferência internacional</h2>
