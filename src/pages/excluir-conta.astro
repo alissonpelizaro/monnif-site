@@ -21,6 +21,24 @@ const passos = [
   "Confirme com a sua senha e digite o seu e-mail.",
 ];
 
+/**
+ * O que a pessoa apaga sozinha sem encerrar a conta.
+ *
+ * O Play pede uma URL separada para exclusão parcial, e ela precisa listar os
+ * passos — não basta apontar para a exclusão da conta inteira. É a mesma
+ * página, com âncora `#dados`.
+ */
+const parcial = [
+  'Lançamentos, um a um ou o lote inteiro de uma importação.',
+  'Contas financeiras, com tudo que está dentro delas.',
+  'Carteiras, cartões e categorias.',
+  'Orçamentos, metas, compromissos, regras e listas de compras.',
+  'Comprovantes e anexos, sem apagar o lançamento a que pertencem.',
+  'Conversas com o assistente e a memória que ele guardou sobre você.',
+  'O vínculo do seu WhatsApp, que leva junto as mensagens trocadas por lá.',
+  'Notificações push e as sessões abertas em outros aparelhos.',
+];
+
 const apagado = [
   "Seu cadastro: nome, CPF, e-mail e senha.",
   "Seus lançamentos, carteiras, cartões, faturas, orçamentos e metas.",
@@ -32,16 +50,17 @@ const apagado = [
 ---
 
 <Base
-  title="Excluir sua conta — Monnif"
-  description="Como apagar a sua conta do Monnif e todos os dados ligados a ela, pelo app ou por e-mail."
+  title="Excluir seus dados ou sua conta — Monnif"
+  description="Como apagar dados avulsos do Monnif, ou a conta inteira, pelo app ou por e-mail."
 >
   <div class="page-head">
     <div class="wrap">
       <p class="kicker">Sua conta</p>
-      <h1>Excluir sua conta</h1>
+      <h1>Excluir seus dados ou sua conta</h1>
       <p class="lead">
-        A exclusão apaga o seu cadastro e tudo que era só seu. Não tem como
-        desfazer, e não guardamos cópia.
+        Dá para apagar só o que você quer, sem perder a conta — ou encerrar
+        tudo de uma vez. Excluir a conta não tem como desfazer, e não guardamos
+        cópia.
       </p>
     </div>
   </div>
@@ -71,7 +90,30 @@ const apagado = [
           LGPD estabelece.
         </p>
 
-        <h2>O que é apagado</h2>
+        <h2 id="dados">Apagar só parte dos dados, sem excluir a conta</h2>
+        <p>
+          Excluir a conta é o caminho mais radical, e quase nunca é o que a
+          pessoa quer. Tudo o que está na lista abaixo você apaga sozinho, item
+          a item, de dentro do app — sem pedir nada a ninguém e sem perder o
+          resto:
+        </p>
+        <ul>
+          {parcial.map((item) => <li>{item}</li>)}
+        </ul>
+        <p>
+          Cada um sai pelo próprio lugar: abra o item, use <strong>Excluir</strong>
+          e confirme. Apagar um lançamento leva junto os anexos dele; apagar uma
+          conta financeira leva tudo o que estava dentro dela.
+        </p>
+        <p>
+          Para o que não tiver botão — um pedido de anonimização, por exemplo, ou
+          a exclusão de um dado específico que você não encontrou — escreva para
+          <a href="mailto:contato@monnif.com?subject=Excluir%20dados">
+            contato@monnif.com</a
+          > dizendo o que quer apagar. Respondemos em até 15 dias, o prazo da LGPD.
+        </p>
+
+        <h2>O que é apagado quando a conta é excluída</h2>
         <ul>
           {apagado.map((item) => <li>{item}</li>)}
         </ul>
