@@ -1,0 +1,115 @@
+---
+import Base from "../layouts/Base.astro";
+
+/**
+ * Endereço público de exclusão de conta.
+ *
+ * Existe por exigência da política de dados do Google Play: todo app que deixa
+ * criar conta precisa oferecer a exclusão dentro do app **e** num endereço que
+ * funcione para quem já desinstalou. Este é o segundo, e é ele que vai no
+ * formulário de Data safety do Play Console.
+ *
+ * Não há formulário aqui de propósito. Um campo de e-mail nesta página aceitaria
+ * o pedido de qualquer pessoa que soubesse o endereço de outra — e o que ele
+ * dispara não tem volta. Quem consegue entrar apaga sozinho, provando quem é
+ * com a senha; quem não consegue passa pelo e-mail, onde a gente confere antes.
+ */
+const passos = [
+  "Entre no app em app.monnif.com, ou pelo aplicativo instalado.",
+  "Abra Minha conta e vá até a aba Segurança.",
+  "Desça até Excluir minha conta.",
+  "Confirme com a sua senha e digite o seu e-mail.",
+];
+
+const apagado = [
+  "Seu cadastro: nome, CPF, e-mail e senha.",
+  "Seus lançamentos, carteiras, cartões, faturas, orçamentos e metas.",
+  "Comprovantes e extratos que você anexou ou importou.",
+  "Suas conversas com o assistente e o que ele guardou sobre você.",
+  "O vínculo do seu WhatsApp e as mensagens trocadas por lá.",
+  "Suas sessões abertas e as inscrições de notificação.",
+];
+---
+
+<Base
+  title="Excluir sua conta — Monnif"
+  description="Como apagar a sua conta do Monnif e todos os dados ligados a ela, pelo app ou por e-mail."
+>
+  <div class="page-head">
+    <div class="wrap">
+      <p class="kicker">Sua conta</p>
+      <h1>Excluir sua conta</h1>
+      <p class="lead">
+        A exclusão apaga o seu cadastro e tudo que era só seu. Não tem como
+        desfazer, e não guardamos cópia.
+      </p>
+    </div>
+  </div>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="prose">
+        <h2>Pelo app, em quatro passos</h2>
+        <ol>
+          {passos.map((passo) => <li>{passo}</li>)}
+        </ol>
+        <p>
+          <a class="btn" href="https://app.monnif.com/perfil?tab=seguranca"
+            >Ir para Segurança no app</a
+          >
+        </p>
+
+        <h2>Se você não consegue mais entrar</h2>
+        <p>
+          Desinstalou o app, perdeu a senha ou não tem mais acesso ao e-mail do
+          cadastro? Escreva para
+          <a href="mailto:contato@monnif.com?subject=Excluir%20minha%20conta"
+            >contato@monnif.com</a
+          > com o assunto <strong>Excluir minha conta</strong>. Vamos confirmar
+          que a conta é sua antes de apagar — é o que impede alguém de apagar a
+          conta de outra pessoa — e concluímos em até 15 dias, o prazo que a
+          LGPD estabelece.
+        </p>
+
+        <h2>O que é apagado</h2>
+        <ul>
+          {apagado.map((item) => <li>{item}</li>)}
+        </ul>
+
+        <h2>O que continua, e por quê</h2>
+        <p>
+          <strong>Contas financeiras que você divide com outras pessoas.</strong>
+          Elas também são delas. Você sai da conta, e quem ficou assume como
+          dono. Os lançamentos que você criou seguem no Histórico daquela conta,
+          agora atribuídos a quem assumiu — apagá-los sumiria com parte do
+          dinheiro de gente que não pediu nada. Contas em que você era a única
+          pessoa vão embora junto com você.
+        </p>
+        <p>
+          <strong>Registros de pagamento.</strong> Se você assinou um plano pago,
+          guardamos o mínimo exigido pela obrigação fiscal e contábil, pelo prazo
+          da lei. Isso não inclui dados de cartão.
+        </p>
+        <p>
+          <strong>Backups.</strong> Cópias de segurança rotativas podem conter os
+          seus dados por até 30 dias depois da exclusão. Elas não são consultadas
+          para nada além de recuperar um desastre, e vencem sozinhas.
+        </p>
+
+        <h2>Se você assina um plano pago</h2>
+        <p>
+          Cancele a assinatura <strong>antes</strong> de apagar a conta. Se a
+          compra foi feita dentro do aplicativo, o cancelamento é na loja — em
+          <em>Assinaturas</em>, na Google Play ou na App Store. Apagar a conta
+          aqui não interrompe a cobrança da loja, porque quem cobra é ela. Se a
+          assinatura foi contratada pelo site, ela é encerrada junto com a conta.
+        </p>
+
+        <p>
+          Detalhes sobre quais dados guardamos e por quanto tempo estão na
+          <a href="/privacidade">Política de Privacidade</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
