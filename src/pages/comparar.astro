@@ -8,68 +8,78 @@ const url = `${SITE}/comparar/`;
 // Comparação sem citar concorrente pelo nome: as colunas são categorias, não
 // marcas. Sai mais honesto (nenhum app do mercado é igual ao outro) e não
 // envelhece toda vez que alguém do lado de lá muda de plano.
+//
+// Cada célula é um veredito curto: `s` é o sinal (ok / meio / nao, do ponto de
+// vista de quem usa) e `t` é o texto. Tabela é para escanear — a nuance de cada
+// linha está no texto logo abaixo, não dentro da célula.
 const LINHAS = [
   {
-    criterio: "Onde você anota o gasto",
-    planilha: "Abrindo o arquivo e digitando a linha, no computador",
-    apps: "Abrindo o app e preenchendo o formulário",
-    monnif: "Mensagem, áudio ou foto do cupom no WhatsApp — ou o formulário, se preferir",
+    criterio: "Onde você anota",
+    planilha: { s: "nao", t: "Digitando no computador" },
+    apps: { s: "meio", t: "Formulário no app" },
+    monnif: { s: "ok", t: "Texto, áudio ou foto no WhatsApp" },
   },
   {
     criterio: "Anotar na hora, na rua",
-    planilha: "Na prática, não. Fica para depois — e depois some",
-    apps: "Dá, se você abrir o app na fila do caixa",
-    monnif: "Manda a mensagem e acabou. O lançamento entra na hora",
+    planilha: { s: "nao", t: "Fica para depois" },
+    apps: { s: "meio", t: "Só se abrir o app" },
+    monnif: { s: "ok", t: "Manda a mensagem e acabou" },
   },
   {
-    criterio: "Usar junto com outra pessoa",
-    planilha: "Compartilhando o arquivo. Uma pessoa acaba dona dele",
-    apps: "Depende — em vários, é o recurso que exige plano pago",
-    monnif: "Cada um com o próprio acesso, sem dividir senha. No plano grátis",
+    criterio: "Usar com outra pessoa",
+    planilha: { s: "meio", t: "Arquivo compartilhado" },
+    apps: { s: "meio", t: "Costuma ser plano pago" },
+    monnif: { s: "ok", t: "Acesso próprio, no grátis" },
   },
   {
     criterio: "Cartão de crédito",
-    planilha: "Você calcula na mão em que fatura cada compra cai",
-    apps: "Geralmente sim, com fechamento e parcelas",
-    monnif: "Fatura fecha na data certa e a parcela aparece mês a mês",
+    planilha: { s: "nao", t: "Você calcula na mão" },
+    apps: { s: "ok", t: "Fatura e parcelas" },
+    monnif: { s: "ok", t: "Fatura e parcelas" },
   },
   {
-    criterio: "Saber quanto ainda pode gastar",
-    planilha: "Só olhando o passado. O futuro você adivinha",
-    apps: "Orçamento por categoria, quase sempre",
-    monnif: "Orçamento por categoria e o saldo previsto dos próximos dias",
+    criterio: "Quanto ainda pode gastar",
+    planilha: { s: "nao", t: "Só o passado" },
+    apps: { s: "ok", t: "Orçamento por categoria" },
+    monnif: { s: "ok", t: "Orçamento + saldo previsto" },
   },
   {
-    criterio: "Conexão automática com o banco",
-    planilha: "Não",
-    apps: "Muitos sim, por Open Finance — costuma ser o recurso pago",
-    monnif: "Não, por escolha. Você importa o extrato quando quiser",
+    criterio: "Conexão com o banco",
+    planilha: { s: "nao", t: "Não tem" },
+    apps: { s: "ok", t: "Open Finance, quase sempre pago" },
+    monnif: { s: "meio", t: "Não, por escolha. Você importa o extrato" },
   },
   {
     criterio: "Preço",
-    planilha: "Zero, e o custo é o seu tempo",
-    apps: "Grátis limitado, com o essencial atrás da assinatura",
-    monnif: "Grátis para criar e usar, sem cartão no cadastro",
+    planilha: { s: "ok", t: "Zero — custa seu tempo" },
+    apps: { s: "meio", t: "Grátis limitado" },
+    monnif: { s: "ok", t: "Grátis, sem cartão" },
   },
   {
     criterio: "Anúncio e venda de dados",
-    planilha: "Não",
-    apps: "Varia. Vale ler a política antes",
-    monnif: "Nenhum dos dois, nunca",
+    planilha: { s: "ok", t: "Não" },
+    apps: { s: "meio", t: "Varia — leia a política" },
+    monnif: { s: "ok", t: "Nunca" },
   },
   {
     criterio: "Se você parar de pagar",
-    planilha: "Nada muda",
-    apps: "Recursos somem e o histórico costuma ficar trancado",
-    monnif: "O que dá para fazer de graça continua dando",
+    planilha: { s: "ok", t: "Nada muda" },
+    apps: { s: "nao", t: "Histórico pode travar" },
+    monnif: { s: "ok", t: "O grátis continua" },
   },
   {
     criterio: "Por que costuma dar errado",
-    planilha: "Cansaço. Duas semanas de atraso e ninguém volta",
-    apps: "Fricção de abrir o app toda vez, e a parede do plano pago",
-    monnif: "Se você não falar com o assistente, também vai esfriar. Ele reduz o trabalho, não elimina",
+    planilha: { s: "nao", t: "Cansaço de digitar" },
+    apps: { s: "meio", t: "Fricção e parede do plano pago" },
+    monnif: { s: "meio", t: "Se não falar com o assistente, esfria também" },
   },
 ];
+
+const COLUNAS = [
+  { chave: "planilha", nome: "Planilha" },
+  { chave: "apps", nome: "Apps do mercado" },
+  { chave: "monnif", nome: "Monnif" },
+] as const;
 
 const duvidas = [
   {
@@ -128,30 +138,33 @@ const dados = grafo(
 
   <section style="padding-top:0">
     <div class="wrap">
-      <div class="prose reveal">
-        <div style="overflow-x:auto">
-          <table>
-            <thead>
-              <tr>
-                <th style="min-width:170px">&nbsp;</th>
-                <th style="min-width:210px">Planilha</th>
-                <th style="min-width:210px">Apps do mercado</th>
-                <th style="min-width:210px">Monnif</th>
-              </tr>
-            </thead>
-            <tbody>
-              {LINHAS.map((l) => (
-                <tr>
-                  <th scope="row">{l.criterio}</th>
-                  <td>{l.planilha}</td>
-                  <td>{l.apps}</td>
-                  <td><strong>{l.monnif}</strong></td>
-                </tr>
+      <div class="cmp reveal">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              {COLUNAS.map((c) => (
+                <th class={c.chave === "monnif" ? "is-monnif" : undefined}>{c.nome}</th>
               ))}
-            </tbody>
-          </table>
-        </div>
+            </tr>
+          </thead>
+          <tbody>
+            {LINHAS.map((l) => (
+              <tr>
+                <th scope="row">{l.criterio}</th>
+                {COLUNAS.map((c) => (
+                  <td class={`v-${l[c.chave].s}${c.chave === "monnif" ? " is-monnif" : ""}`} data-col={c.nome}>
+                    <span class="v-ico" aria-hidden="true" />
+                    {l[c.chave].t}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
+      <div class="prose">
         <div class="note">
           <p>
             “Apps do mercado” é uma generalização, e generalização sempre erra em
