@@ -828,6 +828,57 @@ html:has(.drawer[open]) { overflow: hidden; }
 }
 .prose .note p:last-child { margin-bottom: 0; }
 
+/* ===== Comparativo (/comparar) =====
+   Tabela de escanear, não de ler: cada célula é um veredito de poucas palavras
+   com um sinal colorido. Fora do .prose porque 720px não comporta quatro
+   colunas — dentro dele a tabela nascia com scroll horizontal em qualquer tela.
+   No mobile vira card por critério, com o nome da coluna vindo do data-col. */
+.cmp { max-width: 1000px; margin: 0 auto clamp(38px, 5vw, 56px); }
+.cmp table { width: 100%; border-collapse: collapse; }
+.cmp thead th {
+  padding: 0 14px 10px; text-align: left;
+  font-size: 0.72rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase;
+  color: var(--faint);
+}
+.cmp tbody th {
+  width: 24%; padding: 13px 14px 13px 0; text-align: left; vertical-align: top;
+  font-size: 0.88rem; font-weight: 700; letter-spacing: -0.01em;
+}
+.cmp td {
+  width: 25.33%; padding: 13px 14px 13px 36px; vertical-align: top; position: relative;
+  font-size: 0.88rem; line-height: 1.45; color: var(--muted);
+}
+.cmp tbody tr + tr th, .cmp tbody tr + tr td { border-top: 1px solid var(--border); }
+.cmp .is-monnif { background: color-mix(in oklch, var(--primary) 8%, transparent); }
+.cmp thead .is-monnif { border-radius: 12px 12px 0 0; padding-top: 10px; color: var(--foreground); }
+.cmp tbody tr:last-child .is-monnif { border-radius: 0 0 12px 12px; }
+.cmp td.is-monnif { color: var(--foreground); font-weight: 600; }
+
+.cmp .v-ico { position: absolute; left: 14px; font-weight: 800; }
+.cmp .v-ico::before { content: "✓"; }
+.cmp .v-ok .v-ico { color: var(--success); }
+.cmp .v-meio .v-ico { color: var(--warning); }
+.cmp .v-meio .v-ico::before { content: "~"; }
+.cmp .v-nao .v-ico { color: var(--destructive); }
+.cmp .v-nao .v-ico::before { content: "✕"; }
+
+@media (max-width: 760px) {
+  .cmp thead { display: none; }
+  .cmp table, .cmp tbody, .cmp tr, .cmp th, .cmp td { display: block; width: auto; }
+  .cmp tr {
+    border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; margin-bottom: 10px;
+    background: color-mix(in oklch, var(--card) 55%, transparent);
+  }
+  .cmp tbody th { width: auto; padding: 0 0 10px; font-size: 0.95rem; }
+  .cmp tbody tr + tr th, .cmp tbody tr + tr td { border-top: 0; }
+  .cmp td, .cmp td.is-monnif { padding: 7px 0 0 22px; background: none; }
+  .cmp td .v-ico { left: 0; top: 21px; }
+  .cmp td::before {
+    content: attr(data-col); display: block; margin-bottom: 1px;
+    font-size: 0.64rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--faint);
+  }
+}
+
 /* ===== Manifesto ===== */
 .principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
 /* Passo a passo: são quatro, e com auto-fit de 300px o quarto sobra sozinho
