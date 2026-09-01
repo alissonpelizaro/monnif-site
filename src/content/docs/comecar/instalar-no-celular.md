@@ -1,29 +1,41 @@
 ---
-title: Instalar no celular
-description: O Monnif é um PWA — instala na tela inicial, abre em tela cheia e não passa por loja de aplicativos.
+title: Baixar o app
+description: O Monnif está na Google Play e na App Store. Quem preferir continua usando pelo navegador, com a mesma conta.
 order: 4
 print: mobile-dashboard
 ---
 
-O Monnif roda no navegador, no computador e no celular. Mas ele também é um **PWA**: dá para instalar na tela inicial e usar como qualquer outro aplicativo, com ícone próprio e tela cheia, sem App Store e sem Play Store.
+O Monnif tem aplicativo para **Android** e para **iPhone**, grátis nas duas lojas, e uma **versão web** que abre em qualquer navegador — no celular e no computador. É a mesma conta e os mesmos dados nos três: o que você lança de um lado já está do outro.
 
-## No Android (Chrome)
+<div class="lojas">
+  <a href="https://play.google.com/store/apps/details?id=com.monnif.app" target="_blank" rel="noopener"><img src="/lojas/google-play.png" alt="Baixar o Monnif na Google Play" width="646" height="250" loading="lazy" decoding="async" /></a>
+  <a href="https://apps.apple.com/br/app/monnif-controle-financeiro/id6805985510" target="_blank" rel="noopener"><img src="/lojas/app-store.png" alt="Baixar o Monnif na App Store" width="860" height="255" loading="lazy" decoding="async" /></a>
+</div>
 
-1. Abra [app.monnif.com](https://app.monnif.com/?utm_source=site&utm_medium=docs) no Chrome.
-2. Toque no menu de três pontos.
-3. Escolha **Instalar aplicativo** ou **Adicionar à tela inicial**.
+## No Android
 
-## No iPhone (Safari)
+1. Abra a **Google Play** e procure por **Monnif**, ou toque direto em [baixar na Google Play](https://play.google.com/store/apps/details?id=com.monnif.app).
+2. Toque em **Instalar**.
+3. Abra o app e entre com a mesma conta que você usa no site — ou crie uma, se ainda não tiver.
 
-1. Abra [app.monnif.com](https://app.monnif.com/?utm_source=site&utm_medium=docs) no Safari — precisa ser o Safari.
-2. Toque no botão de compartilhar, o quadrado com a seta para cima.
-3. Role e escolha **Adicionar à Tela de Início**.
+## No iPhone
 
-## O que muda depois de instalar
+1. Abra a **App Store** e procure por **Monnif**, ou toque direto em [baixar na App Store](https://apps.apple.com/br/app/monnif-controle-financeiro/id6805985510).
+2. Toque em **Obter**.
+3. Abra o app e entre com a mesma conta que você usa no site — ou crie uma, se ainda não tiver.
 
-- Abre em tela cheia, sem a barra de endereço do navegador.
-- Ícone próprio junto dos outros aplicativos.
-- As **notificações push** de vencimento passam a chegar como aviso do sistema, se você autorizar.
+## No computador
+
+No computador não há o que baixar: abra [app.monnif.com](https://app.monnif.com/?utm_source=site&utm_medium=docs) no navegador e entre. É onde a tela grande ajuda — relatórios, importação de extrato e o fechamento do mês.
+
+## Sem baixar, pelo navegador do celular
+
+Se você prefere não instalar nada, o Monnif também roda no navegador do celular e pode ficar na tela inicial como um atalho de tela cheia:
+
+- **Android (Chrome):** abra [app.monnif.com](https://app.monnif.com/?utm_source=site&utm_medium=docs), toque no menu de três pontos e escolha **Instalar aplicativo** ou **Adicionar à tela inicial**.
+- **iPhone (Safari):** abra [app.monnif.com](https://app.monnif.com/?utm_source=site&utm_medium=docs) no Safari — precisa ser o Safari —, toque no botão de compartilhar, o quadrado com a seta para cima, e escolha **Adicionar à Tela de Início**.
+
+Funciona bem, mas as **notificações de vencimento** são mais confiáveis no aplicativo da loja. Se os avisos importam para você, prefira baixar.
 
 ## No celular, a navegação é outra
 
@@ -31,5 +43,6 @@ A barra lateral do desktop vira uma **barra inferior** com Dashboard, Despesas, 
 
 ## Bom saber
 
-- Instalar não cria uma cópia dos dados no aparelho: é o mesmo app, a mesma conta, sincronizado.
-- Para desinstalar, basta remover o ícone como faria com qualquer aplicativo.
+- Baixar o app não cria uma cópia separada dos dados: é a mesma conta, sincronizada com o navegador e com o WhatsApp.
+- Dá para usar o app no celular e o navegador no computador ao mesmo tempo, sem sair de nenhum dos dois.
+- Para desinstalar, remova o ícone como faria com qualquer aplicativo. A conta continua existindo — para apagá-la de vez, veja [excluir sua conta](/excluir-conta/).

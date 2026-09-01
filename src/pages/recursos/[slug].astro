@@ -5,6 +5,7 @@ import Base from "../../layouts/Base.astro";
 import Cta from "../../components/Cta.astro";
 import ChatMock from "../../components/ChatMock.astro";
 import WhatsAppPrint from "../../components/WhatsAppPrint.astro";
+import Lojas from "../../components/Lojas.astro";
 import { RECURSOS } from "../../data/recursos";
 import { EDITORA, ID_SITE, SITE, grafo, migalha, resumir } from "../../data/seo";
 import { CRIAR_CONTA } from "../../data/app";
@@ -93,6 +94,10 @@ const dados = grafo(
         </a>
         <a class="btn btn-ghost btn-lg" href={recurso.docs.href}>{recurso.docs.label}</a>
       </div>
+      {/* Só esta página fala de baixar o app; nas outras os selos seriam ruído. */}
+      {recurso.slug === "no-celular" && (
+        <div style="margin-top:26px"><Lojas centro /></div>
+      )}
     </div>
 
     {/* Sem print do app, entra uma conversa — a captura real do WhatsApp na

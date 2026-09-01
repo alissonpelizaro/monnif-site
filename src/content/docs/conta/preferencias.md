@@ -49,6 +49,6 @@ Três recados **não se desligam**, e não estão na tabela acima:
 ## Bom saber
 
 - Autorizar notificação é decisão do navegador, não do Monnif. Se você negou uma vez, precisa reverter nas configurações do site no próprio navegador.
-- Instalado como app no celular, o push funciona como notificação do sistema. Veja [Instalar no celular](/docs/comecar/instalar-no-celular/).
+- Instalado como app no celular, o push funciona como notificação do sistema. Veja [Baixar o app](/docs/comecar/instalar-no-celular/).
 - O WhatsApp só entra depois que você vincula o número. Veja [Assistente no WhatsApp](/docs/assistente/whatsapp/).
 - E-mail de segurança — troca de senha, código de acesso — não está aqui e não se desliga. Ele não é aviso, é o próprio caminho de entrar na conta.
