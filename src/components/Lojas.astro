@@ -5,6 +5,12 @@
  * Os PNG ficam em `public/` e não em `src/assets/`: são a arte oficial da
  * Google e da Apple, que as duas exigem intacta — passar pelo otimizador do
  * Astro é recomprimir o que não pode ser recomprimido.
+ *
+ * O da Play foi recortado uma vez, e só na transparência: o arquivo original
+ * traz 29px vazios em cima e embaixo (a arte ocupa 77% da altura) e o da Apple
+ * não traz nenhum. Igualados pela altura no CSS, o selo da Play saía um terço
+ * menor que o da Apple. O respiro que aquele vazio garantia agora vem do `gap`.
+ * Se um dia alguém rebaixar os arquivos das lojas, é este recorte que se perde.
  */
 import { PLAY_STORE, APP_STORE } from "../data/app";
 
@@ -17,7 +23,7 @@ const { centro = false } = Astro.props;
 // `width`/`height` são os do arquivo, para o navegador reservar o espaço antes
 // de baixar a imagem — o CSS depois iguala as duas pela altura.
 const LOJAS = [
-  { href: PLAY_STORE, src: "/lojas/google-play.png", alt: "Baixar o Monnif na Google Play", w: 646, h: 250 },
+  { href: PLAY_STORE, src: "/lojas/google-play.png", alt: "Baixar o Monnif na Google Play", w: 646, h: 192 },
   { href: APP_STORE, src: "/lojas/app-store.png", alt: "Baixar o Monnif na App Store", w: 860, h: 255 },
 ];
 ---
