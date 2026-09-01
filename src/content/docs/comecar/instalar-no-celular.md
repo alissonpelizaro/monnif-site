@@ -8,7 +8,7 @@ print: mobile-dashboard
 O Monnif tem aplicativo para **Android** e para **iPhone**, grátis nas duas lojas, e uma **versão web** que abre em qualquer navegador — no celular e no computador. É a mesma conta e os mesmos dados nos três: o que você lança de um lado já está do outro.
 
 <div class="lojas">
-  <a href="https://play.google.com/store/apps/details?id=com.monnif.app" target="_blank" rel="noopener"><img src="/lojas/google-play.png" alt="Baixar o Monnif na Google Play" width="646" height="250" loading="lazy" decoding="async" /></a>
+  <a href="https://play.google.com/store/apps/details?id=com.monnif.app" target="_blank" rel="noopener"><img src="/lojas/google-play.png" alt="Baixar o Monnif na Google Play" width="646" height="192" loading="lazy" decoding="async" /></a>
   <a href="https://apps.apple.com/br/app/monnif-controle-financeiro/id6805985510" target="_blank" rel="noopener"><img src="/lojas/app-store.png" alt="Baixar o Monnif na App Store" width="860" height="255" loading="lazy" decoding="async" /></a>
 </div>
 
