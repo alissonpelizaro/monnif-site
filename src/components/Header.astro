@@ -1,6 +1,7 @@
 ---
 import BrandMark from "./BrandMark.astro";
 import Tema from "./Tema.astro";
+import Lojas from "./Lojas.astro";
 import { RECURSOS } from "../data/recursos";
 import { CRIAR_CONTA, ENTRAR } from "../data/app";
 
@@ -71,6 +72,9 @@ const path = Astro.url.pathname;
         {institucional.map((i) => <a href={i.href}>{i.label}</a>)}
         <a class="btn btn-primary btn-lg" href={CRIAR_CONTA("menu-celular")} target="_blank" rel="noopener">Criar conta grátis</a>
         <a class="btn btn-ghost btn-lg" href={ENTRAR("menu-celular")} target="_blank" rel="noopener">Entrar</a>
+        {/* O menu só aparece no celular, que é justamente quem tem loja para abrir. */}
+        <h4>Baixar o app</h4>
+        <Lojas />
       </div>
     </details>
   </div>

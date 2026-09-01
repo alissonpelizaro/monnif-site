@@ -468,17 +468,17 @@ export const RECURSOS: Recurso[] = [
   {
     slug: "no-celular",
     titulo: "No celular",
-    tituloSeo: "App de finanças no celular, sem instalar — Monnif",
-    resumo: "Instala na tela inicial e abre como qualquer outro app",
-    chamada: "Na tela inicial, sem passar por loja.",
-    lead: "O Monnif abre no navegador do computador e do celular. Se quiser, ele fica na tela inicial com ícone próprio e abre em tela cheia, igual a qualquer app instalado.",
+    tituloSeo: "App de finanças para Android e iPhone — Monnif",
+    resumo: "Baixe na Google Play ou na App Store, ou use pelo navegador",
+    chamada: "No Android, no iPhone e no navegador.",
+    lead: "O Monnif está na Google Play e na App Store, de graça. E continua abrindo no navegador do computador e do celular, com a mesma conta e os mesmos dados.",
     print: "mobile-dashboard",
     icone: `<rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 18h.01"/>`,
     pontos: [
       {
-        titulo: "Nada para baixar",
+        titulo: "Nas duas lojas",
         texto:
-          "Sem loja de aplicativos, sem espera, sem atualização para instalar. Você abre o site, escolhe adicionar à tela inicial, e ele passa a estar lá.",
+          "Google Play para Android, App Store para iPhone. Grátis nas duas, com as notificações de vencimento chegando como aviso do sistema.",
       },
       {
         titulo: "Lançar leva segundos",
@@ -488,7 +488,7 @@ export const RECURSOS: Recurso[] = [
       {
         titulo: "O mesmo lugar no computador",
         texto:
-          "Você lança no celular na fila do mercado e vê no computador à noite. É a mesma conta, atualizada sozinha.",
+          "Não precisa baixar nada para usar no computador: a versão web abre em qualquer navegador. Você lança no celular na fila do mercado e vê no computador à noite, na mesma conta, atualizada sozinha.",
       },
       {
         titulo: "Do seu jeito",
@@ -499,14 +499,18 @@ export const RECURSOS: Recurso[] = [
     duvidas: [
       {
         pergunta: "Funciona em iPhone e em Android?",
-        resposta: "Nos dois, e também em qualquer computador. É o mesmo app, com a mesma conta.",
+        resposta: "Nos dois: o app está na App Store e na Google Play. E também em qualquer computador, pelo navegador. É a mesma conta nos três.",
       },
       {
-        pergunta: "Ocupa espaço no celular?",
-        resposta: "Quase nada — bem menos do que um app baixado da loja.",
+        pergunta: "Preciso baixar o app para usar?",
+        resposta: "No celular vale a pena, porque é ali que chegam as notificações de vencimento. Mas não é obrigatório: quem preferir continua entrando por app.monnif.com no navegador, com a mesma conta.",
+      },
+      {
+        pergunta: "Baixar o app custa alguma coisa?",
+        resposta: "Não. O download é grátis nas duas lojas e não pedimos cartão para criar a conta. Os planos pagos existem para quem quiser mais, e são opcionais.",
       },
     ],
-    docs: { href: "/docs/comecar/instalar-no-celular/", label: "Como instalar no celular" },
+    docs: { href: "/docs/comecar/instalar-no-celular/", label: "Como baixar o app" },
   },
 ];
 

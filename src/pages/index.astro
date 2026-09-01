@@ -6,9 +6,10 @@ import ChatMock from "../components/ChatMock.astro";
 import HeroDemo from "../components/HeroDemo.astro";
 import WhatsAppIcon from "../components/WhatsAppIcon.astro";
 import WhatsAppPrint from "../components/WhatsAppPrint.astro";
+import Lojas from "../components/Lojas.astro";
 import { RECURSOS, OUTROS } from "../data/recursos";
 import { EDITORA, SITE, grafo } from "../data/seo";
-import { CRIAR_CONTA } from "../data/app";
+import { APP_STORE, CRIAR_CONTA, ENTRAR, PLAY_STORE } from "../data/app";
 
 // Só nesta página a marca vem na frente: o <title> da home é uma das quatro
 // fontes de onde o buscador tira o nome do site, junto com og:site_name e o
@@ -76,9 +77,9 @@ const PERGUNTAS = [
       "Se você permitir, o celular avisa três dias antes de cada conta vencer e na hora que você marcou para cada compromisso. No começo do mês chega também um resumo por e-mail. Dá para desligar tudo.",
   },
   {
-    pergunta: "Preciso instalar alguma coisa?",
+    pergunta: "Onde eu baixo o aplicativo?",
     resposta:
-      "Não. Abre no navegador, no celular ou no computador. Se quiser, dá para deixar na tela inicial do celular com ícone próprio, sem passar por loja de aplicativos.",
+      "Na Google Play, se você usa Android, e na App Store, se usa iPhone — é grátis nas duas. E existe a versão web, que abre em qualquer navegador e é a melhor forma de usar no computador. Tudo com a mesma conta: o que você lança no celular já está lá quando você abre o computador.",
   },
   {
     pergunta: "E se eu importar o extrato errado?",
@@ -99,7 +100,7 @@ const dados = grafo(
     applicationCategory: "FinanceApplication",
     applicationSubCategory: "Gestão financeira pessoal e familiar",
     operatingSystem: "Web, iOS, Android",
-    browserRequirements: "Funciona em qualquer navegador atual, sem instalar nada",
+    browserRequirements: "A versão web funciona em qualquer navegador atual",
     description:
       "App grátis para organizar as finanças pessoais e da família: contas do mês, cartão de crédito, orçamento por categoria, saldo dos próximos dias, lembretes de vencimento e um assistente de IA que lança por você — no app ou pelo WhatsApp.",
     featureList: [
@@ -120,6 +121,11 @@ const dados = grafo(
     ],
     url: "https://app.monnif.com",
     installUrl: "https://app.monnif.com/signup",
+    // As fichas das lojas: `downloadUrl` diz onde se baixa, `sameAs` diz que
+    // aquele app de lá é este daqui. Sem o segundo o buscador trata a ficha da
+    // Play e a do site como dois produtos de nome parecido.
+    downloadUrl: [PLAY_STORE, APP_STORE],
+    sameAs: [PLAY_STORE, APP_STORE],
     offers: {
       "@type": "Offer",
       price: "0",
@@ -192,6 +198,13 @@ const FRASES = [
       </div>
       <p class="cta-note reveal" data-d="4">Leva menos de 1 minuto. Sem cartão de crédito no cadastro.</p>
 
+      <div class="reveal" data-d="4" style="margin-top:24px"><Lojas centro /></div>
+      <p class="cta-note reveal" data-d="4">
+        Grátis no Android e no iPhone — ou{" "}
+        <a href={ENTRAR("home-web")} target="_blank" rel="noopener" style="color:var(--acento);font-weight:600">abra no navegador</a>,
+        que é como a maioria usa no computador.
+      </p>
+
       <!-- O dashboard com o assistente aberto do lado, conversando sozinho. -->
       <HeroDemo />
 
@@ -200,7 +213,7 @@ const FRASES = [
         <div class="metric"><b class="grad-text">R$ 0</b><span>para criar a conta e usar</span></div>
         <div class="metric"><b class="grad-text">A família</b><span>toda vendo o mesmo número</span></div>
         <div class="metric"><b class="grad-text">Sem anúncio</b><span>e sem venda de dados</span></div>
-        <div class="metric"><b class="grad-text">Sem instalar</b><span>abre no celular e no computador</span></div>
+        <div class="metric"><b class="grad-text">Android e iPhone</b><span>ou direto no navegador</span></div>
       </div>
     </div>
   </div>
@@ -649,12 +662,14 @@ const FRASES = [
       <div class="split rev">
         <div class="split-txt reveal">
           <p class="kicker">No bolso</p>
-          <h2>Na tela inicial,<br />sem passar por loja.</h2>
+          <h2>Baixe na loja,<br />ou abra no navegador.</h2>
           <p>
-            O Monnif abre no navegador do celular e do computador. Se quiser, ele fica
-            na tela inicial com ícone próprio e abre em tela cheia, igual a qualquer
-            app instalado — só que sem baixar nada e sem atualização para instalar.
+            O Monnif está na Google Play e na App Store, de graça. E continua abrindo
+            no navegador do computador e do celular, para quando o aparelho não é o
+            seu ou a tela é maior. É a mesma conta nos dois: o gasto que você lança na
+            fila do mercado já está lá quando você senta na frente do computador.
           </p>
+          <div style="margin:24px 0 4px"><Lojas /></div>
           <ul class="checks">
             <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Lançar leva segundos</b> — um toque, a categoria, o valor, pronto</span></li>
             <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>O assistente a um toque</b> de dentro de qualquer tela</span></li>

@@ -2,6 +2,7 @@ import { getCollection } from "astro:content";
 import { RECURSOS } from "../data/recursos";
 import { SECOES } from "../content/docs/secoes";
 import { SITE } from "../data/seo";
+import { APP_STORE, PLAY_STORE } from "../data/app";
 
 /**
  * /llms.txt — o índice que os buscadores com IA leem antes de sair rastreando
@@ -31,10 +32,12 @@ export async function GET() {
 
 O assistente atende no WhatsApp: a pessoa vincula o número uma vez, de dentro do app, e passa a lançar gastos por mensagem, por áudio ou mandando a foto do cupom, sem abrir o app. O que entra por lá aparece na conta na hora. Excluir lançamento, convidar pessoas e ajustar saldo continuam sendo feitos só dentro do app.
 
-O Monnif não se conecta ao banco e nunca pede a senha bancária: quem quiser evitar digitação importa o extrato (.ofx ou .csv) baixado no site do próprio banco. A conta é compartilhada com a família por padrão, cada pessoa com o próprio acesso. Roda no navegador do celular e do computador, sem loja de aplicativos. É grátis para criar a conta e usar, sem anúncio e sem venda de dados.
+O Monnif não se conecta ao banco e nunca pede a senha bancária: quem quiser evitar digitação importa o extrato (.ofx ou .csv) baixado no site do próprio banco. A conta é compartilhada com a família por padrão, cada pessoa com o próprio acesso. Tem aplicativo na Google Play e na App Store, e uma versão web que roda no navegador do celular e do computador — mesma conta nos três. É grátis para criar a conta e usar, sem anúncio e sem venda de dados.
 
 - Site: ${SITE}
-- App: https://app.monnif.com
+- App (web): https://app.monnif.com
+- Android: ${PLAY_STORE}
+- iPhone: ${APP_STORE}
 - Contato: contato@monnif.com
 
 ## Recursos

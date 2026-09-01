@@ -24,3 +24,15 @@ export function appUrl(caminho: "/" | "/signup", medium: string) {
 /** Os dois destinos de sempre, para quem não precisa escolher o `medium`. */
 export const ENTRAR = (medium: string) => appUrl("/", medium);
 export const CRIAR_CONTA = (medium: string) => appUrl("/signup", medium);
+
+/**
+ * As lojas.
+ *
+ * Sem `utm_source` aqui de propósito: o clique sai para a Google e para a
+ * Apple, não para `app.monnif.com`, e a marcação morreria no caminho — quem
+ * conta esse clique é o painel de cada loja. (A Play aceita `referrer`, mas
+ * só chega ao app quem lê a Install Referrer API; enquanto ninguém lê, é
+ * parâmetro enfeitando o link.)
+ */
+export const PLAY_STORE = "https://play.google.com/store/apps/details?id=com.monnif.app";
+export const APP_STORE = "https://apps.apple.com/br/app/monnif-controle-financeiro/id6805985510";
