@@ -54,7 +54,7 @@ investimento tenha gerado.
 
 A única exceção razoável é dívida cara. Rotativo de cartão e cheque especial cobram
 muito mais do que qualquer aplicação rende. Nesse caso: uma reserva mínima (um mês),
-mata a dívida, depois volta a completar.
+[mata a dívida](/blog/sair-das-dividas/), depois volta a completar.
 
 ## Como isso fica no Monnif
 
