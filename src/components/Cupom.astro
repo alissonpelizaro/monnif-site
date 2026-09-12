@@ -1,0 +1,61 @@
+---
+/**
+ * Leva o cupom de indicação do site para o app.
+ *
+ * O site é outro domínio (`monnif.com` → `app.monnif.com`), e o app guarda o
+ * cupom no `localStorage` dele — que não enxerga nada daqui. Se o `ref` não
+ * viajar na URL do clique, a indicação morre na fronteira: a pessoa abre
+ * `monnif.com/?ref=ANA10`, lê a página de preços, clica em "Criar conta
+ * grátis" e chega no app sem cupom nenhum.
+ *
+ * Os botões são estáticos (`src/data/app.ts` carimba `utm_source=site` na
+ * hora do build) e o `ref` só existe em tempo de execução, na URL de quem
+ * está lendo. Por isso a marcação é feita aqui, no navegador.
+ *
+ * Guarda em `sessionStorage` pelo mesmo motivo que o contador de visitas: o
+ * `ref` está na URL da primeira página, e o clique para o app costuma sair da
+ * terceira.
+ */
+---
+
+<script is:inline>
+  (function () {
+    var CHAVE = "monnif_cupom";
+    // 24h, o mesmo prazo que o app dá ao cupom depois do clique, contadas do
+    // último clique: reabrir o link regrava o carimbo e devolve as 24h. Aba
+    // deixada aberta a semana inteira não vale mais que quem fechou o
+    // navegador.
+    var VALIDADE = 24 * 60 * 60 * 1000;
+    var cupom = new URLSearchParams(location.search).get("ref");
+
+    try {
+      if (cupom) {
+        sessionStorage.setItem(
+          CHAVE,
+          JSON.stringify({ code: cupom, at: Date.now() }),
+        );
+      } else {
+        var salvo = JSON.parse(sessionStorage.getItem(CHAVE) || "null");
+        if (salvo && Date.now() - salvo.at <= VALIDADE) cupom = salvo.code;
+        else sessionStorage.removeItem(CHAVE);
+      }
+    } catch (e) {
+      // Storage bloqueado (aba anônima travada). O cupom continua valendo na
+      // página em que o link foi aberto; só não atravessa a navegação.
+    }
+
+    if (!cupom) return;
+
+    var links = document.querySelectorAll('a[href*="app.monnif.com"]');
+    for (var i = 0; i < links.length; i++) {
+      try {
+        var url = new URL(links[i].href);
+        url.searchParams.set("ref", cupom);
+        links[i].href = url.toString();
+      } catch (e) {
+        // href estranho: deixa como está, um link quebrado é pior que um
+        // cupom perdido.
+      }
+    }
+  })();
+</script>
