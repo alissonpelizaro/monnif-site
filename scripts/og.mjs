@@ -59,6 +59,7 @@ const paginas = [
   { caminho: "/recursos/", titulo: "Tudo que o dinheiro da casa precisa", etiqueta: "Recursos" },
   { caminho: "/docs/", titulo: "Como usar o Monnif", etiqueta: "Passo a passo" },
   { caminho: "/blog/", titulo: "Dinheiro explicado sem enrolação", etiqueta: "Blog" },
+  { caminho: "/precos/", titulo: "Começa de graça. E continua dando.", etiqueta: "Preços" },
   { caminho: "/comparar/", titulo: "Planilha, app ou Monnif?", etiqueta: "Comparar" },
   { caminho: "/para/casal/", titulo: "O dinheiro é de dois. A conta também.", etiqueta: "Para casais" },
   { caminho: "/para/saber-onde-o-dinheiro-vai/", titulo: "O dinheiro não some. Ele sai em pedaços pequenos.", etiqueta: "Para onde vai o meu dinheiro" },
