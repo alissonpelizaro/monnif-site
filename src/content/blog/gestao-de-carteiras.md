@@ -163,7 +163,7 @@ manual para esquecer de registrar.
 **Carteira que acabou não precisa ser apagada.** Arquivar tira ela dos seletores de lançamento
 novo e mantém o histórico intacto, com os relatórios antigos corretos.
 
-O plano grátis já vem com duas carteiras, e os [planos pagos](/precos/) sobem esse teto — mas o
+O plano grátis já vem com duas carteiras, e os [planos pagos](/precos/) sobem esse limite — mas o
 raciocínio deste texto cabe em duas: uma para o mês, outra para o que não é do mês.
 
 ## O exercício de dez minutos
