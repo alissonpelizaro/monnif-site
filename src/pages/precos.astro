@@ -15,6 +15,15 @@ const url = `${SITE}/precos/`;
  * preços para o build ler, esta lista é o segundo lugar a manter em dia, e
  * está tudo num objeto só justamente para ninguém precisar caçar.
  *
+ * **O número grande é o do anual, não o do mensal.** `mes` guarda o valor por
+ * mês de quem paga o ano inteiro; o avulso e o total à vista ficam logo abaixo,
+ * em `detalhe`, que por isso **precisa abrir com "No plano anual"**. Preço
+ * grande sem essa linha vira promessa que a cobrança não cumpre — se um dia o
+ * detalhe encolher, o qualificador é a última parte a sair.
+ *
+ * O qualificador não cabe ao lado do preço: em card estreito ele quebra no meio
+ * e empurra a linha de baixo, desalinhando os três cards.
+ *
  * **Estes são os preços de quem assina no site.** Quem assina dentro do app do
  * iPhone ou do Android paga o valor da loja, que sai de uma tabela de faixas
  * da Apple e do Google e não bate com o nosso ao centavo. Por isso a página
@@ -43,8 +52,8 @@ const PLANOS = [
     id: "plus",
     nome: "Plus",
     chamada: "Para quem já anota todo dia",
-    mes: "R$ 19,90",
-    detalhe: "R$ 15,90/mês no anual (R$ 190,80 à vista)",
+    mes: "R$ 15,90",
+    detalhe: "No plano anual · R$ 190,80 à vista · R$ 19,90 no mensal",
     destaque: true,
     inclui: [
       "Tudo do grátis, com os tetos bem mais altos",
@@ -59,8 +68,8 @@ const PLANOS = [
     id: "super",
     nome: "Super",
     chamada: "Para quem cuida de mais de um bolso",
-    mes: "R$ 26,90",
-    detalhe: "R$ 19,90/mês no anual (R$ 238,80 à vista)",
+    mes: "R$ 19,90",
+    detalhe: "No plano anual · R$ 238,80 à vista · R$ 26,90 no mensal",
     destaque: false,
     inclui: [
       "Contas, carteiras, cartões e pessoas sem teto",
@@ -262,9 +271,12 @@ const dados = grafo(
   .plano-detalhe {
     margin: 2px 0 0;
     font-size: 0.85rem;
+    line-height: 1.45;
     opacity: 0.7;
-    /* Reserva a linha: sem ela o card do grátis sobe e desalinha os preços. */
-    min-height: 1.2em;
+    /* Reserva duas linhas, que é o que os planos pagos ocupam em toda largura
+       depois que o "No plano anual" entrou aqui. Com uma linha só, o card do
+       grátis subia e as três listas começavam em alturas diferentes. */
+    min-height: 2.9em;
   }
 
   .plano-lista {
