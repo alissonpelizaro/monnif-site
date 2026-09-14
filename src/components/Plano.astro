@@ -1,0 +1,272 @@
+---
+/**
+ * Um card da tabela de preços.
+ *
+ * O card não sabe qual ciclo está selecionado: ele desenha os dois preços e
+ * marca cada um com `so-anual`/`so-mensal`. Quem esconde um dos dois é o
+ * seletor da página, por CSS, a partir do rádio que está `:checked`. Assim a
+ * troca mensal/anual não custa JavaScript nenhum e funciona antes de qualquer
+ * script carregar.
+ */
+interface Props {
+  plano: {
+    id: string;
+    nome: string;
+    chamada: string;
+    icone: string;
+    anual: string;
+    mensal: string;
+    /** "/mês" nos pagos, vazio no grátis — R$ 0 por mês soa a pegadinha. */
+    sufixo: string;
+    detalheAnual: string;
+    detalheMensal: string;
+    /** Percentual de economia no anual. Null no grátis, que não tem o que descontar. */
+    desconto: number | null;
+    destaque: boolean;
+    listaTitulo: string;
+    inclui: string[];
+    botao: string;
+  };
+  href: string;
+  ordem: number;
+}
+
+const { plano, href, ordem } = Astro.props;
+---
+
+<div
+  class={`plano reveal${plano.destaque ? " plano-destaque" : ""}`}
+  data-d={String(ordem)}
+>
+  <div class="plano-topo">
+    <span class="plano-ico" aria-hidden="true">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={plano.icone} />
+    </span>
+    <h2>{plano.nome}</h2>
+    {plano.destaque && <span class="plano-tag">Mais assinado</span>}
+  </div>
+
+  <p class="plano-chamada">{plano.chamada}</p>
+
+  <p class="plano-preco">
+    <span class="so-anual"><b>{plano.anual}</b>{plano.sufixo && <i>{plano.sufixo}</i>}</span>
+    <span class="so-mensal"><b>{plano.mensal}</b>{plano.sufixo && <i>{plano.sufixo}</i>}</span>
+  </p>
+
+  <p class="plano-off-linha">
+    {plano.desconto !== null && (
+      <span class="plano-off so-anual">economia de {plano.desconto}%</span>
+    )}
+  </p>
+
+  <p class="plano-detalhe">
+    <span class="so-anual">{plano.detalheAnual}</span>
+    <span class="so-mensal">{plano.detalheMensal}</span>
+  </p>
+
+  <p class="plano-lista-titulo">{plano.listaTitulo}</p>
+  <ul class="plano-lista">
+    {plano.inclui.map((item) => (
+      <li>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+        <span>{item}</span>
+      </li>
+    ))}
+  </ul>
+
+  <a
+    class={`btn btn-lg ${plano.destaque ? "btn-primary" : "btn-ghost"}`}
+    href={href}
+    target="_blank"
+    rel="noopener"
+  >
+    {plano.botao}
+  </a>
+</div>
+
+<style>
+  .plano {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 26px 22px;
+    border-radius: 22px;
+    background: var(--card);
+    box-shadow:
+      inset 0 0 0 1px var(--border),
+      0 20px 50px -34px oklch(var(--tint) / calc(var(--sombra) * 0.7));
+    transition: transform 0.35s var(--ease-soft), box-shadow 0.35s var(--ease-soft);
+  }
+
+  .plano:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      inset 0 0 0 1px var(--border-strong),
+      0 28px 60px -32px oklch(var(--tint) / var(--sombra));
+  }
+
+  /* O do meio é o que se quer que leiam primeiro: anel e um véu do gradiente,
+     em vez de tamanho — crescer o card esticaria a linha inteira do grid e
+     empurraria os outros dois. */
+  .plano-destaque {
+    background:
+      linear-gradient(180deg, color-mix(in oklch, var(--grad-a) 7%, transparent), transparent 42%),
+      var(--card);
+    box-shadow:
+      inset 0 0 0 1.5px var(--acento),
+      0 26px 60px -30px color-mix(in oklch, var(--grad-a) 55%, transparent);
+  }
+
+  .plano-destaque:hover {
+    box-shadow:
+      inset 0 0 0 1.5px var(--acento),
+      0 34px 70px -28px color-mix(in oklch, var(--grad-a) 65%, transparent);
+  }
+
+  /* Ícone, nome e etiqueta na mesma linha. A etiqueta fora do fluxo vertical é
+     o que mantém os três cards alinhados: em cima do nome, ela descia só o card
+     do meio. */
+  .plano-topo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .plano-ico {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 11px;
+    color: var(--acento);
+    background: color-mix(in oklch, var(--acento) 12%, transparent);
+  }
+
+  .plano h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    letter-spacing: -0.03em;
+  }
+
+  .plano-tag {
+    margin-left: auto;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #fff;
+    background: var(--grad);
+  }
+
+  /* As três alturas reservadas abaixo existem pelo mesmo motivo: em card
+     estreito um plano ganha uma linha que o outro não tem — a chamada do Super
+     quebra em duas, o grátis não tem selo de economia — e as listas dos três
+     passam a começar em alturas diferentes. Reservar é mais barato do que
+     encurtar texto até caber. */
+  .plano-chamada {
+    margin: 10px 0 0;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    color: var(--muted);
+    min-height: 2.9em;
+  }
+
+  .plano-preco {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 0;
+  }
+
+  .plano-off-linha {
+    display: flex;
+    margin: 10px 0 0;
+    min-height: 22px;
+  }
+
+  .plano-preco b {
+    font-size: 2.3rem;
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 1;
+  }
+
+  .plano-preco i {
+    margin-left: 3px;
+    font-style: normal;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--faint);
+  }
+
+  .plano-off {
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    white-space: nowrap;
+    color: var(--success);
+    background: color-mix(in oklch, var(--success) 15%, transparent);
+  }
+
+  .plano-detalhe {
+    margin: 8px 0 0;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: var(--faint);
+    min-height: 2.9em;
+  }
+
+  .plano-lista-titulo {
+    margin: 22px 0 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
+  .plano-lista {
+    margin: 14px 0 22px;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    /* Empurra o botão para a base: cards de listas diferentes terminam juntos. */
+    flex: 1;
+  }
+
+  .plano-lista li {
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  .plano-lista svg {
+    flex: none;
+    margin-top: 3px;
+    color: var(--acento);
+  }
+
+  .plano .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .plano,
+    .plano:hover {
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
