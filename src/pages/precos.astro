@@ -14,6 +14,13 @@ const url = `${SITE}/precos/`;
  * **Mexeu no painel, mexa aqui.** Enquanto não houver uma rota pública de
  * preços para o build ler, esta lista é o segundo lugar a manter em dia, e
  * está tudo num objeto só justamente para ninguém precisar caçar.
+ *
+ * **Estes são os preços de quem assina no site.** Quem assina dentro do app do
+ * iPhone ou do Android paga o valor da loja, que sai de uma tabela de faixas
+ * da Apple e do Google e não bate com o nosso ao centavo. Por isso a página
+ * diz de quais preços está falando, em vez de deixar a pessoa descobrir a
+ * diferença na hora de pagar — e por isso não existe aqui nenhuma promessa de
+ * que o valor é o mesmo em todo canto.
  */
 const PLANOS = [
   {
@@ -73,9 +80,9 @@ const duvidas = [
       "Não. O plano grátis não pede cartão e não expira: não é teste de 7 dias nem período promocional. Você só informa uma forma de pagamento se decidir assinar.",
   },
   {
-    pergunta: "Como eu pago?",
+    pergunta: "Como eu pago, e o preço é o mesmo em todo lugar?",
     resposta:
-      "PIX, boleto ou cartão de crédito no site, e pela própria loja se você assinar dentro do app do iPhone ou do Android. No PIX e no cartão o plano entra no ar na hora.",
+      "No site é PIX, boleto ou cartão de crédito, pelos valores desta página — no PIX e no cartão o plano entra no ar na hora. Assinando dentro do app do iPhone ou do Android, quem cobra é a loja, e o valor é o que aparece lá: a Apple e o Google trabalham com faixas de preço próprias, então pode dar uma diferença de alguns centavos ou reais. Em qualquer um dos caminhos o plano é o mesmo e vale na mesma conta.",
   },
   {
     pergunta: "O que acontece se eu parar de pagar?",
@@ -161,8 +168,9 @@ const dados = grafo(
 
       <p class="planos-nota">
         Todo plano pago começa pelo grátis: você cria a conta, usa, e assina
-        depois — de dentro do app, quando fizer sentido. Os valores do semestral
-        e do anual aparecem no momento de assinar.
+        depois, quando fizer sentido. <strong>Os valores acima são os de quem
+        assina pelo site</strong> — assinando dentro do app do iPhone ou do
+        Android, vale o preço da loja, que pode ser um pouco diferente.
       </p>
     </div>
   </section>
