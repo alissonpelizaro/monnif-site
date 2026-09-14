@@ -189,7 +189,10 @@ const dados = grafo(
     display: grid;
     gap: 18px;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    align-items: start;
+    /* Sem `align-items: start`: os três cards esticam até a altura da linha, e
+       é isso que faz os botões terminarem na mesma reta mesmo com listas de
+       tamanhos diferentes. Com `start`, cada card para onde o texto acaba e os
+       botões ficam em três alturas. */
   }
 
   .plano {
