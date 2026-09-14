@@ -1,0 +1,306 @@
+---
+import Base from "../layouts/Base.astro";
+import Cta from "../components/Cta.astro";
+import { CRIAR_CONTA } from "../data/app";
+import { SITE, grafo, migalha } from "../data/seo";
+
+const url = `${SITE}/precos/`;
+
+/*
+ * Os preços moram no painel (`_config`, chave `billing.prices`) e mudam sem
+ * deploy. Aqui eles são cópia, e é a única forma honesta de mostrar preço numa
+ * página estática — o app é quem cobra, e é lá que o número vale.
+ *
+ * **Mexeu no painel, mexa aqui.** Enquanto não houver uma rota pública de
+ * preços para o build ler, esta lista é o segundo lugar a manter em dia, e
+ * está tudo num objeto só justamente para ninguém precisar caçar.
+ *
+ * **Estes são os preços de quem assina no site.** Quem assina dentro do app do
+ * iPhone ou do Android paga o valor da loja, que sai de uma tabela de faixas
+ * da Apple e do Google e não bate com o nosso ao centavo. Por isso a página
+ * diz de quais preços está falando, em vez de deixar a pessoa descobrir a
+ * diferença na hora de pagar — e por isso não existe aqui nenhuma promessa de
+ * que o valor é o mesmo em todo canto.
+ */
+const PLANOS = [
+  {
+    id: "free",
+    nome: "Grátis",
+    chamada: "Para começar a enxergar o mês",
+    mes: "R$ 0",
+    detalhe: "Para sempre, sem cartão no cadastro",
+    destaque: false,
+    inclui: [
+      "Assistente no WhatsApp: lance por mensagem ou áudio",
+      "2 contas, com até 2 pessoas em cada",
+      "2 carteiras e 2 cartões de crédito",
+      "Contas fixas e compras parceladas",
+      "Relatórios e exportação",
+      "Lembrete de conta vencendo",
+    ],
+  },
+  {
+    id: "plus",
+    nome: "Plus",
+    chamada: "Para quem já anota todo dia",
+    mes: "R$ 19,90",
+    detalhe: "R$ 15,90/mês no anual (R$ 190,80 à vista)",
+    destaque: true,
+    inclui: [
+      "Tudo do grátis, com os tetos bem mais altos",
+      "4 carteiras, 5 cartões, 4 pessoas na conta",
+      "Leitura de cupom por foto",
+      "Categoria automática: o app aprende e classifica",
+      "6 meses de histórico nos relatórios",
+      "10 importações de extrato por mês",
+    ],
+  },
+  {
+    id: "super",
+    nome: "Super",
+    chamada: "Para quem cuida de mais de um bolso",
+    mes: "R$ 26,90",
+    detalhe: "R$ 19,90/mês no anual (R$ 238,80 à vista)",
+    destaque: false,
+    inclui: [
+      "Contas, carteiras, cartões e pessoas sem teto",
+      "Histórico sem teto",
+      "Divisão de despesa entre as pessoas da conta",
+      "Categorias, metas e compromissos sem teto",
+      "500 mensagens e 300 ditados por mês",
+      "100 anexos e 30 importações por mês",
+    ],
+  },
+];
+
+const duvidas = [
+  {
+    pergunta: "Preciso de cartão de crédito para criar a conta?",
+    resposta:
+      "Não. O plano grátis não pede cartão e não expira: não é teste de 7 dias nem período promocional. Você só informa uma forma de pagamento se decidir assinar.",
+  },
+  {
+    pergunta: "Como eu pago, e o preço é o mesmo em todo lugar?",
+    resposta:
+      "No site é PIX, boleto ou cartão de crédito, pelos valores desta página — no PIX e no cartão o plano entra no ar na hora. Assinando dentro do app do iPhone ou do Android, quem cobra é a loja, e o valor é o que aparece lá: a Apple e o Google trabalham com faixas de preço próprias, então pode dar uma diferença de alguns centavos ou reais. Em qualquer um dos caminhos o plano é o mesmo e vale na mesma conta.",
+  },
+  {
+    pergunta: "O que acontece se eu parar de pagar?",
+    resposta:
+      "A conta volta para o plano grátis e nada é apagado: os lançamentos, as carteiras e o histórico continuam lá, e voltam a aparecer inteiros se você assinar de novo. O que muda são os tetos de quanta coisa nova dá para criar.",
+  },
+  {
+    pergunta: "Dá para assinar e cancelar quando eu quiser?",
+    resposta:
+      "Dá. A renovação automática é opcional e fica desligada por padrão quando você paga no PIX ou no boleto — nesses casos só sai do seu bolso o que você mandou sair. Assinatura feita pela loja do celular é cancelada na própria loja.",
+  },
+  {
+    pergunta: "O grátis é isca para virar pago depois?",
+    resposta:
+      "Não. Conta compartilhada, assistente no WhatsApp e relatórios — que costumam ser justamente o que fica atrás da assinatura em outros lugares — estão no plano grátis, e continuam.",
+  },
+];
+
+const dados = grafo(
+  {
+    "@type": "FAQPage",
+    "@id": `${url}#duvidas`,
+    mainEntity: duvidas.map((d) => ({
+      "@type": "Question",
+      name: d.pergunta,
+      acceptedAnswer: { "@type": "Answer", text: d.resposta },
+    })),
+  },
+  migalha([{ nome: "Preços" }]),
+);
+---
+
+<Base
+  title="Preços e planos — Monnif"
+  description="O Monnif é grátis para usar, sem cartão no cadastro e sem prazo para acabar. Veja o que vem no plano grátis e quanto custam o Plus e o Super."
+>
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(dados)} />
+
+  <div class="page-head">
+    <div class="wrap">
+      <p class="kicker">Preços</p>
+      <h1>Começa de graça.<br /><span class="grad-text">E continua dando.</span></h1>
+      <p class="lead">
+        Sem cartão no cadastro, sem teste que expira e sem anúncio. Os planos
+        pagos existem para quem precisa de mais espaço — não para desbloquear o
+        que você já usa.
+      </p>
+    </div>
+  </div>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="planos">
+        {PLANOS.map((p, i) => (
+          <div class={`plano reveal${p.destaque ? " plano-destaque" : ""}`} data-d={String(i + 1)}>
+            {p.destaque && <span class="plano-tag">Mais assinado</span>}
+            <h2>{p.nome}</h2>
+            <p class="plano-chamada">{p.chamada}</p>
+            <p class="plano-preco">
+              {p.mes}
+              {p.id !== "free" && <span>/mês</span>}
+            </p>
+            <p class="plano-detalhe">{p.detalhe}</p>
+            <ul class="plano-lista">
+              {p.inclui.map((item) => (
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              class={`btn btn-lg ${p.destaque ? "btn-primary" : "btn-ghost"}`}
+              href={CRIAR_CONTA(`precos-${p.id}`)}
+              target="_blank"
+              rel="noopener"
+            >
+              {p.id === "free" ? "Criar conta grátis" : `Começar no ${p.nome}`}
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <p class="planos-nota">
+        Todo plano pago começa pelo grátis: você cria a conta, usa, e assina
+        depois, quando fizer sentido. <strong>Os valores acima são os de quem
+        assina pelo site</strong> — assinando dentro do app do iPhone ou do
+        Android, vale o preço da loja, que pode ser um pouco diferente.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="prose reveal">
+        <h2>Dúvidas de quem está decidindo</h2>
+        {duvidas.map((d) => (
+          <>
+            <h3>{d.pergunta}</h3>
+            <p>{d.resposta}</p>
+          </>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Cta />
+</Base>
+
+<style>
+  .planos {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    /* Sem `align-items: start`: os três cards esticam até a altura da linha, e
+       é isso que faz os botões terminarem na mesma reta mesmo com listas de
+       tamanhos diferentes. Com `start`, cada card para onde o texto acaba e os
+       botões ficam em três alturas. */
+  }
+
+  .plano {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 26px 22px;
+    border-radius: 20px;
+    background: var(--cartao, rgba(127, 127, 127, 0.05));
+    border: 1px solid rgba(127, 127, 127, 0.18);
+  }
+
+  /* O do meio é o que se quer que leiam primeiro: anel em vez de tamanho, que
+     cresceria a linha inteira no grid e empurraria os outros dois. */
+  .plano-destaque {
+    border-color: var(--acento);
+    box-shadow: 0 0 0 1px var(--acento);
+  }
+
+  .plano-tag {
+    align-self: flex-start;
+    margin-bottom: 4px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--acento);
+  }
+
+  .plano h2 {
+    margin: 0;
+    font-size: 1.35rem;
+    letter-spacing: -0.03em;
+  }
+
+  .plano-chamada {
+    margin: 0;
+    font-size: 0.92rem;
+    opacity: 0.72;
+  }
+
+  .plano-preco {
+    margin: 14px 0 0;
+    font-size: 2.1rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+  }
+
+  .plano-preco span {
+    font-size: 0.95rem;
+    font-weight: 600;
+    opacity: 0.6;
+  }
+
+  .plano-detalhe {
+    margin: 2px 0 0;
+    font-size: 0.85rem;
+    opacity: 0.7;
+    /* Reserva a linha: sem ela o card do grátis sobe e desalinha os preços. */
+    min-height: 1.2em;
+  }
+
+  .plano-lista {
+    margin: 18px 0 22px;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 9px;
+    /* Empurra o botão para a base: cards de listas diferentes terminam juntos. */
+    flex: 1;
+  }
+
+  .plano-lista li {
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  .plano-lista svg {
+    flex: none;
+    margin-top: 3px;
+    color: var(--acento);
+  }
+
+  .plano .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .planos-nota {
+    margin: 22px auto 0;
+    max-width: 62ch;
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+</style>
