@@ -57,7 +57,7 @@ tivesse.
 ## Um limite existe
 
 Dá para vincular alguns números, não uma lista infinita. Dois cobrem o caso que motivou o
-recurso — empresa e pessoal —, e o teto existe porque **cada número vinculado é um
+recurso — empresa e pessoal —, e ele existe porque **cada número vinculado é um
 aparelho que fala pela sua conta**. Uma lista sem fim seria só superfície de ataque.
 
 Pela mesma razão, o vínculo cai sozinho depois de algumas semanas sem uso, e excluir

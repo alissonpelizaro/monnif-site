@@ -141,7 +141,7 @@ que impede a fiscalização.
 **Ninguém fica refém.** Remover alguém tira o acesso na hora e **os lançamentos ficam** — são
 da conta. A exportação em CSV pelos [relatórios](/docs/planejamento/relatorios/) está no plano
 grátis, que também cabe duas pessoas por conta sem pagar nada; os
-[planos pagos](/precos/) sobem os tetos e liberam a divisão de despesa entre as pessoas da
+[planos pagos](/precos/) sobem os limites e liberam a divisão de despesa entre as pessoas da
 conta.
 
 ## Comece pela conversa, não pelo cadastro

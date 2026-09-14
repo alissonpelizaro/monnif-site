@@ -164,7 +164,7 @@ no app. O raciocínio inteiro está em
 usar IA nenhuma clica em tudo do jeito antigo, e não perde recurso.
 
 O assistente por texto e áudio está no **plano grátis**; leitura de cupom por foto,
-categorização automática e os tetos maiores estão nos [planos pagos](/precos/).
+categorização automática e os limites maiores estão nos [planos pagos](/precos/).
 
 ## O resumo de uma linha
 

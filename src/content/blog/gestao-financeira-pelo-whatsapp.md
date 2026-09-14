@@ -162,7 +162,7 @@ Duas coisas que economizam explicação depois:
 - **As mensagens contam na mesma cota** do assistente do app — não é uma cota à parte.
 
 O assistente no WhatsApp, com texto e áudio, está no **plano grátis**. A leitura de cupom por
-foto e os tetos maiores de mensagem estão nos planos pagos; a lista completa fica em
+foto e os limites maiores de mensagem estão nos planos pagos; a lista completa fica em
 [preços](/precos/), e a visão geral do recurso em [WhatsApp](/recursos/whatsapp/).
 
 ## O teste de uma semana

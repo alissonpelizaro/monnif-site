@@ -181,7 +181,7 @@ por áudio.
 [importa o extrato](/docs/dados/importar/) baixado no próprio banco.
 
 **O plano grátis não expira** e não pede cartão no cadastro — conta compartilhada, assistente
-no WhatsApp e relatórios estão nele. O que os planos pagos mudam são os tetos, e está tudo
+no WhatsApp e relatórios estão nele. O que os planos pagos mudam são os limites, e está tudo
 listado em [preços](/precos/). Parar de pagar devolve a conta para o grátis sem apagar nada.
 
 ## A pergunta que fica
