@@ -77,7 +77,8 @@ dos dois querer ver a própria conta separada, até você precisar saber quem la
 O que procurar: **logins separados, mesma conta financeira, e um registro de quem fez o quê.**
 Papéis diferentes (quem só lança, quem também convida) são o refinamento seguinte. O assunto
 tem um texto só dele em
-[gestão financeira para casais](/blog/gestao-financeira-para-casais/).
+[gestão financeira para casais](/blog/gestao-financeira-para-casais/) — e, com filhos na
+conta, em [orçamento familiar](/blog/orcamento-familiar/).
 
 ## 4. Ele sabe onde o dinheiro está — não só quanto você tem?
 
