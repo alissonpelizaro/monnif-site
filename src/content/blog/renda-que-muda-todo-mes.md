@@ -133,7 +133,8 @@ conta de novo.
 
 Some aí as despesas que só aparecem uma vez por ano. Elas não são imprevistos: têm data
 marcada e você já sabe quais são. Divida cada uma por doze e trate o resultado como conta de
-luz.
+luz — a conta completa, com exemplo, está em
+[orçamento familiar](/blog/orcamento-familiar/).
 
 ## O que entra não é todo seu
 
