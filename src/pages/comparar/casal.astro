@@ -1,0 +1,256 @@
+---
+import Base from "../../layouts/Base.astro";
+import Cta from "../../components/Cta.astro";
+import { CRIAR_CONTA } from "../../data/app";
+import { SITE, grafo, migalha } from "../../data/seo";
+
+const url = `${SITE}/comparar/casal/`;
+
+// Mesma regra do /comparar/: colunas são categorias, não marcas. Muda só o
+// recorte — aqui os critérios são os de quem divide a casa.
+//
+// Os limites do plano grátis não aparecem em número de propósito: eles moram
+// no painel (`_config`) e mudam sem deploy. O número fica em /precos/, que já
+// é a cópia que se atualiza à mão.
+const LINHAS = [
+  {
+    criterio: "Cada um com o próprio acesso",
+    planilha: { s: "meio", t: "Mesmo arquivo, sem saber quem lançou" },
+    apps: { s: "meio", t: "Costuma ser plano pago, ou senha dividida" },
+    monnif: { s: "ok", t: "Convite por link, no grátis" },
+  },
+  {
+    criterio: "Anotar na hora, na rua",
+    planilha: { s: "nao", t: "Fica para a noite" },
+    apps: { s: "meio", t: "Só se abrir o app" },
+    monnif: { s: "ok", t: "Cada um pelo próprio WhatsApp" },
+  },
+  {
+    criterio: "Casa separada do pessoal",
+    planilha: { s: "meio", t: "Outra aba, outro arquivo" },
+    apps: { s: "meio", t: "Varia de app para app" },
+    monnif: { s: "ok", t: "Conta da casa e conta pessoal, mesmo login" },
+  },
+  {
+    criterio: "Quanto ainda dá para gastar",
+    planilha: { s: "nao", t: "Só o que já foi" },
+    apps: { s: "ok", t: "Orçamento por categoria" },
+    monnif: { s: "ok", t: "Orçamento + saldo dos próximos dias" },
+  },
+  {
+    criterio: "Cartão de crédito da casa",
+    planilha: { s: "nao", t: "Você calcula na mão" },
+    apps: { s: "ok", t: "Fatura e parcelas" },
+    monnif: { s: "ok", t: "Fatura e parcelas" },
+  },
+  {
+    criterio: "Quem deve quanto a quem",
+    planilha: { s: "meio", t: "Se alguém montar a fórmula" },
+    apps: { s: "meio", t: "Raro em app de finanças" },
+    monnif: { s: "meio", t: "No plano Super" },
+  },
+  {
+    criterio: "Conexão com o banco",
+    planilha: { s: "nao", t: "Não tem" },
+    apps: { s: "ok", t: "Open Finance, quase sempre pago" },
+    monnif: { s: "meio", t: "Não, por escolha. Você importa o extrato" },
+  },
+  {
+    criterio: "Preço para os dois",
+    planilha: { s: "ok", t: "Zero — custa o tempo de quem cuida" },
+    apps: { s: "meio", t: "Grátis limitado; a dois, costuma ser pago" },
+    monnif: { s: "ok", t: "Grátis para os dois, sem cartão" },
+  },
+];
+
+const COLUNAS = [
+  { chave: "planilha", nome: "Planilha a dois" },
+  { chave: "apps", nome: "Apps de finanças" },
+  { chave: "monnif", nome: "Monnif" },
+] as const;
+
+const duvidas = [
+  {
+    pergunta: "Qual o melhor app de controle financeiro gratuito para casal?",
+    resposta:
+      "Depende do que vocês querem resolver. Para controlar as contas da casa juntos — cada um com o próprio acesso, lançando pelo WhatsApp e vendo o mesmo orçamento —, o plano grátis do Monnif cobre os dois, sem cartão de crédito. Para só rachar despesas, um app de dividir contas é mais direto. Para não anotar nada, um app com Open Finance, que costuma ser pago.",
+  },
+  {
+    pergunta: "O plano grátis do Monnif vale para os dois?",
+    resposta:
+      "Vale. A conta da casa aceita duas pessoas no plano grátis, cada uma com o próprio login e o próprio WhatsApp vinculado. Não há cobrança por pessoa, e o cadastro não pede cartão.",
+  },
+  {
+    pergunta: "Os dois podem lançar gastos pelo WhatsApp?",
+    resposta:
+      "Podem. Cada um vincula o próprio número, de dentro do app, e o que manda por mensagem ou áudio cai na conta da casa na hora, visível para o outro. O assistente tem uma cota mensal de mensagens por pessoa — um não gasta a do outro.",
+  },
+  {
+    pergunta: "O Monnif calcula quem deve quanto para quem?",
+    resposta:
+      "No plano Super, sim: dá para rachar um lançamento entre as pessoas da conta, e o acerto de contas mostra quem pagou quanto e quem deve a quem. No grátis e no Plus, a conta da casa é tratada como um bolo só, que é como a maioria dos casais usa.",
+  },
+  {
+    pergunta: "A outra pessoa vê os meus gastos pessoais?",
+    resposta:
+      "Não, se você lançar na sua conta pessoal. Ela é outra conta, no mesmo login, e só quem você convidar enxerga. A conta da casa os dois veem; a sua continua sua.",
+  },
+];
+
+const dados = grafo(
+  {
+    "@type": "FAQPage",
+    "@id": `${url}#duvidas`,
+    mainEntity: duvidas.map((d) => ({
+      "@type": "Question",
+      name: d.pergunta,
+      acceptedAnswer: { "@type": "Answer", text: d.resposta },
+    })),
+  },
+  migalha([{ nome: "Comparar", url: "/comparar/" }, { nome: "Para casal" }]),
+);
+---
+
+<Base
+  title="Controle financeiro para casal grátis: qual app usar — Monnif"
+  description="Comparação honesta para casais: planilha a dois, apps de finanças e o Monnif. Acesso próprio para cada um, o que é grátis para os dois, WhatsApp, cartão e quem deve a quem."
+>
+  <script type="application/ld+json" is:inline slot="head" set:html={JSON.stringify(dados)} />
+
+  <div class="page-head">
+    <div class="wrap">
+      <p class="kicker">Comparar · para casal</p>
+      <h1>Controle financeiro a dois:<br /><span class="grad-text">o que funciona para os dois.</span></h1>
+      <p class="lead">
+        Para casal, a pergunta não é qual app tem mais gráfico. É se os dois
+        ainda vão estar anotando no terceiro mês — e se dá para fazer isso sem
+        pagar duas assinaturas. Esta página compara as opções por esse critério.
+      </p>
+    </div>
+  </div>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="cmp reveal">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              {COLUNAS.map((c) => (
+                <th class={c.chave === "monnif" ? "is-monnif" : undefined}>{c.nome}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {LINHAS.map((l) => (
+              <tr>
+                <th scope="row">{l.criterio}</th>
+                {COLUNAS.map((c) => (
+                  <td class={`v-${l[c.chave].s}${c.chave === "monnif" ? " is-monnif" : ""}`} data-col={c.nome}>
+                    <span class="v-ico" aria-hidden="true" />
+                    {l[c.chave].t}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="prose">
+        <div class="note">
+          <p>
+            “Apps de finanças” é uma generalização, e generalização sempre erra
+            em algum caso. Cada aplicativo tem o seu plano grátis e o seu limite
+            — vale conferir o do que vocês estão avaliando. Revisado em outubro
+            de 2026.
+          </p>
+        </div>
+
+        <h2>Grátis para os dois: o que cabe</h2>
+        <p>
+          No plano grátis, a <a href="/recursos/familia/">conta da casa</a>
+          recebe duas pessoas, cada uma com o próprio acesso e o próprio número
+          de WhatsApp vinculado. Os dois lançam e os dois veem o mesmo número:
+          contas do mês, <a href="/recursos/cartao-de-credito/">fatura do cartão</a>,
+          compras parceladas, <a href="/recursos/orcamento/">orçamento</a> e
+          relatórios. Cada um pode ter também a conta pessoal, que o outro não
+          enxerga.
+        </p>
+        <p>
+          O limite que aparece primeiro é o do assistente: cada pessoa tem uma
+          cota mensal de mensagens. Dá para criar o hábito no grátis; quem lança
+          tudo pelo WhatsApp, todo dia, pode precisar do Plus. Os números de
+          cada plano estão em <a href="/precos/">preços</a>.
+        </p>
+
+        <h2>Quando outro tipo de app serve melhor</h2>
+        <p>
+          <strong>Se vocês só querem rachar despesas</strong> — viagem, aluguel,
+          rodízio com os amigos — e não controlar o mês, um app de dividir
+          contas resolve com menos passos. Ele registra quem pagou e quem deve,
+          e para aí: não acompanha fatura nem orçamento.
+        </p>
+        <p>
+          <strong>Se não querem anotar nada</strong> e topam conectar o banco,
+          um app com Open Finance traz os lançamentos sozinho. O Monnif não
+          conecta em banco, por escolha; o caminho aqui é
+          <a href="/recursos/importar-extrato/">importar o extrato</a> baixado
+          no site do banco.
+        </p>
+        <p>
+          <strong>Se um dos dois ama planilha</strong> e o outro só quer saber
+          quanto pode gastar, a planilha funciona — até quem cuida dela cansar.
+          É o fim mais comum de todos.
+        </p>
+
+        <h2>Quem deve quanto a quem</h2>
+        <p>
+          No Monnif, a conta da casa é um bolo só por padrão: os dois lançam e o
+          total é dos dois. Para quem precisa do acerto, o plano
+          <a href="/precos/">Super</a> tem a divisão de despesa: um lançamento é
+          rachado entre as pessoas da conta, e o app mostra quem pagou quanto e
+          quem deve a quem, no menor número de transferências.
+        </p>
+
+        <h2>Como começar em dez minutos</h2>
+        <ol>
+          <li>
+            <a href={CRIAR_CONTA("comparar-casal")} target="_blank" rel="noopener">Crie a conta grátis</a>
+            — sem cartão de crédito.
+          </li>
+          <li>Na conta da casa, <a href="/docs/conta/usuarios/">convide a outra pessoa</a> pelo link.</li>
+          <li>Cada um vincula o próprio <a href="/recursos/whatsapp/">WhatsApp</a>, de dentro do app.</li>
+          <li>Mandem o primeiro gasto: “mercado, 180 no cartão”.</li>
+        </ol>
+        <p>
+          Mais sobre como o Monnif funciona para quem divide a casa em
+          <a href="/para/casal/">Monnif para casais</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="duvidas">
+    <div class="wrap">
+      <div class="page-head" style="padding-bottom:34px">
+        <h2>Perguntas de casal antes de escolher</h2>
+      </div>
+      <div class="faq">
+        {duvidas.map((d, i) => (
+          <details class="reveal" open={i === 0}>
+            <summary>{d.pergunta}</summary>
+            <p set:html={d.resposta} />
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Cta
+    titulo="Convide a outra pessoa hoje."
+    destaque="Os dois, de graça."
+    texto="Crie a conta, mande o link e lance o primeiro gasto pelo WhatsApp. Sem cartão de crédito."
+    botao="Criar conta grátis"
+  />
+</Base>

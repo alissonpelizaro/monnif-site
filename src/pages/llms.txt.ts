@@ -44,6 +44,15 @@ O Monnif não se conecta ao banco e nunca pede a senha bancária: quem quiser ev
 
 ${RECURSOS.map((r) => linha(r.titulo, `/recursos/${r.slug}/`, r.resumo)).join("\n")}
 
+## Para quem e comparações
+
+${[
+  linha("Para casais", "/para/casal/", "Conta da casa com acesso próprio para cada um, conta pessoal separada e os dois lançando pelo WhatsApp — no plano grátis, para duas pessoas"),
+  linha("Para saber onde o dinheiro vai", "/para/saber-onde-o-dinheiro-vai/", "As quatro causas de o salário sumir sem explicação e o que fazer com cada uma"),
+  linha("Planilha, app ou Monnif?", "/comparar/", "Comparação honesta entre planilha, apps de controle financeiro e o Monnif, inclusive o que o Monnif não faz"),
+  linha("Controle financeiro para casal: qual usar", "/comparar/casal/", "Planilha a dois, apps de finanças e o Monnif pelos critérios de casal: acesso próprio, grátis para os dois, WhatsApp, cartão e acerto de contas (plano Super)"),
+].join("\n")}
+
 ## Documentação
 
 ${secoes.join("\n\n")}
