@@ -6,6 +6,9 @@
  * origens conta os dois como "direto" — a única coisa que ele não sabe medir.
  *
  * A marcação é lida na primeira visita e guardada lá; ela não volta para cá.
+ * `site` é só o valor do build: quando a sessão tem origem conhecida
+ * (chatgpt.com, google.com, campanha), o `Visita.astro` troca pelo canal real
+ * no navegador.
  *
  * **Não use estas funções em JSON-LD.** Lá o endereço é identidade, e o
  * buscador precisa ver o mesmo `https://app.monnif.com` que vê em todo lugar.

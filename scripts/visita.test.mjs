@@ -26,15 +26,18 @@ const executar = new Function(
   corpo,
 );
 
-/** Abre uma página e devolve o que foi enviado (ou `null`, se nada saiu). */
-function visitar({ url = "https://monnif.com/", referrer = "", sessao }) {
+/**
+ * Abre uma página e devolve o que foi enviado (ou `null`, se nada saiu).
+ * `links` são os `<a>` para o app: o script reescreve o `href` deles no lugar.
+ */
+function visitar({ url = "https://monnif.com/", referrer = "", sessao, links = [] }) {
   const { pathname, search, hostname } = new URL(url);
   let enviado = null;
 
   executar(
     "https://app.monnif.com/api/site/visits",
     { hostname, pathname, search },
-    { referrer },
+    { referrer, querySelectorAll: () => links },
     {
       getItem: (k) => (k in sessao ? sessao[k] : null),
       setItem: (k, v) => {
@@ -134,6 +137,39 @@ const abaNova = () => ({});
 
   assert.equal(interna.source, "instagram", "a campanha sobrevive à navegação interna");
   assert.equal(interna.first, false);
+}
+
+// ------------------------------------------------- origem no clique para o app
+
+/** Um botão "Criar conta" como sai do build. */
+const botao = () => ({ href: "https://app.monnif.com/signup?utm_source=site&utm_medium=home" });
+const query = (link) => Object.fromEntries(new URL(link.href).searchParams);
+
+// O caso que motivou: quem vinha do ChatGPT chegava no app como `site`.
+{
+  const link = botao();
+  visitar({ url: "https://monnif.com/?utm_source=chatgpt.com", sessao: abaNova(), links: [link] });
+  assert.deepEqual(query(link), { utm_source: "chatgpt.com", utm_medium: "home" }, "o canal real troca o `site`, o botão fica");
+}
+
+{
+  const sessao = abaNova();
+  visitar({ referrer: "https://www.google.com/", sessao });
+  const link = botao();
+  visitar({ url: "https://monnif.com/precos/", referrer: "https://monnif.com/", sessao, links: [link] });
+  assert.equal(query(link).utm_source, "google.com", "a origem da entrada chega no clique da terceira página");
+}
+
+{
+  const link = botao();
+  visitar({ url: "https://monnif.com/?utm_source=instagram&utm_campaign=lancamento", sessao: abaNova(), links: [link] });
+  assert.equal(query(link).utm_campaign, "lancamento", "a peça da campanha vai junto");
+}
+
+{
+  const link = botao();
+  visitar({ sessao: abaNova(), links: [link] });
+  assert.equal(query(link).utm_source, "site", "origem desconhecida deixa o `site` do build");
 }
 
 // ------------------------------------------------------------- ambiente

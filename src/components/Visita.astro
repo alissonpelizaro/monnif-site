@@ -89,6 +89,26 @@ const ENDPOINT = "https://app.monnif.com/api/site/visits";
       }
     }
 
+    // A origem viaja no clique para o app. Sem isto quem chega pelo ChatGPT,
+    // lê a página e cria a conta é gravado lá como `site` — o app só vê o
+    // carimbo do botão, e o painel não cruzava as visitas de um canal com os
+    // cadastros dele. O botão segue no `utm_medium`, e o `leadReferrer =
+    // monnif.com` do cadastro é o que diz que a pessoa passou por aqui.
+    // Origem desconhecida ("direct") deixa o `site` que saiu do build.
+    if (origem.source !== "direct") {
+      var links = document.querySelectorAll('a[href*="app.monnif.com"]');
+      for (var i = 0; i < links.length; i++) {
+        try {
+          var url = new URL(links[i].href);
+          url.searchParams.set("utm_source", origem.source);
+          if (origem.campaign) url.searchParams.set("utm_campaign", origem.campaign);
+          links[i].href = url.toString();
+        } catch (e) {
+          // href estranho: fica como está, com o `site` do build.
+        }
+      }
+    }
+
     fetch(ENDPOINT, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
