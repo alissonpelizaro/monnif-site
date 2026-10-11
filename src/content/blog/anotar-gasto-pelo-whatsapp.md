@@ -70,7 +70,9 @@ perdido não pode virar acesso para apagar o seu histórico. Para isso, é você
 app.
 
 É uma limitação de propósito, e é a mesma razão pela qual o vínculo do número começa
-dentro do app — nunca por uma mensagem de fora.
+dentro do app — nunca por uma mensagem de fora. O que checar em qualquer bot antes de
+vincular o seu número está em
+[controle financeiro pelo WhatsApp](/blog/controle-financeiro-pelo-whatsapp/).
 
 ## Como começar
 
