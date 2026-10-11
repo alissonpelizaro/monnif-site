@@ -54,7 +54,8 @@ conseguir lançar do próprio aparelho, no momento em que o gasto acontece, sem 
 
 No arranjo separado com rateio, alguém paga o mercado e o outro devolve a metade. Essa conta
 existe — o que muda é se ela mora num app ou na cabeça de alguém. Quando mora na cabeça, ela
-some, e somem sempre as mesmas parcelas: as pequenas, e as de quem tem pior memória.
+some, e somem sempre as mesmas parcelas: as pequenas, e as de quem tem pior memória. A conta
+inteira, com números, está em [dividir as contas do casal](/blog/dividir-contas-do-casal/).
 
 ### Fiscalização em vez de controle
 
