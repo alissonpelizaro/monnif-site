@@ -139,7 +139,8 @@ Três respostas ruins, em ordem de gravidade:
   lugar, e "algum lugar" costuma ser o seu dado.
 
 O que procurar: plano grátis que não expira, exportação sempre disponível, e limites que
-travam **o que você cria a mais**, nunca o que você já criou.
+travam **o que você cria a mais**, nunca o que você já criou. Os quatro jeitos de um app grátis
+se pagar estão em [app de controle financeiro grátis](/blog/app-de-controle-financeiro-gratis/).
 
 ## O teste dos 60 dias
 

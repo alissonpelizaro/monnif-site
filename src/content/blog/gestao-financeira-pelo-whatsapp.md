@@ -15,7 +15,8 @@ atenção. É onde a conversa com o cliente acontece, onde o grupo da família f
 entregador manda o "cheguei". É o único ícone que a pessoa toca sem decidir tocar.
 
 Este texto é o mapa do que dá para fazer por lá, o que não dá, e por que a segunda lista
-existe.
+existe. Como comparar os bots antes de escolher um está em
+[controle financeiro pelo WhatsApp: o que checar antes de escolher um bot](/blog/controle-financeiro-pelo-whatsapp/).
 
 ## Por que o WhatsApp resolve o problema que o app não resolve
 

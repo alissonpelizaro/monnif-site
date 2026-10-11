@@ -26,7 +26,8 @@ e é o arranjo mais comum entre quem morou sozinho antes.
 
 O custo é operacional: alguém paga, o outro reembolsa, e a conta de quem deve o quê
 precisa existir em algum lugar. Quando essa conta vive só na memória, ela sempre
-favorece quem lembra melhor.
+favorece quem lembra melhor. Como fazer essa conta com números, e fechar o mês numa
+transferência só, está em [dividir as contas do casal](/blog/dividir-contas-do-casal/).
 
 ## Proporcional à renda
 
