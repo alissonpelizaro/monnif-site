@@ -839,6 +839,8 @@ html:has(.drawer[open]) { overflow: hidden; }
 .prose th, .prose td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
 .prose th { color: var(--foreground); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; }
 .prose td { color: var(--muted); }
+/* Quatro colunas não cabem em 375px: no celular a tabela rola por dentro, sem levar a página junto. */
+@media (max-width: 560px) { .prose table { display: block; overflow-x: auto; } }
 .prose .note {
   background: color-mix(in oklch, var(--card) 55%, transparent);
   border: 1px solid var(--border); border-left: 3px solid var(--grad-a);

@@ -82,7 +82,9 @@ mensagem, mesmo "para importar automático", é indistinguível de golpe — e o
 
 Quem quer trazer o histórico sem digitar tem um caminho sem credencial nenhuma: o extrato em
 OFX ou CSV que você mesmo baixa no site do banco. O passo a passo está em
-[três meses de histórico em cinco minutos](/blog/importar-extrato-sem-digitar/).
+[três meses de histórico em cinco minutos](/blog/importar-extrato-sem-digitar/), e o que se
+perde e o que se ganha sem conexão bancária, em
+[app de controle financeiro sem conectar o banco](/blog/controle-financeiro-sem-conectar-o-banco/).
 
 ### 4. Para onde vai a mensagem, e quem lê?
 

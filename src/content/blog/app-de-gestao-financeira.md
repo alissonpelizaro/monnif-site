@@ -118,7 +118,8 @@ Se pede, feche.
 Existe um jeito legítimo de um app ler a sua conta bancária, que é o Open Finance, com
 consentimento revogável e sem senha trafegando. E existe o jeito antigo — você entrega usuário
 e senha para um robô entrar por você. O segundo é comum, é mais fácil de implementar e
-transfere todo o risco para você.
+transfere todo o risco para você. E mesmo o primeiro deixa coisa de fora, como está em
+[app de controle financeiro sem conectar o banco](/blog/controle-financeiro-sem-conectar-o-banco/).
 
 O caminho mais simples e o mais seguro é o mesmo: **o extrato que você mesmo baixa no site do
 banco.** OFX ou CSV, importado no app, três meses de histórico em cinco minutos e nenhuma
