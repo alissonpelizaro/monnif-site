@@ -20,7 +20,8 @@ que dá para cortar num aperto. Aluguel, comida, transporte, saúde, contas de c
 entra restaurante, viagem nem streaming — num mês sem renda, essas linhas somem.
 
 Comprimir costuma reduzir o número em 20% a 30%, o que torna a meta bem menos
-assustadora.
+assustadora. O caminho até ela, mês a mês, está em
+[como juntar dinheiro](/blog/como-juntar-dinheiro/).
 
 ## Quantos meses
 
