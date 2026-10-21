@@ -46,7 +46,8 @@ desenhado: ele te conta em 3 de abril que março foi ruim, o que não te ajudou 
 O que você precisa enxergar é o mês inteiro, incluindo o aluguel que vence dia 10, a fatura
 que fecha dia 28 e a parcela número 4 de 10 que ninguém lembra que existe. **Previsto e
 realizado precisam conviver na mesma tela.** Se o app só soma o que foi pago, ele nunca vai
-te avisar de nada a tempo — e avisar a tempo é o trabalho inteiro.
+te avisar de nada a tempo — e avisar a tempo é o trabalho inteiro, como mostra
+[o juro que você paga por esquecer uma conta](/blog/contas-a-pagar/).
 
 Teste rápido na loja: lance uma despesa com vencimento daqui a duas semanas e veja se o
 número do mês muda. Se não mudou, é retrovisor.
