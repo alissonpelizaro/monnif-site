@@ -95,7 +95,8 @@ Só que ela tem duas condições, e as duas costumam ser ignoradas:
   antecipando consumo, que é outra coisa.
 - **O desconto à vista precisa ser menor que o rendimento.** Loja que tira 10% no PIX está
   oferecendo, em poucos segundos, mais do que a sua reserva rende em um ano inteiro. Nesse
-  caso, parcelar é a opção cara.
+  caso, parcelar é a opção cara. A conta com números, para a data em que as duas ofertas
+  aparecem juntas, está em [Black Friday sem dívida](/blog/black-friday-sem-divida/).
 
 A conclusão prática é chata mas simples: **parcelar sem juros é bom para quem podia ter
 pagado à vista.** Para quem não podia, é crédito com outro nome.
