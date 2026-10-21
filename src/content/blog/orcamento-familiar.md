@@ -36,7 +36,8 @@ Os passos abaixo atacam um desses de cada vez.
 
 Some a renda **líquida** de todo mundo que contribui — o que cai na conta, não o que está no
 contracheque. Vale-alimentação entra se ele paga mercado de verdade; 13º e férias ficam de
-fora, porque não acontecem todo mês.
+fora, porque não acontecem todo mês — o 13º tem um trabalho próprio, que está em
+[o que fazer com o 13º salário](/blog/o-que-fazer-com-o-13-salario/).
 
 Se alguém da casa tem renda que muda todo mês, não use a média dessa pessoa: use o piso, o
 valor que ela alcançou em dez dos últimos doze meses. O porquê, com a conta inteira, está em
