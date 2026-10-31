@@ -2,6 +2,7 @@
 title: "Dividir as contas do casal: o acerto do mês em uma transferência"
 description: "Meio a meio ou proporcional à renda, a regra é a parte fácil. O difícil é saber quem pagou o quê — e fechar o mês com um Pix só, em vez de sete."
 date: 2026-09-23
+atualizado: 2026-10-30
 tag: "Finanças pessoais"
 capa: "https://images.unsplash.com/photo-1758522490273-83abd2c9c3d4?auto=format&fit=crop&w=1600&h=900&q=70"
 ---

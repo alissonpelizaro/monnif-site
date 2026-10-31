@@ -2,6 +2,7 @@
 title: "Por que a Monnif é grátis"
 description: "O Monnif é grátis, não expira e não pede cartão — com WhatsApp e conta compartilhada incluídos. E quem paga a conta não é anúncio nem venda de dados."
 date: 2026-05-22
+atualizado: 2026-10-30
 tag: "Bastidores"
 capa: "https://images.unsplash.com/photo-1484417894907-623942c8ee29?auto=format&fit=crop&w=1600&h=900&q=70"
 ---

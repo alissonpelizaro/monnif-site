@@ -2,6 +2,7 @@
 title: "O que fazer com o 13º salário: a ordem que protege janeiro"
 description: "Dívida cara, contas de janeiro, reserva e só então o presente. A ordem certa para o 13º e por que decidir o destino dele antes de o dinheiro cair."
 date: 2026-10-19
+atualizado: 2026-10-30
 tag: "Finanças pessoais"
 capa: "https://images.unsplash.com/photo-1733743641023-00f5eb6b96cf?auto=format&fit=crop&w=1600&h=900&q=70"
 ---

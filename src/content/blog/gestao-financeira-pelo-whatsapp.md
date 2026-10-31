@@ -2,6 +2,7 @@
 title: "Gestão financeira pelo WhatsApp: o que dá para resolver por mensagem"
 description: "Lançar gasto, perguntar quanto sobrou, mandar a foto do cupom — e as três coisas que continuam só dentro do app, de propósito."
 date: 2026-08-22
+atualizado: 2026-10-30
 tag: "Guia do app"
 capa: "https://images.unsplash.com/photo-1592890288564-76628a30a657?auto=format&fit=crop&w=1600&h=900&q=70"
 ---

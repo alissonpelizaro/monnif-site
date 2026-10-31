@@ -2,6 +2,7 @@
 title: "App de controle financeiro sem conectar o banco: o que você perde e o que ganha"
 description: "O Open Finance traz o extrato sozinho, mas não sabe por que você gastou nem o que ainda vai vencer. Quando conectar compensa e como controlar sem conectar."
 date: 2026-10-21
+atualizado: 2026-10-30
 tag: "Finanças pessoais"
 capa: "https://images.unsplash.com/photo-1633265486064-086b219458ec?auto=format&fit=crop&w=1600&h=900&q=70"
 ---

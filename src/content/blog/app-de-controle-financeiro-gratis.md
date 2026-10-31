@@ -2,6 +2,7 @@
 title: "App de controle financeiro grátis: quem paga quando você não paga"
 description: "Anúncio, dado, teste que expira ou limite: os quatro jeitos de um app grátis se pagar, e o mínimo que o grátis precisa ter para servir de verdade."
 date: 2026-10-01
+atualizado: 2026-10-30
 tag: "Finanças pessoais"
 capa: "https://images.unsplash.com/photo-1607863680198-23d4b2565df0?auto=format&fit=crop&w=1600&h=900&q=70"
 ---

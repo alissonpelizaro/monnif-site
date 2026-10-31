@@ -2,6 +2,7 @@
 title: "Gestão de carteiras: saber onde o dinheiro está, não só quanto você tem"
 description: "Saldo somado é uma mentira confortável. Como separar conta corrente, reserva, espécie e dinheiro da empresa sem transformar transferência em despesa."
 date: 2026-08-29
+atualizado: 2026-10-30
 tag: "Finanças pessoais"
 capa: "https://images.unsplash.com/photo-1579014134953-1580d7f123f3?auto=format&fit=crop&w=1600&h=900&q=70"
 ---

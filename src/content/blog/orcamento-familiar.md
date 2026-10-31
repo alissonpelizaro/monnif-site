@@ -2,6 +2,7 @@
 title: "Orçamento familiar: como montar um que a casa inteira respeita"
 description: "Planilha de orçamento familiar não falta. Falta uma que sobreviva a filho, a três cartões e a janeiro. Como montar o da sua casa em uma tarde."
 date: 2026-10-09
+atualizado: 2026-10-30
 tag: "Finanças pessoais"
 capa: "https://images.unsplash.com/photo-1577896849786-738ed6c78bd3?auto=format&fit=crop&w=1600&h=900&q=70"
 ---

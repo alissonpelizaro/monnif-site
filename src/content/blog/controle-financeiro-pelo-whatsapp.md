@@ -2,6 +2,7 @@
 title: "Controle financeiro pelo WhatsApp: o que checar antes de escolher um bot"
 description: "Conversa com você mesmo, bot que escreve numa planilha ou assistente ligado a um app: os três jeitos e as sete perguntas antes do primeiro gasto."
 date: 2026-09-15
+atualizado: 2026-10-30
 tag: "Finanças pessoais"
 capa: "https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=1600&h=900&q=70"
 ---

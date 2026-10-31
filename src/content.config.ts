@@ -21,6 +21,8 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     date: z.coerce.date(),
+    /** Última revisão de conteúdo. Vira `dateModified` e o `lastmod` do sitemap. */
+    atualizado: z.coerce.date().optional(),
     /** Um assunto só por post — vira a etiqueta na listagem. */
     tag: z.enum(["Finanças pessoais", "Guia do app", "Bastidores"]),
     /** Sobe o post para o topo da listagem, em destaque. */

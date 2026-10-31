@@ -2,6 +2,7 @@
 title: "Como juntar dinheiro: um valor, uma data e um lugar onde ele não seja gasto"
 description: "Guardar o que sobra não funciona porque nunca sobra. O jeito que funciona tem três peças — valor, data e uma conta separada — e começa no dia do salário."
 date: 2026-10-15
+atualizado: 2026-10-30
 tag: "Finanças pessoais"
 capa: "https://images.unsplash.com/photo-1633158829875-e5316a358c6f?auto=format&fit=crop&w=1600&h=900&q=70"
 ---

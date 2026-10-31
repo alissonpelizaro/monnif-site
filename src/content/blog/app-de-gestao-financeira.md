@@ -2,6 +2,7 @@
 title: "App de gestão financeira: as sete perguntas que eliminam quase todos"
 description: "Controle financeiro pessoal, de casal ou da família — o que separa um aplicativo que você ainda vai estar usando em março de um que morre no segundo mês."
 date: 2026-08-08
+atualizado: 2026-10-30
 tag: "Finanças pessoais"
 capa: "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1600&h=900&q=70"
 ---
