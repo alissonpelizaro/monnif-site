@@ -2,6 +2,7 @@
 title: "Mandei a foto do cupom e o gasto se lançou"
 description: "A leitura de cupom fiscal por foto no WhatsApp: o que ela acerta, o que ela pergunta antes e por que nada é gravado sem você confirmar."
 date: 2026-08-05
+atualizado: 2026-10-30
 tag: "Guia do app"
 capa: "https://images.unsplash.com/photo-1634733988138-bf2c3a2a13fa?auto=format&fit=crop&w=1600&h=900&q=70"
 ---
@@ -61,8 +62,8 @@ excluir na tela. Não existe estado escondido, nem um "desfazer do assistente" s
 
 ## Onde ativar
 
-A leitura de cupom por foto faz parte do plano **Plus**. O assistente no WhatsApp em si —
-texto e áudio — está no plano grátis. Se o seu número ainda não está vinculado, o
+A leitura de cupom por foto é um recurso extra, opcional. O assistente no WhatsApp em si —
+texto e áudio — é grátis. Se o seu número ainda não está vinculado, o
 [passo a passo](/docs/assistente/whatsapp/) leva dois minutos.
 
 Depois disso, o cupom deixa de ser um papel que você guarda com a intenção de lançar

@@ -30,9 +30,9 @@ export async function GET() {
 
 > App grátis de finanças pessoais e familiares, em português: as contas do mês, o cartão de crédito, o orçamento por categoria e o saldo dos próximos dias num lugar só — com um assistente de IA que faz o lançamento quando você escreve ou fala o que aconteceu, dentro do app ou pelo WhatsApp.
 
-O assistente atende no WhatsApp: a pessoa vincula o número uma vez, de dentro do app, e passa a lançar gastos por mensagem, por áudio ou mandando a foto do cupom, sem abrir o app. O que entra por lá aparece na conta na hora. Excluir lançamento, convidar pessoas e ajustar saldo continuam sendo feitos só dentro do app.
+O assistente atende no WhatsApp: a pessoa vincula o número uma vez, de dentro do app, e passa a lançar gastos por mensagem ou por áudio, sem abrir o app. O WhatsApp é grátis. O que entra por lá aparece na conta na hora. Excluir lançamento, convidar pessoas e ajustar saldo continuam sendo feitos só dentro do app.
 
-O Monnif não se conecta ao banco e nunca pede a senha bancária: quem quiser evitar digitação importa o extrato (.ofx ou .csv) baixado no site do próprio banco. A conta é compartilhada com a família por padrão, cada pessoa com o próprio acesso. Tem aplicativo na Google Play e na App Store, e uma versão web que roda no navegador do celular e do computador — mesma conta nos três. É grátis para criar a conta e usar, sem anúncio e sem venda de dados.
+O Monnif não se conecta ao banco e nunca pede a senha bancária: quem quiser evitar digitação importa o extrato (.ofx ou .csv) baixado no site do próprio banco — um recurso extra, opcional. A conta é compartilhada com a família por padrão, cada pessoa com o próprio acesso. Tem aplicativo na Google Play e na App Store, e uma versão web que roda no navegador do celular e do computador — mesma conta nos três. É grátis para criar a conta e usar — inclusive a conta compartilhada e o assistente no WhatsApp —, sem cartão no cadastro, sem anúncio e sem venda de dados.
 
 - Site: ${SITE}
 - App (web): https://app.monnif.com
@@ -47,10 +47,10 @@ ${RECURSOS.map((r) => linha(r.titulo, `/recursos/${r.slug}/`, r.resumo)).join("\
 ## Para quem e comparações
 
 ${[
-  linha("Para casais", "/para/casal/", "Conta da casa com acesso próprio para cada um, conta pessoal separada e os dois lançando pelo WhatsApp — no plano grátis, para duas pessoas"),
+  linha("Para casais", "/para/casal/", "Conta da casa com acesso próprio para cada um, conta pessoal separada e os dois lançando pelo WhatsApp — grátis para os dois"),
   linha("Para saber onde o dinheiro vai", "/para/saber-onde-o-dinheiro-vai/", "As quatro causas de o salário sumir sem explicação e o que fazer com cada uma"),
   linha("Planilha, app ou Monnif?", "/comparar/", "Comparação honesta entre planilha, apps de controle financeiro e o Monnif, inclusive o que o Monnif não faz"),
-  linha("Controle financeiro para casal: qual usar", "/comparar/casal/", "Planilha a dois, apps de finanças e o Monnif pelos critérios de casal: acesso próprio, grátis para os dois, WhatsApp, cartão e acerto de contas (plano Super)"),
+  linha("Controle financeiro para casal: qual usar", "/comparar/casal/", "Planilha a dois, apps de finanças e o Monnif pelos critérios de casal: acesso próprio, grátis para os dois, WhatsApp e cartão"),
 ].join("\n")}
 
 ## Documentação
@@ -65,7 +65,6 @@ ${blog.map((p) => linha(p.data.title, `/blog/${p.id}/`, p.data.description)).joi
 
 ${[
   linha("Nossa história", "/manifesto/", "Por que o Monnif existe e o que ele se recusa a fazer"),
-  linha("Indique e ganhe", "/indique/", "Programa de embaixadores: cupom com desconto para quem usa, comissão recorrente para quem indica e repasse por PIX"),
   linha("Segurança", "/seguranca/", "Como os dados são guardados e o que a equipe não consegue ver"),
   linha("Privacidade", "/privacidade/", "Quais dados são coletados, para quê e os direitos da LGPD"),
   linha("Termos de uso", "/termos/", "As regras de uso do serviço"),

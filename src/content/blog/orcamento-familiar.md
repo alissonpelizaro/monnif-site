@@ -2,6 +2,7 @@
 title: "Orçamento familiar: como montar um que a casa inteira respeita"
 description: "Planilha de orçamento familiar não falta. Falta uma que sobreviva a filho, a três cartões e a janeiro. Como montar o da sua casa em uma tarde."
 date: 2026-10-09
+atualizado: 2026-10-30
 tag: "Finanças pessoais"
 capa: "https://images.unsplash.com/photo-1577896849786-738ed6c78bd3?auto=format&fit=crop&w=1600&h=900&q=70"
 ---
@@ -161,8 +162,8 @@ lugar nele.
 [convida por link](/docs/conta/usuarios/), a pessoa aceita e passa a ver os mesmos
 lançamentos, cartões e orçamento, sem ninguém dividir senha. O
 [histórico](/docs/dados/historico/) guarda quem lançou o quê, então ninguém precisa virar o
-guardião. O plano grátis cabe duas pessoas por conta; para a casa com mais gente lançando, os
-[planos pagos](/precos/) sobem esse limite.
+guardião. De graça, cabem duas pessoas por conta; mais gente lançando na mesma conta é um
+recurso extra, opcional.
 
 ![Tela de Pessoas do Monnif, com quem participa da conta, o papel de cada um e o botão de convidar.](../../assets/docs/usuarios.webp)
 

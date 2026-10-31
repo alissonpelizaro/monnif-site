@@ -2,6 +2,7 @@
 title: "Gestão financeira com IA: o que a inteligência artificial resolve de verdade"
 description: "Três coisas que a IA faz bem no dinheiro da casa, três que ela não faz, e como distinguir assistente de verdade de etiqueta de marketing."
 date: 2026-09-05
+atualizado: 2026-10-30
 tag: "Guia do app"
 capa: "https://images.unsplash.com/photo-1665396697251-05a3a49515a7?auto=format&fit=crop&w=1600&h=900&q=70"
 ---
@@ -163,8 +164,8 @@ no app. O raciocínio inteiro está em
 **E o app funciona inteiro sem ele.** Nenhuma tela depende do assistente — quem prefere não
 usar IA nenhuma clica em tudo do jeito antigo, e não perde recurso.
 
-O assistente por texto e áudio está no **plano grátis**; leitura de cupom por foto,
-categorização automática e os limites maiores estão nos [planos pagos](/precos/).
+O assistente por texto e áudio é **grátis**; leitura de cupom por foto e categorização
+automática são recursos extras, opcionais.
 
 ## O resumo de uma linha
 

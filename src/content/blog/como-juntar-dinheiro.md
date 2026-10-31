@@ -2,6 +2,7 @@
 title: "Como juntar dinheiro: um valor, uma data e um lugar onde ele não seja gasto"
 description: "Guardar o que sobra não funciona porque nunca sobra. O jeito que funciona tem três peças — valor, data e uma conta separada — e começa no dia do salário."
 date: 2026-10-15
+atualizado: 2026-10-30
 tag: "Finanças pessoais"
 capa: "https://images.unsplash.com/photo-1633158829875-e5316a358c6f?auto=format&fit=crop&w=1600&h=900&q=70"
 ---
@@ -131,9 +132,8 @@ guardado não entra como despesa e não aparece no gasto do mês.
 
 **O pague-se primeiro vira uma transferência.** A transferência entre carteiras não é despesa
 nem receita: ela muda o saldo de cada lado e deixa a sobra do mês intacta. Pelo WhatsApp,
-"transfere 300 da conta corrente para a viagem" faz o movimento sem abrir o app. O plano grátis
-tem duas carteiras; para separar cada meta numa carteira própria, os
-[planos pagos](/precos/) sobem esse limite.
+"transfere 300 da conta corrente para a viagem" faz o movimento sem abrir o app. De graça, são
+duas carteiras; uma carteira própria para cada meta é um recurso extra, opcional.
 
 ![Tela de Carteiras do Monnif, com o total em caixa, o saldo de cada carteira e o botão de transferir entre elas.](../../assets/docs/carteiras.webp)
 

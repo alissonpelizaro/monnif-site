@@ -7,11 +7,12 @@ import sitemap from "@astrojs/sitemap";
 // Carimbar a data do build no site inteiro é ruído: o buscador aprende que a
 // data não quer dizer nada e passa a ignorá-la.
 const PASTA_BLOG = "./src/content/blog";
+const campo = (texto, nome) => texto.match(new RegExp(`^${nome}:\\s*"?([\\d-]+)`, "m"))?.[1];
 const datas = new Map(
-  fs.readdirSync(PASTA_BLOG).map((arquivo) => [
-    `/blog/${arquivo.replace(/\.md$/, "")}/`,
-    fs.readFileSync(`${PASTA_BLOG}/${arquivo}`, "utf8").match(/^date:\s*"?([\d-]+)/m)?.[1],
-  ]),
+  fs.readdirSync(PASTA_BLOG).map((arquivo) => {
+    const texto = fs.readFileSync(`${PASTA_BLOG}/${arquivo}`, "utf8");
+    return [`/blog/${arquivo.replace(/\.md$/, "")}/`, campo(texto, "atualizado") ?? campo(texto, "date")];
+  }),
 );
 
 export default defineConfig({
@@ -22,6 +23,13 @@ export default defineConfig({
   // deixaria a armadilha armada para o próximo parágrafo escrito assim.
   // Custa ~0,4 KB por página depois do gzip.
   compressHTML: false,
+  // Páginas que saíram do ar. Cada uma vai para onde a mesma pergunta tem
+  // resposta: redirecionar tudo para a home o Google lê como 404 disfarçado.
+  redirects: {
+    "/precos": "/blog/por-que-o-monnif-e-gratuito/",
+    "/indique": "/",
+    "/docs/conta/indicar-amigos": "/docs/",
+  },
   integrations: [
     sitemap({
       serialize(item) {

@@ -2,6 +2,7 @@
 title: "Gestão financeira para casais: o que muda quando são duas pessoas"
 description: "App de controle financeiro feito para uma pessoa quebra a dois — e quase sempre pelo mesmo motivo. O que procurar num aplicativo que os dois realmente vão usar."
 date: 2026-08-15
+atualizado: 2026-10-30
 tag: "Finanças pessoais"
 capa: "https://images.unsplash.com/photo-1758523418820-a492bf647c63?auto=format&fit=crop&w=1600&h=900&q=70"
 ---
@@ -140,10 +141,9 @@ que impede a fiscalização.
 ![Tela de Orçamento do Monnif, com o teto de cada categoria, a barra de quanto já foi gasto e o total orçado no mês.](../../assets/docs/orcamento.webp)
 
 **Ninguém fica refém.** Remover alguém tira o acesso na hora e **os lançamentos ficam** — são
-da conta. A exportação em CSV pelos [relatórios](/docs/planejamento/relatorios/) está no plano
-grátis, que também cabe duas pessoas por conta sem pagar nada; os
-[planos pagos](/precos/) sobem os limites e liberam a divisão de despesa entre as pessoas da
-conta.
+da conta. A exportação em CSV pelos [relatórios](/docs/planejamento/relatorios/) é grátis, e
+a conta recebe as duas pessoas sem pagar nada; a divisão de despesa entre as pessoas da conta
+é um recurso extra, opcional.
 
 ## Comece pela conversa, não pelo cadastro
 

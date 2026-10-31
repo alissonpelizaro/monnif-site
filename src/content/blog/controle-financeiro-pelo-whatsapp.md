@@ -2,6 +2,7 @@
 title: "Controle financeiro pelo WhatsApp: o que checar antes de escolher um bot"
 description: "Conversa com você mesmo, bot que escreve numa planilha ou assistente ligado a um app: os três jeitos e as sete perguntas antes do primeiro gasto."
 date: 2026-09-15
+atualizado: 2026-10-30
 tag: "Finanças pessoais"
 capa: "https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=1600&h=900&q=70"
 ---
@@ -164,10 +165,9 @@ do [orçamento](/docs/planejamento/orcamento/) que você definiu para a categori
 
 ![Tela de Orçamento do Monnif, com o teto de cada categoria, a barra de quanto já foi gasto e o total orçado no mês.](../../assets/docs/orcamento.webp)
 
-**O WhatsApp está no plano grátis**, por texto e por áudio. A
-[leitura de cupom por foto](/blog/foto-do-cupom-no-whatsapp/) e os limites maiores de mensagem
-são dos planos pagos; as mensagens contam na mesma cota mensal do assistente do app. Os
-números de cada plano estão em [preços](/precos/).
+**O WhatsApp é grátis**, por texto e por áudio, e as mensagens contam na mesma cota mensal do
+assistente do app. A [leitura de cupom por foto](/blog/foto-do-cupom-no-whatsapp/) é um recurso
+extra, opcional.
 
 ## O teste das cinco mensagens
 

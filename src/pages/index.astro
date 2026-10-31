@@ -24,12 +24,12 @@ const descricao =
 const PERGUNTAS = [
   {
     pergunta: "O Monnif é grátis mesmo?",
-    resposta: `É grátis para criar a conta e usar: sem teste que expira, sem anúncio e sem venda dos seus dados, e nem pedimos cartão de crédito no cadastro. Existem planos pagos para quem quiser mais, mas o que dá para fazer de graça continua dando. O porquê disso está na <a href="/manifesto/" style="color:var(--acento);font-weight:600">nossa história</a>.`,
+    resposta: `É grátis para criar a conta e usar: sem teste que expira, sem anúncio e sem venda dos seus dados, e nem pedimos cartão de crédito no cadastro. O assistente no WhatsApp, a conta compartilhada com quem divide a casa e os relatórios estão incluídos. O porquê disso está na <a href="/manifesto/" style="color:var(--acento);font-weight:600">nossa história</a>.`,
   },
   {
     pergunta: "Dá para usar o Monnif pelo WhatsApp?",
     resposta:
-      "Dá, e é a forma mais rápida de anotar um gasto. Você vincula seu número uma vez, dentro do app, e daí em diante conversa com o assistente no WhatsApp como conversaria com uma pessoa: “paguei o mercado, 240 no cartão”. Ele lança e responde ali mesmo, e o lançamento aparece no app na hora. Está incluído no plano grátis.",
+      "Dá, e é a forma mais rápida de anotar um gasto. Você vincula seu número uma vez, dentro do app, e daí em diante conversa com o assistente no WhatsApp como conversaria com uma pessoa: “paguei o mercado, 240 no cartão”. Ele lança e responde ali mesmo, e o lançamento aparece no app na hora. É grátis, como o resto do app.",
   },
   {
     pergunta: "Preciso instalar um robô ou salvar um contato estranho?",
@@ -44,12 +44,12 @@ const PERGUNTAS = [
   {
     pergunta: "Posso mandar áudio em vez de digitar?",
     resposta:
-      "Pode: grave o áudio no WhatsApp e ele vira lançamento. É o jeito de anotar sem parar o que você está fazendo — no posto, na fila do mercado, saindo do restaurante. O plano grátis tem uma cota mensal de ditados; no Plus ela é bem maior, e a leitura de cupom por foto também entra.",
+      "Pode: grave o áudio no WhatsApp e ele vira lançamento. É o jeito de anotar sem parar o que você está fazendo — no posto, na fila do mercado, saindo do restaurante. Os áudios entram de graça, dentro de uma cota mensal de ditados.",
   },
   {
     pergunta: "Preciso ligar o Monnif ao meu banco?",
     resposta:
-      "Não, e não é possível: o Monnif nunca pede a senha do seu banco. Se quiser evitar digitação, você baixa o extrato no site do próprio banco, como sempre, e manda o arquivo para cá. A sua senha não chega até nós porque ela nunca sai de lá.",
+      "Não, e não é possível: o Monnif nunca pede a senha do seu banco. Se quiser evitar digitação, você baixa o extrato no site do próprio banco, como sempre, e manda o arquivo para cá — a importação é um recurso extra, opcional. A sua senha não chega até nós porque ela nunca sai de lá.",
   },
   {
     pergunta: "O que o assistente de IA faz de verdade?",
@@ -112,7 +112,7 @@ const dados = grafo(
       "Cartão de crédito com fatura fechada na data certa e parcelas",
       "Orçamento por categoria",
       "Saldo previsto para os próximos dias",
-      "Importação do extrato do banco",
+      "Importação do extrato do banco (recurso extra, opcional)",
     ],
     screenshot: [
       `${SITE}/assets/dashboard-mensal.png`,
@@ -306,8 +306,8 @@ const FRASES = [
           </div>
 
           <p style="font-size:.68rem;color:var(--faint);margin-top:12px">
-            O assistente no WhatsApp está no plano grátis. Ler o cupom por foto
-            faz parte do Plus.
+            O assistente no WhatsApp é grátis. Ler o cupom por foto é um
+            recurso extra, opcional.
           </p>
         </div>
       </div>
@@ -613,7 +613,8 @@ const FRASES = [
             Baixe o extrato no site do seu banco e mande o arquivo para cá. Nada é
             gravado antes de você conferir: o Monnif mostra o que é novo, o que já
             existe e o que combina com uma conta que você já tinha anotado. Mandou o
-            arquivo errado? Um botão desfaz tudo.
+            arquivo errado? Um botão desfaz tudo. A importação é um recurso
+            extra, opcional.
           </p>
           <ul class="checks">
             <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg><span><b>Não duplica</b> — marca como paga a conta que você já tinha anotado</span></li>

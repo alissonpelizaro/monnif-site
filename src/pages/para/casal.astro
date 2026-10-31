@@ -49,7 +49,7 @@ const duvidas = [
   {
     pergunta: "O Monnif divide a conta e calcula quem deve quanto para quem?",
     resposta:
-      "No plano Super, sim: dá para rachar um lançamento entre as pessoas da conta, e o acerto de contas mostra quem pagou quanto e quem deve a quem. No grátis e no Plus, o Monnif trata o dinheiro da casa como um bolo só: as duas pessoas lançam na mesma conta e enxergam o mesmo total.",
+      "Por padrão, o Monnif trata o dinheiro da casa como um bolo só: as duas pessoas lançam na mesma conta e enxergam o mesmo total. Rachar um lançamento entre as pessoas e ver no acerto de contas quem deve a quem é um recurso extra, opcional.",
   },
   {
     pergunta: "A outra pessoa vai ver os meus gastos pessoais?",
@@ -69,7 +69,7 @@ const duvidas = [
   {
     pergunta: "Tem limite de pessoas na conta?",
     resposta:
-      "No plano grátis, a conta recebe duas pessoas — o casal. Para incluir mais gente, como filhos, sogra ou sócio, os planos pagos aceitam mais pessoas; os números estão em <a href=\"/precos/\">preços</a>.",
+      "De graça, a conta recebe duas pessoas — o casal, cada um com o próprio acesso. Incluir mais gente na mesma conta, como filhos, sogra ou sócio, é um recurso extra, opcional.",
   },
   {
     pergunta: "E se só um dos dois se interessar por planilha?",
@@ -196,9 +196,8 @@ const dados = grafo(
           <p>
             Por padrão, o dinheiro da conta compartilhada é tratado como um bolo
             só. Quem precisa dizer “você pagou 60% do mês, o outro te deve 340”
-            tem isso no plano <a href="/precos/">Super</a>: o lançamento é
-            rachado entre as pessoas da conta, e o acerto mostra quem deve a
-            quem.
+            tem isso como recurso extra, opcional: o lançamento é rachado entre
+            as pessoas da conta, e o acerto mostra quem deve a quem.
           </p>
         </div>
         <p>

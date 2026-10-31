@@ -2,6 +2,7 @@
 title: "Gestão financeira pelo WhatsApp: o que dá para resolver por mensagem"
 description: "Lançar gasto, perguntar quanto sobrou, mandar a foto do cupom — e as três coisas que continuam só dentro do app, de propósito."
 date: 2026-08-22
+atualizado: 2026-10-30
 tag: "Guia do app"
 capa: "https://images.unsplash.com/photo-1592890288564-76628a30a657?auto=format&fit=crop&w=1600&h=900&q=70"
 ---
@@ -162,9 +163,8 @@ Duas coisas que economizam explicação depois:
   outro código.
 - **As mensagens contam na mesma cota** do assistente do app — não é uma cota à parte.
 
-O assistente no WhatsApp, com texto e áudio, está no **plano grátis**. A leitura de cupom por
-foto e os limites maiores de mensagem estão nos planos pagos; a lista completa fica em
-[preços](/precos/), e a visão geral do recurso em [WhatsApp](/recursos/whatsapp/).
+O assistente no WhatsApp, com texto e áudio, é **grátis**. A leitura de cupom por foto é um
+recurso extra, opcional; a visão geral do recurso está em [WhatsApp](/recursos/whatsapp/).
 
 ## O teste de uma semana
 

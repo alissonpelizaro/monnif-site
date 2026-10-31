@@ -2,6 +2,7 @@
 title: "App de gestão financeira: as sete perguntas que eliminam quase todos"
 description: "Controle financeiro pessoal, de casal ou da família — o que separa um aplicativo que você ainda vai estar usando em março de um que morre no segundo mês."
 date: 2026-08-08
+atualizado: 2026-10-30
 tag: "Finanças pessoais"
 capa: "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1600&h=900&q=70"
 ---
@@ -184,9 +185,9 @@ por áudio.
 **Ninguém pede a sua senha do banco.** Não existe conexão bancária: quem quer evitar digitação
 [importa o extrato](/docs/dados/importar/) baixado no próprio banco.
 
-**O plano grátis não expira** e não pede cartão no cadastro — conta compartilhada, assistente
-no WhatsApp e relatórios estão nele. O que os planos pagos mudam são os limites, e está tudo
-listado em [preços](/precos/). Parar de pagar devolve a conta para o grátis sem apagar nada.
+**O Monnif é grátis, não expira** e não pede cartão no cadastro — conta compartilhada,
+assistente no WhatsApp e relatórios estão incluídos. O que é extra, e opcional, é volume e
+conforto: mais espaço, importação de extrato, leitura de cupom por foto.
 
 ## A pergunta que fica
 
