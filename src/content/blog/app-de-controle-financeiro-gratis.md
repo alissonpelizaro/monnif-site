@@ -112,18 +112,15 @@ não treinam modelo nenhum — o detalhe está em [segurança](/seguranca/) e na
 [assistente no WhatsApp](/docs/assistente/whatsapp/), por mensagem ou áudio. Duas contas, com até duas [pessoas](/docs/conta/usuarios/) em cada.
 Duas carteiras e dois [cartões com fatura](/docs/dia-a-dia/cartoes/). Contas fixas, compras
 parceladas e lembrete de conta vencendo. [Relatórios](/docs/planejamento/relatorios/) com
-exportação em CSV e PDF. E nenhuma conexão com banco: o histórico entra
-[importando o extrato](/docs/dados/importar/).
+exportação em CSV e PDF. E nenhuma conexão com banco: quem quiser trazer o histórico pode
+[importar o extrato](/docs/dados/importar/), um recurso extra, opcional.
 
 ![Dashboard do Monnif, com Sobra prevista, A pagar no mês, Receitas do mês, os orçamentos no limite e a lista das próximas despesas.](../../assets/docs/dashboard.webp)
 
-**O pago é conforto e volume.** O Plus traz leitura de cupom por foto, categoria automática,
-seis meses de histórico nos relatórios e limites maiores. O Super tira os limites de contas,
-cartões e pessoas e traz a divisão de despesa entre as pessoas da conta. Valores e a lista
-completa estão em [preços](/precos/).
-
-**Parar de pagar não apaga nada.** A conta volta para o grátis com os lançamentos, as carteiras
-e o histórico inteiros. O que muda é quanta coisa nova dá para criar.
+**O que é extra é conforto e volume.** Leitura de cupom por foto, categoria automática,
+histórico mais longo nos relatórios, mais contas, cartões e pessoas, e a divisão de despesa
+entre as pessoas da conta são recursos extras, opcionais. Quem não precisa deles não perde
+nada do controle do mês.
 
 ![Relatórios do Monnif, com receitas e despesas do período comparadas ao intervalo anterior e a lista de categorias ordenada do maior gasto para o menor.](../../assets/docs/relatorios.webp)
 

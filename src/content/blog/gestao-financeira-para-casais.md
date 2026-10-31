@@ -140,10 +140,9 @@ que impede a fiscalização.
 ![Tela de Orçamento do Monnif, com o teto de cada categoria, a barra de quanto já foi gasto e o total orçado no mês.](../../assets/docs/orcamento.webp)
 
 **Ninguém fica refém.** Remover alguém tira o acesso na hora e **os lançamentos ficam** — são
-da conta. A exportação em CSV pelos [relatórios](/docs/planejamento/relatorios/) está no plano
-grátis, que também cabe duas pessoas por conta sem pagar nada; os
-[planos pagos](/precos/) sobem os limites e liberam a divisão de despesa entre as pessoas da
-conta.
+da conta. A exportação em CSV pelos [relatórios](/docs/planejamento/relatorios/) é grátis, e
+a conta recebe as duas pessoas sem pagar nada; a divisão de despesa entre as pessoas da conta
+é um recurso extra, opcional.
 
 ## Comece pela conversa, não pelo cadastro
 

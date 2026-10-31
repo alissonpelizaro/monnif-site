@@ -156,7 +156,7 @@ const query = (link) => Object.fromEntries(new URL(link.href).searchParams);
   const sessao = abaNova();
   visitar({ referrer: "https://www.google.com/", sessao });
   const link = botao();
-  visitar({ url: "https://monnif.com/precos/", referrer: "https://monnif.com/", sessao, links: [link] });
+  visitar({ url: "https://monnif.com/blog/", referrer: "https://monnif.com/", sessao, links: [link] });
   assert.equal(query(link).utm_source, "google.com", "a origem da entrada chega no clique da terceira página");
 }
 

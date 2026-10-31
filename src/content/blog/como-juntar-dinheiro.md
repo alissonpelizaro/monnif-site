@@ -131,9 +131,8 @@ guardado não entra como despesa e não aparece no gasto do mês.
 
 **O pague-se primeiro vira uma transferência.** A transferência entre carteiras não é despesa
 nem receita: ela muda o saldo de cada lado e deixa a sobra do mês intacta. Pelo WhatsApp,
-"transfere 300 da conta corrente para a viagem" faz o movimento sem abrir o app. O plano grátis
-tem duas carteiras; para separar cada meta numa carteira própria, os
-[planos pagos](/precos/) sobem esse limite.
+"transfere 300 da conta corrente para a viagem" faz o movimento sem abrir o app. De graça, são
+duas carteiras; uma carteira própria para cada meta é um recurso extra, opcional.
 
 ![Tela de Carteiras do Monnif, com o total em caixa, o saldo de cada carteira e o botão de transferir entre elas.](../../assets/docs/carteiras.webp)
 

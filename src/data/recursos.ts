@@ -131,7 +131,7 @@ export const RECURSOS: Recurso[] = [
       {
         titulo: "Texto, áudio ou foto do cupom",
         texto:
-          "Grave um áudio quando estiver de mãos ocupadas: ele transcreve e lança. Mande a foto do cupom fiscal e ele lê o estabelecimento, o valor e a data, e pergunta antes de gravar. A leitura de cupom por foto faz parte do plano Plus.",
+          "Grave um áudio quando estiver de mãos ocupadas: ele transcreve e lança. Mande a foto do cupom fiscal e ele lê o estabelecimento, o valor e a data, e pergunta antes de gravar. A leitura de cupom por foto é um recurso extra, opcional.",
       },
       {
         titulo: "Um número para cada conta",
@@ -156,9 +156,9 @@ export const RECURSOS: Recurso[] = [
           "Não. O vínculo começa dentro do app: ele mostra o código e abre a conversa com a mensagem já escrita, no número oficial do Monnif. Um toque e está feito.",
       },
       {
-        pergunta: "Isso está no plano grátis?",
+        pergunta: "O WhatsApp é grátis?",
         resposta:
-          "Está: vincular o número e conversar pelo WhatsApp faz parte do plano grátis, e as mensagens contam na mesma cota mensal do assistente do app. Ditado por áudio tem cota no grátis e cota bem maior no Plus; a leitura de cupom por foto é do Plus.",
+          "É: vincular o número e lançar por mensagem ou áudio no WhatsApp é grátis, e as mensagens contam na mesma cota mensal do assistente do app. Só a leitura de cupom por foto é um recurso extra, opcional.",
       },
       {
         pergunta: "E se alguém pegar meu celular?",
@@ -409,6 +409,11 @@ export const RECURSOS: Recurso[] = [
           "Nunca. O Monnif não se conecta ao seu banco. Você baixa o arquivo logado no site do banco, como sempre, e envia. A sua senha não chega até nós porque ela nunca sai de lá.",
       },
       {
+        pergunta: "A importação é grátis?",
+        resposta:
+          "A importação de extrato é um recurso extra, opcional. O dia a dia — lançar no app, por mensagem ou por áudio no WhatsApp — é grátis.",
+      },
+      {
         pergunta: "Dá para importar a fatura do cartão também?",
         resposta: "Dá, do mesmo jeito.",
       },
@@ -507,7 +512,7 @@ export const RECURSOS: Recurso[] = [
       },
       {
         pergunta: "Baixar o app custa alguma coisa?",
-        resposta: "Não. O download é grátis nas duas lojas e não pedimos cartão para criar a conta. Os planos pagos existem para quem quiser mais, e são opcionais.",
+        resposta: "Não. O download é grátis nas duas lojas, usar é grátis, e não pedimos cartão para criar a conta.",
       },
     ],
     docs: { href: "/docs/comecar/instalar-no-celular/", label: "Como baixar o app" },

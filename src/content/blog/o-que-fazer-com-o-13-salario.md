@@ -168,9 +168,9 @@ zero em janeiro — com semanas de antecedência, e não no dia do boleto. O avi
 [carteira](/docs/dia-a-dia/carteiras/) "Janeiro" e transfira para ela no dia em que o 13º
 cair. A transferência não é despesa nem receita, então a sobra do mês continua honesta. Ligue
 a ela uma [meta](/docs/planejamento/metas/) de R$ 2.800 com data em janeiro: o progresso é o
-próprio saldo da carteira, sem aporte manual. O plano grátis tem duas carteiras, a Principal e
-mais uma; se a reserva também precisar da dela, os [planos pagos](/precos/) sobem esse
-limite.
+próprio saldo da carteira, sem aporte manual. De graça, são duas carteiras, a Principal e
+mais uma; se a reserva também precisar da dela, mais carteiras são um recurso extra,
+opcional.
 
 ![Tela de Metas do Monnif, com o valor alvo de cada meta, a barra de progresso e quanto ainda falta.](../../assets/docs/metas.webp)
 

@@ -22,6 +22,8 @@ export default defineConfig({
   // deixaria a armadilha armada para o próximo parágrafo escrito assim.
   // Custa ~0,4 KB por página depois do gzip.
   compressHTML: false,
+  // Páginas que saíram do ar: o link antigo cai na home em vez de 404.
+  redirects: { "/precos": "/", "/indique": "/" },
   integrations: [
     sitemap({
       serialize(item) {

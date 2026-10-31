@@ -61,8 +61,8 @@ excluir na tela. Não existe estado escondido, nem um "desfazer do assistente" s
 
 ## Onde ativar
 
-A leitura de cupom por foto faz parte do plano **Plus**. O assistente no WhatsApp em si —
-texto e áudio — está no plano grátis. Se o seu número ainda não está vinculado, o
+A leitura de cupom por foto é um recurso extra, opcional. O assistente no WhatsApp em si —
+texto e áudio — é grátis. Se o seu número ainda não está vinculado, o
 [passo a passo](/docs/assistente/whatsapp/) leva dois minutos.
 
 Depois disso, o cupom deixa de ser um papel que você guarda com a intenção de lançar

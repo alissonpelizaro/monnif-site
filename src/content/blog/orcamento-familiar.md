@@ -161,8 +161,8 @@ lugar nele.
 [convida por link](/docs/conta/usuarios/), a pessoa aceita e passa a ver os mesmos
 lançamentos, cartões e orçamento, sem ninguém dividir senha. O
 [histórico](/docs/dados/historico/) guarda quem lançou o quê, então ninguém precisa virar o
-guardião. O plano grátis cabe duas pessoas por conta; para a casa com mais gente lançando, os
-[planos pagos](/precos/) sobem esse limite.
+guardião. De graça, cabem duas pessoas por conta; mais gente lançando na mesma conta é um
+recurso extra, opcional.
 
 ![Tela de Pessoas do Monnif, com quem participa da conta, o papel de cada um e o botão de convidar.](../../assets/docs/usuarios.webp)
 

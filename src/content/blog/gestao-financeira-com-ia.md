@@ -163,8 +163,8 @@ no app. O raciocínio inteiro está em
 **E o app funciona inteiro sem ele.** Nenhuma tela depende do assistente — quem prefere não
 usar IA nenhuma clica em tudo do jeito antigo, e não perde recurso.
 
-O assistente por texto e áudio está no **plano grátis**; leitura de cupom por foto,
-categorização automática e os limites maiores estão nos [planos pagos](/precos/).
+O assistente por texto e áudio é **grátis**; leitura de cupom por foto e categorização
+automática são recursos extras, opcionais.
 
 ## O resumo de uma linha
 

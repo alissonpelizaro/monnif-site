@@ -62,12 +62,6 @@ const LINHAS = [
     monnif: { s: "ok", t: "Nunca" },
   },
   {
-    criterio: "Se você parar de pagar",
-    planilha: { s: "ok", t: "Nada muda" },
-    apps: { s: "nao", t: "Histórico pode travar" },
-    monnif: { s: "ok", t: "O grátis continua" },
-  },
-  {
     criterio: "Por que costuma dar errado",
     planilha: { s: "nao", t: "Cansaço de digitar" },
     apps: { s: "meio", t: "Fricção e parede do plano pago" },
@@ -98,9 +92,9 @@ const duvidas = [
       "Não conecta em banco e não acompanha investimento. Se algum desses é indispensável para você, é melhor saber agora.",
   },
   {
-    pergunta: "O plano grátis é isca para virar pago depois?",
+    pergunta: "O Monnif é grátis mesmo, ou é isca?",
     resposta:
-      "Não. Existem planos pagos para quem quiser mais, mas o que dá para fazer de graça continua dando — incluindo conta compartilhada e assistente no WhatsApp, que costumam ser justamente o que fica atrás da assinatura em outros lugares.",
+      "Não. O grátis não expira e não pede cartão — e inclui a conta compartilhada e o assistente no WhatsApp, que costumam ser justamente o que fica atrás da assinatura em outros lugares.",
   },
 ];
 
@@ -196,7 +190,7 @@ const dados = grafo(
           A aposta aqui é outra: em vez de tirar você do circuito, deixar o
           registro tão barato que você não desista. Você manda
           <a href="/recursos/whatsapp/">“paguei o mercado, 240 no cartão” no WhatsApp</a>
-          e acabou — texto, áudio ou foto do cupom. Sem abrir app, sem formulário,
+          e acabou — por texto ou áudio. Sem abrir app, sem formulário,
           sem esperar até a noite.
         </p>
         <p>
@@ -208,8 +202,8 @@ const dados = grafo(
           metade — por isso o foco está em anotar, não em relatório bonito.
         </p>
         <p>
-          E a <a href="/recursos/familia/">conta compartilhada</a> está no plano
-          grátis, com acesso próprio para cada pessoa. É o recurso que mais
+          E a <a href="/recursos/familia/">conta compartilhada</a> é grátis,
+          com acesso próprio para cada pessoa. É o recurso que mais
           costuma esbarrar em assinatura em outros lugares, e é o que faz o
           controle sobreviver quando o dinheiro é de mais de um.
         </p>

@@ -38,7 +38,7 @@ O mesmo que no app, e do mesmo jeito: em português normal, sem comando nem pala
 
 > marca reunião com o contador quinta às 14h30
 
-**Áudio** funciona: grave a mensagem de voz e ele transcreve antes de lançar. **Foto do cupom fiscal** também — ele lê o estabelecimento, o valor e a data, e confirma com você antes de gravar. A leitura de cupom por foto faz parte do plano Plus.
+**Áudio** funciona: grave a mensagem de voz e ele transcreve antes de lançar. **Foto do cupom fiscal** também — ele lê o estabelecimento, o valor e a data, e confirma com você antes de gravar. A leitura de cupom por foto é um recurso extra, opcional; texto e áudio são grátis.
 
 ## O que continua só no app
 

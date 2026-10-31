@@ -132,7 +132,7 @@ comparação entre planilha, apps e o Monnif pelos critérios de casal está em
 
 ## Como isso fica no Monnif
 
-**A conta da casa tem as duas pessoas, cada uma com o próprio acesso.** No plano grátis cabem
+**A conta da casa tem as duas pessoas, cada uma com o próprio acesso.** De graça, cabem
 duas contas, com até duas pessoas em cada: a da casa, com os dois, e a sua pessoal, que o outro
 não vê. O convite é por link, e os papéis estão em [pessoas e papéis](/docs/conta/usuarios/).
 
@@ -145,12 +145,11 @@ dois de cada — já respondem "quem pagou" em cada linha.
 
 ![Tela de Carteiras do Monnif, com o total em caixa, o saldo de cada carteira e o botão de transferir entre elas.](../../assets/docs/carteiras.webp)
 
-**O acerto automático é do plano Super.** Nele, um lançamento é rachado entre as pessoas da
-conta, e o app mostra quem pagou quanto e quem deve a quem, no menor número de
-transferências. No grátis e no Plus, a conta da casa é um bolo só — o que serve a quem
-escolheu o arranjo tudo junto, e a quem prefere fazer a conta da tabela acima uma vez por mês.
-Os planos estão em [preços](/precos/), e o resto do que o Monnif faz para quem divide a casa,
-em [Monnif para casais](/para/casal/).
+**O acerto automático é um recurso extra, opcional.** Nele, um lançamento é rachado entre as
+pessoas da conta, e o app mostra quem pagou quanto e quem deve a quem, no menor número de
+transferências. Por padrão, a conta da casa é um bolo só — o que serve a quem escolheu o
+arranjo tudo junto, e a quem prefere fazer a conta da tabela acima uma vez por mês. O resto do
+que o Monnif faz para quem divide a casa está em [Monnif para casais](/para/casal/).
 
 **Os dois lançam pelo WhatsApp.** Cada um [vincula o próprio número](/docs/assistente/whatsapp/)
 à conta da casa, e o que um manda aparece para o outro na hora, com o nome de quem mandou.

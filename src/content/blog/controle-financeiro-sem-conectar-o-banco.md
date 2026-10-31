@@ -199,15 +199,14 @@ com conexão resolve melhor.
 
 **O histórico entra pelo extrato.** [Importar](/docs/dados/importar/) aceita OFX e CSV, mostra
 uma prévia antes de gravar qualquer coisa, reconhece o que você já tinha lançado como previsto
-e desfaz a importação inteira com um botão. A importação é dos [planos pagos](/precos/) — o
-Plus faz 10 por mês.
+e desfaz a importação inteira com um botão. A importação é um recurso extra, opcional.
 
 ![Tela de Importar extrato do Monnif, com a área para escolher o arquivo e os formatos aceitos: .ofx e .csv com colunas de data e valor.](../../assets/docs/importar.webp)
 
-**O dia a dia entra por mensagem, inclusive no plano grátis.** O
+**O dia a dia entra por mensagem, de graça.** O
 [assistente no WhatsApp](/recursos/whatsapp/) lança o gasto a partir de uma frase ou de um
-áudio, e ele aparece na conta na hora. No Plus, a foto do cupom fiscal também vira lançamento,
-sempre com confirmação antes de gravar.
+áudio, e ele aparece na conta na hora. Como recurso extra, opcional, a foto do cupom fiscal
+também vira lançamento, sempre com confirmação antes de gravar.
 
 **O que vai vencer já está na tela.** Contas fixas e parcelas entram como
 [despesas com repetição](/docs/dia-a-dia/despesas/), cada [cartão](/docs/dia-a-dia/cartoes/)

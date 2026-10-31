@@ -9,9 +9,8 @@ const url = `${SITE}/comparar/casal/`;
 // Mesma regra do /comparar/: colunas são categorias, não marcas. Muda só o
 // recorte — aqui os critérios são os de quem divide a casa.
 //
-// Os limites do plano grátis não aparecem em número de propósito: eles moram
-// no painel (`_config`) e mudam sem deploy. O número fica em /precos/, que já
-// é a cópia que se atualiza à mão.
+// Os limites do grátis não aparecem em número de propósito: eles moram no
+// painel (`_config`) e mudam sem deploy.
 const LINHAS = [
   {
     criterio: "Cada um com o próprio acesso",
@@ -47,7 +46,7 @@ const LINHAS = [
     criterio: "Quem deve quanto a quem",
     planilha: { s: "meio", t: "Se alguém montar a fórmula" },
     apps: { s: "meio", t: "Raro em app de finanças" },
-    monnif: { s: "meio", t: "No plano Super" },
+    monnif: { s: "meio", t: "Recurso extra, opcional" },
   },
   {
     criterio: "Conexão com o banco",
@@ -73,12 +72,12 @@ const duvidas = [
   {
     pergunta: "Qual o melhor app de controle financeiro gratuito para casal?",
     resposta:
-      "Depende do que vocês querem resolver. Para controlar as contas da casa juntos — cada um com o próprio acesso, lançando pelo WhatsApp e vendo o mesmo orçamento —, o plano grátis do Monnif cobre os dois, sem cartão de crédito. Para só rachar despesas, um app de dividir contas é mais direto. Para não anotar nada, um app com Open Finance, que costuma ser pago.",
+      "Depende do que vocês querem resolver. Para controlar as contas da casa juntos — cada um com o próprio acesso, lançando pelo WhatsApp e vendo o mesmo orçamento —, o Monnif é grátis para os dois, sem cartão de crédito. Para só rachar despesas, um app de dividir contas é mais direto. Para não anotar nada, um app com Open Finance, que costuma ser pago.",
   },
   {
-    pergunta: "O plano grátis do Monnif vale para os dois?",
+    pergunta: "O Monnif é grátis para os dois?",
     resposta:
-      "Vale. A conta da casa aceita duas pessoas no plano grátis, cada uma com o próprio login e o próprio WhatsApp vinculado. Não há cobrança por pessoa, e o cadastro não pede cartão.",
+      "É. A conta da casa recebe as duas pessoas de graça, cada uma com o próprio login e o próprio WhatsApp vinculado. Não há cobrança por pessoa, e o cadastro não pede cartão.",
   },
   {
     pergunta: "Os dois podem lançar gastos pelo WhatsApp?",
@@ -88,7 +87,7 @@ const duvidas = [
   {
     pergunta: "O Monnif calcula quem deve quanto para quem?",
     resposta:
-      "No plano Super, sim: dá para rachar um lançamento entre as pessoas da conta, e o acerto de contas mostra quem pagou quanto e quem deve a quem. No grátis e no Plus, a conta da casa é tratada como um bolo só, que é como a maioria dos casais usa.",
+      "Por padrão, a conta da casa é tratada como um bolo só, que é como a maioria dos casais usa. Rachar um lançamento entre as pessoas e ver no acerto de contas quem deve a quem é um recurso extra, opcional.",
   },
   {
     pergunta: "A outra pessoa vê os meus gastos pessoais?",
@@ -169,7 +168,7 @@ const dados = grafo(
 
         <h2>Grátis para os dois: o que cabe</h2>
         <p>
-          No plano grátis, a <a href="/recursos/familia/">conta da casa</a>
+          De graça, a <a href="/recursos/familia/">conta da casa</a>
           recebe duas pessoas, cada uma com o próprio acesso e o próprio número
           de WhatsApp vinculado. Os dois lançam e os dois veem o mesmo número:
           contas do mês, <a href="/recursos/cartao-de-credito/">fatura do cartão</a>,
@@ -178,10 +177,8 @@ const dados = grafo(
           enxerga.
         </p>
         <p>
-          O limite que aparece primeiro é o do assistente: cada pessoa tem uma
-          cota mensal de mensagens. Dá para criar o hábito no grátis; quem lança
-          tudo pelo WhatsApp, todo dia, pode precisar do Plus. Os números de
-          cada plano estão em <a href="/precos/">preços</a>.
+          O assistente no WhatsApp também é grátis, com uma cota mensal de
+          mensagens para cada pessoa — um não gasta a do outro.
         </p>
 
         <h2>Quando outro tipo de app serve melhor</h2>
@@ -207,10 +204,10 @@ const dados = grafo(
         <h2>Quem deve quanto a quem</h2>
         <p>
           No Monnif, a conta da casa é um bolo só por padrão: os dois lançam e o
-          total é dos dois. Para quem precisa do acerto, o plano
-          <a href="/precos/">Super</a> tem a divisão de despesa: um lançamento é
-          rachado entre as pessoas da conta, e o app mostra quem pagou quanto e
-          quem deve a quem, no menor número de transferências.
+          total é dos dois. Para quem precisa do acerto, a divisão de despesa é
+          um recurso extra, opcional: um lançamento é rachado entre as pessoas da
+          conta, e o app mostra quem pagou quanto e quem deve a quem, no menor
+          número de transferências.
         </p>
 
         <h2>Como começar em dez minutos</h2>

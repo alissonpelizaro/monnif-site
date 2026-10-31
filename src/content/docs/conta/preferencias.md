@@ -30,7 +30,6 @@ O controle é **por assunto**, não por canal inteiro. Cada aviso tem os canais 
 | **Cobrança duplicada** | Mesma descrição e valor duas vezes em poucos dias | Push, e-mail |
 | **Lembrete de compromisso** | A antecedência que você escolheu em cada compromisso | Push |
 | **Resumo do mês** | Fechamento de cada conta, no primeiro dia do mês | E-mail |
-| **Renovação do plano** | Sete dias e um dia antes do seu plano vencer | Push, e-mail, WhatsApp |
 
 Nada disso precisa ser ligado: tudo já nasce ligado, e o que você guarda aqui é o que resolveu **desligar**.
 
