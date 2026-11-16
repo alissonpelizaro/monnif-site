@@ -49,7 +49,9 @@ Isso tem nome: **assimetria de informação**. É o que produz a frase "eu não 
 estava assim", e ela raramente é mentira.
 
 O remédio é simples de descrever e difícil de manter sem ferramenta: os dois precisam
-conseguir lançar do próprio aparelho, no momento em que o gasto acontece, sem abrir nada.
+conseguir lançar do próprio aparelho, no momento em que o gasto acontece, sem abrir nada. A
+primeira semana disso, mensagem por mensagem, está em
+[app de finanças para casal](/blog/app-de-financas-para-casal/).
 
 ### Nenhum lugar para o "quem deve o quê"
 
