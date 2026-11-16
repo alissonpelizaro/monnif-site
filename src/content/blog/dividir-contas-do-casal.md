@@ -154,6 +154,8 @@ que o Monnif faz para quem divide a casa está em [Monnif para casais](/para/cas
 
 **Os dois lançam pelo WhatsApp.** Cada um [vincula o próprio número](/docs/assistente/whatsapp/)
 à conta da casa, e o que um manda aparece para o outro na hora, com o nome de quem mandou.
+Como não lançar o mesmo mercado duas vezes está em
+[app de finanças para casal](/blog/app-de-financas-para-casal/).
 
 ## A conta do mês passado
 
