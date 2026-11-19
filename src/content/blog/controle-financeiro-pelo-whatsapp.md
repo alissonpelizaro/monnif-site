@@ -135,8 +135,7 @@ vinculado aponta para uma conta**, e os dois podem lançar na mesma conta da cas
 seu aparelho, com o nome de quem mandou registrado. O caso da empresa está em
 [um WhatsApp para a casa, outro para a empresa](/blog/um-whatsapp-para-cada-conta/); o do
 casal, com a conta de quem deve quanto a quem, em
-[dividir as contas do casal](/blog/dividir-contas-do-casal/), e a primeira semana dos dois
-lançando, em [app de finanças para casal](/blog/app-de-financas-para-casal/).
+[dividir as contas do casal](/blog/dividir-contas-do-casal/).
 
 ## Como isso fica no Monnif
 
