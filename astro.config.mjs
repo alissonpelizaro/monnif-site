@@ -29,6 +29,7 @@ export default defineConfig({
     "/precos": "/blog/por-que-o-monnif-e-gratuito/",
     "/indique": "/",
     "/docs/conta/indicar-amigos": "/docs/",
+    "/blog/app-de-financas-para-casal": "/comparar/casal/",
   },
   integrations: [
     sitemap({
